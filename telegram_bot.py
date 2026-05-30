@@ -6,7 +6,7 @@ from uuid import uuid4
 from datetime import datetime
 
 import requests
-from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
+from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, InputFile
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -38,6 +38,17 @@ def make_keyboard(buttons):
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
+    img_path = os.path.join(os.path.dirname(__file__), "studio.jpg")
+    if os.path.exists(img_path):
+        with open(img_path, "rb") as f:
+            await update.message.reply_photo(photo=InputFile(f))
+    else:
+        for ext in (".png", ".jpeg", ".webp"):
+            alt = img_path.replace(".jpg", ext)
+            if os.path.exists(alt):
+                with open(alt, "rb") as f:
+                    await update.message.reply_photo(photo=InputFile(f))
+                break
     await update.message.reply_text(
         f"\u041f\u0440\u0438\u0432\u0435\u0442, {user.first_name}! \u270c\ufe0f\n\n"
         f"\u041c\u044b \u2014 <b>Vexio Studio</b> \u2014 \u0441\u0442\u0443\u0434\u0438\u044f "
