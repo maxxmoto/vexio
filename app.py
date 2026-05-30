@@ -42,6 +42,8 @@ def send_tg_notification(sub):
         f"\U0001F4C1 \u0422\u0438\u043f: {sub.type or '\u2014'}\n"
         f"\U0001F535 \u0421\u0442\u0430\u0442\u0443\u0441: {sub.status}"
     )
+    if sub.telegram_username:
+        text += f"\n\U0001F916 TG: @{sub.telegram_username}"
     if sub.description:
         text += f"\n\U0001F4DD \u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435: {sub.description[:200]}"
     try:
@@ -66,6 +68,7 @@ class Submission(db.Model):
     catalog = db.Column(db.String(10))
     admin = db.Column(db.String(10))
     telegram = db.Column(db.String(10))
+    telegram_username = db.Column(db.String(100))
     status = db.Column(db.String(20), default='pending')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -81,12 +84,19 @@ class Submission(db.Model):
             'catalog': self.catalog,
             'admin': self.admin,
             'telegram': self.telegram,
+            'telegram_username': self.telegram_username,
             'status': self.status or 'pending',
             'created_at': self.created_at.isoformat() if self.created_at else None,
         }
 
 with app.app_context():
     db.create_all()
+    for col in ('telegram_username',):
+        try:
+            db.session.execute(db.text(f'ALTER TABLE submission ADD COLUMN {col} VARCHAR(100)'))
+            db.session.commit()
+        except Exception:
+            pass
 
 def login_required(f):
     @wraps(f)
@@ -121,6 +131,7 @@ def submit_project():
         catalog=data.get('catalog', 'no'),
         admin=data.get('admin', 'no'),
         telegram=data.get('telegram', 'no'),
+        telegram_username=data.get('telegram_username', ''),
     )
     db.session.add(sub)
     db.session.commit()

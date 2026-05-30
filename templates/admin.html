@@ -138,6 +138,9 @@
                         {% if s.phone %}
                         <a href="tel:{{ s.phone }}">📞 {{ s.phone }}</a>
                         {% endif %}
+                        {% if s.telegram_username %}
+                        <span>🤖 @{{ s.telegram_username }}</span>
+                        {% endif %}
                     </div>
                     {% if s.description %}
                     <div class="desc-text">{{ s.description }}</div>

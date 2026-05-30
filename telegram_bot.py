@@ -141,6 +141,7 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "catalog": "no",
         "admin": "no",
         "telegram": "yes",
+        "telegram_username": update.effective_user.username or "",
     }
     msg = await update.message.reply_text("\U0001F4E6 \u0421\u043e\u0431\u0438\u0440\u0430\u044e \u0437\u0430\u044f\u0432\u043a\u0443...")
     try:
