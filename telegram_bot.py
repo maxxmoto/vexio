@@ -43,7 +43,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         with open(img_path, "rb") as f:
             await update.message.reply_photo(photo=InputFile(f))
     else:
-        for ext in (".png", ".jpeg", ".webp"):
+        for ext in (".png", ".jpeg", ".webp", ".jfif"):
             alt = img_path.replace(".jpg", ext)
             if os.path.exists(alt):
                 with open(alt, "rb") as f:
