@@ -147,25 +147,27 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         async with httpx.AsyncClient() as client:
             resp = await client.post(f"{API_URL}/api/submit", json=payload, timeout=15)
+        await msg.delete()
         if resp.status_code == 201:
             pid = resp.json().get("project_id", "???")
-            await msg.edit_text(
-                f"\u2705 <b>\u0417\u0430\u044f\u0432\u043a\u0430 \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430!</b>\n"
-                f"\u041d\u043e\u043c\u0435\u0440: <code>{pid}</code>\n\n"
-                f"\u041c\u044b \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438 \u0432 \u0431\u043b\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043c\u044f.\n\n"
-                f"\U0001F310 \u041d\u0430\u0448 \u0441\u0430\u0439\u0442: https://vexio.up.railway.app/",
+            await update.message.reply_text(
+                f"\u2705 <b>\u0423\u0441\u043f\u0435\u0448\u043d\u043e!</b>\n"
+                f"\u041c\u0435\u043d\u0435\u0434\u0436\u0435\u0440 \u0441\u0432\u044f\u0436\u0435\u0442\u0441\u044f \u0441 \u0412\u0430\u043c\u0438 "
+                f"\u0432 \u0431\u043b\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043c\u044f.\n\n"
+                f"\U0001F310 <b>\u041d\u0430\u0448 \u0441\u0430\u0439\u0442:</b> https://vexio.up.railway.app/",
                 parse_mode="HTML",
                 reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443"]]),
             )
         else:
-            await msg.edit_text(
+            await update.message.reply_text(
                 f"\u274c \u041e\u0448\u0438\u0431\u043a\u0430 \u0441\u0435\u0440\u0432\u0435\u0440\u0430: {resp.status_code}\n"
                 f"\u041f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u043f\u043e\u0437\u0436\u0435.",
                 reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443"]]),
             )
-    except requests.RequestException as e:
-        await msg.edit_text(
-            f"\u274c \u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c: {e}",
+    except httpx.HTTPError as e:
+        await msg.delete()
+        await update.message.reply_text(
+            f"\u274c \u041e\u0448\u0438\u0431\u043a\u0430 \u043e\u0442\u043f\u0440\u0430\u0432\u043a\u0438: {e}",
             reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443"]]),
         )
     return ConversationHandler.END
