@@ -6,12 +6,13 @@ from uuid import uuid4
 from datetime import datetime
 
 import httpx
-from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, InputFile
+from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, InputFile, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     Application,
     CommandHandler,
     MessageHandler,
     ConversationHandler,
+    CallbackQueryHandler,
     filters,
     ContextTypes,
 )
@@ -58,9 +59,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"\u043b\u0435\u043d\u0434\u0438\u043d\u0433\u0438, \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442-\u043c\u0430\u0433\u0430\u0437\u0438\u043d\u044b, "
         f"\u0438\u043d\u0442\u0435\u0440\u0430\u043a\u0442\u0438\u0432\u043d\u044b\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f "
         f"\u0438 \u0443\u043c\u043d\u044b\u0445 \u0431\u043e\u0442\u043e\u0432 \u0434\u043b\u044f \u0432\u0430\u0448\u0435\u0433\u043e \u0431\u0438\u0437\u043d\u0435\u0441\u0430.\n\n"
-        f"\u041d\u0430\u0436\u043c\u0438\u0442\u0435 \u043a\u043d\u043e\u043f\u043a\u0443 \u043d\u0438\u0436\u0435, "
-        f"\u0447\u0442\u043e\u0431\u044b \u043e\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443.",
-        reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443"]]),
+        f"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435:",
+        reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"]]),
         parse_mode="HTML",
     )
     return NAME
@@ -73,9 +73,9 @@ async def name_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reply_markup=ReplyKeyboardRemove(),
         )
         return NAME
-    context.user_data["name"] = text.strip()
-    await update.message.reply_text("\u041e\u0442\u043b\u0438\u0447\u043d\u043e! \u0422\u0435\u043f\u0435\u0440\u044c \u0443\u043A\u0430\u0436\u0438\u0442\u0435 \u043d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430.")
-    return PROJECT
+    if "\U0001F4F7" in text:
+        await portfolio_menu(update, context)
+    return ConversationHandler.END
 
 async def project_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data["project_name"] = update.message.text.strip()
@@ -156,19 +156,19 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"\u0432 \u0431\u043b\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043c\u044f.\n\n"
                 f"\U0001F310 <b>\u041d\u0430\u0448 \u0441\u0430\u0439\u0442:</b> https://vexio.up.railway.app/",
                 parse_mode="HTML",
-                reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443"]]),
+                reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"]]),
             )
         else:
             await update.message.reply_text(
                 f"\u274c \u041e\u0448\u0438\u0431\u043a\u0430 \u0441\u0435\u0440\u0432\u0435\u0440\u0430: {resp.status_code}\n"
                 f"\u041f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u043f\u043e\u0437\u0436\u0435.",
-                reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443"]]),
+                reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"]]),
             )
     except httpx.HTTPError as e:
         await msg.delete()
         await update.message.reply_text(
             f"\u274c \u041e\u0448\u0438\u0431\u043a\u0430 \u043e\u0442\u043f\u0440\u0430\u0432\u043a\u0438: {e}",
-            reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443"]]),
+            reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"]]),
         )
     return ConversationHandler.END
 
@@ -180,8 +180,108 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
     return ConversationHandler.END
 
+
+async def portfolio_menu(update: Update, context: ContextTypes.DEFAULT_TYPE, msg=None):
+    keyboard = [
+        [InlineKeyboardButton("\U0001F310 \u0421\u0430\u0439\u0442\u044b", callback_data="pf_sites"),
+         InlineKeyboardButton("\U0001F916 \u0411\u043e\u0442\u044b", callback_data="pf_bots")],
+        [InlineKeyboardButton("\u2190 \u0412 \u043c\u0435\u043d\u044e", callback_data="pf_back")],
+    ]
+    text = "\U0001F4F7 <b>\u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e Vexio Studio</b>\n\n\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u043a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u044e:"
+    if update.message:
+        if msg:
+            await msg.delete()
+        await update.message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode="HTML")
+    elif update.callback_query:
+        query = update.callback_query
+        await query.message.edit_text(text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode="HTML")
+        await query.answer()
+
+
+async def portfolio_show(update: Update, context: ContextTypes.DEFAULT_TYPE, category, index=0):
+    query = update.callback_query
+    try:
+        async with httpx.AsyncClient() as client:
+            resp = await client.get(f"{API_URL}/api/portfolio/{category}", timeout=10)
+        if resp.status_code != 200 or not resp.json():
+            await query.message.edit_text(
+                f"\U0001F50D \u0412 \u043a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u0438 \u00ab{category}\u00bb \u043f\u043e\u043a\u0430 \u043d\u0435\u0442 \u043f\u0440\u043e\u0435\u043a\u0442\u043e\u0432.",
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("\u2190 \u041d\u0430\u0437\u0430\u0434", callback_data="pf_menu")]]),
+            )
+            await query.answer()
+            return
+        items = resp.json()
+        if index < 0 or index >= len(items):
+            index = 0
+        item = items[index]
+        nav = []
+        row = []
+        if index > 0:
+            row.append(InlineKeyboardButton("\u25C0\ufe0f", callback_data=f"pf_{category}_prev_{index}"))
+        row.append(f"{index+1}/{len(items)}")
+        if index < len(items) - 1:
+            row.append(InlineKeyboardButton("\u25B6\ufe0f", callback_data=f"pf_{category}_next_{index}"))
+        nav.append(row)
+        nav.append([InlineKeyboardButton("\u2190 \u041a \u043a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u044f\u043c", callback_data="pf_menu")])
+        text = f"\U0001F4F7 <b>{item['name']}</b>\n\n{item.get('description', '')}"
+        if item.get('image'):
+            await query.message.delete()
+            await query.message.reply_photo(
+                photo=item['image'],
+                caption=text,
+                reply_markup=InlineKeyboardMarkup(nav),
+                parse_mode="HTML",
+            )
+        else:
+            await query.message.edit_text(
+                text,
+                reply_markup=InlineKeyboardMarkup(nav),
+                parse_mode="HTML",
+            )
+        await query.answer()
+    except Exception as e:
+        logger.error(f"Portfolio error: {e}")
+        await query.message.edit_text(f"\u274c \u041e\u0448\u0438\u0431\u043a\u0430: {e}")
+        await query.answer()
+
+
+async def portfolio_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    data = query.data
+    if data == "pf_back":
+        await query.message.delete()
+        user = update.effective_user
+        await query.message.reply_text(
+            f"\u041f\u0440\u0438\u0432\u0435\u0442, {user.first_name}! \u270c\ufe0f",
+            reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"]]),
+        )
+        await query.answer()
+        return
+    if data == "pf_menu":
+        await portfolio_menu(update, context)
+        return
+    parts = data.split("_")
+    if len(parts) >= 4:
+        _, cat_key, direction, idx = parts[0], parts[1], parts[2], int(parts[3])
+        category = "\u0421\u0430\u0439\u0442\u044b" if cat_key == "sites" else "\u0411\u043e\u0442\u044b"
+        new_idx = idx + (1 if direction == "next" else -1)
+        await portfolio_show(update, context, category, new_idx)
+    elif len(parts) >= 3 and parts[0] == "pf":
+        category = "\u0421\u0430\u0439\u0442\u044b" if parts[1] == "sites" else "\u0411\u043e\u0442\u044b"
+        await portfolio_show(update, context, category)
+
+
+async def handle_portfolio_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if "\U0001F4F7" in update.message.text:
+        await portfolio_menu(update, context)
+
+
 def main():
     app = Application.builder().token(TOKEN).build()
+
+    app.add_handler(CallbackQueryHandler(portfolio_callback, pattern="^pf_"))
+
+    app.add_handler(MessageHandler(filters.Regex("\U0001F4F7"), handle_portfolio_text))
 
     conv = ConversationHandler(
         entry_points=[CommandHandler("start", start)],

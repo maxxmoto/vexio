@@ -1,4 +1,5 @@
 import os
+import json
 import subprocess
 import uuid
 import logging
@@ -21,6 +22,20 @@ if db_url and db_url.startswith('postgres://'):
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url or 'sqlite:///vexio.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+PORTFOLIO_FILE = os.path.join(os.path.dirname(__file__), 'static', 'portfolio.json')
+
+def load_portfolio():
+    try:
+        with open(PORTFOLIO_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+def save_portfolio(data):
+    os.makedirs(os.path.dirname(PORTFOLIO_FILE), exist_ok=True)
+    with open(PORTFOLIO_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
 @app.after_request
 def add_headers(response):
@@ -170,7 +185,61 @@ def admin_login():
 @login_required
 def admin_dashboard():
     submissions = Submission.query.order_by(Submission.created_at.desc()).all()
-    return render_template('admin.html', login=False, submissions=[s.to_dict() for s in submissions])
+    portfolio = load_portfolio()
+    return render_template('admin.html', login=False, page='submissions', submissions=[s.to_dict() for s in submissions], portfolio=portfolio)
+
+@app.route('/admin/portfolio', methods=['GET', 'POST'])
+@login_required
+def admin_portfolio():
+    port = load_portfolio()
+    if request.method == 'POST':
+        category = request.form.get('category', '')
+        name = request.form.get('name', '')
+        desc = request.form.get('description', '')
+        image_url = request.form.get('image_url', '').strip()
+        if 'image' in request.files:
+            file = request.files['image']
+            if file.filename:
+                try:
+                    r = requests.post(
+                        'https://telegra.ph/upload',
+                        files={'file': (file.filename, file.stream, file.content_type)},
+                        timeout=15,
+                    )
+                    if r.status_code == 200:
+                        data = r.json()
+                        if isinstance(data, list) and len(data) > 0:
+                            src = data[0].get('src', '')
+                            if src:
+                                image_url = f'https://telegra.ph{src}'
+                except Exception as e:
+                    logger.error(f"Image upload error: {e}")
+        if name and category:
+            port.append({
+                'id': str(uuid.uuid4())[:8],
+                'category': category,
+                'name': name,
+                'description': desc,
+                'image': image_url,
+                'created': datetime.utcnow().isoformat(),
+            })
+            save_portfolio(port)
+        return redirect(url_for('admin_portfolio'))
+    return render_template('admin.html', login=False, page='portfolio', portfolio=port)
+
+@app.route('/admin/portfolio/delete/<item_id>', methods=['POST'])
+@login_required
+def delete_portfolio_item(item_id):
+    port = load_portfolio()
+    port = [p for p in port if p['id'] != item_id]
+    save_portfolio(port)
+    return redirect(url_for('admin_portfolio'))
+
+@app.route('/api/portfolio/<category>')
+def api_portfolio(category):
+    port = load_portfolio()
+    items = [p for p in port if p['category'] == category]
+    return jsonify(items)
 
 @app.route('/admin/logout')
 def admin_logout():
