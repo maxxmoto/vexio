@@ -74,7 +74,7 @@ async def name_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return NAME
     context.user_data["name"] = text.strip()
-    await update.message.reply_text("\u041e\u0442\u043b\u0438\u0447\u043d\u043e! \u0422\u0435\u043f\u0435\u0440\u044c \u043f\u0440\u0438\u0434\u0443\u043c\u0430\u0439\u0442\u0435 \u043d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430.")
+    await update.message.reply_text("\u041e\u0442\u043b\u0438\u0447\u043d\u043e! \u0422\u0435\u043f\u0435\u0440\u044c \u0443\u043A\u0430\u0436\u0438\u0442\u0435 \u043d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430.")
     return PROJECT
 
 async def project_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
