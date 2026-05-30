@@ -5,7 +5,7 @@ import asyncio
 from uuid import uuid4
 from datetime import datetime
 
-import requests
+import httpx
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, InputFile
 from telegram.ext import (
     Application,
@@ -142,9 +142,10 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "admin": "no",
         "telegram": "yes",
     }
-    msg = await update.message.reply_text("\u23f3 \u041e\u0442\u043f\u0440\u0430\u0432\u043b\u044f\u044e \u0437\u0430\u044f\u0432\u043a\u0443...")
+    msg = await update.message.reply_text("\U0001F4E6 \u0421\u043e\u0431\u0438\u0440\u0430\u044e \u0437\u0430\u044f\u0432\u043a\u0443...")
     try:
-        resp = requests.post(f"{API_URL}/api/submit", json=payload, timeout=15)
+        async with httpx.AsyncClient() as client:
+            resp = await client.post(f"{API_URL}/api/submit", json=payload, timeout=15)
         if resp.status_code == 201:
             pid = resp.json().get("project_id", "???")
             await msg.edit_text(
