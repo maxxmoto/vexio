@@ -23,7 +23,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 TOKEN = "8964412503:AAEVNUajV66HteTLH8WuN-oHmquPt9IVDQo"
-API_URL = os.environ.get("VEXIO_API_URL", "https://vexio-production-c918.up.railway.app")
+API_URL = os.environ.get("VEXIO_API_URL", "https://vexio.up.railway.app")
 
 NAME, PROJECT, PHONE, PTYPE, DESC, CONFIRM = range(6)
 

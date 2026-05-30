@@ -1,11 +1,15 @@
 import os
 import uuid
+import logging
 from datetime import datetime
 from functools import wraps
 import requests
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', os.urandom(24).hex())
@@ -32,22 +36,24 @@ TG_ADMIN_ID = os.environ.get('TG_ADMIN_ID', '903104535')
 def send_tg_notification(sub):
     text = (
         f"\u2709\ufe0f \u041d\u043e\u0432\u0430\u044f \u0437\u0430\u044f\u0432\u043a\u0430\n"
-        f"\ud83d\udccb \u041f\u0440\u043e\u0435\u043a\u0442: {sub.project_name}\n"
-        f"\ud83d\udc64 \u0418\u043c\u044f: {sub.name}\n"
-        f"\ud83d\udcde \u0422\u0435\u043b\u0435\u0444\u043e\u043d: {sub.phone}\n"
-        f"\ud83d\udcc1 \u0422\u0438\u043f: {sub.type or '\u2014'}\n"
-        f"\ud83d\udd35 \u0421\u0442\u0430\u0442\u0443\u0441: {sub.status}"
+        f"\U0001F4CB \u041f\u0440\u043e\u0435\u043a\u0442: {sub.project_name}\n"
+        f"\U0001F464 \u0418\u043c\u044f: {sub.name}\n"
+        f"\U0001F4DE \u0422\u0435\u043b\u0435\u0444\u043e\u043d: {sub.phone}\n"
+        f"\U0001F4C1 \u0422\u0438\u043f: {sub.type or '\u2014'}\n"
+        f"\U0001F535 \u0421\u0442\u0430\u0442\u0443\u0441: {sub.status}"
     )
     if sub.description:
-        text += f"\n\ud83d\udcdd \u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435: {sub.description[:200]}"
+        text += f"\n\U0001F4DD \u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435: {sub.description[:200]}"
     try:
-        requests.post(
+        resp = requests.post(
             f'https://api.telegram.org/bot{TG_TOKEN}/sendMessage',
             json={'chat_id': TG_ADMIN_ID, 'text': text, 'parse_mode': 'HTML'},
             timeout=10,
         )
-    except Exception:
-        pass
+        if resp.status_code != 200:
+            logger.error(f"TG notify failed: {resp.status_code} {resp.text}")
+    except Exception as e:
+        logger.error(f"TG notify error: {e}")
 
 class Submission(db.Model):
     id = db.Column(db.Integer, primary_key=True)
