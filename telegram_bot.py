@@ -74,7 +74,7 @@ async def name_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return NAME
     context.user_data["name"] = text.strip()
-    await update.message.reply_text("\u041e\u0442\u043b\u0438\u0447\u043d\u043e! \u0422\u0435\u043f\u0435\u0440\u044c \u043d\u0430\u0437\u043e\u0432\u0438\u0442\u0435 \u043d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430.")
+    await update.message.reply_text("\u041e\u0442\u043b\u0438\u0447\u043d\u043e! \u0422\u0435\u043f\u0435\u0440\u044c \u043f\u0440\u0438\u0434\u0443\u043c\u0430\u0439\u0442\u0435 \u043d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u0430.")
     return PROJECT
 
 async def project_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -150,7 +150,8 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await msg.edit_text(
                 f"\u2705 <b>\u0417\u0430\u044f\u0432\u043a\u0430 \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430!</b>\n"
                 f"\u041d\u043e\u043c\u0435\u0440: <code>{pid}</code>\n\n"
-                f"\u041c\u044b \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438 \u0432 \u0431\u043b\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043c\u044f.",
+                f"\u041c\u044b \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438 \u0432 \u0431\u043b\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043c\u044f.\n\n"
+                f"\U0001F310 \u041d\u0430\u0448 \u0441\u0430\u0439\u0442: https://vexio.up.railway.app/",
                 parse_mode="HTML",
                 reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443"]]),
             )
