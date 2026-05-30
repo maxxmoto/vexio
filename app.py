@@ -1,4 +1,5 @@
 import os
+import subprocess
 import uuid
 import logging
 from datetime import datetime
@@ -118,6 +119,14 @@ def index():
 def favicon():
     svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90" fill="#8B5CF6">\u2726</text></svg>'
     return app.response_class(svg, mimetype='image/svg+xml')
+
+@app.route('/version')
+def version():
+    try:
+        sha = subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD'], cwd=os.path.dirname(__file__)).decode().strip()
+    except Exception:
+        sha = 'unknown'
+    return jsonify({'commit': sha})
 
 @app.route('/api/submit', methods=['POST'])
 def submit_project():
