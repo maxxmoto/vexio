@@ -91,12 +91,16 @@ class Submission(db.Model):
 
 with app.app_context():
     db.create_all()
-    for col in ('telegram_username',):
-        try:
-            db.session.execute(db.text(f'ALTER TABLE submission ADD COLUMN {col} VARCHAR(100)'))
+    try:
+        from sqlalchemy import inspect
+        inspector = inspect(db.engine)
+        cols = [c['name'] for c in inspector.get_columns('submission')]
+        if 'telegram_username' not in cols:
+            db.session.execute(db.text('ALTER TABLE submission ADD COLUMN telegram_username VARCHAR(100)'))
             db.session.commit()
-        except Exception:
-            pass
+            logger.info("Added telegram_username column")
+    except Exception as e:
+        logger.warning(f"Migration note: {e}")
 
 def login_required(f):
     @wraps(f)
