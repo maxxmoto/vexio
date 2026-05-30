@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOTNUR | Modern Glamping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700&family=Manrope:wght@200;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --canvas: #0F110E;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent: #D4E2D4;
+            --white: #FFFFFF;
+            --text-dim: #A0A0A0;
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+
+        body {
+            background-color: var(--canvas);
+            color: var(--white);
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--canvas); }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            padding: 30px 0; mix-blend-mode: difference;
+        }
+
+        .nav-container {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; padding: 0 40px;
+        }
+
+        .logo {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
+            letter-spacing: -1px; font-size: 24px; text-decoration: none; color: var(--white);
+        }
+
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; position: relative;
+            padding: 0 20px; text-align: center;
+        }
+
+        .hero-video-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1; opacity: 0.4; filter: grayscale(100%);
+        }
+
+        .hero h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(40px, 8vw, 120px); font-weight: 300;
+            line-height: 0.9; margin-bottom: 40px; letter-spacing: -4px;
+        }
+
+        .hero h1 span { display: block; color: var(--accent); font-weight: 700; }
+
+        .bento-section { padding: 100px 0; max-width: 1400px; margin: 0 auto; padding: 0 40px 100px; }
+
+        .bento-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 400px); gap: 20px;
+        }
+
+        .bento-item {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: 32px; position: relative; overflow: hidden;
+            transition: var(--ease) 0.6s; cursor: pointer;
+        }
+
+        .bento-item:hover { background: rgba(255, 255, 255, 0.07); border-color: var(--accent); transform: scale(0.98); }
+        .item-1 { grid-column: span 2; }
+        .item-2 { grid-column: span 2; }
+        .item-3 { grid-column: span 1; }
+        .item-4 { grid-column: span 2; }
+        .item-5 { grid-column: span 1; }
+
+        .bento-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 1s var(--ease); }
+        .bento-item:hover .bento-img { transform: scale(1.1); opacity: 0.9; }
+        .bento-content { position: absolute; bottom: 30px; left: 30px; right: 30px; }
+        .bento-content h3 { font-size: 24px; margin-bottom: 10px; }
+        .bento-content p { color: var(--text-dim); font-size: 14px; }
+
+        .floating-booking {
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+            background: rgba(15, 17, 14, 0.8); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); padding: 10px 10px 10px 30px;
+            border-radius: 100px; display: flex; align-items: center; gap: 40px;
+            z-index: 1000; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .booking-info-minimal { display: flex; gap: 20px; }
+        .info-block label { display: block; font-size: 10px; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
+        .info-block span { font-size: 14px; font-weight: 500; }
+
+        .btn-round {
+            background: var(--white); color: var(--canvas); padding: 15px 35px;
+            border-radius: 100px; text-decoration: none; font-weight: 700;
+            font-size: 14px; transition: 0.3s; cursor: pointer; border: none;
+        }
+        .btn-round:hover { background: var(--accent); }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s var(--ease); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+            z-index: 2000; display: none; justify-content: center; align-items: center;
+        }
+        .modern-form { max-width: 500px; width: 100%; padding: 40px; }
+        .modern-form input {
+            width: 100%; background: transparent; border: none;
+            border-bottom: 1px solid var(--glass-border); padding: 20px 0;
+            color: var(--white); font-size: 24px; margin-bottom: 30px; font-family: 'Plus Jakarta Sans';
+        }
+        .modern-form input:focus { border-color: var(--accent); }
+
+        @media (max-width: 992px) {
+            .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .item-1, .item-2, .item-3, .item-4, .item-5 { grid-column: span 1; height: 350px; }
+            .floating-booking { width: 90%; justify-content: space-between; padding-left: 20px; }
+            .booking-info-minimal { display: none; }
+            .hero h1 { font-size: 50px; letter-spacing: -2px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">SOTNUR.</a>
+            <div style="font-size: 12px; letter-spacing: 2px; opacity: 0.6;">EXPLORE THE WILD</div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&q=80&w=2000" alt="Forest" class="hero-video-bg">
+        <div class="reveal">
+            <h1>ESCAPE TO <span>SILENCE.</span></h1>
+        </div>
+    </section>
+
+    <section class="bento-section" id="houses">
+        <div class="bento-grid">
+            <div class="bento-item item-1 reveal">
+                <img src="https://images.unsplash.com/photo-1449156001446-d419672170b6?auto=format&fit=crop&q=80&w=800" class="bento-img">
+                <div class="bento-content">
+                    <h3>A-FRAME ALPHA</h3>
+                    <p>Панорамный вид на сосновый бор. Дровяной камин.</p>
+                </div>
+            </div>
+            <div class="bento-item item-2 reveal">
+                <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&q=80&w=800" class="bento-img">
+                <div class="bento-content">
+                    <h3>MIRROR HOUSE</h3>
+                    <p>Дом, который исчезает в лесу. Полная приватность.</p>
+                </div>
+            </div>
+            <div class="bento-item item-3 reveal">
+                <div class="bento-content">
+                    <h2 style="font-size: 40px; line-height: 1;">4.9</h2>
+                    <p>Rating on Airbnb</p>
+                </div>
+            </div>
+            <div class="bento-item item-4 reveal">
+                <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&q=80&w=800" class="bento-img">
+                <div class="bento-content">
+                    <h3>SAFARI LODGE</h3>
+                    <p>Премиальный глэмпинг у самого берега.</p>
+                </div>
+            </div>
+            <div class="bento-item item-5 reveal">
+                <div class="bento-content" style="bottom: auto; top: 30px;">
+                    <p>УДОБСТВА</p>
+                    <ul style="list-style: none; margin-top: 15px; font-size: 13px; color: var(--accent);">
+                        <li>• Купель</li>
+                        <li>• Wi-Fi 6</li>
+                        <li>• Кинотеатр</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="floating-booking reveal">
+        <div class="booking-info-minimal">
+            <div class="info-block">
+                <label>Локация</label>
+                <span>Сотнур, Марий Эл</span>
+            </div>
+            <div class="info-block">
+                <label>Цена от</label>
+                <span>5 400 ₽ / ночь</span>
+            </div>
+        </div>
+        <a href="javascript:void(0)" class="btn-round" onclick="toggleModal()">ЗАБРОНИРОВАТЬ</a>
+    </div>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modern-form">
+            <h2 style="font-size: 40px; margin-bottom: 40px; letter-spacing: -2px;">Request a stay</h2>
+            <form>
+                <input type="text" placeholder="Ваше имя" required>
+                <input type="tel" placeholder="+7 000 000 00 00" required>
+                <input type="text" placeholder="Даты" onfocus="(this.type='date')">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                    <button type="button" class="btn-round" style="background: transparent; color: white; border: 1px solid var(--glass-border);" onclick="toggleModal()">ЗАКРЫТЬ</button>
+                    <button type="submit" class="btn-round">ОТПРАВИТЬ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        function toggleModal() {
+            const modal = document.getElementById('modal');
+            const isVisible = modal.style.display === 'flex';
+            modal.style.display = isVisible ? 'none' : 'flex';
+            document.body.style.overflow = isVisible ? 'auto' : 'hidden';
+        }
+
+        window.addEventListener('scroll', () => {
+            const scroll = window.scrollY;
+            const h1 = document.querySelector('.hero h1');
+            h1.style.transform = `translateY(${scroll * 0.3}px)`;
+            h1.style.opacity = 1 - (scroll / 600);
+        });
+    </script>
+</body>
+</html>

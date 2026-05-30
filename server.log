@@ -1,0 +1,4 @@
+ * Vexio Studio running on http://127.0.0.1:5500
+ * Admin panel: http://127.0.0.1:5500/admin
+ * Serving Flask app 'app'
+ * Debug mode: on

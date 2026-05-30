@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Void Studio — Creative Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #000a0f; --surface: rgba(6,182,212,0.05); --text: #e0f2fe; --text-dim: rgba(224,242,254,0.5); --accent: #06b6d4; --accent-dim: rgba(6,182,212,0.12); --font-display: 'Syne', sans-serif; --font-body: 'Outfit', sans-serif; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: hidden; }
+    ::selection { background: rgba(6,182,212,0.4); }
+    .hero { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px 40px; position: relative; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(6,182,212,0.06) 0%, transparent 70%); }
+    .hero * { position: relative; z-index: 1; }
+    .hero .badge { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); border: 1px solid rgba(6,182,212,0.25); padding: 6px 14px; border-radius: 100px; margin-bottom: 24px; }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(48px, 10vw, 88px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.9; margin-bottom: 20px; background: linear-gradient(180deg, #fff 0%, #06b6d4 60%, #0891b2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: 15px; color: var(--text-dim); max-width: 480px; line-height: 1.6; margin-bottom: 32px; }
+    .hero .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3); border-radius: 12px; color: var(--accent); font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+    .hero .btn:hover { background: var(--accent); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(6,182,212,0.3); }
+
+    .work { padding: 60px 24px; max-width: 1100px; margin: 0 auto; }
+    .work h2 { font-family: var(--font-display); font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .work .sub { color: var(--text-dim); font-size: 14px; margin-bottom: 32px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+    .project { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; cursor: pointer; background: var(--surface); border: 1px solid rgba(6,182,212,0.08); transition: all 0.3s; }
+    .project:hover { border-color: rgba(6,182,212,0.3); transform: translateY(-4px); }
+    .project .preview { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 48px; background: linear-gradient(135deg, rgba(6,182,212,0.08), rgba(6,182,212,0.02)); }
+    .project .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,10,15,0.9) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; opacity: 0; transition: opacity 0.3s; }
+    .project:hover .overlay { opacity: 1; }
+    .project .overlay .tag { font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; font-family: var(--font-display); }
+    .project .overlay h3 { font-family: var(--font-display); font-size: 18px; font-weight: 700; }
+    .project .overlay .desc { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+    .about { padding: 60px 24px; text-align: center; max-width: 700px; margin: 0 auto; }
+    .about h2 { font-family: var(--font-display); font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+    .about p { font-size: 15px; color: var(--text-dim); line-height: 1.7; }
+    .about .cta { margin-top: 24px; }
+
+    .footer { text-align: center; padding: 40px 24px; font-size: 12px; color: var(--text-dim); border-top: 1px solid rgba(6,182,212,0.08); }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="badge">Creative Studio</div>
+    <h1>Void</h1>
+    <p>We shape digital experiences that exist in the space between imagination and reality.</p>
+    <a href="#" class="btn">View our work →</a>
+  </div>
+
+  <div class="work">
+    <h2>Selected projects</h2>
+    <div class="sub">A glimpse into what we've built.</div>
+    <div class="grid">
+      <div class="project">
+        <div class="preview">🌌</div>
+        <div class="overlay"><div class="tag">Brand Identity</div><h3>Nebula Labs</h3><div class="desc">Visual identity for a deep-tech startup.</div></div>
+      </div>
+      <div class="project">
+        <div class="preview">🎵</div>
+        <div class="overlay"><div class="tag">Web App</div><h3>Echo</h3><div class="desc">Music collaboration platform with real-time sync.</div></div>
+      </div>
+      <div class="project">
+        <div class="preview">📱</div>
+        <div class="overlay"><div class="tag">Mobile</div><h3>Pulse</h3><div class="desc">Health tracking app with minimalist design.</div></div>
+      </div>
+      <div class="project">
+        <div class="preview">🕹️</div>
+        <div class="overlay"><div class="tag">Interactive</div><h3>Fractal</h3><div class="desc">Generative art installation for exhibitions.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about">
+    <h2>About Void</h2>
+    <p>We are a small team of designers and developers who believe that less is more. Every project is crafted with obsessive attention to detail — from the first pixel to the last line of code.</p>
+    <div class="cta"><a href="#" class="btn">Get in touch</a></div>
+  </div>
+
+  <div class="footer">© 2024 Void Studio — Website by Vexio Studio</div>
+</body>
+</html>

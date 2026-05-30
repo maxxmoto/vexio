@@ -1,0 +1,1338 @@
+<!--
+╔══════════════════════════════════════════════════════════╗
+║  TENNIS BRUTAL · Йошкар-Ола · Бронирование кортов     ║
+║                                                        ║
+║  Дизайн-концепция:                                     ║
+║  • Футуристичный спортивный брутализм                  ║
+║  • Неоморфные «парящие» блоки слотов                   ║
+║  • 3D-сцена с теннисным мячом и геометрией (Three.js)  ║
+║  • Глитч-эффект при подтверждении брони                ║
+║  • Кислотные акценты: лайм #CCFF00, электрик #0066FF,  ║
+║    маджента #BF40BF                                    ║
+║  • Кинетическая типографика + микроанимации            ║
+║  • Горизонтальный скролл-календарь                     ║
+║  • Mobile-first, свайпы и жесты                        ║
+╚══════════════════════════════════════════════════════════╝
+-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТЕННИС БРУТАЛ · Бронирование кортов · Йошкар-Ола</title>
+
+    <!-- Google Fonts: кинетическая типографика -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
+    </script>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+    </script>
+
+    <style>
+        :root {
+            --bg: #0a0a0c;
+            --bg-secondary: #121216;
+            --bg-card: #1a1a20;
+            --text: #e8e8ec;
+            --text-dim: #777788;
+            --text-muted: #4a4a58;
+            --accent-olimp: #CCFF00;
+            --accent-tarhanovo: #0066FF;
+            --accent-arena: #BF40BF;
+            --accent-current: var(--accent-olimp);
+            --neon-glow: 0 0 20px var(--accent-current), 0 0 60px var(--accent-current);
+            --border-subtle: rgba(255, 255, 255, 0.04);
+            --radius-sm: 6px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --font-display: 'Space Grotesk', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --z-canvas: 0;
+            --z-content: 10;
+            --z-modal: 100;
+            --z-glitch: 200;
+            --z-overlay: 150;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            cursor: default;
+        }
+
+        /* ===== 3D Canvas Background ===== */
+        #bg-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: var(--z-canvas);
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        /* ===== Main Content Layer ===== */
+        #app {
+            position: relative;
+            z-index: var(--z-content);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 16px;
+            gap: 20px;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 8px 4px;
+        }
+        .header__logo {
+            font-family: var(--font-mono);
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text);
+            line-height: 1;
+        }
+        .header__logo span {
+            color: var(--accent-current);
+            transition: color var(--transition-smooth);
+        }
+        .header__tagline {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            background: var(--bg-card);
+            padding: 6px 14px;
+            border-radius: 99px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        /* ===== Court Tabs ===== */
+        .court-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        .court-tab {
+            flex: 1;
+            min-width: 90px;
+            padding: 14px 20px;
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            color: var(--text-dim);
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .court-tab::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity var(--transition-smooth);
+            pointer-events: none;
+            box-shadow: inset 0 0 40px var(--accent-current);
+        }
+        .court-tab:hover {
+            color: var(--text);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+        }
+        .court-tab--active {
+            color: #000;
+            background: var(--accent-current);
+            border-color: var(--accent-current);
+            font-weight: 700;
+            box-shadow: var(--neon-glow);
+            transform: translateY(-2px);
+        }
+        .court-tab--active::after {
+            opacity: 0.3;
+        }
+        .court-tab[data-court="olimp"] {
+            --accent-current: var(--accent-olimp);
+        }
+        .court-tab[data-court="tarhanovo"] {
+            --accent-current: var(--accent-tarhanovo);
+        }
+        .court-tab[data-court="arena"] {
+            --accent-current: var(--accent-arena);
+        }
+
+        /* ===== Court Info Card ===== */
+        .court-info-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 16px 18px;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+            transition: all var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        .court-info-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent-current);
+            border-radius: 3px 0 0 3px;
+            transition: background var(--transition-smooth);
+        }
+        .court-info-card__item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .court-info-card__label {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+        .court-info-card__value {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+            letter-spacing: 0.02em;
+        }
+        .court-info-card__value--accent {
+            color: var(--accent-current);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* ===== Calendar Bar ===== */
+        .calendar-section {
+            position: relative;
+        }
+        .calendar-section__label {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .calendar-bar {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 6px 2px 14px;
+            scrollbar-width: none;
+            cursor: grab;
+        }
+        .calendar-bar::-webkit-scrollbar {
+            display: none;
+        }
+        .calendar-bar:active {
+            cursor: grabbing;
+        }
+        .calendar-day {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            min-width: 62px;
+            padding: 12px 10px;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            border: 2px solid transparent;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            font-family: var(--font-display);
+            position: relative;
+        }
+        .calendar-day:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+        }
+        .calendar-day--active {
+            border-color: var(--accent-current) !important;
+            background: #1a1a28;
+            box-shadow: 0 0 24px rgba(var(--accent-current-rgb, 204, 255, 0), 0.25);
+            transform: translateY(-4px);
+        }
+        .calendar-day--today {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .calendar-day__dow {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+            font-family: var(--font-mono);
+        }
+        .calendar-day__num {
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .calendar-day__month {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        /* ===== Slots Grid ===== */
+        .slots-section__label {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .slots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+        }
+        .slot-block {
+            position: relative;
+            padding: 14px 8px;
+            text-align: center;
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+            font-family: var(--font-mono);
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            color: var(--text);
+            /* Неоморфная тень */
+            box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4), -2px -2px 8px rgba(255, 255, 255, 0.03);
+            transform: translateY(0);
+        }
+        .slot-block:hover:not(.slot-block--booked) {
+            transform: translateY(-6px);
+            border-color: var(--accent-current);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 30px rgba(var(--accent-current-rgb, 204, 255, 0), 0.35);
+            color: var(--accent-current);
+            z-index: 5;
+        }
+        .slot-block--booked {
+            opacity: 0.3;
+            cursor: not-allowed;
+            text-decoration: line-through;
+            text-decoration-color: var(--text-muted);
+            text-decoration-thickness: 2px;
+            filter: grayscale(0.6);
+            pointer-events: none;
+            box-shadow: none;
+        }
+        .slot-block--selected {
+            border-color: var(--accent-current) !important;
+            background: var(--accent-current) !important;
+            color: #000 !important;
+            font-weight: 700 !important;
+            box-shadow: var(--neon-glow) !important;
+            transform: translateY(-4px) !important;
+            animation: pulse-slot 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse-slot {
+            0%,
+            100% {
+                box-shadow: 0 0 20px var(--accent-current), 0 0 60px var(--accent-current);
+            }
+            50% {
+                box-shadow: 0 0 40px var(--accent-current), 0 0 100px var(--accent-current), 0 0 140px var(--accent-current);
+            }
+        }
+
+        /* ===== Booking Modal ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: var(--z-modal);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-smooth);
+        }
+        .modal-overlay--open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 28px 24px;
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+            transform: translateY(20px);
+            transition: transform var(--transition-bounce);
+        }
+        .modal-overlay--open .modal {
+            transform: translateY(0);
+        }
+        .modal__title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            margin-bottom: 6px;
+        }
+        .modal__subtitle {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--accent-current);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+        .modal__field {
+            margin-bottom: 14px;
+        }
+        .modal__field label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            margin-bottom: 5px;
+        }
+        .modal__field input,
+        .modal__field textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-subtle);
+            background: #0e0e14;
+            color: var(--text);
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            transition: border var(--transition-fast);
+            resize: vertical;
+            outline: none;
+        }
+        .modal__field input:focus,
+        .modal__field textarea:focus {
+            border-color: var(--accent-current);
+            box-shadow: 0 0 12px rgba(var(--accent-current-rgb, 204, 255, 0), 0.2);
+        }
+        .modal__actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .btn {
+            padding: 12px 22px;
+            border-radius: 99px;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition-smooth);
+            text-transform: uppercase;
+        }
+        .btn--primary {
+            background: var(--accent-current);
+            color: #000;
+            box-shadow: 0 0 20px rgba(var(--accent-current-rgb, 204, 255, 0), 0.5);
+        }
+        .btn--primary:hover {
+            box-shadow: 0 0 40px rgba(var(--accent-current-rgb, 204, 255, 0), 0.8);
+            transform: translateY(-2px);
+        }
+        .btn--ghost {
+            background: transparent;
+            border: 2px solid var(--text-dim);
+            color: var(--text-dim);
+        }
+        .btn--ghost:hover {
+            border-color: var(--text);
+            color: var(--text);
+        }
+        .modal__close {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: color var(--transition-fast);
+            line-height: 1;
+        }
+        .modal__close:hover {
+            color: var(--text);
+        }
+
+        /* ===== Success Overlay ===== */
+        .success-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: var(--z-overlay);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .success-overlay--show {
+            opacity: 1;
+        }
+        .success-badge {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-current);
+            border-radius: var(--radius-lg);
+            padding: 30px 36px;
+            text-align: center;
+            box-shadow: var(--neon-glow), 0 24px 60px rgba(0, 0, 0, 0.6);
+            animation: badge-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes badge-pop {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .success-badge__icon {
+            font-size: 3rem;
+            margin-bottom: 8px;
+        }
+        .success-badge__text {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* ===== Glitch Canvas ===== */
+        #glitch-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: var(--z-glitch);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        #glitch-canvas.glitch-active {
+            opacity: 1;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 600px) {
+            #app {
+                padding: 10px;
+                gap: 14px;
+            }
+            .court-tab {
+                padding: 10px 12px;
+                font-size: 0.75rem;
+                min-width: 70px;
+                border-radius: var(--radius-sm);
+            }
+            .slots-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+            .slot-block {
+                padding: 12px 4px;
+                font-size: 0.7rem;
+                border-radius: var(--radius-sm);
+            }
+            .calendar-day {
+                min-width: 50px;
+                padding: 10px 6px;
+            }
+            .calendar-day__num {
+                font-size: 1.1rem;
+            }
+            .court-info-card {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+                padding: 12px;
+            }
+            .modal {
+                padding: 20px 16px;
+                border-radius: var(--radius-md);
+            }
+        }
+        @media (max-width: 380px) {
+            .slots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .calendar-day {
+                min-width: 44px;
+                padding: 8px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Three.js фон -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Глитч-оверлей -->
+    <canvas id="glitch-canvas"></canvas>
+
+    <!-- Основное приложение -->
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header__logo">TENNIS<span>BRUTAL</span></div>
+            <div class="header__tagline">Йошкар-Ола · Корты</div>
+        </header>
+
+        <!-- Табы кортов -->
+        <nav class="court-tabs" id="courtTabs">
+            <button class="court-tab court-tab--active" data-court="olimp">ОЛИМП</button>
+            <button class="court-tab" data-court="tarhanovo">ТАРХАНОВО</button>
+            <button class="court-tab" data-court="arena">АРЕНА</button>
+        </nav>
+
+        <!-- Инфокарточка корта -->
+        <div class="court-info-card" id="courtInfoCard">
+            <div class="court-info-card__item">
+                <span class="court-info-card__label">Адрес</span>
+                <span class="court-info-card__value" id="infoAddress">ул. Машиностроителей, 20</span>
+            </div>
+            <div class="court-info-card__item">
+                <span class="court-info-card__label">Покрытие</span>
+                <span class="court-info-card__value" id="infoSurface">Хард</span>
+            </div>
+            <div class="court-info-card__item">
+                <span class="court-info-card__label">Цена / час</span>
+                <span class="court-info-card__value court-info-card__value--accent" id="infoPrice">1200 ₽</span>
+            </div>
+            <div class="court-info-card__item">
+                <span class="court-info-card__label">Особенности</span>
+                <span class="court-info-card__value" id="infoFeatures">Крытый, LED-освещение</span>
+            </div>
+        </div>
+
+        <!-- Календарь -->
+        <section class="calendar-section">
+            <span class="calendar-section__label">📅 Выберите дату</span>
+            <div class="calendar-bar" id="calendarBar">
+                <!-- Генерируется JS -->
+            </div>
+        </section>
+
+        <!-- Слоты времени -->
+        <section class="slots-section">
+            <span class="slots-section__label">⏱ Доступные слоты</span>
+            <div class="slots-grid" id="slotsGrid">
+                <!-- Генерируется JS -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Модальное окно бронирования -->
+    <div class="modal-overlay" id="bookingModalOverlay">
+        <div class="modal" id="bookingModal">
+            <button class="modal__close" id="modalCloseBtn">&times;</button>
+            <div class="modal__title">Забронировать</div>
+            <div class="modal__subtitle" id="modalSubtitle"></div>
+            <div class="modal__field">
+                <label for="inputName">Имя</label>
+                <input type="text" id="inputName" placeholder="Алексей Смирнов" autocomplete="name">
+            </div>
+            <div class="modal__field">
+                <label for="inputPhone">Телефон</label>
+                <input type="tel" id="inputPhone" placeholder="+7 999 123-45-67" autocomplete="tel">
+            </div>
+            <div class="modal__field">
+                <label for="inputComment">Комментарий</label>
+                <textarea id="inputComment" rows="2" placeholder="Любые пожелания..."></textarea>
+            </div>
+            <div class="modal__actions">
+                <button class="btn btn--primary" id="confirmBookingBtn">Подтвердить</button>
+                <button class="btn btn--ghost" id="cancelBookingBtn">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Оверлей успеха -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-badge">
+            <div class="success-badge__icon">⚡</div>
+            <div class="success-badge__text">Корт забронирован!</div>
+            <div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-dim);margin-top:6px;" id="successDetails"></div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ═══════════════════════════════════════
+            //  ДАННЫЕ КОРТОВ
+            // ═══════════════════════════════════════
+            const courtsData = {
+                olimp: {
+                    id: 'olimp',
+                    name: 'Олимп',
+                    address: 'ул. Машиностроителей, 20',
+                    surface: 'Хард',
+                    price: 1200,
+                    features: 'Крытый, LED-освещение, раздевалки',
+                    accent: '#CCFF00',
+                    accentRGB: '204,255,0',
+                },
+                tarhanovo: {
+                    id: 'tarhanovo',
+                    name: 'Тарханово',
+                    address: 'ул. Дружбы, 55А',
+                    surface: 'Грунт',
+                    price: 900,
+                    features: 'Открытый, вечерняя подсветка, парковка',
+                    accent: '#0066FF',
+                    accentRGB: '0,102,255',
+                },
+                arena: {
+                    id: 'arena',
+                    name: 'Арена',
+                    address: 'Ленинский пр-т, 30Б',
+                    surface: 'Трава (искусств.)',
+                    price: 1500,
+                    features: 'Премиум-покрытие, сауна, лаунж-зона',
+                    accent: '#BF40BF',
+                    accentRGB: '191,64,191',
+                },
+            };
+
+            // ═══════════════════════════════════════
+            //  ГЕНЕРАЦИЯ РАСПИСАНИЯ НА НЕДЕЛЮ
+            // ═══════════════════════════════════════
+            function generateWeekSchedule() {
+                const schedule = {};
+                const now = new Date();
+                const courts = ['olimp', 'tarhanovo', 'arena'];
+                const hours = [];
+                for (let h = 8; h <= 23; h++) hours.push(`${String(h).padStart(2, '0')}:00`);
+
+                for (let d = 0; d < 7; d++) {
+                    const date = new Date(now);
+                    date.setDate(date.getDate() + d);
+                    const dateKey = date.toISOString().split('T')[0]; // YYYY-MM-DD
+                    schedule[dateKey] = {};
+                    courts.forEach(courtId => {
+                        schedule[dateKey][courtId] = hours.map(hour => {
+                            // Случайно занимаем ~25% слотов (детерминированно от даты и корта)
+                            const seed = dateKey.charCodeAt(0) + courtId.charCodeAt(0) + parseInt(
+                                hour);
+                            const isBooked = (seed % 4 === 0);
+                            return {
+                                time: hour,
+                                booked: isBooked,
+                            };
+                        });
+                    });
+                }
+                return schedule;
+            }
+
+            const weekSchedule = generateWeekSchedule();
+            const dateKeys = Object.keys(weekSchedule).sort();
+
+            // ═══════════════════════════════════════
+            //  СОСТОЯНИЕ ПРИЛОЖЕНИЯ
+            // ═══════════════════════════════════════
+            const state = {
+                currentCourt: 'olimp',
+                currentDateKey: dateKeys[0], // сегодня
+                selectedSlot: null, // { time, courtId, dateKey }
+            };
+
+            // ═══════════════════════════════════════
+            //  DOM-ЭЛЕМЕНТЫ
+            // ═══════════════════════════════════════
+            const $ = (sel) => document.querySelector(sel);
+            const $$ = (sel) => document.querySelectorAll(sel);
+
+            const courtTabs = $('#courtTabs');
+            const calendarBar = $('#calendarBar');
+            const slotsGrid = $('#slotsGrid');
+            const courtInfoCard = $('#courtInfoCard');
+            const bookingModalOverlay = $('#bookingModalOverlay');
+            const modalSubtitle = $('#modalSubtitle');
+            const inputName = $('#inputName');
+            const inputPhone = $('#inputPhone');
+            const inputComment = $('#inputComment');
+            const confirmBookingBtn = $('#confirmBookingBtn');
+            const cancelBookingBtn = $('#cancelBookingBtn');
+            const modalCloseBtn = $('#modalCloseBtn');
+            const successOverlay = $('#successOverlay');
+            const successDetails = $('#successDetails');
+            const glitchCanvas = $('#glitch-canvas');
+            const headerLogo = $('.header__logo span');
+
+            // ═══════════════════════════════════════
+            //  ОБНОВЛЕНИЕ CSS-ПЕРЕМЕННОЙ АКЦЕНТА
+            // ═══════════════════════════════════════
+            function updateAccentCSS(courtId) {
+                const data = courtsData[courtId];
+                document.documentElement.style.setProperty('--accent-current', data.accent);
+                document.documentElement.style.setProperty('--accent-current-rgb', data.accentRGB);
+                headerLogo.style.color = data.accent;
+                // Обновляем цвет активного таба
+                $$('.court-tab').forEach(tab => {
+                    tab.style.setProperty('--accent-current', courtsData[tab.dataset.court]
+                        .accent);
+                });
+            }
+
+            // ═══════════════════════════════════════
+            //  ОТРИСОВКА КАЛЕНДАРЯ
+            // ═══════════════════════════════════════
+            function renderCalendar() {
+                calendarBar.innerHTML = '';
+                const today = new Date();
+                const todayKey = today.toISOString().split('T')[0];
+
+                dateKeys.forEach(dateKey => {
+                    const [y, m, d] = dateKey.split('-');
+                    const date = new Date(parseInt(y), parseInt(m) - 1, parseInt(d));
+                    const dow = date.toLocaleDateString('ru-RU', { weekday: 'short' }).replace('.',
+                        '');
+                    const month = date.toLocaleDateString('ru-RU', { month: 'short' }).replace('.',
+                    '');
+                    const dayNum = parseInt(d);
+
+                    const el = document.createElement('div');
+                    el.className = 'calendar-day';
+                    if (dateKey === state.currentDateKey) el.classList.add('calendar-day--active');
+                    if (dateKey === todayKey) el.classList.add('calendar-day--today');
+                    el.dataset.dateKey = dateKey;
+                    el.innerHTML = `
+                <div class="calendar-day__dow">${dow}</div>
+                <div class="calendar-day__num">${dayNum}</div>
+                <div class="calendar-day__month">${month}</div>
+              `;
+                    el.addEventListener('click', () => {
+                        state.currentDateKey = dateKey;
+                        state.selectedSlot = null;
+                        renderCalendar();
+                        renderSlots();
+                    });
+                    calendarBar.appendChild(el);
+                });
+
+                // Скроллим к активному дню
+                const activeDay = calendarBar.querySelector('.calendar-day--active');
+                if (activeDay) {
+                    activeDay.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            }
+
+            // ═══════════════════════════════════════
+            //  ОТРИСОВКА СЛОТОВ
+            // ═══════════════════════════════════════
+            function renderSlots() {
+                slotsGrid.innerHTML = '';
+                const slots = weekSchedule[state.currentDateKey][state.currentCourt];
+
+                slots.forEach(slot => {
+                    const el = document.createElement('div');
+                    el.className = 'slot-block';
+                    if (slot.booked) el.classList.add('slot-block--booked');
+                    if (state.selectedSlot &&
+                        state.selectedSlot.time === slot.time &&
+                        state.selectedSlot.courtId === state.currentCourt &&
+                        state.selectedSlot.dateKey === state.currentDateKey) {
+                        el.classList.add('slot-block--selected');
+                    }
+                    el.textContent = slot.time;
+                    el.dataset.time = slot.time;
+
+                    if (!slot.booked) {
+                        el.addEventListener('click', () => {
+                            // Выбор слота
+                            state.selectedSlot = {
+                                time: slot.time,
+                                courtId: state.currentCourt,
+                                dateKey: state.currentDateKey,
+                            };
+                            renderSlots();
+                            openBookingModal();
+                        });
+                    }
+                    slotsGrid.appendChild(el);
+                });
+            }
+
+            // ═══════════════════════════════════════
+            //  ОТРИСОВКА ИНФОКАРТОЧКИ КОРТА
+            // ═══════════════════════════════════════
+            function renderCourtInfo() {
+                const data = courtsData[state.currentCourt];
+                $('#infoAddress').textContent = data.address;
+                $('#infoSurface').textContent = data.surface;
+                $('#infoPrice').textContent = data.price + ' ₽';
+                $('#infoFeatures').textContent = data.features;
+                // Обновляем акцентную полосу
+                courtInfoCard.style.setProperty('--accent-current', data.accent);
+            }
+
+            // ═══════════════════════════════════════
+            //  МОДАЛЬНОЕ ОКНО БРОНИРОВАНИЯ
+            // ═══════════════════════════════════════
+            function openBookingModal() {
+                if (!state.selectedSlot) return;
+                const data = courtsData[state.selectedSlot.courtId];
+                modalSubtitle.textContent =
+                    `${data.name} · ${state.selectedSlot.dateKey} · ${state.selectedSlot.time}`;
+                bookingModalOverlay.classList.add('modal-overlay--open');
+                inputName.focus();
+                // Сброс полей
+                inputName.value = '';
+                inputPhone.value = '';
+                inputComment.value = '';
+            }
+
+            function closeBookingModal() {
+                bookingModalOverlay.classList.remove('modal-overlay--open');
+                state.selectedSlot = null;
+                renderSlots();
+            }
+
+            modalCloseBtn.addEventListener('click', closeBookingModal);
+            cancelBookingBtn.addEventListener('click', closeBookingModal);
+            bookingModalOverlay.addEventListener('click', (e) => {
+                if (e.target === bookingModalOverlay) closeBookingModal();
+            });
+
+            // ═══════════════════════════════════════
+            //  ИМИТАЦИЯ API-ЗАПРОСА + ГЛИТЧ-ЭФФЕКТ
+            // ═══════════════════════════════════════
+            function triggerGlitchEffect(callback) {
+                const canvas = glitchCanvas;
+                const ctx = canvas.getContext('2d');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                canvas.classList.add('glitch-active');
+
+                // Захватываем текущий экран в canvas
+                ctx.fillStyle = '#000';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                let glitchFrames = 0;
+                const maxFrames = 12;
+                const glitchInterval = setInterval(() => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    // Рисуем несколько "сдвинутых" полос
+                    for (let i = 0; i < 8; i++) {
+                        const y = Math.random() * canvas.height;
+                        const h = Math.random() * 60 + 10;
+                        const xShift = (Math.random() - 0.5) * 80;
+                        const r = Math.random() * 255;
+                        const g = Math.random() * 255;
+                        const b = Math.random() * 255;
+                        ctx.fillStyle = `rgba(${r},${g},${b},0.7)`;
+                        ctx.fillRect(xShift, y, canvas.width, h);
+                        // Белые "битые" строки
+                        if (Math.random() > 0.6) {
+                            ctx.fillStyle = '#fff';
+                            ctx.fillRect(Math.random() * canvas.width, y, Math.random() * 30, h);
+                        }
+                    }
+                    glitchFrames++;
+                    if (glitchFrames >= maxFrames) {
+                        clearInterval(glitchInterval);
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        canvas.classList.remove('glitch-active');
+                        if (callback) callback();
+                    }
+                }, 50);
+            }
+
+            function simulateBooking() {
+                const name = inputName.value.trim();
+                const phone = inputPhone.value.trim();
+                if (!name || !phone) {
+                    // Простая валидация — потрясем поля
+                    gsap.to('#inputName, #inputPhone', {
+                        x: [-8, 8, -4, 4, 0],
+                        duration: 0.4,
+                        ease: 'power2.out',
+                    });
+                    if (!name) inputName.style.borderColor = '#ff4444';
+                    if (!phone) inputPhone.style.borderColor = '#ff4444';
+                    setTimeout(() => {
+                        inputName.style.borderColor = '';
+                        inputPhone.style.borderColor = '';
+                    }, 1500);
+                    return;
+                }
+
+                closeBookingModal();
+
+                // Имитация отправки на сервер
+                const bookingData = {
+                    court: courtsData[state.selectedSlot.courtId].name,
+                    date: state.selectedSlot.dateKey,
+                    time: state.selectedSlot.time,
+                    name,
+                    phone,
+                    comment: inputComment.value.trim(),
+                };
+
+                console.log('📤 Имитация отправки бронирования:', bookingData);
+
+                // Глитч → успех
+                triggerGlitchEffect(() => {
+                    successDetails.textContent =
+                        `${bookingData.court} · ${bookingData.date} · ${bookingData.time}`;
+                    successOverlay.classList.add('success-overlay--show');
+                    // Отмечаем слот как занятый в локальных данных
+                    const slot = weekSchedule[state.selectedSlot.dateKey][state.selectedSlot
+                        .courtId
+                    ].find(s => s.time === state.selectedSlot.time);
+                    if (slot) slot.booked = true;
+                    state.selectedSlot = null;
+                    renderSlots();
+
+                    setTimeout(() => {
+                        successOverlay.classList.remove('success-overlay--show');
+                    }, 2500);
+                });
+            }
+
+            confirmBookingBtn.addEventListener('click', simulateBooking);
+
+            // Закрытие модалки по Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (bookingModalOverlay.classList.contains('modal-overlay--open')) {
+                        closeBookingModal();
+                    }
+                }
+            });
+
+            // ═══════════════════════════════════════
+            //  ПЕРЕКЛЮЧЕНИЕ КОРТОВ (табы)
+            // ═══════════════════════════════════════
+            courtTabs.addEventListener('click', (e) => {
+                const tab = e.target.closest('.court-tab');
+                if (!tab) return;
+                const courtId = tab.dataset.court;
+                if (state.currentCourt === courtId) return;
+
+                state.currentCourt = courtId;
+                state.selectedSlot = null;
+                updateAccentCSS(courtId);
+                renderCourtInfo();
+                renderSlots();
+
+                // Обновляем активный таб
+                $$('.court-tab').forEach(t => t.classList.remove('court-tab--active'));
+                tab.classList.add('court-tab--active');
+
+                // Анимируем инфокарточку
+                gsap.fromTo(courtInfoCard, { scale: 0.96, opacity: 0.6 }, { scale: 1, opacity: 1,
+                    duration: 0.35, ease: 'power3.out' });
+
+                // Обновляем 3D-сцену
+                update3DAccent(courtId);
+            });
+
+            // ═══════════════════════════════════════
+            //  МОБИЛЬНЫЕ СВАЙПЫ ДЛЯ ПЕРЕКЛЮЧЕНИЯ КОРТОВ
+            // ═══════════════════════════════════════
+            let touchStartX = 0;
+            let touchStartY = 0;
+            const swipeThreshold = 60;
+
+            document.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            document.addEventListener('touchend', (e) => {
+                const dx = e.changedTouches[0].clientX - touchStartX;
+                const dy = e.changedTouches[0].clientY - touchStartY;
+                // Только если горизонтальный свайп преобладает
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > swipeThreshold) {
+                    const courtIds = Object.keys(courtsData);
+                    const currentIdx = courtIds.indexOf(state.currentCourt);
+                    if (dx < -swipeThreshold && currentIdx < courtIds.length - 1) {
+                        // Свайп влево — следующий корт
+                        const nextCourt = courtIds[currentIdx + 1];
+                        const tab = document.querySelector(`.court-tab[data-court="${nextCourt}"]`);
+                        if (tab) tab.click();
+                    } else if (dx > swipeThreshold && currentIdx > 0) {
+                        // Свайп вправо — предыдущий корт
+                        const prevCourt = courtIds[currentIdx - 1];
+                        const tab = document.querySelector(`.court-tab[data-court="${prevCourt}"]`);
+                        if (tab) tab.click();
+                    }
+                }
+            });
+
+            // ═══════════════════════════════════════
+            //  THREE.JS 3D-СЦЕНА
+            // ═══════════════════════════════════════
+            let scene, camera, renderer, ballMesh, ringMesh, particlesMesh;
+            let currentAccent3D = courtsData['olimp'].accent;
+
+            function initThreeJS() {
+                const canvas = $('#bg-canvas');
+                scene = new THREE.Scene();
+
+                camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+                camera.position.set(0, 0.5, 6);
+                camera.lookAt(0, 0, 0);
+
+                renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.shadowMap.enabled = true;
+                renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+                // Освещение
+                const ambientLight = new THREE.AmbientLight(0x222244, 1.2);
+                scene.add(ambientLight);
+                const pointLight1 = new THREE.PointLight(currentAccent3D, 2, 10, 1.5);
+                pointLight1.position.set(3, 2, 3);
+                scene.add(pointLight1);
+                const pointLight2 = new THREE.PointLight(0xffffff, 0.6, 8, 2);
+                pointLight2.position.set(-2, -1, -2);
+                scene.add(pointLight2);
+
+                // Теннисный мяч (сфера с линиями)
+                const ballGeo = new THREE.SphereGeometry(0.55, 48, 48);
+                const ballMat = new THREE.MeshStandardMaterial({
+                    color: 0xf5f5f0,
+                    roughness: 0.35,
+                    metalness: 0.05,
+                });
+                ballMesh = new THREE.Mesh(ballGeo, ballMat);
+                ballMesh.castShadow = true;
+                ballMesh.receiveShadow = true;
+                scene.add(ballMesh);
+
+                // "Швы" мяча — два тора
+                const ringGeo = new THREE.TorusGeometry(0.56, 0.025, 16, 64);
+                const ringMat = new THREE.MeshStandardMaterial({
+                    color: 0xdddddd,
+                    roughness: 0.5,
+                    metalness: 0.2,
+                });
+                ringMesh = new THREE.Mesh(ringGeo, ringMat);
+                ringMesh.rotation.x = Math.PI / 2;
+                ballMesh.add(ringMesh);
+
+                const ring2 = new THREE.Mesh(ringGeo, ringMat);
+                ring2.rotation.y = Math.PI / 2;
+                ballMesh.add(ring2);
+
+                // Частицы вокруг
+                const particlesGeo = new THREE.BufferGeometry();
+                const particlesCount = 200;
+                const positions = new Float32Array(particlesCount * 3);
+                const colors = new Float32Array(particlesCount * 3);
+                const accentCol = new THREE.Color(currentAccent3D);
+                for (let i = 0; i < particlesCount; i++) {
+                    const theta = Math.random() * Math.PI * 2;
+                    const phi = Math.random() * Math.PI;
+                    const r = 2.2 + Math.random() * 1.8;
+                    positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+                    positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+                    positions[i * 3 + 2] = r * Math.cos(phi);
+                    const mixCol = accentCol.clone().lerp(new THREE.Color(0xffffff), Math.random() * 0.6);
+                    colors[i * 3] = mixCol.r;
+                    colors[i * 3 + 1] = mixCol.g;
+                    colors[i * 3 + 2] = mixCol.b;
+                }
+                particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                particlesGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                const particlesMat = new THREE.PointsMaterial({
+                    size: 0.04,
+                    vertexColors: true,
+                    blending: THREE.AdditiveBlending,
+                    depthWrite: false,
+                    transparent: true,
+                    opacity: 0.8,
+                });
+                particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+                scene.add(particlesMesh);
+
+                // Геометрический "ударный" элемент — октаэдр
+                const octGeo = new THREE.OctahedronGeometry(0.35, 0);
+                const octMat = new THREE.MeshStandardMaterial({
+                    color: currentAccent3D,
+                    roughness: 0.2,
+                    metalness: 0.7,
+                    emissive: currentAccent3D,
+                    emissiveIntensity: 0.6,
+                });
+                const octMesh = new THREE.Mesh(octGeo, octMat);
+                octMesh.position.set(1.5, -0.3, -1);
+                octMesh.castShadow = true;
+                scene.add(octMesh);
+                // Сохраним ссылку для анимации
+                scene.userData.octMesh = octMesh;
+
+                // Второй октаэдр
+                const oct2 = new THREE.Mesh(octGeo.clone(), octMat.clone());
+                oct2.position.set(-1.6, 0.4, -0.8);
+                oct2.scale.set(0.7, 0.7, 0.7);
+                scene.add(oct2);
+                scene.userData.octMesh2 = oct2;
+
+                // Анимационный цикл
+                function animate() {
+                    requestAnimationFrame(animate);
+                    const t = performance.now() * 0.001;
+                    ballMesh.rotation.y += 0.005;
+                    ballMesh.rotation.x += 0.002;
+                    ballMesh.position.y = Math.sin(t * 0.8) * 0.25;
+                    particlesMesh.rotation.y += 0.002;
+                    particlesMesh.rotation.x += 0.001;
+                    if (scene.userData.octMesh) {
+                        scene.userData.octMesh.rotation.x += 0.01;
+                        scene.userData.octMesh.rotation.y += 0.015;
+                        scene.userData.octMesh.position.y = -0.3 + Math.sin(t * 1.3) * 0.4;
+                    }
+                    if (scene.userData.octMesh2) {
+                        scene.userData.octMesh2.rotation.z += 0.012;
+                        scene.userData.octMesh2.rotation.y -= 0.01;
+                    }
+                    renderer.render(scene, camera);
+                }
+                animate();
+
+                // Ресайз
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                    glitchCanvas.width = window.innerWidth;
+                    glitchCanvas.height = window.innerHeight;
+                });
+            }
+
+            function update3DAccent(courtId) {
+                const newColor = new THREE.Color(courtsData[courtId].accent);
+                currentAccent3D = courtsData[courtId].accent;
+                // Обновляем цвет источников света
+                if (scene && scene.children) {
+                    scene.children.forEach(child => {
+                        if (child.isPointLight && child.color.getHex() !== 0xffffff) {
+                            child.color.set(newColor);
+                        }
+                    });
+                }
+                // Обновляем emissive октаэдров
+                if (scene && scene.userData.octMesh) {
+                    scene.userData.octMesh.material.color.set(newColor);
+                    scene.userData.octMesh.material.emissive.set(newColor);
+                }
+                if (scene && scene.userData.octMesh2) {
+                    scene.userData.octMesh2.material.color.set(newColor);
+                    scene.userData.octMesh2.material.emissive.set(newColor);
+                }
+                // Обновляем цвет частиц
+                if (particlesMesh) {
+                    const colors = particlesMesh.geometry.attributes.color.array;
+                    const accentCol = new THREE.Color(newColor);
+                    for (let i = 0; i < colors.length; i += 3) {
+                        const mixCol = accentCol.clone().lerp(new THREE.Color(0xffffff), Math.random() * 0.6);
+                        colors[i] = mixCol.r;
+                        colors[i + 1] = mixCol.g;
+                        colors[i + 2] = mixCol.b;
+                    }
+                    particlesMesh.geometry.attributes.color.needsUpdate = true;
+                }
+            }
+
+            // ═══════════════════════════════════════
+            //  ИНИЦИАЛИЗАЦИЯ
+            // ═══════════════════════════════════════
+            function init() {
+                updateAccentCSS(state.currentCourt);
+                renderCourtInfo();
+                renderCalendar();
+                renderSlots();
+                initThreeJS();
+                // Установка размеров глитч-канваса
+                glitchCanvas.width = window.innerWidth;
+                glitchCanvas.height = window.innerHeight;
+            }
+
+            init();
+            console.log('🎾 TENNIS BRUTAL · SPA готов · Йошкар-Ола');
+            console.log('   Корты: Олимп | Тарханово | Арена');
+            console.log('   Свайпайте на мобильном для смены корта');
+            console.log('   Кликайте по слотам для бронирования');
+        })();
+    </script>
+</body>
+</html>

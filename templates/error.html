@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ code }} — Vexio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0A0A0A; color: #F0EEF8;
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      background-image: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(139,92,246,0.08) 0%, transparent 70%);
+    }
+    .card {
+      text-align: center; max-width: 480px;
+    }
+    .code {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(96px, 20vw, 160px);
+      font-weight: 800;
+      background: linear-gradient(160deg, #FFFFFF 0%, #D4C5FF 40%, #8B5CF6 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1;
+      margin-bottom: 8px;
+    }
+    .msg {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px; color: rgba(240,238,248,0.45);
+      margin-bottom: 40px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #7C3AED, #6D28D9);
+      border: 1px solid rgba(167,139,250,0.4);
+      border-radius: 12px; color: #fff;
+      font-family: 'Outfit', sans-serif; font-size: 15px;
+      text-decoration: none; transition: all 0.3s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(139,92,246,0.5); }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: rgba(240,238,248,0.25);
+      margin-bottom: 32px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="code">{{ code }}</div>
+    <div class="msg">{{ message }}</div>
+    <div class="mono">✦ Vexio Studio</div>
+    <a href="/" class="btn">Back to Home</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAXXMOTO.2026 — Premium Moto Dealer</title>
+    <!-- Шрифты: Syncopate для заголовков, Manrope для текста -->
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #ff0000;
+            --bg: #080808;
+            --card: #111;
+            --text: #ffffff;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Навигация */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 5%;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            box-sizing: border-box;
+        }
+
+        .logo { font-family: 'Syncopate', sans-serif; font-size: 22px; letter-spacing: 4px; }
+        .logo span { color: var(--accent); }
+
+        nav a { 
+            color: #fff; text-decoration: none; margin-left: 30px; 
+            font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+            font-weight: 800; opacity: 0.6; transition: 0.3s;
+        }
+        nav a:hover { opacity: 1; color: var(--accent); }
+
+        /* Главный экран (Hero) */
+        /* Обновленный стиль главного экрана */
+/* Возвращаем крупный и жирный стиль текста */
+/* ИСПРАВЛЕННЫЙ ГЛАВНЫЙ ЭКРАН */
+.hero {
+    height: 100vh;
+    min-height: 600px; /* Чтобы на маленьких экранах не сплющило */
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    position: relative;
+    background: url('fon.jfif') center/cover no-repeat; /* ВОЗВРАЩАЕМ ФОН */
+    text-align: center;
+    padding: 0 5%;
+    box-sizing: border-box;
+}
+
+/* Затемнение, чтобы текст читался идеально */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); 
+    z-index: 1;
+}
+
+.hero-info { 
+    position: relative; 
+    z-index: 10;
+    margin-top: 60px; /* Опускаем текст ниже шапки */
+}
+
+.hero-info span { 
+    color: var(--accent); 
+    font-weight: 800; 
+    letter-spacing: 6px; 
+    text-transform: uppercase; 
+    font-size: clamp(10px, 2vw, 14px);
+    display: block;
+    margin-bottom: 15px;
+}
+
+.hero-info h1 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(40px, 9vw, 95px); /* Оптимальный размер, чтобы не ломало верстку */
+    margin: 0; 
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+}
+
+.hero-info p { 
+    max-width: 700px; 
+    color: #bbb; 
+    font-size: clamp(12px, 1.5vw, 16px); 
+    margin: 25px auto 35px; 
+    line-height: 1.5;
+}
+
+.cta-btn {
+    padding: 18px 45px; 
+    background: var(--accent); 
+    color: #fff;
+    text-decoration: none; 
+    text-transform: uppercase; 
+    font-weight: 900;
+    font-size: 12px; 
+    letter-spacing: 2px; 
+    transition: 0.3s; 
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-btn:hover {
+    background: #fff;
+    color: #000;
+    transform: translateY(-3px);
+}
+
+
+        /* Сетка каталога 3 в ряд */
+        .catalog { padding: 100px 5%; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px; 
+        }
+
+        .moto-card {
+            background: var(--card);
+            transition: 0.4s ease;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .moto-card:hover { border-bottom-color: var(--accent); transform: translateY(-5px); }
+
+        /* Рамки для фото (всегда одинаковые) */
+        .img-wrap {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: #000;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+
+        .img-wrap img {
+            max-width: 95%; max-height: 95%;
+            object-fit: contain; transition: 0.5s;
+        }
+
+        .moto-card:hover img { transform: scale(1.08); }
+
+        .moto-content { padding: 30px; }
+        .moto-content .meta { color: #444; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; margin-bottom: 10px; }
+        .moto-content h3 { margin: 0; font-size: 16px; font-weight: 800; text-transform: uppercase; }
+        .price { margin-top: 20px; font-size: 20px; font-weight: 200; border-top: 1px solid #222; padding-top: 20px; }
+        .price b { font-weight: 800; color: var(--accent); }
+
+        /* Модальные окна (описание) */
+        .modal-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.95); z-index: 2000; 
+            display: none; justify-content: center; align-items: center; 
+            backdrop-filter: blur(15px); 
+        }
+        .modal-content { 
+            background: #111; width: 95%; max-width: 1100px; max-height: 90vh; 
+            overflow-y: auto; position: relative; display: flex; border: 1px solid #222; 
+        }
+        .modal-close { position: absolute; top: 20px; right: 20px; font-size: 35px; color: #fff; cursor: pointer; z-index: 100; }
+        
+        .modal-left { width: 45%; background: #000; display: flex; align-items: center; justify-content: center; padding: 40px; }
+        .modal-left img { width: 100%; height: auto; object-fit: contain; }
+        
+        .modal-right { width: 55%; padding: 50px; box-sizing: border-box; }
+        .modal-right h2 { font-family: 'Syncopate', sans-serif; font-size: 26px; margin-top: 0; color: var(--accent); line-height: 1.2; }
+        
+        .promo-block { background: rgba(255,0,0,0.05); border-left: 3px solid var(--accent); padding: 20px; margin: 25px 0; font-size: 14px; color: #bbb; line-height: 1.6; }
+        .promo-block b { color: #fff; }
+
+        .specs-grid { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; 
+            margin-top: 30px; border-top: 1px solid #222; padding-top: 30px; 
+        }
+        .spec-item { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        .spec-item b { color: #fff; display: block; margin-top: 4px; font-size: 14px; }
+
+        .contact-btn {
+            margin-top: 40px; width: 100%; padding: 22px; background: var(--accent); 
+            border: none; color: white; font-weight: 800; cursor: pointer; 
+            text-transform: uppercase; letter-spacing: 3px; font-size: 12px; transition: 0.3s;
+        }
+        .contact-btn:hover { background: #fff; color: #000; }
+
+        /* Адаптив */
+        @media (max-width: 1024px) { 
+            .grid { grid-template-columns: 1fr 1fr; } 
+            .modal-content { flex-direction: column; }
+            .modal-left, .modal-right { width: 100%; }
+        }
+        @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">MAXX<span>MOTO</span></div>
+    <nav>
+        <a href="#catalog">Каталог</a>
+        <a href="#">Доставка</a>
+        <a href="contacts.html">Контакты</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-info">
+        <span>Since 2026</span>
+        <h1>MAXXMOTO<br>STREET BEAST</h1>
+        <p>Лучшая мототехника в Йошкар-Оле. В наличии и под заказ. Гарантия драйва и качества.</p>
+        <a href="#catalog" class="cta-btn">Смотреть каталог</a>
+    </div>
+</section>
+
+<section class="catalog" id="catalog">
+    <div class="grid">
+        
+        <!-- МОДЕЛЬ 1 -->
+        <div class="moto-card" onclick="openModal('f1')">
+            <div class="img-wrap"><img src="f1.jpeg"></div>
+            <div class="moto-content">
+                <div class="meta">Enduro / 300cc</div>
+                <h3>Progasi Super Max 300</h3>
+                <div class="price">от <b>150 000 ₽</b></div>
+            </div>
+        </div>
+
+        <!-- МОДЕЛЬ 2 -->
+        <div class="moto-card" onclick="openModal('f2')">
+            <div class="img-wrap"><img src="f2.jpeg"></div>
+            <div class="moto-content">
+                <div class="meta">Hard Enduro / PRO</div>
+                <h3>Progasi Super Max 300 Pro</h3>
+                <div class="price">от <b>165 000 ₽</b></div>
+            </div>
+        </div>
+
+        <!-- МОДЕЛЬ 3 -->
+        <div class="moto-card" onclick="openModal('f3')">
+            <div class="img-wrap"><img src="f3.jpeg"></div>
+            <div class="moto-content">
+                <div class="meta">New Model 2026</div>
+                <h3>Sanchez Maniac PR300</h3>
+                <div class="price"><b>137 000 ₽</b></div>
+            </div>
+        </div>
+
+        <!-- МОДЕЛЬ 4 -->
+        <div class="moto-card" onclick="openModal('f4')">
+            <div class="img-wrap"><img src="f4.jpeg"></div>
+            <div class="moto-content">
+                <div class="meta">Sport / NB300</div>
+                <h3>Kews K16 NB300, 2026</h3>
+                <div class="price">от <b>210 000 ₽</b></div>
+            </div>
+        </div>
+
+	<!-- МОДЕЛЬ 5 -->
+	<div class="moto-card" onclick="openModal('f5')">
+    		<div class="img-wrap"><img src="f5.jpeg"></div>
+    		<div class="moto-content">
+        		<div class="meta">Pitbike / 125cc</div>
+        		<h3>Progasi Smart 125, 2026</h3>
+        		<div class="price"><b>99 000 ₽</b></div>
+    		</div>
+	</div>
+
+    </div>
+</section>
+
+<!-- МОДАЛЬНОЕ ОКНО -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <div class="modal-left">
+            <img id="modalImg" src="">
+        </div>
+        <div class="modal-right" id="modalData">
+            <!-- Сюда вставляется инфа из JS -->
+        </div>
+    </div>
+</div>
+
+<script>
+    const motoData = {
+        'f1': {
+            title: 'Progasi Super Max 300',
+            img: 'f1.jpeg',
+            promo: '<b>В наличии в Йошкар-Оле!</b> Цена до 2.05.2026 Новый, в пленке, в коробке ❗️<br><br>Запросите наш каталог прямо здесь и получите промокод на <b>50% скидку на доставку</b>! Просто напишите слово <b>«Каталог»</b>.',
+            specs: [['Двигатель', 'ZS175FMM, 300 см³'], ['Мощность', '25 л.с.'], ['Карбюратор', 'NIBBI Black PE30'], ['Вес', '112 кг'], ['Бак', '5,5 л'], ['Макс. скорость', '130 км/ч']]
+        },
+        'f2': {
+            title: 'Progasi Super Max 300 Pro',
+            img: 'f2.jpeg',
+            promo: '<b>В наличии в Йошкар-Оле! Красный Цвет!</b> Наклейки PROGASI. Новый, в пленке, в коробке ❗️<br><br>Напишите слово <b>«Каталог»</b> и получите персональный промокод со <b>скидкой 50%</b> на доставку!',
+            specs: [['Двигатель', 'ZS175FMN (баланс.вал)'], ['Мощность', '27 л.с.'], ['Карбюратор', 'NIBBI Black PE30'], ['Шины', 'Kenda 21/18'], ['Вес', '112 кг'], ['Бак', '5,5 л']]
+        },
+        'f3': {
+            title: 'Sanchez Maniac PR300, 2026',
+            img: 'f3.jpeg',
+            promo: '<b>В НАЛИЧИИ В ЙОШКАР-ОЛЕ!</b> В заводской коробке ❗️ Новинка сезона. Алюминиевый маятник и надежный PR300.',
+            specs: [['Тип двигателя', '4-х тактный, 300cc'], ['Мощность', '25 л.с.'], ['Маятник', 'Алюминий'], ['Вес', '109 кг'], ['Клиренс', '310 мм'], ['Тормоза', 'Brembo Copy']]
+        },
+        'f4': {
+            title: 'Kews K16 NB300, 2026',
+            img: 'f4.jpeg',
+            promo: '<b>В НАЛИЧИИ В ЙОШКАР-ОЛЕ!</b> ❗️ Цена под закaз 198т.р. С приборной панелью. Рама K8, пластик KTM EXC 23 года.',
+            specs: [['Двигатель', 'NB300 ZS174MN-5'], ['Охлаждение', 'Жидкостное'], ['Карбюратор', 'Nibbi PWK34'], ['Вилка', '48 мм, регулируемая'], ['Траверсы', 'Фрезерованные']]
+        },
+        'f5': {
+            title: 'Progasi Smart 125, 2026',
+            img: 'f5.jpeg',
+            promo: '<b>❗️ Progasi Smart 125 в наличии в Йошкар-Оле ❗️</b> Питбайк на 17/14 колесах Kenda. Легкий, маневренный и надежный.',
+            specs: [['Тип', 'Питбайк 125cc'], ['Мощность', '8.8 л.с.'], ['Трансмиссия', '4 скорости'], ['Вес', '75 кг'], ['Высота седла', '870 мм'], ['Бак', '6.5 л'], ['Макс. скорость', '80 км/ч']]
+        }
+    };
+
+    function openModal(id) {
+        const data = motoData[id];
+        if(!data) return;
+
+        document.getElementById('modalImg').src = data.img;
+        let html = `<h2>${data.title}</h2>`;
+        html += `<div class="promo-block">${data.promo}</div>`;
+        html += `<div class="specs-grid">`;
+        data.specs.forEach(s => {
+            html += `<div class="spec-item">${s[0]}: <b>${s[1]}</b></div>`;
+        });
+        html += `</div>`;
+        html += `<button class="contact-btn" onclick="window.open('https://t.me', '_blank')">Написать и получить каталог</button>`;
+        
+        document.getElementById('modalData').innerHTML = html;
+        document.getElementById('modalOverlay').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('modalOverlay').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Forge — Pro Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0c0f;
+            --surface: #111418;
+            --surface2: #181c22;
+            --border: #252a34;
+            --text: #c8ccd4;
+            --text2: #8b929d;
+            --green: #00e05e;
+            --green-glow: #00ff6a;
+            --cyan: #00c8e0;
+            --red: #ff3b4a;
+            --yellow: #ffb627;
+            --orange: #ff7b3b;
+            --purple: #a277ff;
+            --macbook-frame: #1c1c1e;
+            --macbook-bezel: #0d0d0f;
+            --terminal-bg: #0e1015;
+            --font: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            letter-spacing: 0.02em;
+            line-height: 1.6;
+        }
+        /* Header */
+        header {
+            position: relative;
+            z-index: 100;
+            background: rgba(17,20,24,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-shrink: 0;
+        }
+        .logo { width: 38px; height: 38px; background: var(--green); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem; color: #000; box-shadow: 0 0 20px rgba(0,255,106,0.3); }
+        .title { font-weight: 700; font-size: 1.1rem; color: #fff; letter-spacing: 0.04em; }
+        .title span { color: var(--green-glow); }
+        .header-controls { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+        .progress-wrapper { display: flex; align-items: center; gap: 8px; background: var(--surface2); padding: 5px 14px; border-radius: 30px; border: 1px solid var(--border); }
+        .progress-bar-outer { width: 100px; height: 8px; background: var(--surface); border-radius: 10px; overflow: hidden; }
+        .progress-bar-inner { height: 100%; background: var(--green-glow); border-radius: 10px; transition: width 0.4s; box-shadow: 0 0 8px rgba(0,255,106,0.3); }
+        .coin-display { font-weight: 600; color: var(--yellow); font-size: 0.85rem; display: flex; align-items: center; gap: 5px; }
+        .btn-shop { padding: 7px 18px; border-radius: 20px; background: rgba(162,119,255,0.1); border: 1px solid rgba(162,119,255,0.3); color: var(--purple); font-family: var(--font); font-weight: 600; cursor: pointer; transition: var(--transition); font-size: 0.8rem; letter-spacing: 0.04em; }
+        .btn-shop:hover { background: rgba(162,119,255,0.2); border-color: var(--purple); box-shadow: 0 0 12px rgba(162,119,255,0.2); }
+
+        /* Основной контейнер */
+        .app-container { display: flex; flex: 1; overflow: hidden; }
+
+        /* Сайдбар */
+        .sidebar {
+            width: 320px; min-width: 320px; background: var(--surface); border-right: 1px solid var(--border);
+            overflow-y: auto; display: flex; flex-direction: column; padding: 16px 0;
+        }
+        .section-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text2); padding: 12px 20px 6px; font-weight: 600; }
+        .lesson-btn {
+            display: flex; align-items: center; gap: 12px; padding: 12px 20px; margin: 0 8px;
+            border-radius: 8px; cursor: pointer; transition: var(--transition); border: 1px solid transparent;
+            background: transparent; color: var(--text2); font-family: var(--font); font-size: 0.82rem;
+            letter-spacing: 0.03em; text-align: left;
+        }
+        .lesson-btn:hover { background: var(--surface2); color: #fff; border-color: var(--border); }
+        .lesson-btn.active { background: rgba(0,255,106,0.06); color: var(--green-glow); border-color: rgba(0,255,106,0.3); box-shadow: 0 0 12px rgba(0,255,106,0.08); font-weight: 500; }
+        .lesson-btn .num { width: 28px; height: 28px; border-radius: 6px; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; border: 1px solid var(--border); }
+        .lesson-btn.active .num { background: var(--green); color: #000; border-color: var(--green); box-shadow: 0 0 10px rgba(0,255,106,0.3); }
+        .lesson-btn .check { margin-left: auto; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; opacity: 0; }
+        .lesson-btn.done .check { opacity: 1; background: var(--green); border-color: var(--green); color: #000; }
+
+        /* Основной контент */
+        .main-content {
+            flex: 1; display: flex; flex-direction: column; overflow: hidden;
+        }
+        .scroll-area {
+            flex: 1; overflow-y: auto; padding: 24px 28px;
+        }
+        .lesson-panel {
+            max-width: 900px; margin: 0 auto 24px; background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 28px 32px; position: relative;
+        }
+        .lesson-panel h2 { font-size: 1.6rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+        .lesson-panel h3 { font-size: 1.1rem; color: var(--green-glow); margin: 20px 0 8px; }
+        .lesson-panel p, .lesson-panel li { color: var(--text); line-height: 1.7; margin-bottom: 12px; }
+        .code-block {
+            background: #0d1117; border: 1px solid var(--border); border-left: 4px solid var(--green);
+            border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-family: var(--font); font-size: 0.85rem;
+            white-space: pre-wrap; color: #e6edf3; overflow-x: auto;
+        }
+        .keyword { color: #ff7b3b; } .string { color: #a5d6ff; } .func { color: #d2a8ff; } .comment { color: #5c6370; font-style: italic; } .number { color: #79c0ff; }
+        .task-box {
+            background: rgba(255,182,39,0.04); border: 1px solid rgba(255,182,39,0.25); border-left: 4px solid var(--yellow);
+            border-radius: 8px; padding: 16px 20px; margin: 20px 0;
+        }
+        .task-title { font-weight: 600; color: var(--yellow); font-size: 0.85rem; margin-bottom: 8px; }
+        .run-example-btn {
+            display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; padding: 8px 18px;
+            background: rgba(0,255,106,0.08); border: 1px solid rgba(0,255,106,0.3); border-radius: 20px;
+            cursor: pointer; font-family: var(--font); font-size: 0.72rem; color: var(--green-glow);
+            transition: var(--transition);
+        }
+        .run-example-btn:hover { background: rgba(0,255,106,0.16); border-color: var(--green); box-shadow: 0 0 14px rgba(0,255,106,0.15); }
+
+        /* ЕГЭ панель */
+        .ege-card {
+            background: var(--surface2); border-radius: 12px; padding: 20px; margin: 16px 0;
+            border: 1px solid var(--border);
+        }
+        .ege-card img { max-width: 100%; border-radius: 8px; margin: 10px 0; background: #fff; }
+
+        /* Терминал */
+        .terminal-section { flex-shrink: 0; border-top: 1px solid var(--border); padding: 12px 28px 16px; background: var(--surface); }
+        .terminal-section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text2); margin-bottom: 8px; font-weight: 600; }
+        .macbook-wrapper { max-width: 780px; margin: 0 auto; }
+        .macbook-lid {
+            background: var(--macbook-frame); border-radius: 18px 18px 14px 14px; padding: 14px 12px 18px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6); position: relative; transform: rotateX(2deg); transition: 0.3s;
+        }
+        .macbook-lid:hover { transform: rotateX(0deg); }
+        .macbook-screen {
+            background: var(--macbook-bezel); border-radius: 8px; padding: 10px; position: relative;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+        }
+        .macbook-notch { position: absolute; top: 0; left: 50%; width: 130px; height: 20px; background: var(--macbook-bezel); border-radius: 0 0 12px 12px; z-index: 10; }
+        .terminal-window {
+            background: var(--terminal-bg); border-radius: 6px; overflow: hidden; border: 1px solid #1a1a1e;
+            display: flex; flex-direction: column; height: 280px;
+        }
+        .terminal-titlebar { background: #1e1e22; padding: 8px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #25252b; }
+        .traffic-lights { display: flex; gap: 7px; }
+        .traffic-light { width: 11px; height: 11px; border-radius: 50%; }
+        .traffic-light.red { background: #ff5f57; } .traffic-light.yellow { background: #ffbd2e; } .traffic-light.green { background: #28c840; }
+        .terminal-title { flex: 1; text-align: center; font-size: 0.7rem; color: #8b8b92; }
+        .terminal-body {
+            flex: 1; overflow-y: auto; padding: 10px 14px; font-family: var(--font); font-size: 0.8rem;
+            color: #c8ccd4; line-height: 1.5;
+        }
+        .terminal-input-row { display: flex; align-items: center; gap: 0; padding: 6px 14px; font-family: var(--font); }
+        .prompt-text { color: var(--green-glow); font-weight: 500; user-select: none; }
+        .terminal-input-row input {
+            flex: 1; background: transparent; border: none; outline: none; color: #e6edf3;
+            font-family: var(--font); font-size: 0.8rem; caret-color: var(--green-glow);
+        }
+        .history-entry { margin-bottom: 2px; }
+        .input-line { color: var(--green-glow); } .output-line { color: #c8ccd4; } .error-line { color: var(--red); }
+        .coin-particle { position: fixed; pointer-events: none; font-size: 2rem; z-index: 999; animation: coinUp 0.8s ease-out forwards; }
+        @keyframes coinUp { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-140px) scale(0.4); } }
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);
+            display: flex; align-items: center; justify-content: center; z-index: 200;
+            opacity: 0; pointer-events: none; transition: 0.3s;
+        }
+        .modal-overlay.open { opacity: 1; pointer-events: auto; }
+        .modal-box {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 28px;
+            max-width: 480px; width: 90%; position: relative;
+        }
+        .close-modal { position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 1.5rem; color: var(--text2); cursor: pointer; }
+        .shop-item { display: flex; align-items: center; justify-content: space-between; padding: 12px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">🐍</div>
+    <div class="title">Python<span>Forge</span></div>
+    <div class="header-controls">
+        <div class="progress-wrapper">
+            <span style="font-size:0.7rem;color:var(--text2);">Прогресс</span>
+            <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBarInner" style="width:0%"></div></div>
+            <span id="progressText">0/12</span>
+        </div>
+        <div class="coin-display" id="coinDisplay">🪙 <span id="coinCount">0</span></div>
+        <button class="btn-shop" id="btnOpenShop">🛍️ Магазин</button>
+    </div>
+</header>
+
+<div class="app-container">
+    <nav class="sidebar" id="sidebar"></nav>
+    <main class="main-content">
+        <div class="scroll-area" id="scrollArea">
+            <div class="lesson-panel" id="lessonPanel"></div>
+            <div id="egeContainer" style="display:none;"></div>
+        </div>
+        <div class="terminal-section">
+            <div class="terminal-section-label">💻 Терминал (Python REPL)</div>
+            <div class="macbook-wrapper">
+                <div class="macbook-lid">
+                    <div class="macbook-screen">
+                        <div class="macbook-notch"></div>
+                        <div class="terminal-window">
+                            <div class="terminal-titlebar">
+                                <div class="traffic-lights"><div class="traffic-light red"></div><div class="traffic-light yellow"></div><div class="traffic-light green"></div></div>
+                                <div class="terminal-title">Terminal — python3</div>
+                            </div>
+                            <div class="terminal-body" id="terminalBody"></div>
+                            <div class="terminal-input-row">
+                                <span class="prompt-text" id="promptText">>>>&nbsp;</span>
+                                <input type="text" id="terminalInput" placeholder="Код или команда" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Shop Modal -->
+<div class="modal-overlay" id="shopModal">
+    <div class="modal-box">
+        <button class="close-modal" id="closeShopModal">&times;</button>
+        <h3>🛍️ Магазин</h3>
+        <div id="shopItemsContainer"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+<script>
+    // ---------- Данные ----------
+    const courses = {
+        junior: [
+            { id:0, title:'Привет, мир!', theory:'<h3>print()</h3><div class="code-block"><span class="func">print</span>(<span class="string">"Hello, world!"</span>)</div>', task:'Выведи своё имя.', code:'print("Я Python-разработчик")' },
+            { id:1, title:'Переменные', theory:'<h3>Переменные</h3><div class="code-block">name = <span class="string">"Алиса"</span>\n<span class="func">print</span>(name)</div>', task:'Создай переменную city.', code:'city = "Москва"\nprint(city)' },
+            { id:2, title:'Типы данных', theory:'<h3>int, str, float</h3><div class="code-block"><span class="func">print</span>(<span class="func">type</span>(<span class="number">42</span>))</div>', task:'Преобразуй "256" в число.', code:'a = "256"\nb = int(a)\nprint(b * 2)' },
+            { id:3, title:'Условия', theory:'<h3>if/else</h3><div class="code-block"><span class="keyword">if</span> age >= <span class="number">18</span>:\n    <span class="func">print</span>(<span class="string">"Можно"</span>)</div>', task:'Температурный комфорт.', code:'temp = 22\nif temp > 30:\n    print("Жарко")\nelif temp >= 15:\n    print("Тепло")\nelse:\n    print("Холодно")' },
+        ],
+        middle: [
+            { id:4, title:'Списки', theory:'<h3>list</h3><div class="code-block">fruits = [<span class="string">"яблоко"</span>, <span class="string">"банан"</span>]\n<span class="func">print</span>(fruits[<span class="number">0</span>])</div>', task:'Создай список из 3 фильмов.', code:'movies = ["Интерстеллар", "Матрица", "Начало"]\nprint(movies)' },
+            { id:5, title:'Словари', theory:'<h3>dict</h3><div class="code-block">person = {<span class="string">"имя"</span>: <span class="string">"Иван"</span>}\n<span class="func">print</span>(person[<span class="string">"имя"</span>])</div>', task:'Словарь с характеристиками.', code:'me = {"рост": 175, "вес": 70}\nprint(me["рост"])' },
+            { id:6, title:'Функции', theory:'<h3>def</h3><div class="code-block"><span class="keyword">def</span> <span class="func">square</span>(x):\n    <span class="keyword">return</span> x * x</div>', task:'Функция cube.', code:'def cube(x):\n    return x**3\nprint(cube(3))' },
+        ],
+        senior: [
+            { id:7, title:'Декораторы', theory:'<h3>@decorator</h3><div class="code-block"><span class="keyword">def</span> <span class="func">bold</span>(func):\n    <span class="keyword">def</span> <span class="func">wrap</span>(): ...</div>', task:'Создай декоратор bold.', code:'def bold(func):\n def wrap():\n  return "<b>"+func()+"</b>"\n return wrap\n@bold\ndef greet():\n return "hi"\nprint(greet())' },
+            { id:8, title:'Асинхронность', theory:'<h3>async/await</h3><div class="code-block"><span class="keyword">async</span> <span class="keyword">def</span> <span class="func">main</span>(): ...</div>', task:'Запусти async функцию.', code:'import asyncio\nasync def main():\n await asyncio.sleep(0.1)\n return "ok"\nprint(asyncio.run(main()))' },
+        ],
+    };
+    const egeTasks = [
+        { id:'e1', title:'Задание 1: Анализ графов', desc:'Сколько путей из А в К?', svg:'<svg width="200" height="120"><circle cx="30" cy="60" r="10" fill="cyan"/><text x="24" y="65" fill="black">A</text><circle cx="170" cy="60" r="10" fill="cyan"/><text x="164" y="65" fill="black">K</text><line x1="40" y1="60" x2="160" y2="60" stroke="white"/></svg>', answer:'1' },
+        { id:'e2', title:'Задание 2: Таблица истинности', desc:'¬(A ∧ B) ∨ C', svg:'<svg width="100" height="60"><text x="10" y="20" fill="white">A B C</text><text x="10" y="40" fill="white">0 0 0 -> 1</text></svg>', answer:'7' },
+    ];
+
+    let state = {
+        view: 'junior',
+        index: 0,
+        completed: new Set(JSON.parse(localStorage.getItem('pf_done') || '[]')),
+        coins: parseInt(localStorage.getItem('pf_coins') || '0'),
+    };
+
+    function save() {
+        localStorage.setItem('pf_done', JSON.stringify([...state.completed]));
+        localStorage.setItem('pf_coins', state.coins);
+    }
+
+    function renderSidebar() {
+        let html = '';
+        for (let [level, lessons] of Object.entries(courses)) {
+            html += `<div class="section-label">${level === 'junior' ? '🐍 Junior' : level === 'middle' ? '⚙️ Middle' : '🚀 Senior'}</div>`;
+            lessons.forEach((l, idx) => {
+                html += `<button class="lesson-btn ${state.view===level && state.index===idx ? 'active' : ''} ${state.completed.has(l.id) ? 'done' : ''}" data-view="${level}" data-index="${idx}"><span class="num">${idx+1}</span> ${l.title}<span class="check">✓</span></button>`;
+            });
+        }
+        html += '<div class="section-label">🎓 ЕГЭ 2026</div>';
+        html += `<button class="lesson-btn ${state.view==='ege' ? 'active' : ''}" data-view="ege" data-index="0">📋 Задания с графикой</button>`;
+        document.getElementById('sidebar').innerHTML = html;
+    }
+
+    function renderContent() {
+        const panel = document.getElementById('lessonPanel');
+        const egeContainer = document.getElementById('egeContainer');
+        if (state.view === 'ege') {
+            panel.style.display = 'none';
+            egeContainer.style.display = 'block';
+            let html = '<h2>Банк заданий ЕГЭ по информатике 2026</h2>';
+            egeTasks.forEach(task => {
+                html += `<div class="ege-card">
+                    <h3 style="color:var(--purple);">${task.title}</h3>
+                    <p>${task.desc}</p>
+                    ${task.svg}
+                    <p>Ответ: <input type="text" placeholder="Введите ответ" style="background:var(--surface); border:1px solid var(--border); color:white; padding:6px; border-radius:6px; margin-top:8px;"></p>
+                    <button style="background:var(--purple); border:none; color:white; padding:6px 16px; border-radius:20px; cursor:pointer;" onclick="alert('Правильный ответ: ${task.answer}')">Проверить</button>
+                </div>`;
+            });
+            egeContainer.innerHTML = html;
+        } else {
+            panel.style.display = 'block';
+            egeContainer.style.display = 'none';
+            const lessons = courses[state.view];
+            if (!lessons || !lessons[state.index]) return;
+            const lesson = lessons[state.index];
+            panel.innerHTML = `
+                <h2>${lesson.title}</h2>
+                ${lesson.theory}
+                <div class="task-box">
+                    <div class="task-title">🎯 Задание</div>
+                    <p>${lesson.task}</p>
+                    <button class="run-example-btn" onclick="executeCode(\`${lesson.code.replace(/`/g, '\\`')}\`)">▶ Запустить пример</button>
+                </div>
+            `;
+            if (!state.completed.has(lesson.id)) {
+                state.completed.add(lesson.id);
+                state.coins += 20;
+                save();
+                spawnCoins();
+            }
+        }
+        updateUI();
+    }
+
+    function updateUI() {
+        const total = 9; // сумма всех уроков
+        const done = state.completed.size;
+        document.getElementById('progressBarInner').style.width = (done / total * 100) + '%';
+        document.getElementById('progressText').textContent = `${done}/${total}`;
+        document.getElementById('coinCount').textContent = state.coins;
+    }
+
+    function spawnCoins() {
+        for (let i = 0; i < 3; i++) {
+            const p = document.createElement('div');
+            p.className = 'coin-particle';
+            p.textContent = '🪙';
+            p.style.left = Math.random() * 80 + 10 + '%';
+            p.style.top = Math.random() * 60 + 20 + '%';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 800);
+        }
+    }
+
+    // Терминал
+    let pyodideReady = false;
+    let pyodide;
+    async function initPyodide() {
+        pyodide = await loadPyodide({ indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/" });
+        pyodide.setStdout({ batched: (text) => { window._stdout = (window._stdout || '') + text; } });
+        pyodideReady = true;
+        document.getElementById('terminalBody').innerHTML += '<div class="history-entry output-line">🐍 Python готов.</div>';
+    }
+    async function executeCode(code) {
+        if (!pyodideReady) return;
+        window._stdout = '';
+        try {
+            const res = pyodide.runPython(code);
+            let out = window._stdout || (res !== undefined ? String(res) : '');
+            if (out) addTerminal(out, 'output');
+        } catch (e) { addTerminal('❌ ' + e.message, 'error'); }
+    }
+    function addTerminal(text, type) {
+        const body = document.getElementById('terminalBody');
+        const div = document.createElement('div');
+        div.className = 'history-entry ' + type + '-line';
+        div.textContent = text;
+        body.appendChild(div);
+        body.scrollTop = body.scrollHeight;
+    }
+
+    document.getElementById('sidebar').addEventListener('click', e => {
+        const btn = e.target.closest('.lesson-btn');
+        if (!btn) return;
+        state.view = btn.dataset.view;
+        state.index = parseInt(btn.dataset.index) || 0;
+        renderSidebar();
+        renderContent();
+        document.getElementById('scrollArea').scrollTop = 0;
+    });
+
+    document.getElementById('terminalInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const code = this.value;
+            if (code.trim() === 'clear') { document.getElementById('terminalBody').innerHTML = ''; }
+            else { addTerminal('>>> ' + code, 'input'); executeCode(code); }
+            this.value = '';
+        }
+    });
+
+    // Магазин
+    const shopItems = [
+        { name:'🌑 Тёмная тема', price:0, apply:()=>{} },
+        { name:'💜 Киберпанк', price:40, apply:()=> document.body.style.background = '#1a0030' },
+        { name:'🟢 Матрица', price:50, apply:()=> document.body.style.background = '#001a00' },
+    ];
+    function renderShop() {
+        const container = document.getElementById('shopItemsContainer');
+        container.innerHTML = '';
+        shopItems.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'shop-item';
+            div.innerHTML = `<span>${item.name}</span><span>${item.price} 🪙</span><button>Купить</button>`;
+            div.querySelector('button').onclick = () => {
+                if (state.coins >= item.price) {
+                    state.coins -= item.price; item.apply(); save(); updateUI(); renderShop();
+                } else alert('Не хватает монет');
+            };
+            container.appendChild(div);
+        });
+    }
+    document.getElementById('btnOpenShop').addEventListener('click', ()=>{
+        renderShop();
+        document.getElementById('shopModal').classList.add('open');
+    });
+    document.getElementById('closeShopModal').addEventListener('click', ()=>
+        document.getElementById('shopModal').classList.remove('open'));
+
+    // Старт
+    renderSidebar();
+    renderContent();
+    updateUI();
+    initPyodide();
+</script>
+</body>
+</html>
