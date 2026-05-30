@@ -109,11 +109,11 @@ async def desc_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
     data = context.user_data
     summary = (
         f"\u2714\ufe0f <b>\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u0434\u0430\u043d\u043d\u044b\u0435:</b>\n\n"
-        f"\ud83d\udc64 <b>\u0418\u043c\u044f:</b> {data['name']}\n"
-        f"\ud83d\udccb <b>\u041f\u0440\u043e\u0435\u043a\u0442:</b> {data['project_name']}\n"
-        f"\ud83d\udcde <b>\u0422\u0435\u043b\u0435\u0444\u043e\u043d:</b> {data['phone']}\n"
-        f"\ud83d\udcc1 <b>\u0422\u0438\u043f:</b> {data['ptype']}\n"
-        + (f"\ud83d\udcdd <b>\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435:</b> {data['description']}" if data['description'] else "")
+        f"\U0001F464 <b>\u0418\u043c\u044f:</b> {data['name']}\n"
+        f"\U0001F4CB <b>\u041f\u0440\u043e\u0435\u043a\u0442:</b> {data['project_name']}\n"
+        f"\U0001F4DE <b>\u0422\u0435\u043b\u0435\u0444\u043e\u043d:</b> {data['phone']}\n"
+        f"\U0001F4C1 <b>\u0422\u0438\u043f:</b> {data['ptype']}\n"
+        + (f"\U0001F4DD <b>\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435:</b> {data['description']}" if data['description'] else "")
         + "\n\n\u0412\u0441\u0451 \u0432\u0435\u0440\u043d\u043e?"
     )
     await update.message.reply_text(
