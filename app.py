@@ -17,6 +17,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = db_url or 'sqlite:///vexio.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+@app.after_request
+def add_headers(response):
+    if response.mimetype in ('text/css', 'application/javascript', 'image/webp', 'image/jpeg', 'image/png', 'image/svg+xml', 'font/woff2', 'font/woff'):
+        response.headers['Cache-Control'] = 'public, max-age=2592000, immutable'
+    return response
+
 ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
 ADMIN_PASSWORD_HASH = generate_password_hash(os.environ.get('ADMIN_PASSWORD', 'vexio2024'))
 

@@ -55,7 +55,7 @@
     align-items: center; 
     justify-content: center;
     position: relative;
-    background: url('fon.jfif') center/cover no-repeat; /* ВОЗВРАЩАЕМ ФОН */
+    background: url('fon.webp') center/cover no-repeat;
     text-align: center;
     padding: 0 5%;
     box-sizing: border-box;
@@ -237,7 +237,7 @@
         
         <!-- МОДЕЛЬ 1 -->
         <div class="moto-card" onclick="openModal('f1')">
-            <div class="img-wrap"><img src="f1.jpeg"></div>
+            <div class="img-wrap"><img src="f1.webp"></div>
             <div class="moto-content">
                 <div class="meta">Enduro / 300cc</div>
                 <h3>Progasi Super Max 300</h3>
@@ -247,7 +247,7 @@
 
         <!-- МОДЕЛЬ 2 -->
         <div class="moto-card" onclick="openModal('f2')">
-            <div class="img-wrap"><img src="f2.jpeg"></div>
+            <div class="img-wrap"><img src="f2.webp"></div>
             <div class="moto-content">
                 <div class="meta">Hard Enduro / PRO</div>
                 <h3>Progasi Super Max 300 Pro</h3>
@@ -257,7 +257,7 @@
 
         <!-- МОДЕЛЬ 3 -->
         <div class="moto-card" onclick="openModal('f3')">
-            <div class="img-wrap"><img src="f3.jpeg"></div>
+            <div class="img-wrap"><img src="f3.webp"></div>
             <div class="moto-content">
                 <div class="meta">New Model 2026</div>
                 <h3>Sanchez Maniac PR300</h3>
@@ -267,7 +267,7 @@
 
         <!-- МОДЕЛЬ 4 -->
         <div class="moto-card" onclick="openModal('f4')">
-            <div class="img-wrap"><img src="f4.jpeg"></div>
+            <div class="img-wrap"><img src="f4.webp"></div>
             <div class="moto-content">
                 <div class="meta">Sport / NB300</div>
                 <h3>Kews K16 NB300, 2026</h3>
@@ -277,7 +277,7 @@
 
 	<!-- МОДЕЛЬ 5 -->
 	<div class="moto-card" onclick="openModal('f5')">
-    		<div class="img-wrap"><img src="f5.jpeg"></div>
+    		<div class="img-wrap"><img src="f5.webp"></div>
     		<div class="moto-content">
         		<div class="meta">Pitbike / 125cc</div>
         		<h3>Progasi Smart 125, 2026</h3>
@@ -305,31 +305,31 @@
     const motoData = {
         'f1': {
             title: 'Progasi Super Max 300',
-            img: 'f1.jpeg',
+            img: 'f1.webp',
             promo: '<b>В наличии в Йошкар-Оле!</b> Цена до 2.05.2026 Новый, в пленке, в коробке ❗️<br><br>Запросите наш каталог прямо здесь и получите промокод на <b>50% скидку на доставку</b>! Просто напишите слово <b>«Каталог»</b>.',
             specs: [['Двигатель', 'ZS175FMM, 300 см³'], ['Мощность', '25 л.с.'], ['Карбюратор', 'NIBBI Black PE30'], ['Вес', '112 кг'], ['Бак', '5,5 л'], ['Макс. скорость', '130 км/ч']]
         },
         'f2': {
             title: 'Progasi Super Max 300 Pro',
-            img: 'f2.jpeg',
+            img: 'f2.webp',
             promo: '<b>В наличии в Йошкар-Оле! Красный Цвет!</b> Наклейки PROGASI. Новый, в пленке, в коробке ❗️<br><br>Напишите слово <b>«Каталог»</b> и получите персональный промокод со <b>скидкой 50%</b> на доставку!',
             specs: [['Двигатель', 'ZS175FMN (баланс.вал)'], ['Мощность', '27 л.с.'], ['Карбюратор', 'NIBBI Black PE30'], ['Шины', 'Kenda 21/18'], ['Вес', '112 кг'], ['Бак', '5,5 л']]
         },
         'f3': {
             title: 'Sanchez Maniac PR300, 2026',
-            img: 'f3.jpeg',
+            img: 'f3.webp',
             promo: '<b>В НАЛИЧИИ В ЙОШКАР-ОЛЕ!</b> В заводской коробке ❗️ Новинка сезона. Алюминиевый маятник и надежный PR300.',
             specs: [['Тип двигателя', '4-х тактный, 300cc'], ['Мощность', '25 л.с.'], ['Маятник', 'Алюминий'], ['Вес', '109 кг'], ['Клиренс', '310 мм'], ['Тормоза', 'Brembo Copy']]
         },
         'f4': {
             title: 'Kews K16 NB300, 2026',
-            img: 'f4.jpeg',
+            img: 'f4.webp',
             promo: '<b>В НАЛИЧИИ В ЙОШКАР-ОЛЕ!</b> ❗️ Цена под закaз 198т.р. С приборной панелью. Рама K8, пластик KTM EXC 23 года.',
             specs: [['Двигатель', 'NB300 ZS174MN-5'], ['Охлаждение', 'Жидкостное'], ['Карбюратор', 'Nibbi PWK34'], ['Вилка', '48 мм, регулируемая'], ['Траверсы', 'Фрезерованные']]
         },
         'f5': {
             title: 'Progasi Smart 125, 2026',
-            img: 'f5.jpeg',
+            img: 'f5.webp',
             promo: '<b>❗️ Progasi Smart 125 в наличии в Йошкар-Оле ❗️</b> Питбайк на 17/14 колесах Kenda. Легкий, маневренный и надежный.',
             specs: [['Тип', 'Питбайк 125cc'], ['Мощность', '8.8 л.с.'], ['Трансмиссия', '4 скорости'], ['Вес', '75 кг'], ['Высота седла', '870 мм'], ['Бак', '6.5 л'], ['Макс. скорость', '80 км/ч']]
         }
