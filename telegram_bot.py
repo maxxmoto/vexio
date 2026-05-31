@@ -272,6 +272,9 @@ async def portfolio_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
         new_idx = idx + (1 if direction == "next" else -1)
         await portfolio_show(update, context, category, cat_key, new_idx)
     elif len(parts) >= 2 and parts[0] == "pf":
+        if parts[1] == "noop":
+            await query.answer()
+            return
         cat_key = parts[1]
         category = "\u0421\u0430\u0439\u0442\u044b" if cat_key == "sites" else "\u0411\u043e\u0442\u044b"
         await portfolio_show(update, context, category, cat_key)
