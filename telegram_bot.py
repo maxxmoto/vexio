@@ -203,7 +203,7 @@ async def portfolio_menu(update: Update, context: ContextTypes.DEFAULT_TYPE, msg
         await query.answer()
 
 
-async def portfolio_show(update: Update, context: ContextTypes.DEFAULT_TYPE, category, index=0):
+async def portfolio_show(update: Update, context: ContextTypes.DEFAULT_TYPE, category, cat_key="sites", index=0):
     query = update.callback_query
     try:
         async with httpx.AsyncClient() as client:
@@ -222,10 +222,10 @@ async def portfolio_show(update: Update, context: ContextTypes.DEFAULT_TYPE, cat
         nav = []
         row = []
         if index > 0:
-            row.append(InlineKeyboardButton("\u25C0\ufe0f", callback_data=f"pf_{category}_prev_{index}"))
+            row.append(InlineKeyboardButton("\u25C0\ufe0f", callback_data=f"pf_{cat_key}_prev_{index}"))
         row.append(f"{index+1}/{len(items)}")
         if index < len(items) - 1:
-            row.append(InlineKeyboardButton("\u25B6\ufe0f", callback_data=f"pf_{category}_next_{index}"))
+            row.append(InlineKeyboardButton("\u25B6\ufe0f", callback_data=f"pf_{cat_key}_next_{index}"))
         nav.append(row)
         nav.append([InlineKeyboardButton("\u2190 \u041a \u043a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u044f\u043c", callback_data="pf_menu")])
         text = f"\U0001F4F7 <b>{item['name']}</b>\n\n{item.get('description', '')}"
@@ -270,10 +270,11 @@ async def portfolio_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
         _, cat_key, direction, idx = parts[0], parts[1], parts[2], int(parts[3])
         category = "\u0421\u0430\u0439\u0442\u044b" if cat_key == "sites" else "\u0411\u043e\u0442\u044b"
         new_idx = idx + (1 if direction == "next" else -1)
-        await portfolio_show(update, context, category, new_idx)
-    elif len(parts) >= 3 and parts[0] == "pf":
-        category = "\u0421\u0430\u0439\u0442\u044b" if parts[1] == "sites" else "\u0411\u043e\u0442\u044b"
-        await portfolio_show(update, context, category)
+        await portfolio_show(update, context, category, cat_key, new_idx)
+    elif len(parts) >= 2 and parts[0] == "pf":
+        cat_key = parts[1]
+        category = "\u0421\u0430\u0439\u0442\u044b" if cat_key == "sites" else "\u0411\u043e\u0442\u044b"
+        await portfolio_show(update, context, category, cat_key)
 
 
 async def handle_portfolio_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
