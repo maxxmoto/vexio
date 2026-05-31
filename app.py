@@ -24,6 +24,32 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 PORTFOLIO_FILE = os.path.join(os.path.dirname(__file__), 'static', 'portfolio.json')
+VISITORS_FILE = os.path.join(os.path.dirname(__file__), 'static', 'visitors.json')
+
+def load_visitors():
+    try:
+        with open(VISITORS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {'unique_ips': [], 'total': 0}
+
+def save_visitors(data):
+    os.makedirs(os.path.dirname(VISITORS_FILE), exist_ok=True)
+    with open(VISITORS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+@app.before_request
+def track_visitor():
+    if request.path.startswith('/static/') or request.path.startswith('/admin') or request.path.startswith('/api/'):
+        return
+    if session.get('admin_logged_in'):
+        return
+    ip = request.remote_addr or 'unknown'
+    data = load_visitors()
+    if ip not in data['unique_ips']:
+        data['unique_ips'].append(ip)
+        data['total'] = len(data['unique_ips'])
+        save_visitors(data)
 
 def load_portfolio():
     try:
@@ -195,7 +221,8 @@ def admin_login():
 def admin_dashboard():
     submissions = Submission.query.order_by(Submission.created_at.desc()).all()
     portfolio = load_portfolio()
-    return render_template('admin.html', login=False, page='submissions', submissions=[s.to_dict() for s in submissions], portfolio=portfolio)
+    visitors = load_visitors()
+    return render_template('admin.html', login=False, page='submissions', submissions=[s.to_dict() for s in submissions], portfolio=portfolio, visitors=visitors)
 
 @app.route('/admin/portfolio', methods=['GET', 'POST'])
 @login_required
@@ -288,6 +315,59 @@ def update_submission_status(sub_id):
 def api_referrals():
     try:
         with open(os.path.join(app.root_path, 'static', 'referrals.json'), 'r', encoding='utf-8') as f:
+            return jsonify(json.load(f))
+    except (FileNotFoundError, json.JSONDecodeError):
+        return jsonify([])
+
+@app.route('/admin/mailing', methods=['GET', 'POST'])
+@login_required
+def admin_mailing():
+    users_file = os.path.join(app.root_path, 'static', 'users.json')
+    try:
+        with open(users_file, 'r', encoding='utf-8') as f:
+            users = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        users = []
+    result = None
+    if request.method == 'POST':
+        text = request.form.get('text', '').strip()
+        photo = request.files.get('photo')
+        sent = 0
+        failed = 0
+        for u in users:
+            uid = u.get('user_id')
+            if not uid:
+                continue
+            try:
+                if photo and photo.filename:
+                    resp = requests.post(
+                        f'https://api.telegram.org/bot{TG_TOKEN}/sendPhoto',
+                        files={'photo': (photo.filename, photo.stream, photo.content_type)},
+                        data={'chat_id': uid, 'caption': text, 'parse_mode': 'HTML'},
+                        timeout=15,
+                    )
+                else:
+                    resp = requests.post(
+                        f'https://api.telegram.org/bot{TG_TOKEN}/sendMessage',
+                        json={'chat_id': uid, 'text': text, 'parse_mode': 'HTML'},
+                        timeout=10,
+                    )
+                if resp.status_code == 200:
+                    sent += 1
+                else:
+                    failed += 1
+                    logger.warning(f"Mailing fail to {uid}: {resp.status_code}")
+            except Exception as e:
+                failed += 1
+                logger.error(f"Mailing error to {uid}: {e}")
+        result = {'sent': sent, 'failed': failed, 'total': len(users)}
+    return render_template('admin.html', login=False, page='mailing', users=users, result=result)
+
+@app.route('/admin/api/users')
+@login_required
+def api_users():
+    try:
+        with open(os.path.join(app.root_path, 'static', 'users.json'), 'r', encoding='utf-8') as f:
             return jsonify(json.load(f))
     except (FileNotFoundError, json.JSONDecodeError):
         return jsonify([])
