@@ -220,22 +220,19 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         r["status"] = "converted"
                         r["converted_at"] = datetime.utcnow().isoformat()
                 save_referrals(referrals)
-            users_file = os.path.join(os.path.dirname(__file__), "static", "users.json")
             try:
-                with open(users_file, "r", encoding="utf-8") as f:
-                    users = json.load(f)
-            except (FileNotFoundError, json.JSONDecodeError):
-                users = []
-            if not any(u.get("user_id") == update.effective_user.id for u in users):
-                users.append({
-                    "user_id": update.effective_user.id,
-                    "username": update.effective_user.username or "",
-                    "first_name": update.effective_user.first_name or "",
-                    "created_at": datetime.utcnow().isoformat(),
-                })
-                os.makedirs(os.path.dirname(users_file), exist_ok=True)
-                with open(users_file, "w", encoding="utf-8") as f:
-                    json.dump(users, f, ensure_ascii=False, indent=2)
+                async with httpx.AsyncClient() as client:
+                    await client.post(
+                        f"{API_URL}/api/register_user",
+                        json={
+                            "user_id": update.effective_user.id,
+                            "username": update.effective_user.username or "",
+                            "first_name": update.effective_user.first_name or "",
+                        },
+                        timeout=10,
+                    )
+            except Exception as e:
+                logger.warning(f"Failed to register user: {e}")
             await update.message.reply_text(
                 f"\u2705 <b>\u0423\u0441\u043f\u0435\u0448\u043d\u043e!</b>\n"
                 f"\U0001F4CB <b>\u041d\u043e\u043c\u0435\u0440 \u0437\u0430\u044f\u0432\u043a\u0438:</b> {pid}\n"

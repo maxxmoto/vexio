@@ -319,6 +319,30 @@ def api_referrals():
     except (FileNotFoundError, json.JSONDecodeError):
         return jsonify([])
 
+@app.route('/api/register_user', methods=['POST'])
+def api_register_user():
+    data = request.get_json()
+    if not data or not data.get('user_id'):
+        return jsonify({'error': 'user_id required'}), 400
+    users_file = os.path.join(app.root_path, 'static', 'users.json')
+    try:
+        with open(users_file, 'r', encoding='utf-8') as f:
+            users = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        users = []
+    uid = data['user_id']
+    if not any(u.get('user_id') == uid for u in users):
+        users.append({
+            'user_id': uid,
+            'username': data.get('username', ''),
+            'first_name': data.get('first_name', ''),
+            'created_at': datetime.utcnow().isoformat(),
+        })
+        os.makedirs(os.path.dirname(users_file), exist_ok=True)
+        with open(users_file, 'w', encoding='utf-8') as f:
+            json.dump(users, f, ensure_ascii=False, indent=2)
+    return jsonify({'success': True})
+
 @app.route('/admin/mailing', methods=['GET', 'POST'])
 @login_required
 def admin_mailing():
