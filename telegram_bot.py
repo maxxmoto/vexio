@@ -223,7 +223,7 @@ async def portfolio_show(update: Update, context: ContextTypes.DEFAULT_TYPE, cat
         row = []
         if index > 0:
             row.append(InlineKeyboardButton("\u25C0\ufe0f", callback_data=f"pf_{cat_key}_prev_{index}"))
-        row.append(f"{index+1}/{len(items)}")
+        row.append(InlineKeyboardButton(f"{index+1}/{len(items)}", callback_data="pf_noop"))
         if index < len(items) - 1:
             row.append(InlineKeyboardButton("\u25B6\ufe0f", callback_data=f"pf_{cat_key}_next_{index}"))
         nav.append(row)
