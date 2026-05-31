@@ -4,6 +4,7 @@
     "category": "Сайты",
     "name": "MaxxMoto",
     "description": "Онлайн-витрина мотоциклов с каталогом и формой заявки. Тёмный стиль, JetBrains Mono, акцент на скорость.",
+    "link": "https://maxxmoto.ru",
     "image": "",
     "created": "2026-05-30T20:00:00"
   },
@@ -12,6 +13,7 @@
     "category": "Сайты",
     "name": "Sotnur Glamping",
     "description": "Landing page для глэмпинга на озере. Атмосферный дизайн, галерея, форма бронирования.",
+    "link": "https://sotnur.ru",
     "image": "",
     "created": "2026-05-30T20:00:00"
   },
@@ -20,6 +22,7 @@
     "category": "Сайты",
     "name": "Englify",
     "description": "Платформа для изучения английского. Интерактивные уроки, прогресс, адаптивный интерфейс.",
+    "link": "https://englify.ru",
     "image": "",
     "created": "2026-05-30T20:00:00"
   },
@@ -28,6 +31,7 @@
     "category": "Сайты",
     "name": "Теннис Брутал",
     "description": "Сайт теннисного клуба в Йошкар-Оле. Онлайн-запись, расписание кортов, цены.",
+    "link": "",
     "image": "",
     "created": "2026-05-30T20:00:00"
   },
@@ -36,7 +40,17 @@
     "category": "Боты",
     "name": "Vexio Form Bot",
     "description": "Telegram-бот для сбора заявок на разработку. Квиз, картинки-референсы, автопост в админ-бота.",
+    "link": "",
     "image": "",
     "created": "2026-05-30T20:00:00"
+  },
+  {
+    "id": "a436b490",
+    "category": "Сайты",
+    "name": "NextMoto",
+    "description": "Сайт продажи мотоциклов",
+    "link": "https://nextmoto.ru",
+    "image": "",
+    "created": "2026-05-31T09:10:52.165884"
   }
 ]

@@ -142,7 +142,15 @@
                     <textarea name="description" rows="2" placeholder="Онлайн-витрина мотоциклов с каталогом и заявками" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;resize:vertical;"></textarea>
                 </div>
                 <div style="margin-bottom:16px;">
-                    <label style="display:block;font-size:12px;color:var(--text-dim);margin-bottom:6px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;">Изображение</label>
+                    <label style="display:block;font-size:12px;color:var(--text-dim);margin-bottom:6px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;">Ссылка на проект</label>
+                    <input type="url" name="link" placeholder="https://example.com" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font-body);font-size:15px;outline:none;">
+                </div>
+                <div style="margin-bottom:16px;">
+                    <label style="display:block;font-size:12px;color:var(--text-dim);margin-bottom:6px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;">Изображение (ссылка)</label>
+                    <input type="url" name="image_url" placeholder="https://telegra.ph/... или https://imgur.com/..." style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font-body);font-size:15px;outline:none;">
+                </div>
+                <div style="margin-bottom:16px;">
+                    <label style="display:block;font-size:12px;color:var(--text-dim);margin-bottom:6px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;">Или загрузить файл</label>
                     <input type="file" name="image" accept="image/*" style="color:var(--text-dim);font-size:13px;">
                 </div>
                 <button type="submit" class="btn-primary">+ Добавить</button>
@@ -160,7 +168,10 @@
                             <strong style="font-family:var(--font-display);font-size:16px;">{{ p.name }}</strong>
                             <span style="font-size:11px;font-family:var(--font-mono);color:var(--purple-bright);background:var(--purple-dim);padding:2px 10px;border-radius:100px;">{{ p.category }}</span>
                         </div>
-                        <p style="font-size:13px;color:var(--text-dim);margin-bottom:12px;">{{ p.description }}</p>
+                        <p style="font-size:13px;color:var(--text-dim);margin-bottom:6px;">{{ p.description }}</p>
+                        {% if p.link %}
+                        <p style="margin-bottom:10px;"><a href="{{ p.link }}" target="_blank" style="font-size:12px;color:var(--purple-bright);text-decoration:none;">🔗 {{ p.link }}</a></p>
+                        {% endif %}
                         <form method="POST" action="{{ url_for('delete_portfolio_item', item_id=p.id) }}" style="display:inline;">
                             <button type="submit" class="btn-primary btn-sm btn-danger" onclick="return confirm('Удалить?')">✕ Удалить</button>
                         </form>

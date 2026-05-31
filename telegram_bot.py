@@ -229,6 +229,8 @@ async def portfolio_show(update: Update, context: ContextTypes.DEFAULT_TYPE, cat
         nav.append(row)
         nav.append([InlineKeyboardButton("\u2190 \u041a \u043a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u044f\u043c", callback_data="pf_menu")])
         text = f"\U0001F4F7 <b>{item['name']}</b>\n\n{item.get('description', '')}"
+        if item.get('link'):
+            text += f"\n\n\U0001F517 <a href=\"{item['link']}\">{item['link']}</a>"
         if item.get('image'):
             await query.message.delete()
             await query.message.reply_photo(

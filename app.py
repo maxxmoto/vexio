@@ -212,6 +212,10 @@ def admin_portfolio():
                             src = data[0].get('src', '')
                             if src:
                                 image_url = f'https://telegra.ph{src}'
+                        else:
+                            logger.warning(f"Telegra.ph unexpected response: {data}")
+                    else:
+                        logger.warning(f"Telegra.ph upload failed: {r.status_code} {r.text[:200]}")
                 except Exception as e:
                     logger.error(f"Image upload error: {e}")
         if name and category:
@@ -220,6 +224,7 @@ def admin_portfolio():
                 'category': category,
                 'name': name,
                 'description': desc,
+                'link': request.form.get('link', '').strip(),
                 'image': image_url,
                 'created': datetime.utcnow().isoformat(),
             })
