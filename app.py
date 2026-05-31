@@ -205,7 +205,7 @@ def admin_portfolio():
                 'name': name,
                 'description': desc,
                 'link': link,
-                'image': '',
+                'image': image_url,
                 'created': datetime.utcnow().isoformat(),
             }
             port.append(entry)
@@ -215,19 +215,16 @@ def admin_portfolio():
                 if file.filename:
                     try:
                         r = requests.post(
-                            'https://telegra.ph/upload',
-                            files={'file': (file.filename, file.stream, file.content_type)},
-                            timeout=5,
+                            'https://catbox.moe/user/api.php',
+                            data={'reqtype': 'fileupload'},
+                            files={'fileToUpload': (file.filename, file.stream, file.content_type)},
+                            timeout=10,
                         )
-                        if r.status_code == 200:
-                            data = r.json()
-                            if isinstance(data, list) and len(data) > 0:
-                                src = data[0].get('src', '')
-                                if src:
-                                    entry['image'] = f'https://telegra.ph{src}'
-                                    save_portfolio(port)
+                        if r.status_code == 200 and r.text.startswith('https://'):
+                            entry['image'] = r.text.strip()
+                            save_portfolio(port)
                         else:
-                            logger.warning(f"Telegra.ph upload failed: {r.status_code} {r.text[:200]}")
+                            logger.warning(f"Catbox upload failed: {r.status_code} {r.text[:200]}")
                     except Exception as e:
                         logger.warning(f"Image upload skipped: {e}")
         return redirect(url_for('admin_portfolio'))
