@@ -196,39 +196,40 @@ def admin_portfolio():
         category = request.form.get('category', '')
         name = request.form.get('name', '')
         desc = request.form.get('description', '')
+        link = request.form.get('link', '').strip()
         image_url = request.form.get('image_url', '').strip()
-        if 'image' in request.files:
-            file = request.files['image']
-            if file.filename:
-                try:
-                    r = requests.post(
-                        'https://telegra.ph/upload',
-                        files={'file': (file.filename, file.stream, file.content_type)},
-                        timeout=15,
-                    )
-                    if r.status_code == 200:
-                        data = r.json()
-                        if isinstance(data, list) and len(data) > 0:
-                            src = data[0].get('src', '')
-                            if src:
-                                image_url = f'https://telegra.ph{src}'
-                        else:
-                            logger.warning(f"Telegra.ph unexpected response: {data}")
-                    else:
-                        logger.warning(f"Telegra.ph upload failed: {r.status_code} {r.text[:200]}")
-                except Exception as e:
-                    logger.error(f"Image upload error: {e}")
         if name and category:
-            port.append({
+            entry = {
                 'id': str(uuid.uuid4())[:8],
                 'category': category,
                 'name': name,
                 'description': desc,
-                'link': request.form.get('link', '').strip(),
-                'image': image_url,
+                'link': link,
+                'image': '',
                 'created': datetime.utcnow().isoformat(),
-            })
+            }
+            port.append(entry)
             save_portfolio(port)
+            if 'image' in request.files:
+                file = request.files['image']
+                if file.filename:
+                    try:
+                        r = requests.post(
+                            'https://telegra.ph/upload',
+                            files={'file': (file.filename, file.stream, file.content_type)},
+                            timeout=5,
+                        )
+                        if r.status_code == 200:
+                            data = r.json()
+                            if isinstance(data, list) and len(data) > 0:
+                                src = data[0].get('src', '')
+                                if src:
+                                    entry['image'] = f'https://telegra.ph{src}'
+                                    save_portfolio(port)
+                        else:
+                            logger.warning(f"Telegra.ph upload failed: {r.status_code} {r.text[:200]}")
+                    except Exception as e:
+                        logger.warning(f"Image upload skipped: {e}")
         return redirect(url_for('admin_portfolio'))
     return render_template('admin.html', login=False, page='portfolio', portfolio=port)
 

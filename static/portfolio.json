@@ -13,7 +13,7 @@
     "category": "Сайты",
     "name": "Sotnur Glamping",
     "description": "Landing page для глэмпинга на озере. Атмосферный дизайн, галерея, форма бронирования.",
-    "link": "https://sotnur.ru",
+    "link": "https://sotnur.onrender.com/",
     "image": "",
     "created": "2026-05-30T20:00:00"
   },
@@ -22,14 +22,14 @@
     "category": "Сайты",
     "name": "Englify",
     "description": "Платформа для изучения английского. Интерактивные уроки, прогресс, адаптивный интерфейс.",
-    "link": "https://englify.ru",
+    "link": "https://maxxmoto.github.io/englify-bot/#",
     "image": "",
     "created": "2026-05-30T20:00:00"
   },
   {
     "id": "init004",
     "category": "Сайты",
-    "name": "Теннис Брутал",
+    "name": "Теннисный центр \"Дружба\"",
     "description": "Сайт теннисного клуба в Йошкар-Оле. Онлайн-запись, расписание кортов, цены.",
     "link": "",
     "image": "",
@@ -49,7 +49,7 @@
     "category": "Сайты",
     "name": "NextMoto",
     "description": "Сайт продажи мотоциклов",
-    "link": "https://nextmoto.ru",
+    "link": "https://devjob.pythonanywhere.com/",
     "image": "",
     "created": "2026-05-31T09:10:52.165884"
   }
