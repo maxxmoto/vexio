@@ -66,7 +66,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return NAME
 
 async def name_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    text = update.message.text
+    text = update.message.text.strip()
     if text == "\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443":
         await update.message.reply_text(
             "\u041a\u0430\u043a \u0432\u0430\u0441 \u0437\u043e\u0432\u0443\u0442?",
@@ -75,7 +75,12 @@ async def name_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return NAME
     if "\U0001F4F7" in text:
         await portfolio_menu(update, context)
-    return ConversationHandler.END
+        return ConversationHandler.END
+    context.user_data["name"] = text
+    await update.message.reply_text(
+        "\u041a\u0430\u043a \u043d\u0430\u0437\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u0432\u0430\u0448 \u043f\u0440\u043e\u0435\u043a\u0442?"
+    )
+    return PROJECT
 
 async def project_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data["project_name"] = update.message.text.strip()
@@ -279,10 +284,6 @@ async def handle_portfolio_text(update: Update, context: ContextTypes.DEFAULT_TY
 def main():
     app = Application.builder().token(TOKEN).build()
 
-    app.add_handler(CallbackQueryHandler(portfolio_callback, pattern="^pf_"))
-
-    app.add_handler(MessageHandler(filters.Regex("\U0001F4F7"), handle_portfolio_text))
-
     conv = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
         states={
@@ -309,6 +310,10 @@ def main():
     )
 
     app.add_handler(conv)
+
+    app.add_handler(CallbackQueryHandler(portfolio_callback, pattern="^pf_"))
+    app.add_handler(MessageHandler(filters.Regex("\U0001F4F7"), handle_portfolio_text))
+
     logger.info("Bot started, polling...")
     app.run_polling(allowed_updates=Update.ALL_TYPES)
 
