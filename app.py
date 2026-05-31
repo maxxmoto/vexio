@@ -332,6 +332,9 @@ def admin_mailing():
     if request.method == 'POST':
         text = request.form.get('text', '').strip()
         photo = request.files.get('photo')
+        photo_bytes = photo.read() if photo and photo.filename else None
+        photo_filename = photo.filename if photo and photo.filename else None
+        photo_type = photo.content_type if photo and photo.filename else None
         sent = 0
         failed = 0
         for u in users:
@@ -339,10 +342,10 @@ def admin_mailing():
             if not uid:
                 continue
             try:
-                if photo and photo.filename:
+                if photo_bytes:
                     resp = requests.post(
                         f'https://api.telegram.org/bot{TG_TOKEN}/sendPhoto',
-                        files={'photo': (photo.filename, photo.stream, photo.content_type)},
+                        files={'photo': (photo_filename, photo_bytes, photo_type)},
                         data={'chat_id': uid, 'caption': text, 'parse_mode': 'HTML'},
                         timeout=15,
                     )
