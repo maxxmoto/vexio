@@ -62,6 +62,8 @@ def send_tg_notification(sub):
         text += f"\n\U0001F916 TG: @{sub.telegram_username}"
     if sub.description:
         text += f"\n\U0001F4DD \u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435: {sub.description[:200]}"
+    if sub.reference:
+        text += f"\n\U0001F517 \u0420\u0435\u0444\u0435\u0440\u0435\u043d\u0441: {sub.reference}"
     try:
         resp = requests.post(
             f'https://api.telegram.org/bot{TG_TOKEN}/sendMessage',
