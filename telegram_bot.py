@@ -290,6 +290,15 @@ async def portfolio_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
         await portfolio_show(update, context, category, cat_key)
 
 
+async def handle_channel_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "\U0001F4E2 <b>Vexio Studio</b> \u2014 \u043a\u0430\u043d\u0430\u043b \u043e \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0435 \u0438 \u043d\u043e\u0432\u044b\u0445 \u043f\u0440\u043e\u0435\u043a\u0442\u0430\u0445:\n\n"
+        "https://t.me/vexiostudiocahnnel",
+        reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"], ["\U0001F4E2 \u041a\u0430\u043d\u0430\u043b"]]),
+        parse_mode="HTML",
+    )
+
+
 async def handle_portfolio_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if "\U0001F4F7" in update.message.text:
         await portfolio_menu(update, context)
@@ -299,7 +308,10 @@ def main():
     app = Application.builder().token(TOKEN).build()
 
     conv = ConversationHandler(
-        entry_points=[CommandHandler("start", start)],
+        entry_points=[
+            CommandHandler("start", start),
+            MessageHandler(filters.Regex("^\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443$"), name_step),
+        ],
         states={
             NAME: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, name_step),
@@ -327,6 +339,7 @@ def main():
 
     app.add_handler(CallbackQueryHandler(portfolio_callback, pattern="^pf_"))
     app.add_handler(MessageHandler(filters.Regex("\U0001F4F7"), handle_portfolio_text))
+    app.add_handler(MessageHandler(filters.Regex("\U0001F4E2"), handle_channel_text))
 
     logger.info("Bot started, polling...")
     app.run_polling(allowed_updates=Update.ALL_TYPES)
