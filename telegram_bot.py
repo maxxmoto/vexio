@@ -42,6 +42,8 @@ def save_referrals(data):
 
 NAME, PROJECT, PHONE, PTYPE, DESC, REF, CONFIRM = range(7)
 
+MAIN_MENU = [["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"], ["\U0001F4E2 \u041a\u0430\u043d\u0430\u043b", "\U0001F381 \u0420\u0435\u0444\u0435\u0440\u0430\u043b\u044c\u043d\u0430\u044f \u0441\u0438\u0441\u0442\u0435\u043c\u0430"]]
+
 PTYPE_KEYBOARD = [
     ["\u0418\u043d\u0442\u0435\u0440\u043d\u0435\u0442-\u043c\u0430\u0433\u0430\u0437\u0438\u043d", "\u041b\u0435\u043d\u0434\u0438\u043d\u0433"],
     ["Telegram-\u0431\u043e\u0442", "\u041f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435"],
@@ -90,7 +92,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"\u0438\u043d\u0442\u0435\u0440\u0430\u043a\u0442\u0438\u0432\u043d\u044b\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f "
         f"\u0438 \u0443\u043c\u043d\u044b\u0445 \u0431\u043e\u0442\u043e\u0432 \u0434\u043b\u044f \u0432\u0430\u0448\u0435\u0433\u043e \u0431\u0438\u0437\u043d\u0435\u0441\u0430.\n\n"
         f"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435:",
-        reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"], ["\U0001F4E2 \u041a\u0430\u043d\u0430\u043b"]]),
+        reply_markup=make_keyboard(MAIN_MENU),
         parse_mode="HTML",
     )
     return NAME
@@ -110,9 +112,12 @@ async def name_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             "\U0001F4E2 <b>Vexio Studio</b> \u2014 \u043a\u0430\u043d\u0430\u043b \u043e \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0435 \u0438 \u043d\u043e\u0432\u044b\u0445 \u043f\u0440\u043e\u0435\u043a\u0442\u0430\u0445:\n\n"
             "https://t.me/vexiostudiocahnnel",
-            reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"], ["\U0001F4E2 \u041a\u0430\u043d\u0430\u043b"]]),
+            reply_markup=make_keyboard(MAIN_MENU),
             parse_mode="HTML",
         )
+        return NAME
+    if "\U0001F381" in text or "\u0420\u0435\u0444\u0435\u0440\u0430\u043b\u044c\u043d\u0430\u044f" in text:
+        await ref_command(update, context)
         return NAME
     context.user_data["name"] = text
     await update.message.reply_text(
@@ -224,19 +229,19 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"<a href=\"https://t.me/maxxmoto12RU\">MAXXMOTO</a>\n"
                 f"\u043b\u0443\u0447\u0448\u0435\u0435 \u043c\u0435\u0441\u0442\u043e \u0434\u043b\u044f \u043f\u043e\u043a\u0443\u043f\u043a\u0438 \u043c\u043e\u0442\u043e\u0442\u0435\u0445\u043d\u0438\u043a\u0438 \u0438\u0437 \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d\u0430",
                 parse_mode="HTML",
-                reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"]]),
+                reply_markup=make_keyboard(MAIN_MENU),
             )
         else:
             await update.message.reply_text(
                 f"\u274c \u041e\u0448\u0438\u0431\u043a\u0430 \u0441\u0435\u0440\u0432\u0435\u0440\u0430: {resp.status_code}\n"
                 f"\u041f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u043f\u043e\u0437\u0436\u0435.",
-                reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"]]),
+                reply_markup=make_keyboard(MAIN_MENU),
             )
     except httpx.HTTPError as e:
         await msg.delete()
         await update.message.reply_text(
             f"\u274c \u041e\u0448\u0438\u0431\u043a\u0430 \u043e\u0442\u043f\u0440\u0430\u0432\u043a\u0438: {e}",
-            reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"]]),
+            reply_markup=make_keyboard(MAIN_MENU),
         )
     return ConversationHandler.END
 
@@ -323,7 +328,7 @@ async def portfolio_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
         user = update.effective_user
         await query.message.reply_text(
             f"\u041f\u0440\u0438\u0432\u0435\u0442, {user.first_name}! \u270c\ufe0f",
-            reply_markup=make_keyboard([["\u0417\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443", "\U0001F4F7 \u041f\u043e\u0440\u0442\u0444\u043e\u043b\u0438\u043e"], ["\U0001F4E2 \u041a\u0430\u043d\u0430\u043b"]]),
+        reply_markup=make_keyboard(MAIN_MENU),
         )
         await query.answer()
         return
@@ -413,6 +418,7 @@ def main():
     app.add_handler(CallbackQueryHandler(portfolio_callback, pattern="^pf_"))
     app.add_handler(MessageHandler(filters.Regex("\U0001F4F7"), handle_portfolio_text))
     app.add_handler(MessageHandler(filters.Regex("\U0001F4E2"), handle_channel_text))
+    app.add_handler(MessageHandler(filters.Regex("\U0001F381|\u0420\u0435\u0444\u0435\u0440\u0430\u043b\u044c\u043d\u0430\u044f"), ref_command))
 
     logger.info("Bot started, polling...")
     app.run_polling(allowed_updates=Update.ALL_TYPES)
