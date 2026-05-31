@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 import logging
 import asyncio
 from uuid import uuid4
@@ -25,8 +26,21 @@ logger = logging.getLogger(__name__)
 
 TOKEN = "8964412503:AAEVNUajV66HteTLH8WuN-oHmquPt9IVDQo"
 API_URL = os.environ.get("VEXIO_API_URL", "https://vexio.up.railway.app")
+REFERRALS_FILE = os.path.join(os.path.dirname(__file__), "static", "referrals.json")
 
-NAME, PROJECT, PHONE, PTYPE, DESC, CONFIRM = range(6)
+def load_referrals():
+    try:
+        with open(REFERRALS_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+def save_referrals(data):
+    os.makedirs(os.path.dirname(REFERRALS_FILE), exist_ok=True)
+    with open(REFERRALS_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+NAME, PROJECT, PHONE, PTYPE, DESC, REF, CONFIRM = range(7)
 
 PTYPE_KEYBOARD = [
     ["\u0418\u043d\u0442\u0435\u0440\u043d\u0435\u0442-\u043c\u0430\u0433\u0430\u0437\u0438\u043d", "\u041b\u0435\u043d\u0434\u0438\u043d\u0433"],
@@ -39,6 +53,22 @@ def make_keyboard(buttons):
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
+    args = context.args
+    if args and args[0].startswith("ref_"):
+        ref_code = args[0][4:]
+        referrals = load_referrals()
+        if not any(r.get("ref_code") == ref_code for r in referrals):
+            referrals.append({
+                "ref_code": ref_code,
+                "ref_by_id": ref_code,
+                "referred_id": str(user.id),
+                "referred_name": user.full_name,
+                "referred_username": user.username or "",
+                "created_at": datetime.utcnow().isoformat(),
+                "status": "started",
+            })
+            save_referrals(referrals)
+        context.user_data["referred_by"] = ref_code
     img_path = os.path.join(os.path.dirname(__file__), "studio.jpg")
     if os.path.exists(img_path):
         with open(img_path, "rb") as f:
@@ -119,6 +149,18 @@ async def desc_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data["description"] = update.message.text.strip()
     else:
         context.user_data["description"] = ""
+    await update.message.reply_text(
+        "\U0001F517 \u041f\u0440\u0438\u043a\u0440\u0435\u043f\u0438\u0442\u0435 \u0441\u0441\u044b\u043b\u043a\u0443 \u043d\u0430 \u0441\u0430\u0439\u0442-\u0440\u0435\u0444\u0435\u0440\u0435\u043d\u0441 \u0438\u043b\u0438 \u043d\u0430\u0436\u043c\u0438\u0442\u0435 \u00ab\u041f\u0440\u043e\u043f\u0443\u0441\u0442\u0438\u0442\u044c\u00bb.",
+        reply_markup=make_keyboard([["\u041f\u0440\u043e\u043f\u0443\u0441\u0442\u0438\u0442\u044c"]]),
+    )
+    return REF
+
+
+async def ref_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.message.text.strip() != "\u041f\u0440\u043e\u043f\u0443\u0441\u0442\u0438\u0442\u044c":
+        context.user_data["reference"] = update.message.text.strip()
+    else:
+        context.user_data["reference"] = ""
     data = context.user_data
     summary = (
         f"\u2714\ufe0f <b>\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u0434\u0430\u043d\u043d\u044b\u0435:</b>\n\n"
@@ -126,7 +168,8 @@ async def desc_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"\U0001F4CB <b>\u041f\u0440\u043e\u0435\u043a\u0442:</b> {data['project_name']}\n"
         f"\U0001F4DE <b>\u0422\u0435\u043b\u0435\u0444\u043e\u043d:</b> {data['phone']}\n"
         f"\U0001F4C1 <b>\u0422\u0438\u043f:</b> {data['ptype']}\n"
-        + (f"\U0001F4DD <b>\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435:</b> {data['description']}" if data['description'] else "")
+        + (f"\U0001F4DD <b>\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435:</b> {data['description']}\n" if data.get("description") else "")
+        + (f"\U0001F517 <b>\u0420\u0435\u0444\u0435\u0440\u0435\u043d\u0441:</b> {data['reference']}" if data.get("reference") else "")
         + "\n\n\u0412\u0441\u0451 \u0432\u0435\u0440\u043d\u043e?"
     )
     await update.message.reply_text(
@@ -151,6 +194,7 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "phone": data.get("phone", ""),
         "type": data.get("ptype", ""),
         "description": data.get("description", ""),
+        "reference": data.get("reference", ""),
         "catalog": "no",
         "admin": "no",
         "telegram": "yes",
@@ -163,6 +207,14 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.delete()
         if resp.status_code == 201:
             pid = resp.json().get("project_id", "???")
+            referred_by = context.user_data.get("referred_by")
+            if referred_by:
+                referrals = load_referrals()
+                for r in referrals:
+                    if r.get("ref_code") == referred_by and r.get("referred_id") == str(update.effective_user.id):
+                        r["status"] = "converted"
+                        r["converted_at"] = datetime.utcnow().isoformat()
+                save_referrals(referrals)
             await update.message.reply_text(
                 f"\u2705 <b>\u0423\u0441\u043f\u0435\u0448\u043d\u043e!</b>\n"
                 f"\u041c\u0435\u043d\u0435\u0434\u0436\u0435\u0440 \u0441\u0432\u044f\u0436\u0435\u0442\u0441\u044f \u0441 \u0412\u0430\u043c\u0438 "
@@ -293,6 +345,20 @@ async def portfolio_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
         await portfolio_show(update, context, category, cat_key)
 
 
+async def ref_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user = update.effective_user
+    bot_username = (await context.bot.get_me()).username
+    ref_link = f"https://t.me/{bot_username}?start=ref_{user.id}"
+    referrals = load_referrals()
+    converted = sum(1 for r in referrals if r.get("ref_code") == str(user.id) and r.get("status") == "converted")
+    await update.message.reply_text(
+        f"\U0001F517 <b>\u0412\u0430\u0448\u0430 \u0440\u0435\u0444\u0435\u0440\u0430\u043b\u044c\u043d\u0430\u044f \u0441\u0441\u044b\u043b\u043a\u0430:</b>\n{ref_link}\n\n"
+        f"\U0001F4CA \u041f\u0440\u0438\u0432\u0435\u0434\u0435\u043d\u043e \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u0432: {converted}\n\n"
+        f"\u041f\u0440\u0438\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u0440\u0443\u0433\u0430 \u0438 \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u0435 \u0441\u043a\u0438\u0434\u043a\u0443 10% \u043d\u0430 \u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u0437\u0430\u043a\u0430\u0437!",
+        parse_mode="HTML",
+    )
+
+
 async def handle_channel_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "\U0001F4E2 <b>Vexio Studio</b> \u2014 \u043a\u0430\u043d\u0430\u043b \u043e \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0435 \u0438 \u043d\u043e\u0432\u044b\u0445 \u043f\u0440\u043e\u0435\u043a\u0442\u0430\u0445:\n\n"
@@ -331,6 +397,9 @@ def main():
             DESC: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, desc_step),
             ],
+            REF: [
+                MessageHandler(filters.TEXT & ~filters.COMMAND, ref_step),
+            ],
             CONFIRM: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_step),
             ],
@@ -340,6 +409,7 @@ def main():
 
     app.add_handler(conv)
 
+    app.add_handler(CommandHandler("ref", ref_command))
     app.add_handler(CallbackQueryHandler(portfolio_callback, pattern="^pf_"))
     app.add_handler(MessageHandler(filters.Regex("\U0001F4F7"), handle_portfolio_text))
     app.add_handler(MessageHandler(filters.Regex("\U0001F4E2"), handle_channel_text))

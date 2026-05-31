@@ -81,6 +81,7 @@ class Submission(db.Model):
     phone = db.Column(db.String(30))
     type = db.Column(db.String(200))
     description = db.Column(db.Text)
+    reference = db.Column(db.String(500), default='')
     catalog = db.Column(db.String(10))
     admin = db.Column(db.String(10))
     telegram = db.Column(db.String(10))
@@ -97,6 +98,7 @@ class Submission(db.Model):
             'phone': self.phone,
             'type': self.type,
             'description': self.description,
+            'reference': self.reference,
             'catalog': self.catalog,
             'admin': self.admin,
             'telegram': self.telegram,
@@ -115,6 +117,10 @@ with app.app_context():
             db.session.execute(db.text('ALTER TABLE submission ADD COLUMN telegram_username VARCHAR(100)'))
             db.session.commit()
             logger.info("Added telegram_username column")
+        if 'reference' not in cols:
+            db.session.execute(db.text('ALTER TABLE submission ADD COLUMN reference VARCHAR(500) DEFAULT \'\''))
+            db.session.commit()
+            logger.info("Added reference column")
     except Exception as e:
         logger.warning(f"Migration note: {e}")
 
@@ -156,6 +162,7 @@ def submit_project():
         phone=data.get('phone', ''),
         type=data.get('type', ''),
         description=data.get('description', ''),
+        reference=data.get('reference', ''),
         catalog=data.get('catalog', 'no'),
         admin=data.get('admin', 'no'),
         telegram=data.get('telegram', 'no'),
@@ -273,6 +280,15 @@ def update_submission_status(sub_id):
     sub.status = status
     db.session.commit()
     return jsonify({'success': True})
+
+@app.route('/admin/api/referrals')
+@login_required
+def api_referrals():
+    try:
+        with open(os.path.join(app.root_path, 'static', 'referrals.json'), 'r', encoding='utf-8') as f:
+            return jsonify(json.load(f))
+    except (FileNotFoundError, json.JSONDecodeError):
+        return jsonify([])
 
 @app.errorhandler(404)
 def not_found(e):
