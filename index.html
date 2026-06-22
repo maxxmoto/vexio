@@ -762,19 +762,8 @@ function RequestBuilder({ onSubmit }) {
 
   const handleSubmitToApi = async () => {
     setSubmitting(true);
-    try {
-      const res = await fetch('https://vexio.up.railway.app/api/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(answers),
-      });
-      const data = await res.json();
-      if (data.success) setSubmitted(true);
-    } catch (e) {
-      // backend unavailable — simulate success for static deploy
-      setTimeout(() => setSubmitted(true), 1500);
-    }
-    setSubmitting(false);
+    // static-only — simulate submission
+    setTimeout(() => { setSubmitted(true); setSubmitting(false); }, 1500);
   };
 
   if (submitted) {
