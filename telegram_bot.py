@@ -6,7 +6,6 @@ import asyncio
 from uuid import uuid4
 from datetime import datetime
 
-import httpx
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, InputFile, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     Application,
@@ -25,8 +24,12 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 TOKEN = "8964412503:AAEVNUajV66HteTLH8WuN-oHmquPt9IVDQo"
-API_URL = os.environ.get("VEXIO_API_URL", "https://vexio.up.railway.app")
-REFERRALS_FILE = os.path.join(os.path.dirname(__file__), "static", "referrals.json")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+REFERRALS_FILE = os.path.join(STATIC_DIR, "referrals.json")
+SUBMISSIONS_FILE = os.path.join(STATIC_DIR, "submissions.json")
+USERS_FILE = os.path.join(STATIC_DIR, "users.json")
+PORTFOLIO_FILE = os.path.join(STATIC_DIR, "portfolio.json")
 
 def load_referrals():
     try:
@@ -34,6 +37,18 @@ def load_referrals():
             return json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         return []
+
+def save_json(filepath, data):
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    with open(filepath, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+def load_json(filepath, default=None):
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return default if default is not None else []
 
 def save_referrals(data):
     os.makedirs(os.path.dirname(REFERRALS_FILE), exist_ok=True)
@@ -206,12 +221,14 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "telegram_username": update.effective_user.username or "",
     }
     msg = await update.message.reply_text("\U0001F4E6 \u0421\u043e\u0431\u0438\u0440\u0430\u044e \u0437\u0430\u044f\u0432\u043a\u0443...")
+    await msg.delete()
     try:
-        async with httpx.AsyncClient() as client:
-            resp = await client.post(f"{API_URL}/api/submit", json=payload, timeout=15)
-        await msg.delete()
-        if resp.status_code == 201:
-            pid = resp.json().get("project_id", "???")
+        submissions = load_json(SUBMISSIONS_FILE, [])
+        pid = f"VX-{len(submissions) + 2000}"
+        payload["project_id"] = pid
+        payload["created_at"] = datetime.utcnow().isoformat()
+        submissions.append(payload)
+        save_json(SUBMISSIONS_FILE, submissions)
             referred_by = context.user_data.get("referred_by")
             if referred_by:
                 referrals = load_referrals()
@@ -221,16 +238,16 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         r["converted_at"] = datetime.utcnow().isoformat()
                 save_referrals(referrals)
             try:
-                async with httpx.AsyncClient() as client:
-                    await client.post(
-                        f"{API_URL}/api/register_user",
-                        json={
-                            "user_id": update.effective_user.id,
-                            "username": update.effective_user.username or "",
-                            "first_name": update.effective_user.first_name or "",
-                        },
-                        timeout=10,
-                    )
+                users = load_json(USERS_FILE, [])
+                uid = str(update.effective_user.id)
+                if not any(u.get("user_id") == uid for u in users):
+                    users.append({
+                        "user_id": uid,
+                        "username": update.effective_user.username or "",
+                        "first_name": update.effective_user.first_name or "",
+                        "registered_at": datetime.utcnow().isoformat(),
+                    })
+                    save_json(USERS_FILE, users)
             except Exception as e:
                 logger.warning(f"Failed to register user: {e}")
             await update.message.reply_text(
@@ -238,7 +255,7 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"\U0001F4CB <b>\u041d\u043e\u043c\u0435\u0440 \u0437\u0430\u044f\u0432\u043a\u0438:</b> {pid}\n"
                 f"\u041c\u0435\u043d\u0435\u0434\u0436\u0435\u0440 \u0441\u0432\u044f\u0436\u0435\u0442\u0441\u044f \u0441 \u0412\u0430\u043c\u0438 "
                 f"\u0432 \u0431\u043b\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043c\u044f.\n\n"
-                f"\U0001F310 <b>\u041d\u0430\u0448 \u0441\u0430\u0439\u0442:</b> https://vexio.up.railway.app/\n\n"
+                f"\U0001F310 <b>\u041d\u0430\u0448 \u0441\u0430\u0439\u0442:</b> https://maxxmoto.github.io/vexio/\n\n"
                 f"\U0001F4B0 <b>\u041d\u0430\u0448 \u0441\u043f\u043e\u043d\u0441\u043e\u0440:</b> "
                 f"<a href=\"https://t.me/maxxmoto12RU\">MAXXMOTO</a>\n"
                 f"\u043b\u0443\u0447\u0448\u0435\u0435 \u043c\u0435\u0441\u0442\u043e \u0434\u043b\u044f \u043f\u043e\u043a\u0443\u043f\u043a\u0438 \u043c\u043e\u0442\u043e\u0442\u0435\u0445\u043d\u0438\u043a\u0438 \u0438\u0437 \u041a\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043d\u0430",
@@ -247,14 +264,12 @@ async def confirm_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
         else:
             await update.message.reply_text(
-                f"\u274c \u041e\u0448\u0438\u0431\u043a\u0430 \u0441\u0435\u0440\u0432\u0435\u0440\u0430: {resp.status_code}\n"
-                f"\u041f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u043f\u043e\u0437\u0436\u0435.",
+                f"\u274c \u041e\u0448\u0438\u0431\u043a\u0430 \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f.",
                 reply_markup=make_keyboard(MAIN_MENU),
             )
-    except httpx.HTTPError as e:
-        await msg.delete()
+    except Exception as e:
         await update.message.reply_text(
-            f"\u274c \u041e\u0448\u0438\u0431\u043a\u0430 \u043e\u0442\u043f\u0440\u0430\u0432\u043a\u0438: {e}",
+            f"\u274c \u041e\u0448\u0438\u0431\u043a\u0430: {e}",
             reply_markup=make_keyboard(MAIN_MENU),
         )
     return ConversationHandler.END
@@ -287,17 +302,14 @@ async def portfolio_menu(update: Update, context: ContextTypes.DEFAULT_TYPE, msg
 
 async def portfolio_show(update: Update, context: ContextTypes.DEFAULT_TYPE, category, cat_key="sites", index=0):
     query = update.callback_query
-    try:
-        async with httpx.AsyncClient() as client:
-            resp = await client.get(f"{API_URL}/api/portfolio/{category}", timeout=10)
-        if resp.status_code != 200 or not resp.json():
+    items = [p for p in load_json(PORTFOLIO_FILE, []) if p.get("category") == category]
+    if not items:
             await query.message.edit_text(
                 f"\U0001F50D \u0412 \u043a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u0438 \u00ab{category}\u00bb \u043f\u043e\u043a\u0430 \u043d\u0435\u0442 \u043f\u0440\u043e\u0435\u043a\u0442\u043e\u0432.",
                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("\u2190 \u041d\u0430\u0437\u0430\u0434", callback_data="pf_menu")]]),
             )
             await query.answer()
             return
-        items = resp.json()
         if index < 0 or index >= len(items):
             index = 0
         item = items[index]
