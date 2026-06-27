@@ -10,3 +10,7 @@ venv/
 dist/
 *.log
 VexioLanding.jsx
+
+__pycache__/
+*.pyc
+node_modules/
