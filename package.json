@@ -2,6 +2,7 @@
   "name": "vexio-bot",
   "version": "1.0.0",
   "scripts": {
-    "start": "node bot.js"
-  }
+    "start": "node telegram_bot.py"
+  },
+  "main": "telegram_bot.py"
 }
