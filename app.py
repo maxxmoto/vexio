@@ -12,14 +12,10 @@ def check_honeypot():
     if request.method == 'POST' and request.form.get('website'):
         abort(403)
 
-# === Active ===
+# === Active pages (no heavy deps) ===
 @app.route('/')
 def index():
     return render_template('wip.html')
-
-@app.route('/remover')
-def remover():
-    return render_template('remover.html')
 
 @app.route('/generator')
 def generator_page():
@@ -37,25 +33,15 @@ def enhance_page():
 def products():
     return render_template('products.html')
 
-# === WIP ===
+# === WIP pages ===
+@app.route('/remover')
 @app.route('/ocr')
 @app.route('/restore')
 @app.route('/caption')
 def wip():
     return render_template('wip.html')
 
-# === APIs ===
-@app.route('/remove-bg', methods=['POST'])
-def remove_bg():
-    if 'image' not in request.files:
-        return jsonify({'error': 'No image'}), 400
-    try:
-        from remover import remove_background
-        data = remove_background(request.files['image'].read())
-        return send_file(io.BytesIO(data), mimetype='image/png', as_attachment=True, download_name='no_bg.png')
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
+# === Active APIs ===
 @app.route('/generate-api', methods=['POST'])
 def generate_api():
     data = request.get_json()
@@ -96,6 +82,7 @@ def enhance_api():
 @app.route('/ocr-api', methods=['POST'])
 @app.route('/restore-api', methods=['POST'])
 @app.route('/caption-api', methods=['POST'])
+@app.route('/remove-bg', methods=['POST'])
 def wip_api():
     return jsonify({'error': 'В разработке'}), 503
 
