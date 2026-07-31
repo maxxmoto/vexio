@@ -15,7 +15,7 @@ def check_honeypot():
 # === Active pages (no heavy deps) ===
 @app.route('/')
 def index():
-    return render_template('wip.html')
+    return render_template('index.html')
 
 @app.route('/generator')
 def generator_page():
