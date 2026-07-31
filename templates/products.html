@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Платформа AI-инструментов: классификация изображений, удаление фона, OCR, генерация картинок, AI-чат, улучшение фото, реставрация. Всё бесплатно.">
+    <meta name="keywords" content="AI инструменты, платформа нейросетей, Vexio AI продукты, искусственный интеллект онлайн">
+    <meta name="author" content="Vexio AI">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#09090b">
+    <link rel="canonical" href="http://127.0.0.1:5001/products">
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://127.0.0.1:5001/products">
+    <meta property="og:title" content="Продукты и возможности Vexio AI | AI инструменты">
+    <meta property="og:description" content="Платформа AI-инструментов: классификация изображений, удаление фона, OCR, генерация картинок, AI-чат, улучшение фото, реставрация. Всё бесплатно.">
+    <meta property="og:site_name" content="Vexio AI">
+    <meta property="og:locale" content="ru_RU">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="http://127.0.0.1:5001/products">
+    <meta name="twitter:title" content="Продукты и возможности Vexio AI | AI инструменты">
+    <meta name="twitter:description" content="Платформа AI-инструментов: классификация изображений, удаление фона, OCR, генерация картинок, AI-чат, улучшение фото, реставрация. Всё бесплатно.">
+    <meta name="twitter:creator" content="@vexioai">
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Продукты и возможности Vexio AI | AI инструменты",
+  "url": "http://127.0.0.1:5001/products",
+  "description": "Платформа AI-инструментов: классификация изображений, удаление фона, OCR, генерация картинок, AI-чат, улучшение фото, реставрация. Всё бесплатно.",
+  "operatingSystem": "All",
+  "applicationCategory": "Multimedia",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+    </script><title>Продукты Vexio AI — AI анализ изображений</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #09090b;
+            color: #d4d4d8;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        ::selection { background: rgba(99, 102, 241, 0.3); }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+        @media (min-width: 640px) { .container { padding: 0 1.5rem; } }
+        @media (min-width: 1024px) { .container { padding: 0 2rem; } }
+
+        
+        /* Nav */
+        nav { border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(9,9,11,.8); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; }
+        nav .inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; height: 3.5rem; display: flex; align-items: center; justify-content: space-between; }
+        .nav-brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; color: inherit; }
+        .nav-links { display: none; gap: 1rem; font-size: .875rem; font-weight: 500; color: #71717a; }
+        @media (min-width: 768px) { .nav-links { display: flex; } }
+        .nav-links a { text-decoration: none; color: #71717a; transition: color .2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; }
+        .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; z-index: 60; background: none; border: none; padding: 4px; }
+        .hamburger span { width: 22px; height: 2px; background: #d4d4d8; border-radius: 1px; transition: all .3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .nav-links.mobile { display: flex !important; flex-direction: column; position: fixed; top: 3.5rem; left: 0; right: 0; bottom: 0; background: #09090b; z-index: 50; padding: 2rem; gap: 1.5rem; font-size: 1.125rem; align-items: flex-start; }
+        @media (min-width: 769px) { .hamburger { display: none !important; } }
+ /* Hero */
+        .hero {
+            position: relative; padding: 5rem 0 8rem; overflow: hidden;
+        }
+        .hero-bg-glow {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 800px; height: 800px;
+            background: rgba(99, 102, 241, 0.08); border-radius: 50%;
+            filter: blur(80px); pointer-events: none;
+        }
+        .hero-bg-purple {
+            position: absolute; top: 0; right: 0; width: 500px; height: 500px;
+            background: rgba(168, 85, 247, 0.06); border-radius: 50%;
+            filter: blur(80px); pointer-events: none;
+        }
+
+        .hero-content { position: relative; z-index: 10; text-align: center; }
+
+        .badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.25rem 0.75rem; border-radius: 9999px;
+            background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2);
+            color: #fff; font-size: 0.875rem; font-weight: 500; margin-bottom: 2rem;
+        }
+        .badge svg { width: 1rem; height: 1rem; }
+
+        .hero-title {
+            font-size: 2.5rem; font-weight: 900; color: white; letter-spacing: -0.025em;
+            line-height: 1.2; margin-bottom: 1.5rem;
+        }
+        @media (min-width: 768px) { .hero-title { font-size: 4.5rem; } }
+        .hero-gradient {
+            background: linear-gradient(135deg, #818cf8, #d4d4d8, #a1a1aa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            max-width: 42rem; margin: 0 auto 3rem;
+            font-size: 1.125rem; color: #71717a; line-height: 1.6;
+        }
+        @media (min-width: 768px) { .hero-subtitle { font-size: 1.25rem; } }
+
+        /* Upload Card */
+        .upload-card {
+            max-width: 48rem; margin: 0 auto;
+            background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,.08); border-radius: 1.5rem; padding: 0.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,.5);
+        }
+        .upload-card-inner {
+            background: #09090b; border-radius: 1rem;
+            border: 1px solid rgba(30, 41, 59, 0.5); padding: 1.5rem 2.5rem;
+            min-height: 400px; position: relative; overflow: hidden;
+        }
+        @media (min-width: 768px) { .upload-card-inner { padding: 2.5rem; } }
+
+        /* Dropzone */
+        .dropzone {
+            border: 2px dashed rgba(255,255,255,.1); border-radius: 0.75rem;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 4rem 2rem; cursor: pointer; transition: all 0.3s;
+            min-height: 350px;
+        }
+        .dropzone:hover { border-color: rgba(99, 102, 241, 0.5); background: rgba(99, 102, 241, 0.03); }
+        .dropzone.dragging {
+            border-color: #fff; background: rgba(99, 102, 241, 0.05);
+        }
+        .dropzone-icon {
+            background: rgba(255,255,255,.08); padding: 1rem; border-radius: 50%; margin-bottom: 1rem; color: #fff; line-height: 0;
+        }
+        .dropzone-title { font-size: 1.25rem; font-weight: 600; color: white; margin-bottom: 0.5rem; }
+        .dropzone-text { color: #71717a; font-size: 0.875rem; margin-bottom: 1.5rem; }
+        .dropzone-hints { display: flex; gap: 1rem; font-size: 0.75rem; color: #52525b; }
+        .dropzone-hints span { display: flex; align-items: center; gap: 0.25rem; }
+        .dropzone input[type="file"] { display: none; }
+
+        /* Result Area */
+        .result-area { display: flex; flex-direction: column; gap: 2rem; align-items: center; }
+        @media (min-width: 768px) { .result-area { flex-direction: row; } }
+
+        .preview-container {
+            position: relative; width: 100%; aspect-ratio: 1;
+            border-radius: 0.75rem; overflow: hidden;
+            background: #121214; border: 1px solid rgba(255,255,255,.1); flex-shrink: 0;
+        }
+        @media (min-width: 768px) { .preview-container { width: 50%; } }
+        .preview-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .scan-overlay {
+            position: absolute; inset: 0; z-index: 10;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .scan-overlay-bg {
+            position: absolute; inset: 0;
+            background: rgba(2, 6, 23, 0.4); backdrop-filter: blur(2px);
+        }
+        .scan-line {
+            position: absolute; left: 0; right: 0; height: 4px;
+            background: #fff; box-shadow: 0 0 15px 3px rgba(99, 102, 241, 0.5);
+            animation: scanMove 2s cubic-bezier(0.4, 0, 0.2, 1) infinite; z-index: 10;
+        }
+        @keyframes scanMove {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .scan-spinner { z-index: 20; text-align: center; }
+        .scan-spinner svg { animation: pulse 1.5s ease-in-out infinite; margin-bottom: 1rem; }
+        .scan-spinner span {
+            background: rgba(2, 6, 23, 0.8); padding: 0.5rem 1rem; border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,.1); backdrop-filter: blur(8px); font-weight: 500;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        .result-content { width: 100%; }
+        @media (min-width: 768px) { .result-content { width: 50%; } }
+
+        .result-content .fade-in {
+            animation: fadeSlideIn 0.5s ease-out;
+        }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .result-icon {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 4rem; height: 4rem; background: rgba(255,255,255,.08); border-radius: 1rem;
+            border: 1px solid rgba(255,255,255,.1); font-size: 2.5rem; margin-bottom: 1.5rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .result-label { font-size: 2.25rem; font-weight: 800; color: white; margin-bottom: 0.5rem; }
+        .result-meta { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+        .result-badge {
+            background: rgba(16, 185, 129, 0.1); color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.2); padding: 0.25rem 0.75rem;
+            border-radius: 9999px; font-size: 0.875rem; font-weight: 500;
+            display: flex; align-items: center; gap: 0.375rem;
+        }
+        .result-confidence { color: #71717a; font-size: 0.875rem; }
+        .result-confidence strong { color: white; font-weight: 600; }
+        .result-desc { color: #71717a; line-height: 1.6; margin-bottom: 2rem; }
+
+        .result-details { margin-bottom: 1.5rem; }
+        .result-details summary { cursor: pointer; color: #52525b; font-size: 0.875rem; font-weight: 500; }
+        .result-details ul { list-style: none; margin-top: 0.5rem; }
+        .result-details li {
+            display: flex; justify-content: space-between; padding: 0.25rem 0;
+            font-size: 0.8rem; color: #71717a; border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+        .result-details li span:last-child { color: #fff; font-weight: 500; }
+
+        .btn-reset {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.75rem 1.5rem; background: white; color: #121214;
+            border-radius: 0.75rem; font-weight: 600; border: none;
+            cursor: pointer; transition: background 0.2s; width: 100%;
+            justify-content: center;
+        }
+        @media (min-width: 640px) { .btn-reset { width: auto; } }
+        .btn-reset:hover { background: #d4d4d8; }
+
+        /* Skeleton */
+        .skeleton { animation: shimmer 1.5s ease-in-out infinite; background: rgba(255,255,255,.08); border-radius: 0.25rem; }
+        .skeleton-line { height: 1rem; margin-bottom: 0.75rem; }
+        .skeleton-line.w-75 { width: 75%; }
+        .skeleton-line.w-50 { width: 50%; }
+        .skeleton-line.w-83 { width: 83%; }
+        @keyframes shimmer { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+
+        .progress-section { margin-top: 2rem; }
+        .progress-row { display: flex; justify-content: space-between; font-size: 0.875rem; margin-bottom: 0.5rem; }
+        .progress-row span:first-child { color: #71717a; }
+        .progress-row span:last-child { color: #fff; }
+        .progress-bar { width: 100%; background: rgba(255,255,255,.08); border-radius: 9999px; height: 6px; overflow: hidden; }
+        .progress-fill {
+            height: 100%; background: #fff; border-radius: 9999px;
+            width: 66%; animation: shimmer 1.5s ease-in-out infinite;
+        }
+
+        /* Stats */
+        .stats {
+            display: flex; flex-direction: column; align-items: center; gap: 2rem;
+            margin-top: 3rem; color: #52525b; font-size: 0.875rem; font-weight: 500;
+        }
+        @media (min-width: 768px) { .stats { flex-direction: row; justify-content: center; } }
+        .stat-item { display: flex; align-items: center; gap: 0.5rem; }
+        .stat-dot { display: none; width: 4px; height: 4px; background: rgba(255,255,255,.1); border-radius: 50%; }
+        @media (min-width: 768px) { .stat-dot { display: block; } }
+
+        /* Features */
+        .features { background: rgba(15, 23, 42, 0.3); border-top: 1px solid rgba(30, 41, 59, 0.5); padding: 6rem 0; }
+        .features-title { text-align: center; margin-bottom: 4rem; }
+        .features-title h2 { font-size: 2rem; font-weight: 800; color: white; margin-bottom: 1rem; }
+        .features-title p { color: #71717a; max-width: 36rem; margin: 0 auto; }
+        .features-grid { display: grid; gap: 2rem; }
+        @media (min-width: 768px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .feature-card {
+            background: #121214; border: 1px solid rgba(255,255,255,.08); border-radius: 1rem;
+            padding: 1.5rem; transition: all 0.2s; cursor: default;
+        }
+        .feature-card:hover { background: rgba(30, 41, 59, 0.5); }
+        .feature-card-icon {
+            background: #09090b; width: 3rem; height: 3rem; border-radius: 0.75rem;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(255,255,255,.08); margin-bottom: 1.5rem; transition: border-color 0.2s;
+        }
+        .feature-card:hover .feature-card-icon { border-color: rgba(255,255,255,.1); }
+        .feature-card h3 { font-size: 1.125rem; font-weight: 600; color: white; margin-bottom: 0.5rem; }
+        .feature-card p { color: #71717a; line-height: 1.6; font-size: 0.875rem; }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255,255,255,.08); padding: 3rem 0;
+        }
+        footer .container { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+        @media (min-width: 768px) { footer .container { flex-direction: row; justify-content: space-between; } }
+        footer 
+        .footer-copy { color: #52525b; font-size: 0.875rem; }
+        .footer-socials { display: flex; gap: 1rem; color: #71717a; }
+        .footer-socials a { color: #71717a; transition: color 0.2s; line-height: 0; }
+        .footer-socials a:hover { color: white; }
+
+        /* Error */
+        .error-box {
+            background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5; padding: 1rem; border-radius: 0.75rem; margin-top: 1rem;
+            font-size: 0.875rem;
+        }
+
+        
+    
+        /* Hamburger */
+        .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; z-index: 60; background: none; border: none; padding: 4px; }
+        .hamburger span { width: 24px; height: 2px; background: #d4d4d8; border-radius: 2px; transition: all .3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .nav-links.mobile { display: flex !important; flex-direction: column; position: fixed; top: 4rem; left: 0; right: 0; bottom: 0; background: #09090b; z-index: 50; padding: 2rem; gap: 1.5rem; font-size: 1.125rem; align-items: flex-start; }
+        /* Mobile general */
+        @media (max-width: 640px) {
+            nav .container { padding: 0 0.75rem; }
+            .hero { padding: 2rem 0 4rem; }
+            .hero-title { font-size: 1.75rem; }
+            .card-inner { padding: 1rem; }
+            .dropzone { padding: 2rem 1rem; min-height: 250px; }
+            .btn { padding: 0.625rem 1.25rem; font-size: 0.875rem; }
+        }
+    
+        .hp-field { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; overflow: hidden; }
+    
+        @media (min-width: 769px) { .hamburger { display: none !important; } }
+        .nav-actions, .nav-login, .nav-cta { display: none !important; }
+    
+        .logo-img { height: 52px; width: auto; }
+        @media (max-width: 640px) { .logo-img { height: 28px; } }
+    </style>
+</head>
+<body>
+    <div class="hp-field">
+        <input type="text" name="website" autocomplete="off" tabindex="-1">
+    </div>
+<nav><div class="inner">
+            <a href="/" class="nav-brand">
+<img src="/static/logotip.png" alt="Vexio AI" style="height:28px;">
+</a>
+<div class="nav-links">
+<a href="/">Cat/Dog</a>
+<a href="/remover">Ремувер</a>
+<a href="/ocr">OCR</a>
+<a href="/generator">Генератор</a>
+<a href="/chat">Чат</a>
+<a href="/caption">Описатель</a>
+<a href="/enhance">Улучшение</a>
+<a href="/restore">Реставрация</a>
+<a href="/products" class="active">Продукты</a>
+</div>
+<button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</div></nav>
+
+    <main class="hero" style="padding: 4rem 0;">
+        <div class="hero-bg-glow"></div>
+        <div class="container hero-content">
+            <div class="badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 4 8 12 8 12s8-8 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Наши решения</span>
+            </div>
+            <h1 class="hero-title">Продукты <span class="hero-gradient">Vexio AI</span></h1>
+            <p class="hero-subtitle">Платформа компьютерного зрения для бизнеса и разработчиков.</p>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;text-align:left;margin-top:3rem;">
+                <div class="feature-card">
+                    <div class="feature-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 4 8 12 8 12s8-8 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                    <h3>Image Classifier API</h3>
+                    <p>Классификация изображений по 1000+ категориям. Определяйте объекты, животных, сцены и действия на фото. Базовая модель MobileNetV2 обучена на ImageNet (1.2M изображений).</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+                    <h3>Cat &amp; Dog Detector</h3>
+                    <p>Специализированный классификатор для определения кошек и собак. Доступен как веб-интерфейс, так и REST API. Точность на тестовой выборке &gt;95%.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a1a1aa" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/></svg></div>
+                    <h3>Custom Model Training</h3>
+                    <p>Обучите модель на ваших данных. Поддерживаются датасеты до 10 000 изображений. Fine-tuning на базе MobileNetV2, ResNet50 или EfficientNet.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+                    <h3>Batch Processing</h3>
+                    <p>Обрабатывайте до 1000 изображений за один запрос. Результаты в формате JSON, CSV или XML. Интеграция с облачными хранилищами.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+                    <h3>Edge API</h3>
+                    <p>Используйте модели локально на мобильных устройствах для мгновенного анализа без подключения к сети.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></div>
+                    <h3>Segmentation</h3>
+                    <p>Сегментация изображений с пиксельной точностью. Выделяйте контуры объектов, удаляйте фон, измеряйте области.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+<footer style="border-top:1px solid rgba(255,255,255,.06);padding:2rem 0;text-align:center"><p style="color:#52525b;font-size:.8rem">Создано с помощью <a href="https://maxxmoto.github.io/vexio/" style="color:#a1a1aa;text-decoration:underline;font-weight:500" target="_blank">Vexio</a></p></footer>
+
+    <script>
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('fileInput');
+        const resultArea = document.getElementById('resultArea');
+        const previewImg = document.getElementById('previewImg');
+        const scanOverlay = document.getElementById('scanOverlay');
+        const analyzingState = document.getElementById('analyzingState');
+        const resultState = document.getElementById('resultState');
+        const resultIcon = document.getElementById('resultIcon');
+        const resultLabel = document.getElementById('resultLabel');
+        const resultConfidence = document.getElementById('resultConfidence');
+        const resultDesc = document.getElementById('resultDesc');
+        const detailsList = document.getElementById('detailsList');
+        const errorBox = document.getElementById('errorBox');
+        const uploadCard = document.getElementById('uploadCard');
+
+        let isDragging = false;
+
+        // Drag events
+        dropzone.addEventListener('dragenter', (e) => { e.preventDefault(); dropzone.classList.add('dragging'); });
+        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragging'); });
+        dropzone.addEventListener('dragleave', (e) => { e.preventDefault(); dropzone.classList.remove('dragging'); });
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragging');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) processFile(file);
+        });
+        dropzone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) processFile(file);
+        });
+
+        // Ctrl+V paste
+        document.addEventListener('paste', (e) => {
+            const items = e.clipboardData?.items;
+            if (!items) return;
+            for (const item of items) {
+                if (item.type.startsWith('image/')) {
+                    const file = item.getAsFile();
+                    if (file) {
+                        processFile(file);
+                        break;
+                    }
+                }
+            }
+        });
+
+        function processFile(file) {
+            if (file.size > 10 * 1024 * 1024) {
+                showError('Файл слишком большой. Максимальный размер — 10 МБ.');
+                return;
+            }
+
+            errorBox.style.display = 'none';
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImg.src = e.target.result;
+                dropzone.style.display = 'none';
+                resultArea.style.display = 'flex';
+                showAnalyzing();
+                analyzeImage(file);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function showAnalyzing() {
+            scanOverlay.style.display = 'flex';
+            analyzingState.style.display = 'block';
+            resultState.style.display = 'none';
+        }
+
+        async function analyzeImage(file) {
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const response = await fetch('/predict', { method: 'POST', body: formData });
+                if (!response.ok) throw new Error('Ошибка сервера');
+                const data = await response.json();
+                if (data.error) throw new Error(data.error);
+                showResult(data);
+            } catch (err) {
+                showError(err.message || 'Не удалось обработать изображение');
+            }
+        }
+
+        function showResult(data) {
+            scanOverlay.style.display = 'none';
+            analyzingState.style.display = 'none';
+            resultState.style.display = 'block';
+
+            resultIcon.textContent = data.icon || '❓';
+            resultLabel.textContent = data.label || 'Не определено';
+            resultConfidence.textContent = (data.confidence || 0) + '%';
+            resultDesc.textContent = data.description || '';
+
+            detailsList.innerHTML = '';
+            if (data.details && data.details.length) {
+                data.details.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span>${item.label}</span><span>${item.confidence}%</span>`;
+                    detailsList.appendChild(li);
+                });
+            }
+        }
+
+        function showError(msg) {
+            dropzone.style.display = 'flex';
+            resultArea.style.display = 'none';
+            errorBox.style.display = 'block';
+            errorBox.className = 'error-box';
+            errorBox.textContent = msg;
+        }
+
+        function resetForm() {
+            dropzone.style.display = 'flex';
+            resultArea.style.display = 'none';
+            errorBox.style.display = 'none';
+            fileInput.value = '';
+        }
+    </script>
+
+
+        
+
+<script>
+        function toggleMenu() {
+            var nl = document.querySelector('.nav-links');
+            var hb = document.querySelector('.hamburger');
+            if (!nl || !hb) return;
+            nl.classList.toggle('mobile');
+            hb.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

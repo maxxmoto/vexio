@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Распознайте текст с изображения за секунды. EasyOCR: русский и английский язык. Загрузите фото — получите текст. Бесплатный онлайн OCR сервис.">
+    <meta name="keywords" content="распознавание текста, OCR онлайн, текст с фото, оптическое распознавание, EasyOCR">
+    <meta name="author" content="Vexio AI">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#09090b">
+    <link rel="canonical" href="http://127.0.0.1:5001/ocr">
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://127.0.0.1:5001/ocr">
+    <meta property="og:title" content="Распознавание текста с фото онлайн | OCR — Vexio AI">
+    <meta property="og:description" content="Распознайте текст с изображения за секунды. EasyOCR: русский и английский язык. Загрузите фото — получите текст. Бесплатный онлайн OCR сервис.">
+    <meta property="og:site_name" content="Vexio AI">
+    <meta property="og:locale" content="ru_RU">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="http://127.0.0.1:5001/ocr">
+    <meta name="twitter:title" content="Распознавание текста с фото онлайн | OCR — Vexio AI">
+    <meta name="twitter:description" content="Распознайте текст с изображения за секунды. EasyOCR: русский и английский язык. Загрузите фото — получите текст. Бесплатный онлайн OCR сервис.">
+    <meta name="twitter:creator" content="@vexioai">
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Распознавание текста с фото онлайн | OCR — Vexio AI",
+  "url": "http://127.0.0.1:5001/ocr",
+  "description": "Распознайте текст с изображения за секунды. EasyOCR: русский и английский язык. Загрузите фото — получите текст. Бесплатный онлайн OCR сервис.",
+  "operatingSystem": "All",
+  "applicationCategory": "Multimedia",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+    </script><title>Распознавание текста (OCR) — Vexio AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#09090b;color:#e2e8f0;min-height:100vh;
+        /* Nav */
+        nav { border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(9,9,11,.8); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; }
+        nav .inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; height: 3.5rem; display: flex; align-items: center; justify-content: space-between; }
+        .nav-brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; color: inherit; }
+        .nav-links { display: none; gap: 1rem; font-size: .875rem; font-weight: 500; color: #71717a; }
+        @media (min-width: 768px) { .nav-links { display: flex; } }
+        .nav-links a { text-decoration: none; color: #71717a; transition: color .2s; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; }
+        .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; z-index: 60; background: none; border: none; padding: 4px; }
+        .hamburger span { width: 22px; height: 2px; background: #d4d4d8; border-radius: 1px; transition: all .3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .nav-links.mobile { display: flex !important; flex-direction: column; position: fixed; top: 3.5rem; left: 0; right: 0; bottom: 0; background: #09090b; z-index: 50; padding: 2rem; gap: 1.5rem; font-size: 1.125rem; align-items: flex-start; }
+        @media (min-width: 769px) { .hamburger { display: none !important; } }
+overflow-x:hidden}
+::selection{background:rgba(99,102,241,0.3)}
+.container{max-width:1280px;margin:0 auto;padding:0 1rem}
+@media(min-width:640px){.container{padding:0 1.5rem}}
+@media(min-width:1024px){.container{padding:0 2rem}}
+nav{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(2,6,23,0.8);backdrop-filter:blur(20px)}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:4rem}
+.logo{display:flex;align-items:center}
+
+
+
+
+.nav-links{display:none;gap:2rem;font-size:.875rem;font-weight:500;color:#94a3b8}
+@media(min-width:768px){.nav-links{display:flex}}
+.nav-links a{text-decoration:none;color:#94a3b8;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#818cf8}
+.nav-actions{display:flex;align-items:center;gap:1rem}
+.nav-login{display:none;font-size:.875rem;font-weight:500;color:#cbd5e1;text-decoration:none;transition:color .2s}
+@media(min-width:640px){.nav-login{display:block}}
+.nav-login:hover{color:white}
+.nav-cta{font-size:.875rem;font-weight:600;background:white;color:#09090b;padding:.5rem 1rem;border-radius:9999px;border:none;cursor:pointer;transition:background .2s}
+.nav-cta:hover{background:#e2e8f0}
+.hero{position:relative;padding:4rem 0 6rem;overflow:hidden}
+.hero-bg-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:rgba(99,102,241,0.08);border-radius:50%;filter:blur(80px);pointer-events:none}
+.hero-content{position:relative;z-index:10;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:.5rem;padding:.25rem .75rem;border-radius:9999px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);color:#818cf8;font-size:.875rem;font-weight:500;margin-bottom:2rem}
+.hero-title{font-size:2.5rem;font-weight:900;color:white;letter-spacing:-.025em;line-height:1.2;margin-bottom:1.5rem}
+@media(min-width:768px){.hero-title{font-size:4rem}}
+.hero-gradient{background:linear-gradient(135deg,#818cf8,#d4d4d8,#a1a1aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-subtitle{max-width:42rem;margin:0 auto 3rem;font-size:1.125rem;color:#94a3b8;line-height:1.6}
+.card{max-width:56rem;margin:0 auto;background:rgba(15,23,42,0.5);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.08);border-radius:1.5rem;padding:.5rem;box-shadow:0 25px 50px -12px rgba(0,0,0,.5)}
+.card-inner{background:#09090b;border-radius:1rem;border:1px solid rgba(30,41,59,0.5);padding:2rem;position:relative}
+.dropzone{border:2px dashed rgba(255,255,255,.1);border-radius:.75rem;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem;cursor:pointer;transition:all .3s}
+.dropzone:hover{border-color:rgba(99,102,241,0.5);background:rgba(99,102,241,0.03)}
+.dropzone-icon{background:rgba(255,255,255,.08);padding:1rem;border-radius:50%;margin-bottom:1rem;color:#818cf8;line-height:0}
+.dropzone-title{font-size:1.5rem;font-weight:600;color:white;margin-bottom:.5rem}
+.result-area{display:flex;flex-direction:column;gap:2rem;align-items:center}
+@media(min-width:768px){.result-area{flex-direction:row;align-items:flex-start}}
+.preview-box{width:100%;aspect-ratio:1;border-radius:.75rem;overflow:hidden;background:#121214;border:1px solid rgba(255,255,255,.1);flex-shrink:0}
+@media(min-width:768px){.preview-box{width:45%}}
+.preview-box img{width:100%;height:100%;object-fit:contain;display:block}
+.result-info{width:100%;text-align:left}
+@media(min-width:768px){.result-info{width:55%}}
+.text-block{background:#121214;border:1px solid rgba(255,255,255,.08);border-radius:.75rem;padding:1rem;max-height:300px;overflow-y:auto;font-family:monospace;font-size:.9rem;color:#e2e8f0;line-height:1.6;white-space:pre-wrap;margin-top:.5rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:.75rem;font-weight:600;border:none;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-primary{background:white;color:#121214}
+.btn-primary:hover{background:#e2e8f0}
+.btn-outline{background:transparent;color:white;border:1px solid rgba(255,255,255,.1)}
+.btn-outline:hover{background:rgba(255,255,255,0.05)}
+.error-box{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#fca5a5;padding:1rem;border-radius:.75rem;margin-top:1rem;font-size:.875rem}
+footer{border-top:1px solid rgba(255,255,255,.08);padding:3rem 0}
+footer .container{display:flex;flex-direction:column;align-items:center;gap:1.5rem}
+@media(min-width:768px){footer .container{flex-direction:row;justify-content:space-between}}
+.footer-copy{color:#64748b;font-size:.875rem}
+.spinner{animation:spin 1s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.progress-bar{width:100%;background:rgba(255,255,255,.08);border-radius:9999px;height:6px;margin-top:1rem;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#fff,#d4d4d8);border-radius:9999px;animation:progressAnim 2s ease-in-out infinite}
+@keyframes progressAnim{0%{width:0}50%{width:70%}100%{width:100%}}
+
+        /* Hamburger */
+        .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; z-index: 60; background: none; border: none; padding: 4px; }
+        .hamburger span { width: 24px; height: 2px; background: #d4d4d8; border-radius: 2px; transition: all .3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .nav-links.mobile { display: flex !important; flex-direction: column; position: fixed; top: 4rem; left: 0; right: 0; bottom: 0; background: #09090b; z-index: 50; padding: 2rem; gap: 1.5rem; font-size: 1.125rem; align-items: flex-start; }
+        /* Mobile general */
+        @media (max-width: 640px) {
+            nav .container { padding: 0 0.75rem; }
+            .hero { padding: 2rem 0 4rem; }
+            .hero-title { font-size: 1.75rem; }
+            .card-inner { padding: 1rem; }
+            .dropzone { padding: 2rem 1rem; min-height: 250px; }
+            .btn { padding: 0.625rem 1.25rem; font-size: 0.875rem; }
+        }
+    
+        .hp-field { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; overflow: hidden; }
+    
+        @media (min-width: 769px) { .hamburger { display: none !important; } }
+        .nav-actions, .nav-login, .nav-cta { display: none !important; }
+    
+        .logo-img { height: 52px; width: auto; }
+        @media (max-width: 640px) { .logo-img { height: 28px; } }
+    </style>
+</head>
+<body>
+    <div class="hp-field">
+        <input type="text" name="website" autocomplete="off" tabindex="-1">
+    </div>
+<nav><div class="inner">
+            <a href="/" class="nav-brand">
+<img src="/static/logotip.png" alt="Vexio AI" style="height:28px;">
+</a>
+<div class="nav-links">
+<a href="/">Cat/Dog</a>
+<a href="/remover">Ремувер</a>
+<a href="/ocr" class="active">OCR</a>
+<a href="/generator">Генератор</a>
+<a href="/chat">Чат</a>
+<a href="/caption">Описатель</a>
+<a href="/enhance">Улучшение</a>
+<a href="/restore">Реставрация</a>
+<a href="/products">Продукты</a>
+</div>
+<button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</div></nav>
+<main class="hero">
+<div class="hero-bg-glow"></div>
+<div class="container hero-content">
+<div class="badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg><span>OCR</span></div>
+<h1 class="hero-title">Распознавание <span class="hero-gradient">текста</span></h1>
+<p class="hero-subtitle">Загрузите фото с текстом — ИИ распознает и вернет текст. Поддерживается русский и английский язык.</p>
+<div class="card">
+<div class="card-inner">
+<div class="dropzone" id="dropzone">
+<div class="dropzone-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+<h3 class="dropzone-title">Перетащите фото с текстом</h3>
+<p style="color:#94a3b8;font-size:.875rem;margin-bottom:1rem;">или нажмите для выбора файла</p>
+</div>
+<div class="result-area" id="resultArea" style="display:none;">
+<div class="preview-box"><img id="previewImg" src="" alt="preview"></div>
+<div class="result-info">
+<div id="processingState" style="display:none;">
+<div style="display:flex;align-items:center;gap:1rem;padding:2rem 0">
+<svg class="spinner" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+<span style="color:#94a3b8;">Распознавание текста...</span>
+</div>
+<div class="progress-bar"><div class="progress-fill"></div></div>
+</div>
+<div id="resultState" style="display:none;">
+<div style="display:inline-flex;align-items:center;justify-content:center;width:4rem;height:4rem;background:rgba(255,255,255,.08);border-radius:1rem;border:1px solid rgba(255,255,255,.1);margin-bottom:1.5rem">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+</div>
+<h2 style="font-size:1.5rem;font-weight:700;color:white;margin-bottom:.25rem;">Текст распознан</h2>
+<p style="color:#94a3b8;font-size:.875rem;margin-bottom:.5rem;">Уверенность: <strong id="confidenceText" style="color:white;"></strong></p>
+<div class="text-block" id="textResult"></div>
+<div style="display:flex;gap:.75rem;margin-top:1rem;">
+<button class="btn btn-primary" onclick="copyText()">Копировать</button>
+<button class="btn btn-outline" onclick="resetForm()">Новое фото</button>
+</div>
+</div>
+</div>
+</div>
+<div id="errorBox" style="display:none;"></div>
+</div>
+</div>
+</div>
+</main>
+<footer style="border-top:1px solid rgba(255,255,255,.06);padding:2rem 0;text-align:center"><p style="color:#52525b;font-size:.8rem">Создано с помощью <a href="https://maxxmoto.github.io/vexio/" style="color:#a1a1aa;text-decoration:underline;font-weight:500" target="_blank">Vexio</a></p></footer>
+<script>
+const dropzone=document.getElementById('dropzone'),resultArea=document.getElementById('resultArea'),previewImg=document.getElementById('previewImg'),processingState=document.getElementById('processingState'),resultState=document.getElementById('resultState'),textResult=document.getElementById('textResult'),confidenceText=document.getElementById('confidenceText'),errorBox=document.getElementById('errorBox');let lastText='';
+
+function triggerFileInput(){const i=document.createElement('input');i.type='file';i.accept='image/*';i.style.cssText='position:fixed;left:-9999px;top:-9999px;opacity:0';i.addEventListener('change',e=>{const f=e.target.files[0];if(f)processFile(f);if(i.parentNode)i.parentNode.removeChild(i)});document.body.appendChild(i);i.click()}
+dropzone.addEventListener('click',triggerFileInput);
+
+function processFile(file){if(file.size>32*1024*1024){showError('Файл слишком большой');return}
+errorBox.style.display='none';const reader=new FileReader();reader.onload=e=>{previewImg.src=e.target.result;dropzone.style.display='none';resultArea.style.display='flex';processingState.style.display='block';resultState.style.display='none';ocrFile(file)};reader.readAsDataURL(file)}
+
+async function ocrFile(file){const fd=new FormData();fd.append('image',file)
+try{const r=await fetch('/ocr-api',{method:'POST',body:fd});if(!r.ok)throw new Error('Ошибка');const d=await r.json();lastText=d.text||'';textResult.textContent=lastText;confidenceText.textContent=d.confidence+'%';processingState.style.display='none';resultState.style.display='block'}catch(err){showError(err.message)}}
+
+function copyText(){navigator.clipboard.writeText(lastText).then(()=>{alert('Текст скопирован')})}
+function showError(msg){dropzone.style.display='flex';resultArea.style.display='none';errorBox.style.display='block';errorBox.textContent=msg;errorBox.className='error-box'}
+function resetForm(){dropzone.style.display='flex';resultArea.style.display='none';errorBox.style.display='none'}
+</script>
+
+        
+
+<script>
+        function toggleMenu() {
+            var nl = document.querySelector('.nav-links');
+            var hb = document.querySelector('.hamburger');
+            if (!nl || !hb) return;
+            nl.classList.toggle('mobile');
+            hb.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
