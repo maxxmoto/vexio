@@ -1,17 +1,21 @@
 """Free AI features: HF Inference API (chat) + local model (caption) + pollinations (image gen)"""
 import requests
 import time
-from config import HF_TOKEN
 
+# Try to load HF token, fallback gracefully
+HF_TOKEN = None
 HF_CHAT_URL = 'https://router.huggingface.co/v1/chat/completions'
-HF_HEADERS = {'Authorization': f'Bearer {HF_TOKEN}'}
+HF_HEADERS = {}
+try:
+    from config import HF_TOKEN
+    HF_HEADERS = {'Authorization': f'Bearer {HF_TOKEN}'}
+except Exception:
+    pass
 
 CHAT_MODELS = {
     'Qwen/Qwen2.5-7B-Instruct': 32000,
     'meta-llama/Llama-3.1-8B-Instruct': 32000,
 }
-
-# Pick default chat model
 DEFAULT_CHAT_MODEL = 'Qwen/Qwen2.5-7B-Instruct'
 
 
