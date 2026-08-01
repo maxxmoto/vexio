@@ -124,6 +124,8 @@ const LOCALES = {
     builder: { label: "Request Builder", title1: "Build your project,", title2: "right here.", title: "vexio — project-builder", desc: "Choose or type your answers", complete: "All fields complete. Submit when ready.", submit: "Submit Project ✦", submitting: "Submitting...", projectPlaceholder: "Project name will appear here...", emptyHint: "Answer questions in the terminal to build your blueprint", catalog: "PRODUCT CATALOG", admin: "ADMIN DASHBOARD", telegram: "TELEGRAM INTEGRATION", telegramDesc: "Bot automation · Notifications · Commands" },
     submission: { created: "PROJECT CREATED", yourProject: "Your Project", statusLabel: "Status", received: "Received", projectId: "Project ID", response: "Response", within24h: "Within 24 hours", preparing: "Preparing upload...", uploading: "Uploading...", delivered: "Delivered", review: "We'll review your project brief and reach out within 24 hours.", newProject: "Start a new project", catalog: "Catalog", adminPanel: "Admin Panel", telegram: "Telegram" },
     footer: { copyright: "© 2026 Vexio Studio. Crafted with obsession.", twitter: "Twitter", behance: "Behance", telegram: "Telegram" },
+    channel: { title: "Subscribe to our Telegram", title2: "channel", desc: "Be the first to know all the news", button: "Subscribe" },
+    doneMsg: "Blueprint complete. Ready to submit.",
     doneMsg: "Blueprint complete. Ready to submit.",
   },
   ru: {
@@ -135,6 +137,8 @@ const LOCALES = {
     builder: { label: "Форма заявки", title1: "Создайте свой проект", title2: "прямо здесь.", title: "vexio — конструктор проектов", desc: "Выберите или введите ответы", complete: "Все поля заполнены. Отправляйте.", submit: "Отправить ✦", submitting: "Отправка...", projectPlaceholder: "Название проекта появится здесь...", emptyHint: "Ответьте на вопросы в терминале чтобы собрать проект", catalog: "КАТАЛОГ ТОВАРОВ", admin: "АДМИН-ПАНЕЛЬ", telegram: "ИНТЕГРАЦИЯ С TELEGRAM", telegramDesc: "Автоматизация ботов · Уведомления · Команды" },
     submission: { created: "ПРОЕКТ СОЗДАН", yourProject: "Ваш проект", statusLabel: "Статус", received: "Получен", projectId: "ID проекта", response: "Ответ", within24h: "В течение 24 часов", preparing: "Подготовка к отправке...", uploading: "Отправка...", delivered: "Доставлено", review: "Мы проверим вашу заявку и свяжемся в течение 24 часов.", newProject: "Создать новый проект", catalog: "Каталог", adminPanel: "Админ-панель", telegram: "Telegram" },
     footer: { copyright: "© 2026 Vexio Studio. Сделано с одержимостью.", twitter: "Twitter", behance: "Behance", telegram: "Telegram" },
+    channel: { title: "Подпишитесь на наш", title2: "телеграм-канал", desc: "Будьте первыми в курсе всех новостей", button: "Подписаться" },
+    doneMsg: "Бланк готов. Отправляйте.",
     doneMsg: "Бланк готов. Отправляйте.",
   },
 };
@@ -486,6 +490,44 @@ function TelegramBots() {
           <div style={{ fontSize: 48, opacity: 0.5 }}>✈️</div>
           <div>{t("bots.placeholder")}</div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function TelegramChannel() {
+  const { t } = useContext(LocaleContext);
+  return (
+    <section style={{
+      padding: "100px 24px",
+      background: "#ff4a2b",
+      backgroundImage: "radial-gradient(circle at 0% 0%, #ffaa00 0%, transparent 60%), radial-gradient(circle at 100% 0%, #ff1100 0%, transparent 55%), radial-gradient(circle at 0% 100%, #d80073 0%, transparent 65%), radial-gradient(circle at 100% 100%, #ff7700 0%, transparent 60%), radial-gradient(circle at 50% 50%, #ff4b2b 0%, transparent 65%)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+    }}>
+      <div style={{ maxWidth: 700, textAlign: "center" }}>
+        <h2 style={{
+          color: "#fff", fontFamily: "var(--font-display)", fontWeight: 700,
+          fontSize: "clamp(28px, 5vw, 48px)", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: 20,
+        }}>
+          {t("channel.title")}<br /><span style={{ opacity: 0.9 }}>{t("channel.title2")}</span>
+        </h2>
+        <p style={{ color: "rgba(255,255,255,0.9)", fontSize: "clamp(15px, 2vw, 20px)", marginBottom: 32, fontWeight: 400 }}>
+          {t("channel.desc")}
+        </p>
+        <button onClick={() => window.open("https://t.me/vexio_studio", "_blank")} style={{
+          display: "inline-flex", alignItems: "center", gap: 12, padding: "14px 32px",
+          background: "#fff", color: "#000", border: "none", borderRadius: 14,
+          fontFamily: "var(--font-body)", fontSize: "clamp(16px, 2vw, 18px)", fontWeight: 600,
+          cursor: "pointer", transition: "all 0.2s",
+        }}
+          onMouseEnter={e => { e.target.style.transform = "scale(1.02)"; e.target.style.boxShadow = "0 8px 24px rgba(0,0,0,0.15)"; }}
+          onMouseLeave={e => { e.target.style.transform = "scale(1)"; e.target.style.boxShadow = "none"; }}
+        >
+          {t("channel.button")}
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.00002 11.9999L22 2.99994L18.46 20.9999L12.56 16.4299L10.5 18.5999L9.5 14.1999L17.5 7.49994L7.5 13.4999L2 11.9999Z"/>
+          </svg>
+        </button>
       </div>
     </section>
   );
@@ -914,6 +956,7 @@ function VexioLanding() {
         <Hero onViewProjects={scrollToShowcase} onStartProject={scrollToBuilder} />
         <ClientCarousel />
         <div ref={showcaseRef}><Showcase onNewProject={scrollToBuilder} /></div>
+        <TelegramChannel />
         <TelegramBots />
         <div ref={requestRef}><RequestBuilder /></div>
         <footer style={{ borderTop: "1px solid var(--border)", padding: "40px clamp(20px, 4vw, 60px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
