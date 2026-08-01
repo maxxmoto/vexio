@@ -1043,9 +1043,6 @@
                     phone,
                     comment: inputComment.value.trim(),
                 };
-
-                console.log('📤 Имитация отправки бронирования:', bookingData);
-
                 // Глитч → успех
                 triggerGlitchEffect(() => {
                     successDetails.textContent =
@@ -1328,10 +1325,9 @@
             }
 
             init();
-            console.log('🎾 TENNIS BRUTAL · SPA готов · Йошкар-Ола');
-            console.log('   Корты: Олимп | Тарханово | Арена');
-            console.log('   Свайпайте на мобильном для смены корта');
-            console.log('   Кликайте по слотам для бронирования');
+
+
+
         })();
     </script>
 </body>
