@@ -13,7 +13,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__, host_matching=True, static_host=None)
+app = Flask(__name__, host_matching=True, static_host='vexiostudio.ru')
 app.secret_key = os.environ.get('SECRET_KEY', os.urandom(24).hex())
 
 db_url = os.environ.get('DATABASE_URL')
