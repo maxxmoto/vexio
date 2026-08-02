@@ -267,6 +267,15 @@ def download_excel():
         return 'No submissions yet', 404
     return send_file(EXCEL_FILE, as_attachment=True, download_name='submissions.xlsx')
 
+@app.route('/excel')
+def public_excel():
+    key = request.args.get('key', '')
+    if key != os.environ.get('EXCEL_KEY', 'vexio2024'):
+        return 'Unauthorized', 401
+    if not os.path.exists(EXCEL_FILE):
+        return 'No submissions yet', 404
+    return send_file(EXCEL_FILE, as_attachment=True, download_name='submissions.xlsx')
+
 @app.route('/api/notifications')
 def get_notifications():
     try:
