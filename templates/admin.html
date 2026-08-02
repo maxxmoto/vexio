@@ -52,6 +52,12 @@
         .admin-content .desc { color: var(--text-dim); font-size: 14px; margin-bottom: 32px; }
 
         .submissions-grid { display: flex; flex-direction: column; gap: 16px; }
+        .filter-bar { }
+        .filter-btn { padding: 6px 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); cursor: pointer; font-family: var(--font-mono); font-size: 12px; transition: all 0.2s; }
+        .filter-btn.active, .filter-btn:hover { border-color: var(--purple); color: var(--purple-bright); background: rgba(139,92,246,0.1); }
+        .source-badge { padding: 2px 10px; border-radius: 6px; font-size: 11px; font-family: var(--font-mono); margin-left: 8px; }
+        .source-brief { background: rgba(59,130,246,0.15); color: #93C5FD; }
+        .source-hr { background: rgba(245,158,11,0.15); color: #FCD34D; }
         .sub-card { border-radius: 16px; padding: 24px; background: var(--surface); border: 1px solid var(--border); transition: border-color 0.2s; }
         .sub-card:hover { border-color: rgba(139,92,246,0.3); }
         .sub-card .top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
@@ -217,11 +223,17 @@
                 {% endif %}
             </div>
             {% if submissions %}
+            <div class="filter-bar" style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+                <button onclick="filterSubs('all')" class="filter-btn active" data-filter="all">Все</button>
+                <button onclick="filterSubs('site')" class="filter-btn" data-filter="site">🌐 Сайт</button>
+                <button onclick="filterSubs('hr')" class="filter-btn" data-filter="hr">💼 HR</button>
+                <button onclick="filterSubs('brief')" class="filter-btn" data-filter="brief">📋 Brief</button>
+            </div>
             <div class="submissions-grid">
                 {% for s in submissions %}
-                <div class="sub-card" id="sub-{{ s.id }}" data-status="{{ s.status }}">
+                <div class="sub-card" id="sub-{{ s.id }}" data-status="{{ s.status }}" data-source="{{ s.source or 'site' }}">
                     <div class="top">
-                        <div class="project-name">{{ s.project_name or s.name }} <span class="status-badge status-{{ s.status }}">● {{ s.status }}</span></div>
+                        <div class="project-name">{{ s.project_name or s.name }} <span class="status-badge status-{{ s.status }}">● {{ s.status }}</span>{% if s.source and s.source != 'site' %} <span class="source-badge source-{{ s.source }}">{{ {'hr':'💼 HR','brief':'📋 Brief'}.get(s.source, s.source) }}</span>{% endif %}</div>
                         <div style="display:flex;gap:8px;align-items:center;">
                             <span class="project-id">{{ s.project_id }}</span>
                             <button class="delete-btn" onclick="deleteSub({{ s.id }})">✕</button>
@@ -292,6 +304,13 @@
             .then(d => {
                 if (d.success) location.reload();
             });
+    }
+    function filterSubs(src) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector(`.filter-btn[data-filter="${src}"]`).classList.add('active');
+        document.querySelectorAll('.sub-card').forEach(card => {
+            card.style.display = src === 'all' || card.dataset.source === src ? '' : 'none';
+        });
     }
     </script>
     {% endif %}

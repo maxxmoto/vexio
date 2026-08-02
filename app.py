@@ -252,6 +252,9 @@ def hr_apply():
     data = request.get_json()
     if not data:
         return jsonify({'error': 'No data'}), 400
+    data['project_id'] = 'HR-' + str(uuid.uuid4())[:6].upper()
+    data['source'] = 'hr'
+    data['created_at'] = datetime.utcnow().isoformat()
     save_notification('hr', data)
     return jsonify({'success': True})
 
@@ -260,6 +263,9 @@ def brief_apply():
     data = request.get_json()
     if not data:
         return jsonify({'error': 'No data'}), 400
+    data['project_id'] = 'BF-' + str(uuid.uuid4())[:6].upper()
+    data['source'] = 'brief'
+    data['created_at'] = datetime.utcnow().isoformat()
     save_notification('brief', data)
     return jsonify({'success': True})
 
@@ -311,13 +317,36 @@ def admin_login():
             error = 'Invalid credentials'
     return render_template('admin.html', error=error, login=True)
 
+def load_all_submissions():
+    subs = [s.to_dict() for s in Submission.query.order_by(Submission.created_at.desc()).all()]
+    try:
+        with open(NOTIFY_FILE, 'r', encoding='utf-8') as f:
+            notify = json.load(f)
+        for n in notify:
+            d = n['data']
+            subs.append({
+                'id': d.get('project_id', ''),
+                'name': d.get('name', '') or d.get('contact', ''),
+                'project_name': d.get('project', '') or d.get('position', '') or d.get('format', ''),
+                'phone': d.get('phone', '') or d.get('contact', ''),
+                'type': d.get('type', '') or d.get('business', ''),
+                'description': d.get('description', '') or d.get('goal', ''),
+                'status': 'new',
+                'created_at': n.get('time', ''),
+                'source': n.get('source', 'site'),
+            })
+    except (FileNotFoundError, json.JSONDecodeError):
+        pass
+    subs.sort(key=lambda x: x.get('created_at', ''), reverse=True)
+    return subs
+
 @app.route('/admin/dashboard')
 @login_required
 def admin_dashboard():
-    submissions = Submission.query.order_by(Submission.created_at.desc()).all()
+    submissions = load_all_submissions()
     portfolio = load_portfolio()
     visitors = load_visitors()
-    return render_template('admin.html', login=False, page='submissions', submissions=[s.to_dict() for s in submissions], portfolio=portfolio, visitors=visitors)
+    return render_template('admin.html', login=False, page='submissions', submissions=submissions, portfolio=portfolio, visitors=visitors)
 
 @app.route('/admin/portfolio', methods=['GET', 'POST'])
 @login_required
