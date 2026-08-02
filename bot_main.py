@@ -23,7 +23,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-TOKEN = "8964412503:AAEVNUajV66HteTLH8WuN-oHmquPt9IVDQo"
+TOKEN = os.environ.get("BOT_TOKEN", "8964412503:AAEVNUajV66HteTLH8WuN-oHmquPt9IVDQo")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 REFERRALS_FILE = os.path.join(STATIC_DIR, "referrals.json")
