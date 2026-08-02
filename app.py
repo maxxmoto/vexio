@@ -166,13 +166,13 @@ import re
 @app.route('/hr/')
 @app.route('/hr/<path:path>')
 def serve_hr(path='index.html'):
-    return send_from_directory('static/hr', path or 'index.html')
+    return app.send_static_file(f'hr/{path or "index.html"}')
 
 @app.route('/brief')
 @app.route('/brief/')
 @app.route('/brief/<path:path>')
 def serve_brief(path='index.html'):
-    return send_from_directory('static/brief', path or 'index.html')
+    return app.send_static_file(f'brief/{path or "index.html"}')
 
 @app.route('/check-files')
 def check_files():
@@ -260,7 +260,8 @@ def brief_apply():
     try:
         requests.post(
             f'https://api.telegram.org/bot{TG_TOKEN}/sendMessage',
-            json={'chat_id': TG_ADMIN_ID, 'text': text, 'parse_mode': 'HTML'}
+            json={'chat_id': TG_ADMIN_ID, 'text': text, 'parse_mode': 'HTML'},
+            timeout=5
         )
     except Exception as e:
         logger.error(f'Brief apply notify error: {e}')
