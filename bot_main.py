@@ -25,11 +25,11 @@ logger = logging.getLogger(__name__)
 
 TOKEN = os.environ.get("BOT_TOKEN", "8964412503:AAEVNUajV66HteTLH8WuN-oHmquPt9IVDQo")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_DIR = os.path.join(BASE_DIR, "static")
-REFERRALS_FILE = os.path.join(STATIC_DIR, "referrals.json")
-SUBMISSIONS_FILE = os.path.join(STATIC_DIR, "submissions.json")
-USERS_FILE = os.path.join(STATIC_DIR, "users.json")
-PORTFOLIO_FILE = os.path.join(STATIC_DIR, "portfolio.json")
+DATA_DIR = os.path.join(BASE_DIR, "data")
+REFERRALS_FILE = os.path.join(DATA_DIR, "referrals.json")
+SUBMISSIONS_FILE = os.path.join(DATA_DIR, "submissions.json")
+USERS_FILE = os.path.join(DATA_DIR, "users.json")
+PORTFOLIO_FILE = os.path.join(DATA_DIR, "portfolio.json")
 
 def load_referrals():
     try:

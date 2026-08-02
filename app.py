@@ -23,8 +23,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = db_url or 'sqlite:///vexio.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-PORTFOLIO_FILE = os.path.join(os.path.dirname(__file__), 'static', 'portfolio.json')
-VISITORS_FILE = os.path.join(os.path.dirname(__file__), 'static', 'visitors.json')
+PORTFOLIO_FILE = os.path.join(os.path.dirname(__file__), 'data', 'portfolio.json')
+VISITORS_FILE = os.path.join(os.path.dirname(__file__), 'data', 'visitors.json')
 
 def load_visitors():
     try:
@@ -356,7 +356,7 @@ def update_submission_status(sub_id):
 @login_required
 def api_referrals():
     try:
-        with open(os.path.join(app.root_path, 'static', 'referrals.json'), 'r', encoding='utf-8') as f:
+        with open(os.path.join(app.root_path, 'data', 'referrals.json'), 'r', encoding='utf-8') as f:
             return jsonify(json.load(f))
     except (FileNotFoundError, json.JSONDecodeError):
         return jsonify([])
@@ -366,7 +366,7 @@ def api_register_user():
     data = request.get_json()
     if not data or not data.get('user_id'):
         return jsonify({'error': 'user_id required'}), 400
-    users_file = os.path.join(app.root_path, 'static', 'users.json')
+    users_file = os.path.join(app.root_path, 'data', 'users.json')
     try:
         with open(users_file, 'r', encoding='utf-8') as f:
             users = json.load(f)
@@ -388,7 +388,7 @@ def api_register_user():
 @app.route('/admin/mailing', methods=['GET', 'POST'])
 @login_required
 def admin_mailing():
-    users_file = os.path.join(app.root_path, 'static', 'users.json')
+    users_file = os.path.join(app.root_path, 'data', 'users.json')
     try:
         with open(users_file, 'r', encoding='utf-8') as f:
             users = json.load(f)
@@ -436,7 +436,7 @@ def admin_mailing():
 @login_required
 def api_users():
     try:
-        with open(os.path.join(app.root_path, 'static', 'users.json'), 'r', encoding='utf-8') as f:
+        with open(os.path.join(app.root_path, 'data', 'users.json'), 'r', encoding='utf-8') as f:
             return jsonify(json.load(f))
     except (FileNotFoundError, json.JSONDecodeError):
         return jsonify([])
