@@ -163,20 +163,6 @@ def login_required(f):
 
 import re
 
-@app.before_request
-def route_subdomain():
-    host = request.headers.get('X-Forwarded-Host', request.host).split(':')[0]
-    if host.startswith('hr.'):
-        folder = 'hr'
-    elif host.startswith('brief.'):
-        folder = 'brief'
-    else:
-        return
-    path = request.path.lstrip('/') or 'index.html'
-    if not re.search(r'\.[a-z0-9]+$', path, re.I):
-        path = path.rstrip('/') + '/index.html'
-    return send_from_directory(f'static/{folder}', path)
-
 @app.route('/hr/', defaults={'path': 'index.html'})
 @app.route('/hr/<path:path>')
 def serve_hr(path):
