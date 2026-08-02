@@ -218,30 +218,41 @@ def version():
     host = request.headers.get('X-Forwarded-Host', request.host)
     return f'OK {rev} host={host}'
 
+NOTIFY_FILE = os.path.join(os.path.dirname(__file__), 'data', 'notifications.json')
+
+def save_notification(source, data):
+    os.makedirs(os.path.dirname(NOTIFY_FILE), exist_ok=True)
+    try:
+        with open(NOTIFY_FILE, 'r', encoding='utf-8') as f:
+            queue = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        queue = []
+    queue.append({'source': source, 'data': data, 'time': datetime.utcnow().isoformat()})
+    with open(NOTIFY_FILE, 'w', encoding='utf-8') as f:
+        json.dump(queue, f, ensure_ascii=False)
+
+@app.route('/api/notifications')
+def get_notifications():
+    try:
+        with open(NOTIFY_FILE, 'r', encoding='utf-8') as f:
+            queue = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        queue = []
+    return jsonify(queue)
+
+@app.route('/api/notifications/clear', methods=['POST'])
+def clear_notifications():
+    os.makedirs(os.path.dirname(NOTIFY_FILE), exist_ok=True)
+    with open(NOTIFY_FILE, 'w', encoding='utf-8') as f:
+        json.dump([], f)
+    return jsonify({'success': True})
+
 @app.route('/api/hr-apply', methods=['POST'])
 def hr_apply():
     data = request.get_json()
     if not data:
         return jsonify({'error': 'No data'}), 400
-    name = data.get('name', '')
-    telegram = data.get('telegram', '')
-    phone = data.get('phone', '')
-    position = data.get('position', '')
-    
-    text = (
-        f"\U0001F465 <b>Новая заявка — Vexio HR</b>\n\n"
-        f"\U0001F464 <b>Имя:</b> {name or '—'}\n"
-        f"\U0001F4F1 <b>Телефон:</b> {phone or '—'}\n"
-        f"\U0001F4AC <b>Telegram:</b> @{telegram or '—'}\n"
-        f"\U0001F4BC <b>Вакансия:</b> {position or '—'}"
-    )
-    try:
-        resp = requests.post(
-            f'https://api.telegram.org/bot{TG_TOKEN}/sendMessage',
-            json={'chat_id': TG_ADMIN_ID, 'text': text, 'parse_mode': 'HTML'}
-        )
-    except Exception as e:
-        logger.error(f'HR apply notify error: {e}')
+    save_notification('hr', data)
     return jsonify({'success': True})
 
 @app.route('/api/brief-apply', methods=['POST'])
@@ -249,28 +260,7 @@ def brief_apply():
     data = request.get_json()
     if not data:
         return jsonify({'error': 'No data'}), 400
-    fmt = data.get('format', '')
-    business = data.get('business', '')
-    goal = data.get('goal', '')
-    contact = data.get('contact', '')
-    website = data.get('website', '')
-    
-    text = (
-        f"\U0001F4CB <b>Новая заявка — Vexio Brief</b>\n\n"
-        f"\U0001F4E6 <b>Формат:</b> {fmt or '—'}\n"
-        f"\U0001F3E2 <b>Бизнес:</b> {business or '—'}\n"
-        f"\U0001F3AF <b>Цель:</b> {goal or '—'}\n"
-        f"\U0001F4DE <b>Контакт:</b> {contact or '—'}\n"
-        f"\U0001F310 <b>Сайт:</b> {website or '—'}"
-    )
-    try:
-        requests.post(
-            f'https://api.telegram.org/bot{TG_TOKEN}/sendMessage',
-            json={'chat_id': TG_ADMIN_ID, 'text': text, 'parse_mode': 'HTML'},
-            timeout=5
-        )
-    except Exception as e:
-        logger.error(f'Brief apply notify error: {e}')
+    save_notification('brief', data)
     return jsonify({'success': True})
 
 @app.route('/api/submit', methods=['POST'])
@@ -294,7 +284,16 @@ def submit_project():
     )
     db.session.add(sub)
     db.session.commit()
-    send_tg_notification(sub)
+    save_notification('site', {
+        'name': data.get('name', ''),
+        'project': data.get('projectName', ''),
+        'phone': data.get('phone', ''),
+        'type': data.get('type', ''),
+        'description': data.get('description', '') or '—',
+        'catalog': data.get('catalog', 'no'),
+        'admin': data.get('admin', 'no'),
+        'telegram': data.get('telegram', 'no'),
+    })
     return jsonify({'success': True, 'project_id': pid}), 201
 
 @app.route('/admin', methods=['GET', 'POST'])
