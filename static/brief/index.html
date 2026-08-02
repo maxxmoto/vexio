@@ -712,7 +712,7 @@
             };
 
             const handleSubmit = () => {
-                if (!formData.business || !formData.goal || !formData.contact) { return; }
+                if (!formData.business || !formData.goal || !formData.contact) { alert('Заполните обязательные поля: бизнес, цель, контакт'); return; }
                 fetch('/api/brief-apply', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -960,12 +960,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                {kitchenOpen && (
                                 <button 
                                     onClick={() => setActiveSheet('bonuses')}
                                     className="w-full mt-6 bg-ya-yellow hover:bg-[#F0D500] text-ya-dark font-bold py-4 rounded-xl text-lg"
                                 >
                                     к бонусам →
                                 </button>
+                                )}
                             </div>
                         </section>
 
