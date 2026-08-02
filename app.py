@@ -161,6 +161,17 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated
 
+# Subdomain static serving
+@app.before_request
+def serve_subdomain():
+    host = request.headers.get('X-Forwarded-Host', request.host).split(':')[0]
+    if host == 'hr.vexiostudio.ru' or host == 'brief.vexiostudio.ru':
+        folder = 'brief' if host.startswith('brief') else 'hr'
+        path = request.path.lstrip('/') or 'index.html'
+        if '.' not in path.rsplit('/', 1)[-1]:
+            path = path.rstrip('/') + '/index.html'
+        return send_from_directory(f'static/{folder}', path)
+
 @app.route('/')
 def index():
     return send_from_directory('templates', 'index.html')
