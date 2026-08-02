@@ -4,14 +4,14 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://maxxmoto.github.io/vexio-hr/</loc>
+    <loc>https://vexiostudio.ru/hr/</loc>
     <lastmod>2026-08-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://maxxmoto.github.io/vexio-hr/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://maxxmoto.github.io/vexio-hr/en/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vexiostudio.ru/hr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vexiostudio.ru/hr/en/" />
     <image:image>
-      <image:loc>https://maxxmoto.github.io/vexio-hr/logo.png</image:loc>
+      <image:loc>https://vexiostudio.ru/hr/logo.png</image:loc>
       <image:caption>Vexio Studio логотип</image:caption>
     </image:image>
     <news:news>
