@@ -13,7 +13,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__, host_matching=True, static_host='vexiostudio.ru')
+app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', os.urandom(24).hex())
 
 db_url = os.environ.get('DATABASE_URL')
@@ -161,21 +161,18 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated
 
-@app.route('/', host='hr.vexiostudio.ru')
-def hr_index():
-    return send_from_directory('static/hr', 'index.html')
+import re
 
-@app.route('/<path:path>', host='hr.vexiostudio.ru')
-def hr_files(path):
-    return send_from_directory('static/hr', path)
-
-@app.route('/', host='brief.vexiostudio.ru')
-def brief_index():
-    return send_from_directory('static/brief', 'index.html')
-
-@app.route('/<path:path>', host='brief.vexiostudio.ru')
-def brief_files(path):
-    return send_from_directory('static/brief', path)
+@app.before_request
+def route_subdomain():
+    host = request.headers.get('X-Forwarded-Host', request.host).split(':')[0]
+    if host not in ('hr.vexiostudio.ru', 'brief.vexiostudio.ru'):
+        return
+    folder = 'hr' if host.startswith('hr') else 'brief'
+    path = request.path.lstrip('/') or 'index.html'
+    if not re.search(r'\.[a-z0-9]+$', path, re.I):
+        path = path.rstrip('/') + '/index.html'
+    return send_from_directory(f'static/{folder}', path)
 
 @app.route('/')
 def index():
