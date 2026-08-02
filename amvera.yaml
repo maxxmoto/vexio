@@ -8,5 +8,6 @@ build:
   requirements: requirements.txt
 
 run:
-  command: python app.py
+  command: gunicorn -b 0.0.0.0:80 app:app
+  containerPort: 80
   persistenceMount: /app/static
