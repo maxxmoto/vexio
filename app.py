@@ -177,6 +177,20 @@ def route_subdomain():
         path = path.rstrip('/') + '/index.html'
     return send_from_directory(f'static/{folder}', path)
 
+@app.route('/hr/', defaults={'path': 'index.html'})
+@app.route('/hr/<path:path>')
+def serve_hr(path):
+    if not re.search(r'\.[a-z0-9]+$', path, re.I):
+        path = path.rstrip('/') + '/index.html'
+    return send_from_directory('static/hr', path)
+
+@app.route('/brief/', defaults={'path': 'index.html'})
+@app.route('/brief/<path:path>')
+def serve_brief(path):
+    if not re.search(r'\.[a-z0-9]+$', path, re.I):
+        path = path.rstrip('/') + '/index.html'
+    return send_from_directory('static/brief', path)
+
 @app.route('/')
 def index():
     return send_from_directory('templates', 'index.html')
