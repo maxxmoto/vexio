@@ -72,8 +72,7 @@ def add_headers(response):
 ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
 ADMIN_PASSWORD_HASH = generate_password_hash(os.environ.get('ADMIN_PASSWORD', 'vexio2024'))
 
-TG_TOKEN = os.environ.get('TG_TOKEN', '8868137062:AAH-_SKAP-poeG3afD3m47PAVhJbk8sqFl4')
-CLIENT_TG_TOKEN = os.environ.get('CLIENT_TG_TOKEN', '8964412503:AAEVNUajV66HteTLH8WuN-oHmquPt9IVDQo')
+TG_TOKEN = os.environ.get('TG_TOKEN', '8591869743:AAFgSoVueO9FXIVjIPgwOnDIPOeeN_5x05s')
 TG_ADMIN_ID = os.environ.get('TG_ADMIN_ID', '903104535')
 
 def send_tg_notification(sub):
@@ -218,6 +217,32 @@ def version():
     except: rev = '?'
     host = request.headers.get('X-Forwarded-Host', request.host)
     return f'OK {rev} host={host}'
+
+@app.route('/api/hr-apply', methods=['POST'])
+def hr_apply():
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data'}), 400
+    name = data.get('name', '')
+    telegram = data.get('telegram', '')
+    phone = data.get('phone', '')
+    position = data.get('position', '')
+    
+    text = (
+        f"\U0001F465 <b>Новая заявка — Vexio HR</b>\n\n"
+        f"\U0001F464 <b>Имя:</b> {name or '—'}\n"
+        f"\U0001F4F1 <b>Телефон:</b> {phone or '—'}\n"
+        f"\U0001F4AC <b>Telegram:</b> @{telegram or '—'}\n"
+        f"\U0001F4BC <b>Вакансия:</b> {position or '—'}"
+    )
+    try:
+        resp = requests.post(
+            f'https://api.telegram.org/bot{TG_TOKEN}/sendMessage',
+            json={'chat_id': TG_ADMIN_ID, 'text': text, 'parse_mode': 'HTML'}
+        )
+    except Exception as e:
+        logger.error(f'HR apply notify error: {e}')
+    return jsonify({'success': True})
 
 @app.route('/api/submit', methods=['POST'])
 def submit_project():
@@ -410,14 +435,14 @@ def admin_mailing():
             try:
                 if photo_bytes:
                     resp = requests.post(
-                        f'https://api.telegram.org/bot{CLIENT_TG_TOKEN}/sendPhoto',
+                        f'https://api.telegram.org/bot{TG_TOKEN}/sendPhoto',
                         files={'photo': (photo_filename, photo_bytes, photo_type)},
                         data={'chat_id': uid, 'caption': text, 'parse_mode': 'HTML'},
                         timeout=15,
                     )
                 else:
                     resp = requests.post(
-                        f'https://api.telegram.org/bot{CLIENT_TG_TOKEN}/sendMessage',
+                        f'https://api.telegram.org/bot{TG_TOKEN}/sendMessage',
                         json={'chat_id': uid, 'text': text, 'parse_mode': 'HTML'},
                         timeout=10,
                     )
