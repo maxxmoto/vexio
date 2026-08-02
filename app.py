@@ -409,5 +409,5 @@ def server_error(e):
     return render_template('error.html', code=500, message='Something went wrong'), 500
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 80))
+    port = int(os.environ.get('PORT', '80'))
     app.run(host='0.0.0.0', debug=True, port=port)
