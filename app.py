@@ -163,8 +163,6 @@ def login_required(f):
 
 import re
 
-import os
-
 @app.route('/hr')
 @app.route('/hr/')
 @app.route('/hr/<path:path>')
@@ -183,15 +181,25 @@ def serve_brief(path='index.html'):
         path or 'index.html'
     )
 
-@app.route('/debug')
-def debug_headers():
-    headers = {k: v for k, v in request.headers.items()}
-    return jsonify({
-        'host': request.host,
-        'url': request.url,
-        'base_url': request.base_url,
-        'headers': headers,
-    })
+@app.route('/check-files')
+def check_files():
+    paths = {
+        'hr': os.path.join(app.root_path, 'static', 'hr', 'index.html'),
+        'brief': os.path.join(app.root_path, 'static', 'brief', 'index.html'),
+        'static_hr': os.path.join(app.root_path, 'static', 'hr'),
+        'static_brief': os.path.join(app.root_path, 'static', 'brief'),
+        'root_path': app.root_path,
+        'static_files': os.listdir(os.path.join(app.root_path, 'static'))[:20],
+    }
+    result = {}
+    for k, v in paths.items():
+        if k in ('root_path', 'static_files'):
+            result[k] = v
+        elif os.path.isdir(v):
+            result[k] = f'DIR exists, files: {os.listdir(v)[:10]}'
+        else:
+            result[k] = f'EXISTS ({os.path.getsize(v)} bytes)' if os.path.exists(v) else 'NOT FOUND'
+    return jsonify(result)
 
 @app.route('/')
 def index():
