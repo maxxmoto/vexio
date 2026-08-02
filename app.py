@@ -163,24 +163,7 @@ def login_required(f):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-# Subdomain serving
-@app.before_request
-def serve_subdomain_static():
-    host = request.headers.get('X-Forwarded-Host', '')
-    if not host:
-        host = request.host
-    if host.startswith('hr.'):
-        path = request.path.lstrip('/')
-        if not path or '.' not in path.split('/')[-1]:
-            return send_from_directory('static/hr', 'index.html')
-        return send_from_directory('static/hr', path)
-    if host.startswith('brief.'):
-        path = request.path.lstrip('/')
-        if not path or '.' not in path.split('/')[-1]:
-            return send_from_directory('static/brief', 'index.html')
-        return send_from_directory('static/brief', path)
+    return send_from_directory('templates', 'index.html')
 
 @app.route('/favicon.ico')
 def favicon():
