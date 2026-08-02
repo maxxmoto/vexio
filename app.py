@@ -13,7 +13,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
+app = Flask(__name__, host_matching=True, static_host=None)
 app.secret_key = os.environ.get('SECRET_KEY', os.urandom(24).hex())
 
 db_url = os.environ.get('DATABASE_URL')
@@ -160,6 +160,22 @@ def login_required(f):
             return redirect(url_for('admin_login'))
         return f(*args, **kwargs)
     return decorated
+
+@app.route('/', host='hr.vexiostudio.ru')
+def hr_index():
+    return send_from_directory('static/hr', 'index.html')
+
+@app.route('/<path:path>', host='hr.vexiostudio.ru')
+def hr_files(path):
+    return send_from_directory('static/hr', path)
+
+@app.route('/', host='brief.vexiostudio.ru')
+def brief_index():
+    return send_from_directory('static/brief', 'index.html')
+
+@app.route('/<path:path>', host='brief.vexiostudio.ru')
+def brief_files(path):
+    return send_from_directory('static/brief', path)
 
 @app.route('/')
 def index():
