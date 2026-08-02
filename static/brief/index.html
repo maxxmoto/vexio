@@ -589,7 +589,7 @@
                 contactPh: 'Телефон или @telegram',
                 websiteLabel: 'Уже есть сайт? Прикрепите ссылку (необязательно)',
                 websitePh: 'https://...',
-                viewBonuses: 'Посмотреть бонусы',
+                viewBonuses: 'Время — деньги',
                 bonus1: 'дизайн логотипа со скидкой',
                 bonus2: 'ведение месяц в подарок',
                 readyTitle: 'всё готово',
@@ -625,7 +625,7 @@
                 contactPh: 'Phone or @telegram',
                 websiteLabel: 'Already have a website? Attach link (optional)',
                 websitePh: 'https://...',
-                viewBonuses: 'View bonuses',
+                viewBonuses: 'Time is money',
                 bonus1: 'logo design with discount',
                 bonus2: 'one month maintenance free',
                 readyTitle: 'all ready',
@@ -740,7 +740,7 @@
                                     <span className="text-gray-600">/</span>
                                     <span className="cursor-pointer hover:text-white transition-colors" onClick={() => setActiveSheet('brief')}>{t.stage2}</span>
                                     <span className="text-gray-600">/</span>
-                                    <span className="cursor-pointer hover:text-white transition-colors" onClick={() => setActiveSheet('bonuses')}>{t.stage3}</span>
+                                    <span className="cursor-pointer hover:text-white transition-colors" onClick={() => document.getElementById('timeline').scrollIntoView({behavior:'smooth'})}>{t.stage3}</span>
                                 </div>
                                 <button onClick={toggleLang} className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 transition-colors rounded-full px-3 py-1.5 text-xs font-bold flex-shrink-0">
                                     <img src={lang === 'ru' ? 'russia_8603510.webp' : 'united-kingdom_5975843.webp'} alt="flag" className="w-4 h-4 rounded-sm object-cover" />
@@ -871,7 +871,7 @@
                                 </div>
                                 
                                 <button 
-                                    onClick={() => setActiveSheet('bonuses')}
+                                    onClick={() => document.getElementById('timeline').scrollIntoView({behavior:'smooth'})}
                                     className="w-full mt-2 bg-gray-100 hover:bg-gray-200 text-ya-dark font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors"
                                 >
                                     {t.viewBonuses} <Icon name="arrow-down" size={18} />
@@ -880,12 +880,13 @@
                         </Sheet>
 
                         {/* TIMELINE */}
+                        <div id="timeline"></div>
                         <section className={`rounded-t-[1.75rem] shadow-sheet relative transition-colors duration-300 overflow-hidden -mt-5 ${timelineOpen ? 'bg-white z-30' : 'bg-ya-gray z-20 hover:bg-[#EBEAE5]'}`}>
                             <div onClick={() => setTimelineOpen(!timelineOpen)} className="pt-3 pb-5 px-6 md:px-8 md:pt-4 md:pb-6 cursor-pointer relative">
                                 <div className="w-10 h-1.5 rounded-full bg-gray-300 mx-auto mb-4"></div>
                                 <div className="flex justify-between items-center">
                                     <h2 className="text-[22px] md:text-3xl font-black tracking-tight text-ya-dark">Шаг за шагом</h2>
-                                    <span className={`transform transition-transform ${timelineOpen ? 'rotate-180' : ''}`}>▼</span>
+                                    <div className="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center text-xs font-bold flex-shrink-0 bg-white/50">3</div>
                                 </div>
                             </div>
                             <div className={`sheet-content ${timelineOpen ? 'open' : ''}`}>
@@ -922,7 +923,7 @@
                                 <div className="w-10 h-1.5 rounded-full bg-gray-300 mx-auto mb-4"></div>
                                 <div className="flex justify-between items-center">
                                     <h2 className="text-[22px] md:text-3xl font-black tracking-tight text-ya-dark">Наша кухня — ваша кухня</h2>
-                                    <span className={`transform transition-transform ${kitchenOpen ? 'rotate-180' : ''}`}>▼</span>
+                                    <div className="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center text-xs font-bold flex-shrink-0 bg-white/50">4</div>
                                 </div>
                             </div>
                             <div className={`sheet-content ${kitchenOpen ? 'open' : ''}`}>
@@ -934,7 +935,7 @@
                                                 <div className="text-ya-yellow font-black text-lg md:text-2xl mb-6">Мы делаем</div>
                                                 <div className="space-y-4">
                                                     <div><div className="font-bold text-ya-dark">Структура и дизайн</div><div className="text-gray-500 text-sm">Каталог, карточки, страницы и адаптация под мобилки.</div></div>
-                                                    <div><div className="font-bold text-ya-dark">Интеграции</div><div className="text-gray-500 text-sm">CRM, оплата, доставка, 1С.</div></div>
+                                                    <div><div className="font-bold text-ya-dark">Интеграции</div><div className="text-gray-500 text-sm">CRM, оплата, доставка.</div></div>
                                                     <div><div className="font-bold text-ya-dark">Админка и Метрика</div><div className="text-gray-500 text-sm">Панель управления и аналитика.</div></div>
                                                     <div><div className="font-bold text-ya-dark">Проверка</div><div className="text-gray-500 text-sm">Тестируем ключевые сценарии и исправляем ошибки.</div></div>
                                                     <div><div className="font-bold text-ya-dark">Передача</div><div className="text-gray-500 text-sm">Показываем управление и сопровождаем вас.</div></div>
@@ -958,7 +959,7 @@
                         <Sheet 
                             id="bonuses" 
                             title={t.sheet3}
-                            iconStr="3" 
+                            iconStr="5" 
                             isActive={activeSheet === 'bonuses'} 
                             onOpen={setActiveSheet}
                         >
