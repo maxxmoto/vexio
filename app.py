@@ -6,7 +6,7 @@ import logging
 from datetime import datetime
 from functools import wraps
 import requests
-from flask import Flask, render_template, request, jsonify, redirect, url_for, session, send_from_directory
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session, send_from_directory, send_file
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -219,6 +219,7 @@ def version():
     return f'OK {rev} host={host}'
 
 NOTIFY_FILE = os.path.join(os.path.dirname(__file__), 'data', 'notifications.json')
+EXCEL_FILE = os.path.join(os.path.dirname(__file__), 'data', 'submissions.xlsx')
 
 def save_notification(source, data):
     os.makedirs(os.path.dirname(NOTIFY_FILE), exist_ok=True)
@@ -230,6 +231,41 @@ def save_notification(source, data):
     queue.append({'source': source, 'data': data, 'time': datetime.utcnow().isoformat()})
     with open(NOTIFY_FILE, 'w', encoding='utf-8') as f:
         json.dump(queue, f, ensure_ascii=False)
+    _save_to_excel(source, data)
+
+def _save_to_excel(source, data):
+    from openpyxl import Workbook, load_workbook
+    os.makedirs(os.path.dirname(EXCEL_FILE), exist_ok=True)
+    try:
+        wb = load_workbook(EXCEL_FILE)
+    except FileNotFoundError:
+        wb = Workbook()
+        wb.remove(wb.active)
+    sheet_name = {'site': 'Сайт', 'hr': 'Vexio HR', 'brief': 'Vexio Brief'}.get(source, source)
+    if sheet_name not in wb.sheetnames:
+        ws = wb.create_sheet(sheet_name)
+        if source == 'hr':
+            ws.append(['Имя', 'Telegram', 'Телефон', 'Вакансия', 'ID', 'Дата'])
+        elif source == 'brief':
+            ws.append(['Формат', 'Бизнес', 'Цель', 'Контакт', 'Сайт', 'ID', 'Дата'])
+        else:
+            ws.append(['Имя', 'Проект', 'Телефон', 'Тип', 'Описание', 'Каталог', 'Админка', 'Telegram бот', 'ID', 'Дата'])
+    ws = wb[sheet_name]
+    now = datetime.utcnow().strftime('%Y-%m-%d %H:%M')
+    if source == 'hr':
+        ws.append([data.get('name',''), data.get('telegram',''), data.get('phone',''), data.get('position',''), data.get('project_id',''), now])
+    elif source == 'brief':
+        ws.append([data.get('format',''), data.get('business',''), data.get('goal',''), data.get('contact',''), data.get('website',''), data.get('project_id',''), now])
+    else:
+        ws.append([data.get('name',''), data.get('project',''), data.get('phone',''), data.get('type',''), data.get('description',''), data.get('catalog','no'), data.get('admin','no'), data.get('telegram','no'), data.get('project_id',''), now])
+    wb.save(EXCEL_FILE)
+
+@app.route('/admin/download-excel')
+@login_required
+def download_excel():
+    if not os.path.exists(EXCEL_FILE):
+        return 'No submissions yet', 404
+    return send_file(EXCEL_FILE, as_attachment=True, download_name='submissions.xlsx')
 
 @app.route('/api/notifications')
 def get_notifications():
