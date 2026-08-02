@@ -712,6 +712,7 @@
             };
 
             const handleSubmit = () => {
+                if (!formData.business || !formData.goal || !formData.contact) { return; }
                 fetch('/api/brief-apply', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -961,7 +962,7 @@
                                 </div>
                                 <button 
                                     onClick={() => setActiveSheet('bonuses')}
-                                    className="w-full mt-6 mx-6 md:mx-12 max-w-3xl bg-ya-yellow hover:bg-[#F0D500] text-ya-dark font-bold py-4 rounded-xl text-lg"
+                                    className="w-full mt-6 bg-ya-yellow hover:bg-[#F0D500] text-ya-dark font-bold py-4 rounded-xl text-lg"
                                 >
                                     к бонусам →
                                 </button>
