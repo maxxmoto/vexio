@@ -191,6 +191,16 @@ def serve_brief(path):
         path = path.rstrip('/') + '/index.html'
     return send_from_directory('static/brief', path)
 
+@app.route('/debug')
+def debug_headers():
+    headers = {k: v for k, v in request.headers.items()}
+    return jsonify({
+        'host': request.host,
+        'url': request.url,
+        'base_url': request.base_url,
+        'headers': headers,
+    })
+
 @app.route('/')
 def index():
     return send_from_directory('templates', 'index.html')
