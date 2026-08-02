@@ -163,15 +163,25 @@ def login_required(f):
 
 import re
 
+import os
+
+@app.route('/hr')
 @app.route('/hr/')
 @app.route('/hr/<path:path>')
 def serve_hr(path='index.html'):
-    return send_from_directory('static/hr', path or 'index.html')
+    return send_from_directory(
+        os.path.join(app.root_path, 'static', 'hr'),
+        path or 'index.html'
+    )
 
+@app.route('/brief')
 @app.route('/brief/')
 @app.route('/brief/<path:path>')
 def serve_brief(path='index.html'):
-    return send_from_directory('static/brief', path or 'index.html')
+    return send_from_directory(
+        os.path.join(app.root_path, 'static', 'brief'),
+        path or 'index.html'
+    )
 
 @app.route('/debug')
 def debug_headers():
