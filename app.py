@@ -161,22 +161,26 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated
 
-# Subdomain routing
-@app.before_request
-def subdomain_router():
-    host = request.headers.get('X-Forwarded-Host', request.host)
-    if host.startswith('hr.'):
-        if request.path == '/' or '.' not in request.path.split('/')[-1]:
-            return send_from_directory('static/hr', 'index.html')
-        return send_from_directory('static/hr', request.path.lstrip('/'))
-    if host.startswith('brief.'):
-        if request.path == '/' or '.' not in request.path.split('/')[-1]:
-            return send_from_directory('static/brief', 'index.html')
-        return send_from_directory('static/brief', request.path.lstrip('/'))
-
 @app.route('/')
 def index():
-    return send_from_directory('templates', 'index.html')
+    return render_template('index.html')
+
+# Subdomain serving
+@app.before_request
+def serve_subdomain_static():
+    host = request.headers.get('X-Forwarded-Host', '')
+    if not host:
+        host = request.host
+    if host.startswith('hr.'):
+        path = request.path.lstrip('/')
+        if not path or '.' not in path.split('/')[-1]:
+            return send_from_directory('static/hr', 'index.html')
+        return send_from_directory('static/hr', path)
+    if host.startswith('brief.'):
+        path = request.path.lstrip('/')
+        if not path or '.' not in path.split('/')[-1]:
+            return send_from_directory('static/brief', 'index.html')
+        return send_from_directory('static/brief', path)
 
 @app.route('/favicon.ico')
 def favicon():
