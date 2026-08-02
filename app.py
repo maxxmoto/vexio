@@ -166,9 +166,12 @@ import re
 @app.before_request
 def route_subdomain():
     host = request.headers.get('X-Forwarded-Host', request.host).split(':')[0]
-    if host not in ('hr.vexiostudio.ru', 'brief.vexiostudio.ru'):
+    if host.startswith('hr.'):
+        folder = 'hr'
+    elif host.startswith('brief.'):
+        folder = 'brief'
+    else:
         return
-    folder = 'hr' if host.startswith('hr') else 'brief'
     path = request.path.lstrip('/') or 'index.html'
     if not re.search(r'\.[a-z0-9]+$', path, re.I):
         path = path.rstrip('/') + '/index.html'
@@ -185,11 +188,12 @@ def favicon():
 
 @app.route('/version')
 def version():
+    import subprocess, os
     try:
-        sha = subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD'], cwd=os.path.dirname(__file__)).decode().strip()
-    except Exception:
-        sha = 'unknown'
-    return jsonify({'commit': sha})
+        rev = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=os.path.dirname(__file__)).decode().strip()[:7]
+    except: rev = '?'
+    host = request.headers.get('X-Forwarded-Host', request.host)
+    return f'OK {rev} host={host}'
 
 @app.route('/api/submit', methods=['POST'])
 def submit_project():
