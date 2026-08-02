@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://maxxmoto.github.io/vexio-hr/</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://maxxmoto.github.io/vexio-hr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maxxmoto.github.io/vexio-hr/en/" />
+    <image:image>
+      <image:loc>https://maxxmoto.github.io/vexio-hr/logo.png</image:loc>
+      <image:caption>Vexio Studio логотип</image:caption>
+    </image:image>
+    <news:news>
+      <news:publication>
+        <news:name>Vexio HR</news:name>
+        <news:language>ru</news:language>
+      </news:publication>
+      <news:publication_date>2026-08-01</news:publication_date>
+      <news:title>Открыты новые вакансии в Vexio — Senior Frontend, UX/UI, Backend, PM</news:title>
+      <news:keywords>вакансии, IT, Frontend, Backend, UX/UI, PM, удалёнка</news:keywords>
+    </news:news>
+  </url>
+</urlset>
