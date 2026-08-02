@@ -164,7 +164,7 @@ def login_required(f):
 # Subdomain routing
 @app.before_request
 def subdomain_router():
-    host = request.host
+    host = request.headers.get('X-Forwarded-Host', request.host)
     if host.startswith('hr.'):
         if request.path == '/' or '.' not in request.path.split('/')[-1]:
             return send_from_directory('static/hr', 'index.html')

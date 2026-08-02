@@ -313,27 +313,51 @@ const PROJECTS = [
   { id: 1, name: "MaxxMoto", tag: "Motorcycles",
     bg: "linear-gradient(135deg, #0f0514 0%, #1a0533 50%, #0a0a1f 100%)",
     accent: "#9B5CF6", mockBg: "#0D0118",
-    projectPath: "static/projects/1-maxxmoto/index.html" },
+    image: "static/projects/1-maxxmoto/fon.webp",
+    desc: "Полноценная платформа для мотоциклетного бизнеса с каталогом, админ-панелью и интеграцией с Telegram-ботом.",
+    stack: ["React", "Node.js", "PostgreSQL", "Telegram Bot API"],
+    features: ["Каталог с фильтрацией", "Админ-панель CRM", "Telegram-бот для заказов", "Онлайн-оплата", "Личный кабинет дилера"],
+    result: "Рост онлайн-заказов на 60%, автоматизация обработки заявок." },
   { id: 2, name: "Sotnur Glamping", tag: "Resort",
     bg: "linear-gradient(135deg, #020b18 0%, #041830 50%, #010d1f 100%)",
     accent: "#3B82F6", mockBg: "#050E1A",
-    projectPath: "static/projects/2-morskoy-glaz/index.html" },
+    image: "static/projects/2-morskoy-glaz/index.html",
+    desc: "Сайт для премиального глэмпинг-курорта с системой бронирования и визуальным погружением в атмосферу.",
+    stack: ["React", "Flask", "SQLite", "Stripe"],
+    features: ["Онлайн-бронирование", "3D-тур по номерам", "Сезонные тарифы", "Мультиязычность RU/EN", "Интеграция с CRM"],
+    result: "Загрузка номеров выросла на 45% в первый месяц." },
   { id: 3, name: "Englify", tag: "Education",
     bg: "linear-gradient(135deg, #0a0a0f 0%, #13131d 50%, #0a0a0f 100%)",
     accent: "#7C5CFC", mockBg: "#0a0a0f",
-    projectPath: "static/projects/3-engbot/index.html" },
+    image: "static/projects/3-engbot/index.html",
+    desc: "Интерактивная платформа для изучения английского языка с AI-тренажёром и геймификацией.",
+    stack: ["React", "Node.js", "MongoDB", "OpenAI API"],
+    features: ["AI-тренажёр произношения", "Геймификация и стрики", "Персональный словарь", "Адаптивная сложность", "Статистика прогресса"],
+    result: "Более 500 активных пользователей, средний рейт 4.8★." },
   { id: 5, name: "Python Forge", tag: "Education",
     bg: "linear-gradient(135deg, #0a0c0f 0%, #111418 50%, #0a0c0f 100%)",
     accent: "#00e05e", mockBg: "#0a0c0f",
-    projectPath: "static/projects/5-python-forge/index.html" },
-  { id: 6, name: "СЦ \"Дружба\"", tag: "Booking",
+    image: "static/projects/5-python-forge/index.html",
+    desc: "Образовательная платформа по Python с интерактивными заданиями, авто-проверкой кода и рейтинговой системой.",
+    stack: ["React", "FastAPI", "Docker", "Redis"],
+    features: ["Интерактивный редактор кода", "Авто-проверка решений", "Рейтинг и лидерборд", "Трек прогресса", "Сертификация"],
+    result: "80% студентов завершают курс, средний NPS — 92." },
+  { id: 6, name: 'СЦ "Дружба"', tag: "Booking",
     bg: "linear-gradient(135deg, #030918 0%, #0d1a2e 50%, #030918 100%)",
     accent: "#FACC15", mockBg: "#030918",
-    projectPath: "static/projects/6-tennis-brutal/index.html" },
+    image: "static/projects/6-tennis-brutal/index.html",
+    desc: "Система бронирования теннисных кортов с расписанием, оплатой и уведомлениями в Telegram.",
+    stack: ["React", "Flask", "PostgreSQL", "Telegram Bot API"],
+    features: ["Расписание в реальном времени", "Оплата картой на сайте", "Telegram-уведомления", "Абонементы и скидки", "Админ-панель"],
+    result: "Отказы от броней сократились на 70%." },
   { id: 7, name: "Выживальщик Опенспейса", tag: "Satire",
     bg: "linear-gradient(135deg, #1a0a00 0%, #2d1400 50%, #1a0a00 100%)",
     accent: "#FF6B35", mockBg: "#1a0a00",
-    projectPath: "static/projects/7-survivalkit/index.html" },
+    image: "static/projects/7-survivalkit/index.html",
+    desc: "Сатирический проект о жизни в опенспейсе — генератор мемов, тестов и «полезных» советов для офисных работников.",
+    stack: ["React", "Vite", "Canvas API"],
+    features: ["Генератор мемов", "Офисный тест на выживаемость", "Голосовалка за худший опенспейс", "Анимации на Canvas"],
+    result: "Виральный охват — 10К+ просмотров за первую неделю." },
 ];
 
 const LOCALES = {
@@ -482,7 +506,7 @@ function Hero({ onViewProjects, onStartProject }) {
 
 function ProjectCard({ project, onClick }) {
   const [hovered, setHovered] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  const [imgError, setImgError] = useState(false);
   return (
     <div onClick={() => onClick(project)}
       onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
@@ -497,16 +521,18 @@ function ProjectCard({ project, onClick }) {
       }}
     >
       <div style={{ width: "100%", height: "100%", overflow: "hidden", position: "relative", background: project.mockBg }}>
-        <iframe src={project.projectPath} title={project.name}
-          onLoad={() => setLoaded(true)}
-          style={{ width: "300%", height: "300%", border: "none", transform: "scale(0.333)", transformOrigin: "0 0", position: "absolute", top: 0, left: 0, pointerEvents: "none", opacity: loaded ? 1 : 0, transition: "opacity 0.4s" }} />
-        {!loaded && <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ width: 30, height: 30, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.1)", borderTopColor: project.accent, animation: "orbit 0.8s linear infinite" }} />
-        </div>}
+        {!imgError ? (
+          <img src={project.image} alt={project.name} onError={() => setImgError(true)}
+            style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6, transition: "opacity 0.4s" }} />
+        ) : (
+          <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", color: project.accent, fontSize: 48, opacity: 0.3 }}>
+            {project.name.charAt(0)}
+          </div>
+        )}
       </div>
       <div style={{
         position: "absolute", inset: 0,
-        background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)",
+        background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)",
         display: "flex", flexDirection: "column", justifyContent: "flex-end",
         padding: 18, opacity: hovered ? 1 : 0.7, transition: "opacity 0.3s",
       }}>
@@ -538,7 +564,7 @@ function ProjectModal({ project, onClose }) {
       backdropFilter: `blur(${phase === "open" ? 20 : 0}px)`,
     }}>
       <div onClick={e => e.stopPropagation()} style={{
-        width: "90vw", maxWidth: 900, height: "75vh", borderRadius: 24, overflow: "hidden",
+        width: "90vw", maxWidth: 800, maxHeight: "85vh", borderRadius: 24, overflow: "hidden auto",
         transform: `scale(${scale})`, opacity,
         transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease",
         background: project.bg, border: `1px solid ${project.accent}40`,
@@ -546,15 +572,15 @@ function ProjectModal({ project, onClose }) {
         position: "relative",
       }}>
         <div style={{
-          position: "absolute", top: 0, left: 0, right: 0,
+          position: "sticky", top: 0, left: 0, right: 0,
           padding: "16px 20px", display: "flex", justifyContent: "space-between",
-          alignItems: "center", background: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)",
+          alignItems: "center", background: "rgba(0,0,0,0.5)", backdropFilter: "blur(12px)",
           borderBottom: `1px solid ${project.accent}20`, zIndex: 2,
         }}>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
             <div style={{ fontSize: 10, color: project.accent, textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "var(--font-mono)" }}>{project.tag}</div>
             <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 10 }}>·</div>
-            <div style={{ fontSize: 13, fontFamily: "var(--font-display)", fontWeight: 700 }}>{project.name}</div>
+            <div style={{ fontSize: 15, fontFamily: "var(--font-display)", fontWeight: 700 }}>{project.name}</div>
           </div>
           <button onClick={handleClose} style={{
             width: 32, height: 32, borderRadius: "50%",
@@ -563,13 +589,35 @@ function ProjectModal({ project, onClose }) {
             display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s",
           }}>×</button>
         </div>
-        <div style={{ paddingTop: 60, height: "100%", overflow: "hidden", position: "relative" }}>
-          <iframe src={project.projectPath} title={project.name} style={{
-            width: "100%", height: "100%", border: "none", borderRadius: 0,
-          }} />
+        <div style={{ padding: "32px 28px" }}>
+          <p style={{ fontSize: 15, color: "var(--text-dim)", lineHeight: 1.7, marginBottom: 28 }}>
+            {project.desc}
+          </p>
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: project.accent, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12 }}>Стек технологий</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {project.stack.map(s => (
+                <span key={s} style={{ padding: "6px 14px", borderRadius: 8, background: `${project.accent}20`, border: `1px solid ${project.accent}30`, fontSize: 12, color: project.accent, fontFamily: "var(--font-mono)" }}>{s}</span>
+              ))}
+            </div>
+          </div>
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: project.accent, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12 }}>Что сделано</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              {project.features.map((f, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "var(--text-dim)" }}>
+                  <span style={{ color: project.accent, fontSize: 8 }}>●</span> {f}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ padding: "18px 20px", borderRadius: 14, background: `${project.accent}10`, border: `1px solid ${project.accent}20` }}>
+            <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: project.accent, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>Результат</div>
+            <div style={{ fontSize: 14, color: "var(--text)", lineHeight: 1.6 }}>{project.result}</div>
+          </div>
         </div>
-        <div style={{ position: "absolute", bottom: 20, right: 20, fontSize: 11, fontFamily: "var(--font-mono)", color: "rgba(255,255,255,0.3)", zIndex: 2 }}>
-          ESC to close
+        <div style={{ textAlign: "center", padding: "0 28px 32px", fontSize: 11, fontFamily: "var(--font-mono)", color: "rgba(255,255,255,0.25)" }}>
+          ESC чтобы закрыть
         </div>
       </div>
     </div>
