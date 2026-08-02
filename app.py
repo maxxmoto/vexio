@@ -163,19 +163,15 @@ def login_required(f):
 
 import re
 
-@app.route('/hr/', defaults={'path': 'index.html'})
+@app.route('/hr/')
 @app.route('/hr/<path:path>')
-def serve_hr(path):
-    if not re.search(r'\.[a-z0-9]+$', path, re.I):
-        path = path.rstrip('/') + '/index.html'
-    return send_from_directory('static/hr', path)
+def serve_hr(path='index.html'):
+    return send_from_directory('static/hr', path or 'index.html')
 
-@app.route('/brief/', defaults={'path': 'index.html'})
+@app.route('/brief/')
 @app.route('/brief/<path:path>')
-def serve_brief(path):
-    if not re.search(r'\.[a-z0-9]+$', path, re.I):
-        path = path.rstrip('/') + '/index.html'
-    return send_from_directory('static/brief', path)
+def serve_brief(path='index.html'):
+    return send_from_directory('static/brief', path or 'index.html')
 
 @app.route('/debug')
 def debug_headers():
