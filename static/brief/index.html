@@ -709,7 +709,11 @@
             };
 
             const handleSubmit = () => {
-                console.log("Data:", formData);
+                fetch('/api/brief-apply', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
                 setSubmitted(true);
             };
 
@@ -726,7 +730,7 @@
                         <div className="relative z-10">
                             <header className="flex items-center justify-between mb-6 md:mb-10 gap-4">
                                 <div className="flex items-center flex-shrink-0">
-                                    <img src="запасной.png" alt="Vexio" className="h-6 md:h-7" style={{transform: 'scale(1.12)', transformOrigin: 'left center'}} />
+                                    <img src="logo_brief.png" alt="Vexio" className="h-6 md:h-7" style={{transform: 'scale(1.12)', transformOrigin: 'left center'}} />
                                 </div>
                                 <div className="hidden md:flex items-center gap-6 text-xs font-medium text-gray-400 uppercase tracking-wider">
                                     <span className="cursor-pointer hover:text-white transition-colors" onClick={() => setActiveSheet('formats')}>{t.stage1}</span>
@@ -948,7 +952,7 @@
                             className="absolute inset-0 w-full h-full object-cover"
                             style={{filter: 'brightness(0.15)'}}
                         >
-                            <source src="рекламаа.mp4" type="video/mp4" />
+                            <source src="video_brief.mp4" type="video/mp4" />
                         </video>
                         <div className="relative z-10 text-gray-400 text-xs md:text-sm">
                             {t.footer}{' '}

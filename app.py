@@ -244,6 +244,34 @@ def hr_apply():
         logger.error(f'HR apply notify error: {e}')
     return jsonify({'success': True})
 
+@app.route('/api/brief-apply', methods=['POST'])
+def brief_apply():
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data'}), 400
+    fmt = data.get('format', '')
+    business = data.get('business', '')
+    goal = data.get('goal', '')
+    contact = data.get('contact', '')
+    website = data.get('website', '')
+    
+    text = (
+        f"\U0001F4CB <b>Новая заявка — Vexio Brief</b>\n\n"
+        f"\U0001F4E6 <b>Формат:</b> {fmt or '—'}\n"
+        f"\U0001F3E2 <b>Бизнес:</b> {business or '—'}\n"
+        f"\U0001F3AF <b>Цель:</b> {goal or '—'}\n"
+        f"\U0001F4DE <b>Контакт:</b> {contact or '—'}\n"
+        f"\U0001F310 <b>Сайт:</b> {website or '—'}"
+    )
+    try:
+        requests.post(
+            f'https://api.telegram.org/bot{TG_TOKEN}/sendMessage',
+            json={'chat_id': TG_ADMIN_ID, 'text': text, 'parse_mode': 'HTML'}
+        )
+    except Exception as e:
+        logger.error(f'Brief apply notify error: {e}')
+    return jsonify({'success': True})
+
 @app.route('/api/submit', methods=['POST'])
 def submit_project():
     data = request.get_json()
