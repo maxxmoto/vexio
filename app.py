@@ -163,12 +163,18 @@ def login_required(f):
 import re
 
 @app.route('/hr')
+def hr_redirect():
+    return redirect('/hr/'), 301
+
 @app.route('/hr/')
 @app.route('/hr/<path:path>')
 def serve_hr(path='index.html'):
     return app.send_static_file(f'hr/{path or "index.html"}')
 
 @app.route('/brief')
+def brief_redirect():
+    return redirect('/brief/'), 301
+
 @app.route('/brief/')
 @app.route('/brief/<path:path>')
 def serve_brief(path='index.html'):
