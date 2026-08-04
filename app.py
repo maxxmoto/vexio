@@ -340,6 +340,25 @@ def rule_answer(q):
         if k in q.lower(): return v
     return 'Спросите о ценах, сроках, сайтах или ботах!'
 
+@app.route('/news/')
+def news_page():
+    return send_from_directory('templates', 'news.html')
+
+@app.route('/api/news')
+def api_news():
+    NEWS_KEY = os.environ.get('NEWS_KEY', '')
+    try:
+        r = requests.get(
+            'https://newsapi.org/v2/top-headlines',
+            params={'category': 'technology', 'language': 'en', 'pageSize': 9, 'apiKey': NEWS_KEY},
+            timeout=10
+        )
+        if r.status_code == 200:
+            return jsonify(r.json())
+    except Exception:
+        pass
+    return jsonify({'articles': []})
+
 @app.route('/api/submit', methods=['POST'])
 def submit_project():
     data = request.get_json()
