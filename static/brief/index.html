@@ -1107,57 +1107,34 @@
 #ai-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 14px;color:#fff;font-size:13px;outline:none}
 #ai-input::placeholder{color:rgba(255,255,255,0.25)}
 #ai-send{background:#7C3AED;border:none;border-radius:10px;padding:10px 16px;color:#fff;cursor:pointer;font-size:13px;font-weight:600}
-#ai-send:hover{background:#6D28D9}
 .ai-typing{color:rgba(255,255,255,0.3);font-size:12px;padding:8px 14px}
 @media(max-width:400px){#ai-chat{width:290px;height:420px}}
 </style>
 <div id="ai-widget">
 <div class="ai-tooltip" id="ai-tip">Спросите ИИ</div>
-<button id="ai-pill" title="AI"><img src="/static/ai.png" alt="AI"></button>
+<button id="ai-pill"><img src="/static/ai.png" alt="AI"></button>
 <div id="ai-chat">
-<div id="ai-header"><span>AI Ассистент</span><button id="ai-close">&times;</button></div>
-<div id="ai-messages"><div class="ai-msg ai-bot" id="ai-greet">Привет! Я знаю о ценах, кейсах, услугах и сроках Vexio Studio.</div></div>
-<div id="ai-input-wrap"><input id="ai-input" placeholder="Задай вопрос..."><button id="ai-send">&rarr;</button></div>
+<div id="ai-header"><span>AI Ассистент</span><button id="ai-close">×</button></div>
+<div id="ai-messages"><div class="ai-msg ai-bot">G</div></div>
+<div id="ai-input-wrap"><input id="ai-input" placeholder="Задай вопрос..."><button id="ai-send">→</button></div>
 </div></div>
 <script>
 (function(){
 var P=function(id){return document.getElementById(id)};
-var pill=P('ai-pill'),chat=P('ai-chat'),close=P('ai-close'),input=P('ai-input'),
-send=P('ai-send'),msgs=P('ai-messages'),tip=P('ai-tip'),open=false;
-function showTip(){tip.classList.add('show');setTimeout(function(){tip.classList.remove('show')},2000)}
-showTip();setInterval(showTip,15000);
-pill.onclick=function(){open=!open;chat.className=open?'open':'';tip.classList.remove('show');if(open)input.focus()};
-close.onclick=function(){open=false;chat.className=''};
-function add(t,c){var d=document.createElement('div');d.className='ai-msg '+c;d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
-function typing(s){if(s){var d=document.createElement('div');d.className='ai-typing';d.id='t1';d.textContent='...';msgs.appendChild(d)}else{var t=P('t1');if(t)t.remove()}}
-var rules=[
-{kw:["цен","стои","сколько"],a:"Лендинг от 15 000 ₽ (3-7 дней)
-Интернет-магазин от 50 000 ₽
-Корпоративный сайт от 80 000 ₽
-Telegram-бот от 20 000 ₽
-Точную цену скажу после брифинга."},
-{kw:["срок","долго","дней","быстр","скоро"],a:"Лендинг: 3-7 дней
-Магазин: 14-30 дней
-Корпоративный: от 21 дня
-Буст-режим: готовый сайт за 5 дней."},
-{kw:["сайт","веб","лендинг","магазин","портал","сдела"],a:"Создаём сайты под ключ. Лендинги, магазины, порталы, CRM. Полный цикл: дизайн, вёрстка, бэкенд, запуск, поддержка."},
-{kw:["бот","телеграм","telegram","чат"],a:"Telegram-боты с CRM, оплатой, AI. От простых до комплексных. Интеграция с amoCRM, Битрикс24."},
-{kw:["кейс","портфол","пример","работ","проект"],a:"MaxxMoto, Sotnur Glamping, Englify, Python Forge, СЦ Дружба, Выживальщик Опенспейса. 6 проектов в портфолио."},
-{kw:["услуг","дела","может","функц"],a:"Сайты, Telegram-боты, CRM, админ-панели. Дизайн, бэкенд, интеграции, SEO, поддержка 24/7."},
-{kw:["контакт","связ","напис","телефон","почт"],a:"Telegram @vexiostudiocahnnel. Или заявка через форму на сайте. Ответ в течение 24 часов."},
-{kw:["технолог","стек","язык","инструмент"],a:"React, TypeScript, Python (Flask), Node.js, PostgreSQL, MongoDB, Redis, Docker, CI/CD."},
-{kw:["гарант","поддерж","после","сопровожд"],a:"Гарантия 30 дней на баги. Помесячная техподдержка. SLA обсуждаем."},
-{kw:["оплат","рассрочк","предоплат","этап"],a:"Поэтапно: 30% предоплата, 30% после дизайна, 40% после сдачи. Договор с фиксацией сроков."},
-{kw:["сео","поиск","яндекс","гугл","продвиж"],a:"Базовая SEO на всех сайтах. Schema.org, Open Graph, sitemap.xml. Расширенное SEO по запросу."},
-{kw:["дизайн","ui","ux","figma"],a:"Дизайн в Figma. Индивидуально, не шаблоны. Прототипы, адаптив, анимации."},
-{kw:["привет","здрав","хай","добр","hello","hi"],a:"Привет! Я AI-ассистент Vexio Studio. Спрашивай о ценах, сроках, кейсах, технологиях."},
-{kw:["спасиб","благодар","отличн","супер"],a:"Рады помочь! Обращайтесь, если будут ещё вопросы."}
-];
-function match(q){var l=q.toLowerCase().replace(/[?!.,]/g,'');for(var i=0;i<rules.length;i++){var r=rules[i];for(var j=0;j<r.kw.length;j++){if(l.indexOf(r.kw[j])>=0)return r.a}}return null}
-async function ask(q){var r=match(q);if(r){add(r,'ai-bot');return}try{var res=await fetch('/api/ai-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q:q})});if(res.ok){var d=await res.json();if(d.reply){add(d.reply,'ai-bot');return}}}catch(e){}add('\u042f \u043c\u043e\u0433\u0443 \u0440\u0430\u0441\u0441\u043a\u0430\u0437\u0430\u0442\u044c \u043e \u0446\u0435\u043d\u0430\u0445, \u0441\u0440\u043e\u043a\u0430\u0445, \u043a\u0435\u0439\u0441\u0430\u0445, \u0442\u0435\u0445\u043d\u043e\u043b\u043e\u0433\u0438\u044f\u0445, \u0434\u0438\u0437\u0430\u0439\u043d\u0435. \u0427\u0442\u043e \u0438\u043d\u0442\u0435\u0440\u0435\u0441\u0443\u0435\u0442?','ai-bot')}
-send.onclick=function(){var q=input.value.trim();if(!q)return;add(q,'ai-user');input.value='';typing(true);ask(q).finally(function(){typing(false)})};
-input.onkeydown=function(e){if(e.key==='Enter')send.click()};
+var pill=P("ai-pill"),chat=P("ai-chat"),close=P("ai-close"),input=P("ai-input");
+var send=P("ai-send"),msgs=P("ai-messages"),tip=P("ai-tip"),open=false;
+P("ai-greet").textContent="Привет! Я знаю о ценах, кейсах, услугах Vexio Studio. Спрашивай!";
+function tipShow(){tip.classList.add("show");setTimeout(function(){tip.classList.remove("show")},2000)}
+tipShow();setInterval(tipShow,15000);
+pill.onclick=function(){open=!open;chat.className=open?"open":"";tip.classList.remove("show");if(open)input.focus()};
+close.onclick=function(){open=false;chat.className=""};
+function add(t,c){var d=document.createElement("div");d.className="ai-msg "+c;d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
+function wait(s){if(s){var d=document.createElement("div");d.className="ai-typing";d.id="t";d.textContent="...";msgs.appendChild(d)}else{var x=P("t");if(x)x.remove()}}
+var rules=[{k:"цен,стои,сколько,price,cost",a:"Лендинг от 15 000 руб (3-7 дней). Интернет-магазин от 50 000 руб. Корпоративный сайт от 80 000 руб. Telegram-бот от 20 000 руб."},{k:"срок,долго,дней,быстр,скоро,дедлайн",a:"Лендинг: 3-7 дней. Магазин: 14-30 дней. Корпоративный: от 21 дня. Буст: готовый сайт за 5 дней."},{k:"сайт,веб,лендинг,магазин,портал,сделать",a:"Делаем сайты под ключ: лендинги, магазины, порталы, CRM. Полный цикл: дизайн, верстка, бэкенд, запуск, поддержка."},{k:"бот,телеграм,telegram,чат",a:"Telegram-боты с CRM, оплатой, AI. От простых до комплексных. Интеграция с amoCRM и Битрикс24."},{k:"кейс,портфол,пример,работ,проект",a:"MaxxMoto, Sotnur Glamping, Englify, Python Forge, СЦ Дружба, Выживальщик Опенспейса. 6 проектов."},{k:"услуг,делаете,можете,функции",a:"Сайты, боты, CRM, админ-панели. Дизайн, верстка, бэкенд, SEO, поддержка 24/7."},{k:"контакт,связь,написать,телефон,почта",a:"Telegram @vexiostudiocahnnel или заявка на сайте. Ответим в течение 24 часов."},{k:"технолог,стек,язык,инструмент",a:"React, TypeScript, Python (Flask), Node.js, PostgreSQL, Redis, Docker, CI/CD."},{k:"гарант,поддерж,после,сопровожд",a:"Гарантия 30 дней на баги. Помесячная техподдержка. SLA обсуждаем индивидуально."},{k:"оплат,рассроч,предоплат,этап",a:"Поэтапно: 30% предоплата, 30% после дизайна, 40% после сдачи. Договор, фиксация сроков."},{k:"сео,поиск,яндекс,google,продвиж",a:"Базовая SEO на всех сайтах: Schema.org, Open Graph, sitemap.xml, оптимизация скорости. Расширенное SEO по запросу."},{k:"дизайн,ui,ux,figma,фигма",a:"Дизайн в Figma. Индивидуально, не шаблоны. Прототипы, адаптив, анимации."},{k:"привет,здрав,хай,hello,hi,ку",a:"Привет! Я AI-ассистент Vexio Studio. Спрашивай о ценах, сроках, кейсах, технологиях."},{k:"спасиб,благодар,отличн,супер,круто",a:"Рады помочь! Если появятся вопросы — обращайтесь."}];
+function match(q){var l=q.toLowerCase();for(var i=0;i<rules.length;i++){var r=rules[i];var ks=r.k.split(",");for(var j=0;j<ks.length;j++){if(l.indexOf(ks[j])>=0)return r.a}}return null}
+async function ask(q){var r=match(q);if(r){add(r,"ai-bot");return}try{var res=await fetch("/api/ai-chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({q:q})});if(res.ok){var d=await res.json();if(d.reply){add(d.reply,"ai-bot");return}}}catch(e){}add("Я могу рассказать о ценах, сроках, кейсах, технологиях. Что интересует?","ai-bot")}
+send.onclick=function(){var q=input.value.trim();if(!q)return;add(q,"ai-user");input.value="";wait(true);ask(q).finally(function(){wait(false)})};
+input.onkeydown=function(e){if(e.key==="Enter")send.click()};
 })();
-</script>
-</body>
+</script></body>
 </html>
