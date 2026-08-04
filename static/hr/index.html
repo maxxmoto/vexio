@@ -670,7 +670,7 @@
 <button id="ai-pill"><img src="/static/ai.png" alt="AI"></button>
 <div id="ai-chat">
 <div id="ai-header"><span>AI Ассистент</span><button id="ai-close">×</button></div>
-<div id="ai-messages"><div class="ai-msg ai-bot">G</div></div>
+<div id="ai-messages"><div class="ai-msg ai-bot" id="ai-greet"></div></div>
 <div id="ai-input-wrap"><input id="ai-input" placeholder="Задай вопрос..."><button id="ai-send">→</button></div>
 </div></div>
 <script>
@@ -678,7 +678,7 @@
 var P=function(id){return document.getElementById(id)};
 var pill=P("ai-pill"),chat=P("ai-chat"),close=P("ai-close"),input=P("ai-input");
 var send=P("ai-send"),msgs=P("ai-messages"),tip=P("ai-tip"),open=false;
-P("ai-greet").textContent="Привет! Я знаю о ценах, кейсах, услугах Vexio HR. Спрашивай!";
+var g=P("ai-greet");if(g)g.textContent="Привет! Я знаю о ценах, кейсах, услугах Vexio HR. Спрашивай!";
 function tipShow(){tip.classList.add("show");setTimeout(function(){tip.classList.remove("show")},2000)}
 tipShow();setInterval(tipShow,15000);
 pill.onclick=function(){open=!open;chat.className=open?"open":"";tip.classList.remove("show");if(open)input.focus()};
