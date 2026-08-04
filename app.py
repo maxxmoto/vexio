@@ -1,4 +1,4 @@
-import os
+﻿import os
 import json
 import subprocess
 import uuid
@@ -313,6 +313,32 @@ def brief_apply():
     data['created_at'] = datetime.utcnow().isoformat()
     save_notification('brief', data)
     return jsonify({'success': True})
+
+
+@app.route('/api/ai-chat', methods=['POST'])
+def ai_chat():
+    data = request.get_json()
+    q = (data.get('q') or '').strip()
+    if not q: return jsonify({'error':'No question'}), 400
+    HF_KEY = os.environ.get('HF_KEY','')
+    reply = None
+    if HF_KEY:
+        try:
+            r = requests.post('https://router.huggingface.co/v1/chat/completions',headers={'Authorization':f'Bearer {HF_KEY}'},json={'model':'Qwen/Qwen2.5-7B-Instruct','messages':[{'role':'system','content':'Ты ассистент веб-студии. Отвечай кратко, по-русски.'},{'role':'user','content':q}],'max_tokens':200,'temperature':0.7},timeout=10)
+            if r.status_code==200: reply = r.json().get('choices',[{}])[0].get('message',{}).get('content')
+        except: pass
+    if not reply:
+        try:
+            r = requests.post('https://text.pollinations.ai/openai',json={'model':'openai','messages':[{'role':'system','content':'Ты ассистент. Отвечай кратко, по-русски.'},{'role':'user','content':q}],'max_tokens':200},timeout=10)
+            if r.status_code==200: reply = r.json().get('choices',[{}])[0].get('message',{}).get('content')
+        except: pass
+    if not reply: reply = rule_answer(q)
+    return jsonify({'reply':reply or 'Не знаю ответа'})
+
+def rule_answer(q):
+    for k,v in {'цена':'От 15000. Лендинг, от 50000 магазин.','сайт':'Сайты любой сложности. Полный цикл.','бот':'Telegram-боты с CRM, оплатой, AI.','срок':'Лендинг 3-7 дней, сайт 10-20, магазин 14-30.'}.items():
+        if k in q.lower(): return v
+    return 'Спросите о ценах, сроках, сайтах или ботах!'
 
 @app.route('/api/submit', methods=['POST'])
 def submit_project():

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru" prefix="og: https://ogp.me/ns# website: https://ogp.me/ns/website# profile: https://ogp.me/ns/profile#">
   <head>
     <meta charset="UTF-8" />
@@ -641,5 +641,61 @@
   </head>
   <body class="bg-[#09090b]">
     <div id="root"></div>
-  </body>
+  <!-- AI Widget -->
+<style>
+#ai-widget { position:fixed; bottom:24px; right:24px; z-index:9999; font-family:'Inter',sans-serif; }
+#ai-pill { width:56px; height:56px; border-radius:28px; background:#7C3AED; border:none; cursor:pointer; color:#fff; font-size:24px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 24px rgba(124,58,237,0.4); transition:all 0.3s; }
+#ai-pill:hover { transform:scale(1.08); box-shadow:0 6px 32px rgba(124,58,237,0.6); }
+#ai-chat { display:none; position:absolute; bottom:68px; right:0; width:340px; height:480px; background:#111; border-radius:20px; border:1px solid rgba(255,255,255,0.1); flex-direction:column; overflow:hidden; box-shadow:0 8px 48px rgba(0,0,0,0.6); }
+#ai-chat.open { display:flex; }
+#ai-header { padding:14px 18px; background:rgba(124,58,237,0.15); border-bottom:1px solid rgba(124,58,237,0.2); display:flex; justify-content:space-between; align-items:center; }
+#ai-header span { font-weight:600; font-size:14px; color:#A78BFA; }
+#ai-close { background:none; border:none; color:rgba(255,255,255,0.4); cursor:pointer; font-size:18px; }
+#ai-messages { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; }
+.ai-msg { padding:10px 14px; border-radius:14px; font-size:13px; line-height:1.5; max-width:85%; word-wrap:break-word; }
+.ai-user { align-self:flex-end; background:rgba(124,58,237,0.3); color:#F0EEF8; }
+.ai-bot { align-self:flex-start; background:rgba(255,255,255,0.06); color:rgba(240,238,248,0.8); }
+#ai-input-wrap { padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:flex; gap:8px; }
+#ai-input { flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:10px 14px; color:#fff; font-size:13px; outline:none; }
+#ai-input::placeholder { color:rgba(255,255,255,0.25); }
+#ai-send { background:#7C3AED; border:none; border-radius:10px; padding:10px 16px; color:#fff; cursor:pointer; font-size:13px; font-weight:600; }
+#ai-send:hover { background:#6D28D9; }
+.ai-typing { color:rgba(255,255,255,0.3); font-size:12px; padding:8px 14px; }
+</style>
+<div id="ai-widget">
+  <button id="ai-pill" title="AI">✦</button>
+  <div id="ai-chat">
+    <div id="ai-header"><span>✦ AI Ассистент</span><button id="ai-close">×</button></div>
+    <div id="ai-messages"><div class="ai-msg ai-bot">Привет! Спроси меня о сайтах, ботах или услугах Vexio Studio.</div></div>
+    <div id="ai-input-wrap"><input id="ai-input" placeholder="Задай вопрос..." /><button id="ai-send">→</button></div>
+  </div>
+</div>
+<script>
+(function(){
+  const pill=document.getElementById('ai-pill'),chat=document.getElementById('ai-chat'),
+  close=document.getElementById('ai-close'),input=document.getElementById('ai-input'),
+  send=document.getElementById('ai-send'),msgs=document.getElementById('ai-messages');
+  let open=false;
+  pill.onclick=()=>{open=!open;chat.className=open?'open':'';if(open)input.focus()};
+  close.onclick=()=>{open=false;chat.className=''};
+  function add(t,c){const d=document.createElement('div');d.className='ai-msg '+c;d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
+  function typing(s){if(s){const d=document.createElement('div');d.className='ai-typing';d.id='t1';d.textContent='✦ ...';msgs.appendChild(d)}else{const t=document.getElementById('t1');if(t)t.remove()}}
+
+  const RULES={'цена':'От 15000 лендинг, от 50000 магазин. Точную после брифинга.','сайт':'Сайты любой сложности: лендинги, магазины, порталы. Полный цикл.','бот':'Telegram-боты с CRM, оплатой, AI. От простых до комплексных.','срок':'Лендинг: 3-7 дней. Сайт: 10-20 дней. Магазин: 14-30 дней.','контакт':'Telegram @vexiostudiocahnnel'};
+  function rule(q){const l=q.toLowerCase();for(const[k,v]of Object.entries(RULES)){if(l.includes(k))return v}return null}
+
+  async function ask(q){
+    const r=rule(q);if(r){add(r,'ai-bot');return}
+    try{
+      const res=await fetch('/api/ai-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q})});
+      if(res.ok){const d=await res.json();if(d.reply){add(d.reply,'ai-bot');return}}
+    }catch(e){}
+    add('ИИ сейчас недоступен. Спросите о ценах или сроках.','ai-bot');
+  }
+  send.onclick=()=>{const q=input.value.trim();if(!q)return;add(q,'ai-user');input.value='';typing(true);ask(q).finally(()=>typing(false))};
+  input.onkeydown=e=>{if(e.key==='Enter')send.click()};
+})();
+</script>
+
+</body>
 </html>
