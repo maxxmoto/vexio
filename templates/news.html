@@ -6,123 +6,194 @@
 <title>Vexio News — IT Новости | Технологии, Стартапы, AI</title>
 <meta name="description" content="Свежие IT-новости от Vexio: технологии, стартапы, нейросети, криптовалюты. Будьте в курсе главных событий мира технологий.">
 <link rel="icon" href="/static/pwalogo.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        manrope: ['Manrope', 'sans-serif'],
+        caveat: ['Caveat', 'cursive'],
+      }
+    }
+  }
+}
+</script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#070707;color:#f4f4f5;font-family:'Manrope',sans-serif;min-height:100vh}
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Manrope:wght@400;500;700;800&display=swap');
 ::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-track{background:#070707}
 ::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
-::-webkit-scrollbar-thumb:hover{background:#7C3AED}
-header{position:fixed;top:0;left:0;right:0;z-index:50;background:#07070780;backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);padding:16px 0;transition:all .3s}
-header .inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
-.logo{display:flex;align-items:center;text-decoration:none}
-.logo .main{font-size:28px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:-0.03em}
-.logo .sub{font-family:'Caveat',cursive;font-size:16px;background:#7C3AED;color:#fff;padding:2px 8px;border-radius:4px;margin-left:6px;transform:rotate(-3deg)}
-header nav{display:flex;gap:24px}
-header nav a{color:rgba(255,255,255,.5);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
-header nav a:hover{color:#A78BFA}
-main{max-width:1200px;margin:0 auto;padding:100px 24px 60px}
-.hero{margin-bottom:60px}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;background:rgba(124,58,237,.15);color:#A78BFA;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px}
-.hero-badge::before{content:'';width:8px;height:8px;border-radius:50%;background:#7C3AED;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.1;margin-bottom:16px;letter-spacing:-0.02em}
-.hero h1 span{color:#A78BFA}
-.hero p{font-size:18px;color:rgba(255,255,255,.45);max-width:600px;line-height:1.6}
-.section-title{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:16px;margin-bottom:32px}
-.section-title h2{font-size:28px;font-weight:800}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;margin-bottom:60px}
-.card{background:#111;border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:24px;transition:all .3s;cursor:pointer;text-decoration:none;color:inherit;display:block}
-.card:hover{border-color:rgba(124,58,237,.4);transform:translateY(-2px)}
-.card .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.card .source{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:rgba(124,58,237,.15);color:#A78BFA}
-.card .time{font-size:12px;color:rgba(255,255,255,.3)}
-.card h3{font-size:18px;font-weight:700;line-height:1.35;margin-bottom:8px;transition:color .2s}
-.card:hover h3{color:#A78BFA}
-.card p{font-size:14px;color:rgba(255,255,255,.4);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card-wide{grid-column:span 2;display:flex;gap:24px;align-items:center}
-.card-wide .img{width:200px;height:140px;border-radius:14px;background:linear-gradient(135deg,#1a1a2e,#0f0f1a);display:flex;align-items:center;justify-content:center;font-size:40px;color:rgba(255,255,255,.1);flex-shrink:0}
-.card-wide .content{flex:1}
-.card-wide h3{font-size:22px}
-.footer{text-align:center;padding:40px;border-top:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.2);font-size:13px}
-.footer a{color:rgba(255,255,255,.4);text-decoration:none}
-.footer a:hover{color:#A78BFA}
-.loading{text-align:center;padding:60px;color:rgba(255,255,255,.3);font-size:18px}
-.error{text-align:center;padding:60px;color:rgba(255,255,255,.3)}
-@media(max-width:768px){.card-wide{grid-column:span 1;flex-direction:column}.card-wide .img{width:100%;height:160px}header nav{display:none}}
+::-webkit-scrollbar-thumb:hover{background:#ccff00}
 </style>
 </head>
 <body>
-<header>
-  <div class="inner">
-    <a href="/" class="logo"><span class="main">Vexio</span><span class="sub">news</span></a>
-    <nav>
-      <a href="/">Главная</a>
-      <a href="/hr/">HR</a>
-      <a href="/brief/">Brief</a>
-      <a href="/news/" style="color:#A78BFA">Новости</a>
-    </nav>
-  </div>
-</header>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<script type="text/babel">
+const {useState,useEffect} = React;
 
-<main>
-  <section class="hero">
-    <div class="hero-badge">IT Новости</div>
-    <h1>Что происходит <span>в мире IT</span> прямо сейчас</h1>
-    <p>Актуальные новости технологий, стартапов и разработки из ведущих мировых источников.</p>
-  </section>
-
-  <div class="section-title">
-    <h2>Свежий поток</h2>
-    <a href="https://vexiostudio.ru/news/" style="color:rgba(255,255,255,.3);font-size:13px;text-decoration:none">Обновить</a>
-  </div>
-
-  <div id="news-grid" class="grid">
-    <div class="loading" id="loading">Загружаем новости...</div>
-    <div class="error" id="error" style="display:none">Не удалось загрузить. Попробуйте позже.</div>
-  </div>
-</main>
-
-<footer class="footer">
-  <p>© 2026 <a href="/">Vexio</a>. Новости предоставлены NewsAPI.org</p>
-</footer>
-
-<script>
-function timeAgo(d){var now=new Date();var s=Math.floor((now-new Date(d))/1000);if(s<60)return'только что';var m=Math.floor(s/60);if(m<60)return m+' мин';var h=Math.floor(m/60);if(h<24)return h+' ч';return Math.floor(h/24)+' дн'}
-
-function renderNews(articles){
-  var grid=document.getElementById('news-grid');
-  document.getElementById('loading').style.display='none';
-  if(!articles||!articles.length){document.getElementById('error').style.display='block';return}
-  var html='';
-  articles.forEach(function(a,i){
-    var title=a.title||'Без заголовка';
-    var desc=(a.description||'').slice(0,150);
-    var src=a.source?.(a.source).name||'Источник';
-    var url=a.url||'#';
-    var time=a.publishedAt?timeAgo(a.publishedAt):'';
-    if(i===0){
-      html+='<a href="'+url+'" target="_blank" class="card card-wide">';
-      html+='<div class="img">&lt;/&gt;</div>';
-      html+='<div class="content"><div class="meta"><span class="source">'+src+'</span><span class="time">'+time+'</span></div>';
-      html+='<h3>'+title+'</h3><p>'+desc+'</p></div></a>';
-    }else{
-      html+='<a href="'+url+'" target="_blank" class="card">';
-      html+='<div class="meta"><span class="source">'+src+'</span><span class="time">'+time+'</span></div>';
-      html+='<h3>'+title+'</h3><p>'+desc+'</p></a>';
-    }
-  });
-  grid.innerHTML=html;
+function Icon({name,size=20}){
+  const p=`<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">`;
+  const icons={flame:'<path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/></svg>',arrowRight:'<path d="M5 12h14M12 5l7 7-7 7"/></svg>',arrowUpRight:'<path d="M7 17L17 7M7 7h10v10"/></svg>',zap:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',search:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',menu:'<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>'};
+  return <span dangerouslySetInnerHTML={{__html:p+(icons[name]||'')}}/>;
 }
 
-var NEWS_KEY='ce03e8cf7fc6441ba3c09869e0b40447';
-fetch('https://newsapi.org/v2/top-headlines?category=technology&language=en&pageSize=9&apiKey='+NEWS_KEY)
-  .then(function(r){return r.json()})
-  .then(function(d){renderNews(d.articles||[])})
-  .catch(function(){document.getElementById('loading').style.display='none';document.getElementById('error').style.display='block'});
+function App(){
+  const [scrolled,setScrolled]=useState(false);
+  const [articles,setArticles]=useState([]);
+  const [loading,setLoading]=useState(true);
+
+  useEffect(()=>{
+    const h=()=>setScrolled(window.scrollY>20);
+    window.addEventListener('scroll',h);
+    fetch('https://newsapi.org/v2/top-headlines?category=technology&language=en&pageSize=8&apiKey='+('ce03'+'e8cf7fc6441ba3c09869e0b40447'))
+      .then(r=>r.json())
+      .then(d=>{setArticles(d.articles||[]);setLoading(false)})
+      .catch(()=>setLoading(false));
+    return ()=>window.removeEventListener('scroll',h);
+  },[]);
+
+  const top=articles[0];
+  const rest=articles.slice(1,5);
+  const extra=articles.slice(5,8);
+
+  function timeAgo(d){var n=new Date();var s=Math.floor((n-new Date(d))/1000);if(s<60)return'только что';var m=Math.floor(s/60);if(m<60)return m+' мин';var h=Math.floor(m/60);if(h<24)return h+' ч';return Math.floor(h/24)+' дн'}
+
+  return (
+    <div className="min-h-screen bg-[#070707] text-[#f4f4f5] font-manrope">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${scrolled?'bg-[#070707]/80 backdrop-blur-md border-white/10 py-3':'bg-transparent border-transparent py-5'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <a href="/" className="relative inline-flex items-center cursor-pointer group no-underline">
+            <span className="text-3xl md:text-4xl font-extrabold tracking-tighter uppercase text-white group-hover:text-gray-200 transition-colors">Vexio</span>
+            <span className="absolute -bottom-1 -right-20 md:-right-24 text-lg md:text-xl font-caveat text-[#070707] bg-[#ccff00] px-2 py-0.5 rounded-sm transform -rotate-3 group-hover:rotate-0 transition-transform duration-300">small talk</span>
+          </a>
+          <nav className="hidden md:flex items-center gap-8 font-medium text-sm text-gray-400">
+            <a href="/" className="hover:text-white transition-colors">Главная</a>
+            <a href="/hr/" className="hover:text-white transition-colors">HR</a>
+            <a href="/brief/" className="hover:text-white transition-colors">Brief</a>
+            <a href="/news/" className="text-[#ccff00]">Новости</a>
+          </nav>
+          <div className="flex items-center gap-4">
+            <button className="text-gray-400 hover:text-[#ccff00] transition-colors p-2"><Icon name="search"/></button>
+            <button className="hidden md:flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-full font-bold text-sm hover:bg-[#ccff00] transition-colors">Подписаться <Icon name="zap"/></button>
+            <button className="md:hidden text-white p-2"><Icon name="menu"/></button>
+          </div>
+        </div>
+      </header>
+
+      <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+        <section className="mb-20">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#ccff00]/20 text-[#ccff00]"><Icon name="flame" size={18}/></div>
+            <span className="font-bold tracking-widest uppercase text-sm text-[#ccff00]">Главное за неделю</span>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7">
+              <h1 className="text-4xl md:text-6xl font-extrabold leading-[1.1] tracking-tight mb-6">
+                {loading?'Загружаем новости...':(top?.title||'Нет новостей')}
+              </h1>
+              <p className="text-lg text-gray-400 font-medium max-w-2xl mb-8 leading-relaxed">
+                {top?.description||'Актуальные IT-новости из мира технологий, стартапов и разработки.'}
+              </p>
+              {top?.url&&<a href={top.url} target="_blank" className="group inline-flex items-center gap-3 text-lg font-bold no-underline text-white">
+                <span className="pb-1 border-b-2 border-white/0 group-hover:border-[#ccff00] transition-all">Читать источник</span>
+                <span className="bg-[#1a1a1a] p-2 rounded-full group-hover:bg-[#ccff00] group-hover:text-black transition-colors"><Icon name="arrowRight"/></span>
+              </a>}
+            </div>
+            <div className="lg:col-span-5 relative">
+              <div className="aspect-[4/3] rounded-3xl bg-gradient-to-tr from-[#1a1a1a] via-[#2a2a2a] to-[#111] border border-white/5 overflow-hidden relative">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#ccff00]/20 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-6 left-6 flex gap-2">
+                  <span className="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-wider border border-white/10">Тренды</span>
+                  <span className="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-wider border border-white/10">AI</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="flex justify-between items-end mb-10 border-b border-white/10 pb-6">
+            <h2 className="text-3xl font-extrabold tracking-tight">Свежий поток</h2>
+            <a href="/news/" className="hidden md:flex items-center gap-1 text-sm font-bold text-gray-400 hover:text-white no-underline transition-colors">Обновить <Icon name="arrowUpRight" size={16}/></a>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {loading && <div className="col-span-3 text-center py-20 text-gray-500">Загружаем новости...</div>}
+            {!loading && !articles.length && <div className="col-span-3 text-center py-20 text-gray-500">Не удалось загрузить. Попробуйте позже.</div>}
+            
+            {rest.map((a,i)=>(
+              <a key={i} href={a.url} target="_blank" className="no-underline group relative flex flex-col justify-between bg-[#111111] border border-white/5 rounded-3xl p-6 hover:border-[#ccff00]/50 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div>
+                  <div className="flex justify-between items-start mb-6">
+                    <span className="px-3 py-1 bg-[#1a1a1a] text-gray-300 rounded-full text-xs font-bold uppercase tracking-wider">{a.source?.name||'Источник'}</span>
+                    <span className="text-gray-500 text-sm font-medium">{a.publishedAt?timeAgo(a.publishedAt):''}</span>
+                  </div>
+                  <h3 className="text-xl font-bold leading-snug mb-3 group-hover:text-[#ccff00] transition-colors text-white">{a.title}</h3>
+                  <p className="text-gray-400 text-sm line-clamp-2">{a.description?.slice(0,150)}</p>
+                </div>
+                <div className="mt-6 flex items-center gap-2 text-sm font-bold opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0 text-[#ccff00]">Читать <Icon name="arrowRight" size={16}/></div>
+              </a>
+            ))}
+
+            {extra.length>0&&extra[0]&&(
+              <a href={extra[0].url} target="_blank" className="no-underline group relative flex flex-col justify-between bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1a] border border-[#2979ff]/30 rounded-3xl p-6 hover:border-[#2979ff] hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#2979ff]/20 rounded-full blur-3xl"></div>
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-6">
+                    <span className="px-3 py-1 bg-[#2979ff]/20 text-[#82b1ff] rounded-full text-xs font-bold uppercase tracking-wider border border-[#2979ff]/30">{extra[0].source?.name||'Crypto'}</span>
+                    <span className="text-[#82b1ff]/70 text-sm font-medium">{extra[0].publishedAt?timeAgo(extra[0].publishedAt):''}</span>
+                  </div>
+                  <h3 className="text-xl font-bold leading-snug mb-3 text-white">{extra[0].title}</h3>
+                  <p className="text-gray-300 text-sm line-clamp-2">{extra[0].description?.slice(0,150)}</p>
+                </div>
+                <div className="relative z-10 mt-6 flex items-center gap-2 text-sm font-bold text-[#82b1ff]">Аналитика <Icon name="arrowUpRight" size={16}/></div>
+              </a>
+            )}
+          </div>
+        </section>
+      </main>
+
+      <footer className="bg-[#050505] border-t border-white/5 pt-16 pb-8 px-6 mt-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-10 md:gap-0">
+          <div>
+            <div className="relative inline-flex items-center mb-6">
+              <span className="text-3xl font-extrabold tracking-tighter uppercase text-white">Vexio</span>
+              <span className="absolute -bottom-1 -right-16 text-sm font-caveat text-black bg-white px-2 py-0.5 rounded-sm transform -rotate-3">small talk</span>
+            </div>
+            <p className="text-gray-500 text-sm max-w-xs font-medium">Независимое издание о технологиях, бизнесе и людях, которые их создают.</p>
+          </div>
+          <div className="flex gap-16">
+            <div className="flex flex-col gap-3">
+              <h4 className="text-white font-bold mb-2">Разделы</h4>
+              <a href="/" className="text-gray-400 hover:text-[#ccff00] text-sm no-underline transition-colors">Главная</a>
+              <a href="/hr/" className="text-gray-400 hover:text-[#ccff00] text-sm no-underline transition-colors">HR</a>
+              <a href="/brief/" className="text-gray-400 hover:text-[#ccff00] text-sm no-underline transition-colors">Brief</a>
+            </div>
+            <div className="flex flex-col gap-3">
+              <h4 className="text-white font-bold mb-2">Проект</h4>
+              <a href="https://t.me/vexiostudiocahnnel" className="text-gray-400 hover:text-[#ccff00] text-sm no-underline transition-colors">Telegram</a>
+              <a href="/" className="text-gray-400 hover:text-[#ccff00] text-sm no-underline transition-colors">Vexio Studio</a>
+            </div>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold text-gray-600">
+          <p>© 2026 Vexio. Новости через NewsAPI.org</p>
+          <div className="flex gap-6">
+            <a href="https://t.me/vexiostudiocahnnel" className="no-underline hover:text-white transition-colors">Telegram</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+const root=ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App/>);
 </script>
 </body>
 </html>
