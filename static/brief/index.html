@@ -1114,7 +1114,7 @@
 <div class="ai-tooltip" id="ai-tip">Спросите ИИ</div>
 <button id="ai-pill"><img src="/static/ai.webp" alt="AI"></button>
 <div id="ai-chat">
-<div id="ai-header"><span>AI Ассистент</span><button id="ai-close">×</button></div>
+<div id="ai-header"><span>Коди</span><button id="ai-close">×</button></div>
 <div id="ai-messages"><div class="ai-msg ai-bot" id="ai-greet"></div></div>
 <div id="ai-input-wrap"><input id="ai-input" placeholder="Задай вопрос..."><button id="ai-send">→</button></div>
 </div></div>
@@ -1123,7 +1123,7 @@
 var P=function(id){return document.getElementById(id)};
 var pill=P("ai-pill"),chat=P("ai-chat"),close=P("ai-close"),input=P("ai-input");
 var send=P("ai-send"),msgs=P("ai-messages"),tip=P("ai-tip"),open=false;
-var g=P("ai-greet");if(g)g.textContent="Привет! Я знаю о ценах, кейсах, услугах Vexio Studio. Спрашивай!";
+var g=P("ai-greet");if(g)g.textContent="Привет! Я Коди, AI-помощник Vexio Studio. Знаю о ценах, кейсах, услугах. Спрашивай!";
 function tipShow(){tip.classList.add("show");setTimeout(function(){tip.classList.remove("show")},2000)}
 tipShow();setInterval(tipShow,15000);
 pill.onclick=function(){open=!open;chat.className=open?"open":"";tip.classList.remove("show");if(open)input.focus()};
@@ -1143,7 +1143,7 @@ var rules=[
 {k:"оплат,рассроч,предоплат,этап,схема",a:"Оплата поэтапно: 30% предоплата, 30% после утверждения дизайна, 40% после сдачи. Работаем по договору."},
 {k:"сео,поиск,яндекс,google,продвиж,оптимизация",a:"Базовая SEO на всех проектах: Schema.org, Open Graph, sitemap.xml, оптимизация скорости, мета-теги. Расширенное SEO по запросу."},
 {k:"дизайн,ui,ux,figma,фигма,прототип,макет",a:"Дизайн в Figma. Индивидуальный подход — не шаблоны. Прототипирование, адаптив под мобильные, анимации. Показываем макеты на каждом этапе."},
-{k:"привет,здрав,хай,hello,hi,ку,прив,добрый",a:"Привет! Я AI-ассистент Vexio Studio. Могу рассказать о ценах, сроках, кейсах, технологиях, дизайне, оплате. Что интересует?"},
+{k:"привет,здрав,хай,hello,hi,ку,прив,добрый",a:"Привет! Я Коди. Могу рассказать о ценах, сроках, кейсах, технологиях, дизайне, оплате. Что интересует?"},
 {k:"спасиб,благодар,отличн,супер,круто,класс,помог",a:"Рады помочь! Если появятся ещё вопросы — обращайтесь. Оставить заявку можно прямо на сайте."},
 {k:"работа,нанять,сотрудничеств,партнер",a:"Работаем с бизнесом любого масштаба. Нужен сайт, бот или CRM? Оставьте заявку — обсудим ваш проект!"},
 ];
