@@ -1276,6 +1276,10 @@ function Nav() {
             onMouseLeave={e => e.target.style.color = "var(--text-dim)"}
           >{t(key)}</a>
         ))}
+        <a href="/news/" className="resp-hide" style={{ fontSize: 14, color: "var(--text-dim)", textDecoration: "none", transition: "color 0.2s", fontWeight: 400 }}
+            onMouseEnter={e => e.target.style.color = "var(--text)"}
+            onMouseLeave={e => e.target.style.color = "var(--text-dim)"}
+          >Новости</a>
         <button onClick={() => setLang(lang === "en" ? "ru" : "en")} style={{
           padding: "6px 14px", borderRadius: 8, fontSize: 12, fontFamily: "var(--font-mono)",
           background: lang === "en" ? "rgba(139,92,246,0.15)" : "transparent",
