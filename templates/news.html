@@ -4,7 +4,61 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IT новости сегодня — Vexio News | Технологии, AI, Стартапы, Разработка, Крипто | Читать онлайн</title>
-<meta name="description" content="<meta name="description" content="Свежие IT-новости сегодня на Vexio News. Технологии, искусственный интеллект, стартапы, разработка ПО, криптовалюты, гаджеты и хардware. Агрегация лучших материалов из Hacker News и технологических изданий. Обновляется в реальном времени. Читайте, делитесь, будьте в курсе." /></svg>',arrowRight:'<path d="M5 12h14M12 5l7 7-7 7"/></svg>',arrowUpRight:'<path d="M7 17L17 7M7 7h10v10"/></svg>',zap:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',search:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',menu:'<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>'};
+<meta name="description" content="Свежие IT-новости сегодня на Vexio News. Технологии, искусственный интеллект, стартапы, разработка ПО, криптовалюты, гаджеты и хардware. Агрегация лучших материалов из Hacker News и технологических изданий. Обновляется в реальном времени. Читайте, делитесь, будьте в курсе.">
+<meta name="keywords" content="it новости, технологии новости, стартапы новости, искусственный интеллект новости, ai новости, новости разработки, vexio news, tech news, hn, hacker news, криптовалюта новости, новости it сегодня, читать it новости, хайтек, технологии 2026, веб-разработка новости">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://vexiostudio.ru/news/">
+<meta property="og:title" content="Vexio News — IT новости сегодня | Технологии, AI, Стартапы">
+<meta property="og:description" content="Свежие IT-новости сегодня: технологии, AI, стартапы, крипто, разработка. Hacker News + лучшие техноиздания в реальном времени.">
+<meta property="og:url" content="https://vexiostudio.ru/news/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vexio Studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vexio News — IT новости">
+<meta name="twitter:description" content="IT-новости в реальном времени. Технологии, AI, стартапы, крипто. Читайте на Vexio News.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Vexio News",
+  "url": "https://vexiostudio.ru/news/",
+  "description": "IT-новости от Vexio Studio. Технологии, стартапы, AI и разработка.",
+  "publisher": { "@id": "https://vexiostudio.ru/#organization" }
+}
+</script>
+<link rel="icon" href="/static/pwalogo.svg" type="image/svg+xml">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        manrope: ['Manrope', 'sans-serif'],
+        caveat: ['Caveat', 'cursive'],
+      }
+    }
+  }
+}
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Manrope:wght@400;500;700;800&display=swap');
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:#070707}
+::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:#ccff00}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<script type="text/babel">
+const {useState,useEffect} = React;
+
+function Icon({name,size=20}){
+  const p=`<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">`;
+  const icons={flame:'<path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/></svg>',arrowRight:'<path d="M5 12h14M12 5l7 7-7 7"/></svg>',arrowUpRight:'<path d="M7 17L17 7M7 7h10v10"/></svg>',zap:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',search:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',menu:'<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>'};
   return <span dangerouslySetInnerHTML={{__html:p+(icons[name]||'')}}/>;
 }
 
