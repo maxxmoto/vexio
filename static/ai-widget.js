@@ -22,7 +22,7 @@ close.onclick=function(){open=false;chat.className=''};
 function add(t,c){var div=d.createElement('div');div.className='ai-msg '+c;div.textContent=t;msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight}
 function wait(s){if(s){var div=d.createElement('div');div.className='ai-typing';div.id='t1';div.textContent='...';msgs.appendChild(div)}else{var x=P('t1');if(x)x.remove()}}
 
-var rules=[
+var rules=window.__AI_RULES__||[
 {k:"цен,стои,сколько",a:"Лендинг от 15 000 руб. Магазин от 50 000 руб. Бот от 20 000 руб. Точнее после брифинга."},
 {k:"срок,долго,дней,быстр",a:"Лендинг 3-7 дней. Магазин 14-30 дней. Корпоративный от 21 дня."},
 {k:"сайт,веб,лендинг,магазин,сделать",a:"Сайты под ключ: лендинги, магазины, порталы, CRM. Дизайн, вёрстка, бэкенд."},
