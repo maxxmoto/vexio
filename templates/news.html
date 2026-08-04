@@ -49,9 +49,18 @@ function App(){
   useEffect(()=>{
     const h=()=>setScrolled(window.scrollY>20);
     window.addEventListener('scroll',h);
-    fetch('https://newsapi.org/v2/top-headlines?category=technology&language=en&pageSize=8&apiKey='+('ce03'+'e8cf7fc6441ba3c09869e0b40447'))
+    const HN='https://hacker-news.firebaseio.com/v0';
+    fetch(HN+'/topstories.json')
       .then(r=>r.json())
-      .then(d=>{setArticles(d.articles||[]);setLoading(false)})
+      .then(ids=>{
+        const top=ids.slice(0,12);
+        return Promise.all(top.map(id=>fetch(HN+'/item/'+id+'.json').then(r=>r.json())));
+      })
+      .then(items=>{
+        const filtered=items.filter(i=>i&&i.url&&!i.url.startsWith('item?'));
+        setArticles(filtered);
+        setLoading(false);
+      })
       .catch(()=>setLoading(false));
     return ()=>window.removeEventListener('scroll',h);
   },[]);
@@ -60,7 +69,7 @@ function App(){
   const rest=articles.slice(1,5);
   const extra=articles.slice(5,8);
 
-  function timeAgo(d){var n=new Date();var s=Math.floor((n-new Date(d))/1000);if(s<60)return'только что';var m=Math.floor(s/60);if(m<60)return m+' мин';var h=Math.floor(m/60);if(h<24)return h+' ч';return Math.floor(h/24)+' дн'}
+  function timeAgo(d){var n=new Date();var s=Math.floor((n-new Date(d*1000))/1000);if(s<60)return'только что';var m=Math.floor(s/60);if(m<60)return m+' мин';var h=Math.floor(m/60);if(h<24)return h+' ч';return Math.floor(h/24)+' дн'}
 
   return (
     <div className="min-h-screen bg-[#070707] text-[#f4f4f5] font-manrope">
@@ -130,8 +139,8 @@ function App(){
               <a key={i} href={a.url} target="_blank" className="no-underline group relative flex flex-col justify-between bg-[#111111] border border-white/5 rounded-3xl p-6 hover:border-[#ccff00]/50 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                 <div>
                   <div className="flex justify-between items-start mb-6">
-                    <span className="px-3 py-1 bg-[#1a1a1a] text-gray-300 rounded-full text-xs font-bold uppercase tracking-wider">{a.source?.name||'Источник'}</span>
-                    <span className="text-gray-500 text-sm font-medium">{a.publishedAt?timeAgo(a.publishedAt):''}</span>
+                    <span className="px-3 py-1 bg-[#1a1a1a] text-gray-300 rounded-full text-xs font-bold uppercase tracking-wider">{a.by||'HN'}</span>
+                    <span className="text-gray-500 text-sm font-medium">{a.time?timeAgo(a.time):''}</span>
                   </div>
                   <h3 className="text-xl font-bold leading-snug mb-3 group-hover:text-[#ccff00] transition-colors text-white">{a.title}</h3>
                   <p className="text-gray-400 text-sm line-clamp-2">{a.description?.slice(0,150)}</p>
@@ -145,8 +154,8 @@ function App(){
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#2979ff]/20 rounded-full blur-3xl"></div>
                 <div className="relative z-10">
                   <div className="flex justify-between items-start mb-6">
-                    <span className="px-3 py-1 bg-[#2979ff]/20 text-[#82b1ff] rounded-full text-xs font-bold uppercase tracking-wider border border-[#2979ff]/30">{extra[0].source?.name||'Crypto'}</span>
-                    <span className="text-[#82b1ff]/70 text-sm font-medium">{extra[0].publishedAt?timeAgo(extra[0].publishedAt):''}</span>
+                    <span className="px-3 py-1 bg-[#2979ff]/20 text-[#82b1ff] rounded-full text-xs font-bold uppercase tracking-wider border border-[#2979ff]/30">{extra[0].by||'HN'}</span>
+                    <span className="text-[#82b1ff]/70 text-sm font-medium">{extra[0].time?timeAgo(extra[0].time):''}</span>
                   </div>
                   <h3 className="text-xl font-bold leading-snug mb-3 text-white">{extra[0].title}</h3>
                   <p className="text-gray-300 text-sm line-clamp-2">{extra[0].description?.slice(0,150)}</p>
