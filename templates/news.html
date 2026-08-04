@@ -118,7 +118,8 @@ function renderNews(articles){
   grid.innerHTML=html;
 }
 
-fetch('/api/news')
+var NEWS_KEY='ce03e8cf7fc6441ba3c09869e0b40447';
+fetch('https://newsapi.org/v2/top-headlines?category=technology&language=en&pageSize=9&apiKey='+NEWS_KEY)
   .then(function(r){return r.json()})
   .then(function(d){renderNews(d.articles||[])})
   .catch(function(){document.getElementById('loading').style.display='none';document.getElementById('error').style.display='block'});
