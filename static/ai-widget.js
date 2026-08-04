@@ -13,7 +13,7 @@ var pill=P('ai-pill'),chat=P('ai-chat'),close=P('ai-close'),input=P('ai-input');
 var send=P('ai-send'),msgs=P('ai-messages'),tip=P('ai-tip'),open=false;
 
 var greet=P('ai-greet');
-if(greet)greet.textContent=window.__AI_GREET__||'Привет! Я Коди. Спрашивай о ценах, сроках, услугах!';
+if(greet)greet.textContent='Привет! Я Коди. Спрашивай о ценах, сроках, услугах!';
 
 function tipShow(){tip.classList.add('show');setTimeout(function(){tip.classList.remove('show')},2000)}
 tipShow();setInterval(tipShow,15000);
@@ -22,13 +22,27 @@ close.onclick=function(){open=false;chat.className=''};
 function add(t,c){var div=d.createElement('div');div.className='ai-msg '+c;div.textContent=t;msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight}
 function wait(s){if(s){var div=d.createElement('div');div.className='ai-typing';div.id='t1';div.textContent='...';msgs.appendChild(div)}else{var x=P('t1');if(x)x.remove()}}
 
-var rules=window.__AI_RULES__||[
+var rules=[
 {k:"цен,стои,сколько",a:"Лендинг от 15 000 руб. Магазин от 50 000 руб. Бот от 20 000 руб. Точнее после брифинга."},
-{k:"привет,здрав,хай,hello",a:"Привет! Я Коди. Спрашивай о ценах, сроках, услугах Vexio Studio."},
-{k:"кто ты,помощь",a:"Я Коди — AI-ассистент. Знаю о ценах, сроках, кейсах, технологиях."},
+{k:"срок,долго,дней,быстр",a:"Лендинг 3-7 дней. Магазин 14-30 дней. Корпоративный от 21 дня."},
+{k:"сайт,веб,лендинг,магазин,сделать",a:"Сайты под ключ: лендинги, магазины, порталы, CRM. Дизайн, вёрстка, бэкенд."},
+{k:"бот,телеграм,telegram,чат",a:"Telegram-боты с CRM, оплатой, AI. От простых до комплексных."},
+{k:"кейс,портфол,пример,проект",a:"6 проектов: MaxxMoto, Sotnur Glamping, Englify, Python Forge, СЦ Дружба."},
+{k:"услуг,делаете,можете,функции",a:"Сайты, боты, CRM, админ-панели. Дизайн, вёрстка, бэкенд, SEO, поддержка."},
+{k:"контакт,связь,написать,телефон",a:"Telegram @vexiostudiocahnnel. Или заявка на сайте. Ответ 24 часа."},
+{k:"технолог,стек,язык,инструмент",a:"React, TypeScript, Python (Flask), Node.js, PostgreSQL, Docker."},
+{k:"гарант,поддерж,после,сопровожд",a:"Гарантия 30 дней. Помесячная техподдержка. Работаем по договору."},
+{k:"оплат,рассроч,предоплат,этап",a:"30% старт, 30% после дизайна, 40% после сдачи. Договор."},
+{k:"сео,поиск,яндекс,google,продвиж",a:"Базовая SEO на всех сайтах. Расширенное SEO отдельно."},
+{k:"дизайн,ui,ux,figma,фигма,прототип",a:"Дизайн в Figma. Индивидуально, не шаблоны."},
+{k:"привет,здрав,хай,hello,hi,ку",a:"Привет! Я Коди. Спрашивай о ценах, сроках, услугах!"},
+{k:"спасиб,благодар,отличн,супер",a:"Рады помочь! Пишите в Telegram @vexiostudiocahnnel."},
+{k:"кто ты,представься,что умеешь,помощь,help",a:"Я Коди — AI-помощник Vexio Studio. Знаю о ценах, сроках, услугах."},
+{k:"работа,нанять,ваканси,карьер",a:"Вакансии на https://vexiostudio.ru/hr/ — пишите в Telegram."},
+{k:"новости,news,блог,статьи",a:"IT-новости на https://vexiostudio.ru/news/ — обновляется каждый день."},
 ];
 
-function match(q){var l=q.toLowerCase().replace(/[?!.,]/g,'');for(var i=0;i<rules.length;i++){var r=rules[i];var ks=r.k.split(',');for(var j=0;j<ks.length;j++){if(l.indexOf(ks[j])>=0)return r.a}}return null}
+function match(q){var l=q.toLowerCase().replace(/[?!.,]/g,'');for(var i=0;i<rules.length;i++){var r=rules[i];var ks=r.k.split(',');if(!ks)continue;for(var j=0;j<ks.length;j++){if(l.indexOf(ks[j])>=0)return r.a}}return null}
 
 async function ask(q){var r=match(q);if(r){add(r,'ai-bot');return}try{var res=await fetch('/api/ai-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q:q})});if(res.ok){var data=await res.json();if(data.reply){add(data.reply,'ai-bot');return}}}catch(e){}add('Я могу рассказать о ценах, сроках, услугах. Что интересует?','ai-bot')}
 send.onclick=function(){var q=input.value.trim();if(!q)return;add(q,'ai-user');input.value='';wait(true);ask(q).finally(function(){wait(false)})};
