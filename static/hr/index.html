@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru" prefix="og: https://ogp.me/ns# website: https://ogp.me/ns/website# profile: https://ogp.me/ns/profile#">
   <head>
     <meta charset="UTF-8" />
@@ -643,7 +643,7 @@
     <div id="root"></div>
   <!-- AI Widget -->
 <style>
-#ai-widget{position:fixed;bottom:24px;right:24px;z-index:9999;font-family:'Inter',sans-serif}
+#ai-widget{position:fixed;bottom:24px;right:24px;z-index:9999;font-family:Inter,sans-serif}
 #ai-pill{width:56px;height:56px;border-radius:50%;background:#7C3AED;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(124,58,237,0.4);transition:all .3s;overflow:hidden;padding:0;position:relative}
 #ai-pill img{width:32px;height:32px}
 #ai-pill:hover{transform:scale(1.08);box-shadow:0 6px 32px rgba(124,58,237,0.6)}
@@ -670,38 +670,37 @@
 <div class="ai-tooltip" id="ai-tip">Спросите ИИ</div>
 <button id="ai-pill" title="AI"><img src="/static/ai.png" alt="AI"></button>
 <div id="ai-chat">
-<div id="ai-header"><span>AI Ассистент</span><button id="ai-close">×</button></div>
-<div id="ai-messages"><div class="ai-msg ai-bot">Привет! Я знаю о вакансиях, зарплатах и команде Vexio HR.</div></div>
-<div id="ai-input-wrap"><input id="ai-input" placeholder="Задай вопрос..." /><button id="ai-send">→</button></div>
+<div id="ai-header"><span>AI Ассистент</span><button id="ai-close">&times;</button></div>
+<div id="ai-messages"><div class="ai-msg ai-bot" id="ai-greet">Привет! Я знаю о вакансиях, зарплатах и команде Vexio HR.</div></div>
+<div id="ai-input-wrap"><input id="ai-input" placeholder="Задай вопрос..."><button id="ai-send">&rarr;</button></div>
 </div></div>
 <script>
 (function(){
-var pill=document.getElementById('ai-pill'),chat=document.getElementById('ai-chat'),
-close=document.getElementById('ai-close'),input=document.getElementById('ai-input'),
-send=document.getElementById('ai-send'),msgs=document.getElementById('ai-messages'),
-tip=document.getElementById('ai-tip'),open=false;
+var P=function(id){return document.getElementById(id)};
+var pill=P('ai-pill'),chat=P('ai-chat'),close=P('ai-close'),input=P('ai-input'),
+send=P('ai-send'),msgs=P('ai-messages'),tip=P('ai-tip'),open=false;
 function showTip(){tip.classList.add('show');setTimeout(function(){tip.classList.remove('show')},2000)}
 showTip();setInterval(showTip,15000);
 pill.onclick=function(){open=!open;chat.className=open?'open':'';tip.classList.remove('show');if(open)input.focus()};
 close.onclick=function(){open=false;chat.className=''};
 function add(t,c){var d=document.createElement('div');d.className='ai-msg '+c;d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
-function typing(s){if(s){var d=document.createElement('div');d.className='ai-typing';d.id='t1';d.textContent='...';msgs.appendChild(d)}else{var t=document.getElementById('t1');if(t)t.remove()}}
+function typing(s){if(s){var d=document.createElement('div');d.className='ai-typing';d.id='t1';d.textContent='...';msgs.appendChild(d)}else{var t=P('t1');if(t)t.remove()}}
 var rules=[
-{kw:['зарплат','плат','ставк','оклад','доход'],a:'10% от стоимости проекта. Senior Frontend — от 150к/проект, Middle — от 80к/проект.'},
-{kw:['ваканси','позици','кого ищ','должност'],a:'Senior Frontend, UX/UI Designer, Middle Backend, Project Manager.'},
-{kw:['бонус','преимуществ','плюшк','услови','офис','удален'],a:'Удалёнка, гибкий график, оплачиваемое обучение, карьерный рост, топ-команда.'},
-{kw:['команд','коллектив','люди','кто работ'],a:'5+ сильных специалистов. Без микроменеджмента, ценим инициативу.'},
-{kw:['требован','навык','опыт','стек'],a:'Senior — 3+ года React/TS. Middle — 1+ год Node.js. Designer — Figma. PM — Agile.'},
-{kw:['отклик','отправ','заявк','как попас'],a:'Заполните форму. Рассматриваем 1-3 дня. Собеседование + тестовое.'},
-{kw:['обучен','рост','карьер','развити'],a:'Курсы, конференции, сертификации. Менторство. Рост до Senior за 12-18 мес.'},
-{kw:['проект','клиент','заказчик'],a:'Веб-разработка: сайты, боты, админки. Клиенты из РФ и СНГ. Разные задачи.'},
+{kw:["зарплат","плат","ставк","оклад","доход"],a:"10% от стоимости проекта. Senior Frontend от 150к/проект, Middle от 80к/проект. Выплаты после сдачи этапа."},
+{kw:["ваканси","позици","должност"],a:"Senior Frontend (React/TS), UX/UI Designer (Figma), Middle Backend (Node.js), Project Manager (Agile)."},
+{kw:["бонус","преимуществ","плюшк","удален"],a:"Удалёнка, гибкий график, оплачиваемое обучение, карьерный рост, топ-команда."},
+{kw:["команд","коллектив","люди"],a:"5+ сильных специалистов. Без микроменеджмента. Ценим инициативу и самостоятельность."},
+{kw:["требован","навык","опыт","стек"],a:"Senior: 3+ года React/TS. Middle: 1+ год Node.js. Designer: портфолио Figma. PM: Agile/Scrum."},
+{kw:["отклик","отправ","заявк","процесс"],a:"Заполните форму. Рассматриваем 1-3 дня. Собеседование 30 мин + тестовое (оплачиваемое)."},
+{kw:["обучен","рост","карьер","развити"],a:"Оплачиваем курсы, конференции, сертификации. Менторство от лидов. Рост до Senior за 12-18 месяцев."},
+{kw:["проект","клиент","заказчик"],a:"Веб-разработка: сайты, боты, админки. Клиенты из РФ и СНГ. Разнообразные задачи без рутины."},
+{kw:["привет","здрав","хай"],a:"Привет! Я AI-ассистент Vexio HR. Спрашивай о вакансиях, зарплате, команде, бонусах."}
 ];
 function match(q){var l=q.toLowerCase().replace(/[?!.,]/g,'');for(var i=0;i<rules.length;i++){var r=rules[i];for(var j=0;j<r.kw.length;j++){if(l.indexOf(r.kw[j])>=0)return r.a}}return null}
-async function ask(q){var r=match(q);if(r){add(r,'ai-bot');return}try{var res=await fetch('/api/ai-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q:q})});if(res.ok){var d=await res.json();if(d.reply){add(d.reply,'ai-bot');return}}}catch(e){}add('Спросите о вакансиях, зарплате или команде Vexio HR!','ai-bot')}
+async function ask(q){var r=match(q);if(r){add(r,'ai-bot');return}try{var res=await fetch('/api/ai-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q:q})});if(res.ok){var d=await res.json();if(d.reply){add(d.reply,'ai-bot');return}}}catch(e){}add('\u042f \u043c\u043e\u0433\u0443 \u0440\u0430\u0441\u0441\u043a\u0430\u0437\u0430\u0442\u044c \u043e \u0446\u0435\u043d\u0430\u0445, \u0441\u0440\u043e\u043a\u0430\u0445, \u043a\u0435\u0439\u0441\u0430\u0445, \u0442\u0435\u0445\u043d\u043e\u043b\u043e\u0433\u0438\u044f\u0445, \u0434\u0438\u0437\u0430\u0439\u043d\u0435. \u0427\u0442\u043e \u0438\u043d\u0442\u0435\u0440\u0435\u0441\u0443\u0435\u0442?','ai-bot')}
 send.onclick=function(){var q=input.value.trim();if(!q)return;add(q,'ai-user');input.value='';typing(true);ask(q).finally(function(){typing(false)})};
 input.onkeydown=function(e){if(e.key==='Enter')send.click()};
 })();
 </script>
-
 </body>
 </html>
