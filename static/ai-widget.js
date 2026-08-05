@@ -38,7 +38,7 @@ var rules=window.__AI_RULES__||[
 {k:"новости,news,блог,статьи,события",a:"IT-новости на https://vexiostudio.ru/news/ — обновляется каждый день."},
 ];
 
-function match(q){var l=q.toLowerCase().replace(/[?!.,]/g,'');for(var i=0;i<rules.length;i++){var r=rules[i];var ks=r.k.split(',');for(var j=0;j<ks.length;j++){if(l.indexOf(ks[j])>=0)return r.a}}return null}
+function match(q){var l=q.toLowerCase().replace(/[?!.,]/g,'');var found=[];for(var i=0;i<rules.length;i++){var r=rules[i];var ks=r.k.split(',');for(var j=0;j<ks.length;j++){if(l.indexOf(ks[j])>=0){found.push(r.a);break}}}return found.length?found.join('\n\n'):null}
 
 async function ask(q){var r=match(q);if(r){add(r,'ai-bot');return}try{var res=await fetch('/api/ai-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q:q})});if(res.ok){var data=await res.json();if(data.reply){add(data.reply,'ai-bot');return}}}catch(e){}add('Спросите о ценах, сроках, услугах или кейсах Vexio. Что интересует?','ai-bot')}
 send.onclick=function(){var q=input.value.trim();if(!q)return;add(q,'ai-user');input.value='';wait(true);ask(q).finally(function(){wait(false)})};
