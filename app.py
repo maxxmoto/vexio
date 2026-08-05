@@ -376,6 +376,15 @@ def help_apply():
     })
     return jsonify({'success': True})
 
+@app.route('/business')
+def biz_redirect():
+    return redirect('/business/'), 301
+
+@app.route('/business/')
+@app.route('/business/<path:path>')
+def serve_biz(path='index.html'):
+    return app.send_static_file(f'biz/{path or "index.html"}')
+
 @app.route('/api/submit', methods=['POST'])
 def submit_project():
     data = request.get_json()
