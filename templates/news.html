@@ -26,7 +26,12 @@
   "publisher": { "@id": "https://vexiostudio.ru/#organization" }
 }
 </script>
-<link rel="icon" href="/static/news.png" type="image/png">
+<link rel="icon" href="/static/news.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Manrope:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Manrope:wght@400;500;700;800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Manrope:wght@400;500;700;800&display=swap"></noscript>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config = {
@@ -41,7 +46,6 @@ tailwind.config = {
 }
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Manrope:wght@400;500;700;800&display=swap');
 ::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-track{background:#070707}
 ::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
@@ -136,7 +140,7 @@ function App(){
             </div>
             <div className="lg:col-span-5 relative">
               <div className="aspect-[4/3] rounded-3xl border border-white/5 overflow-hidden relative">
-                <img src="/static/news.png" alt="IT новости" className="w-full h-full object-cover" />
+                <img src="/static/news.webp" alt="IT новости" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div className="absolute bottom-6 left-6 flex gap-2">
                   <span className="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-wider border border-white/10">Тренды</span>
