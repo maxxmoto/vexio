@@ -30,7 +30,9 @@
   <meta name="Mail.Ru" content="index, follow" />
   <meta name="p:domain_verify" content="pinterest-verification-code" />
 
-  <meta name="geo.region" content="RU" />
+  <meta name="geo.region" content="RU-MOW" />
+  <meta name="geo.placename" content="Москва" />
+  <meta name="geo.position" content="55.7558;37.6173" />
   <meta name="geo.placename" content="Russia" />
   <meta name="geo.position" content="55.7558;37.6173" />
   <meta name="ICBM" content="55.7558, 37.6173" />
@@ -101,45 +103,58 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": "LocalBusiness",
     "@id": "https://vexiostudio.ru/#organization",
     "name": "Vexio Studio",
-    "alternateName": "Vexio",
+    "alternateName": ["Vexio", "Vexio Dev"],
     "url": "https://vexiostudio.ru/",
     "logo": "https://vexiostudio.ru/static/pwalogo.png",
     "image": "https://vexiostudio.ru/static/pwalogo.png",
-    "description": "Премиальная веб-студия. Создаём сайты любой сложности и Telegram-ботов с интеграциями.",
-    "foundingDate": "2026-01",
-    "foundingLocation": { "@type": "Place", "name": "Россия" },
+    "description": "Веб-студия полного цикла. Разработка сайтов, Telegram-ботов, CRM-систем и админ-панелей.",
+    "foundingDate": "2026-01-01",
+    "foundingLocation": { "@type": "Place", "name": "Москва, Россия" },
     "areaServed": { "@type": "Country", "name": "Russia" },
-    "priceRange": "$$",
-    "telephone": "+7-999-123-45-67",
-    "address": { "@type": "PostalAddress", "addressCountry": "RU" },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "contactType": "customer service",
-      "availableLanguage": ["Russian", "English"],
-      "contactOption": "TollFree"
+    "priceRange": "от 15 000 ₽",
+    "telephone": "+79877173511",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "RU",
+      "addressLocality": "Москва",
+      "addressRegion": "Москва",
+      "streetAddress": "Москва"
     },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "telephone": "+79877173511",
+        "availableLanguage": ["Russian", "English"],
+        "contactOption": "TollFree"
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": ["Russian"],
+        "url": "https://t.me/vexiostudiocahnnel"
+      }
+    ],
     "sameAs": [
       "https://t.me/vexiostudiocahnnel"
     ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.7",
-      "bestRating": "5",
-      "reviewCount": "9"
-    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "24:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "22:00" }
+    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
-      "name": "Услуги Vexio Studio",
+      "name": "Услуги разработки",
       "itemListElement": [
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Разработка сайтов",
-            "description": "Лендинги, интернет-магазины, корпоративные сайты под ключ"
+            "name": "Разработка сайтов под ключ",
+            "description": "Лендинги, интернет-магазины, корпоративные сайты"
           }
         },
         {
@@ -147,15 +162,15 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Разработка Telegram-ботов",
-            "description": "Боты с CRM-интеграцией, автоворонками, AI-функциями"
+            "description": "Чат-боты с CRM-интеграцией и AI-функциями"
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Админ-панели и CRM",
-            "description": "Системы управления, аналитика, дашборды"
+            "name": "Админ-панели и CRM-системы",
+            "description": "Системы управления и аналитики"
           }
         }
       ]
