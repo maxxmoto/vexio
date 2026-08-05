@@ -13,7 +13,7 @@ var pill=P('ai-pill'),chat=P('ai-chat'),close=P('ai-close'),input=P('ai-input'),
 
 function tipShow(){tip.classList.add('show');setTimeout(function(){tip.classList.remove('show')},2000)}
 tipShow();setInterval(tipShow,15000);
-pill.onclick=function(){open=!open;chat.className=open?'open':'';tip.classList.remove('show');if(open)input.focus()};
+pill.onclick=function(){open=!open;chat.className=open?'open':'';tip.classList.remove('show')};
 close.onclick=function(){open=false;chat.className=''};
 function add(t,c){var el=d.createElement('div');el.className='ai-msg '+c;el.textContent=t;msgs.appendChild(el);msgs.scrollTop=msgs.scrollHeight}
 function wait(s){if(s){var el=d.createElement('div');el.className='ai-typing';el.id='t1';el.textContent='...';msgs.appendChild(el)}else{var x=P('t1');if(x)x.remove()}}
