@@ -716,7 +716,7 @@ footer{background:var(--ink);color:var(--paper);padding:80px 0 calc(34px + env(s
         </div>
       </div>
       <div class="float-card fc1"><span class="ok">✓ Задача выполнена</span> — кампания «Зерно недели» запущена<span class="who">Система Vexio · 09:00</span></div>
-      <div class="float-card fc2">💬 Аня, ваш менеджер: «Отчёт за неделю готов, загляните в кабинет»<span class="who">Telegram · 12:04 · ответ за 15 мин</span></div>
+      <div class="float-card fc2">💬 Ваш менеджер: «Отчёт за неделю готов, загляните в кабинет»<span class="who">Telegram · 12:04 · ответ за 15 мин</span></div>
     </div>
   </div>
 </section>
@@ -749,7 +749,7 @@ footer{background:var(--ink);color:var(--paper);padding:80px 0 calc(34px + env(s
       <div class="vs-card vs-good rv" data-d="2">
         <h3>Vexio Business <span>— ведём до прибыли</span></h3>
         <ul>
-          <li><span class="ic">✓</span>Степан на связи 7 дней в неделю</li>
+          <li><span class="ic">✓</span>Менеджер на связи 7 дней в неделю</li>
           <li><span class="ic">✓</span>Сайт, реклама, SEO и соцсети — одна команда</li>
           <li><span class="ic">✓</span>Отчёты про деньги: вложили / получили / ROMI</li>
           <li><span class="ic">✓</span>Ответ в Telegram за 15 минут в рабочее время</li>
@@ -802,7 +802,7 @@ footer{background:var(--ink);color:var(--paper);padding:80px 0 calc(34px + env(s
           <p>Один человек, который знает ваш бизнес лучше, чем вы сами. Никаких «передам разработчикам».</p>
           <div class="chat">
             <div class="msg me">Как у нас дела с лидами на этой неделе?<small>Вы · 11:52</small></div>
-            <div class="msg">Лидов +34% к плану, ДРР снизили до 11,2%. Полный отчёт прикрепила 📊<small>Аня, менеджер · 12:04</small></div>
+            <div class="msg">Лидов +34% к плану, ДРР снизили до 11,2%. Полный отчёт прикрепила 📊<small>Менеджер, менеджер · 12:04</small></div>
           </div>
         </div>
       </div>
@@ -1237,12 +1237,12 @@ footer{background:var(--ink);color:var(--paper);padding:80px 0 calc(34px + env(s
           <textarea id="fTask" placeholder="Например: есть сайт, но мало заявок. Хочу рекламу и соцсети под ключ."></textarea>
         </div>
         <button type="submit" class="btn btn-g">Получить план роста <span class="arr">→</span></button>
-        <p class="form-note">Никакого спама. Менеджер Аня напишет лично и по делу.</p>
+        <p class="form-note">Никакого спама. Менеджер Менеджер напишет лично и по делу.</p>
       </form>
       <div class="success" id="formSuccess">
         <div class="ok-c"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
         <h3>Заявка принята!</h3>
-        <p>Менеджер Аня уже читает её и ответит в течение 40 минут в рабочее время (пн–сб, 9:00–21:00).</p>
+        <p>Менеджер Менеджер уже читает её и ответит в течение 40 минут в рабочее время (пн–сб, 9:00–21:00).</p>
       </div>
     </div>
   </div>
@@ -1461,5 +1461,39 @@ document.getElementById('toTop').addEventListener('click', function(){
 })();
 </script>
 <script src="/static/ai-widget.js"></script>
+<script>
+// Business form submission
+(function(){
+  var section = document.getElementById('contact');
+  if(!section) return;
+  var inputs = section.querySelectorAll('input, textarea');
+  var btn = section.querySelector('button, a.button, .btn');
+  if(!btn){
+    btn = document.createElement('button');
+    btn.textContent = 'Отправить заявку';
+    btn.style.cssText = 'display:block;width:100%;padding:16px;background:#7C3AED;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-top:16px';
+    section.appendChild(btn);
+  }
+  var origClick = btn.onclick;
+  btn.addEventListener('click', function(e){
+    var data = {};
+    inputs.forEach(function(inp){
+      var name = inp.name || inp.placeholder || inp.id || 'field';
+      data[name] = inp.value;
+    });
+    fetch('/api/business-apply', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    }).then(function(){
+      btn.textContent = 'Отправлено!';
+      btn.style.background = '#22c55e';
+    }).catch(function(){
+      btn.textContent = 'Ошибка, попробуйте снова';
+    });
+    if(origClick) origClick.call(btn, e);
+  });
+})();
+</script>
 </body>
 </html>
