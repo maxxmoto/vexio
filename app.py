@@ -359,6 +359,23 @@ def api_news():
         pass
     return jsonify({'articles': []})
 
+@app.route('/help/')
+def help_page():
+    return send_from_directory('templates', 'help.html')
+
+@app.route('/api/help-apply', methods=['POST'])
+def help_apply():
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data'}), 400
+    save_notification('help', {
+        'name': data.get('name', ''),
+        'contact': data.get('contact', ''),
+        'message': data.get('message', ''),
+        'project_id': 'HL-' + str(uuid.uuid4())[:6].upper(),
+    })
+    return jsonify({'success': True})
+
 @app.route('/api/submit', methods=['POST'])
 def submit_project():
     data = request.get_json()

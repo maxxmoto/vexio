@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vexio Care - Техническая поддержка | Помощь 24/7</title>
+    <meta name="description" content="Vexio Care — техническая поддержка 24/7. Быстрые решения, помощь по сайтам, хостингу, ботам. Круглосуточная забота о вашем проекте.">
+    <link rel="icon" href="/static/pwalogo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0A0A0A !important; color: #ffffff; overflow-x: hidden; }
+        .font-sans { font-family: 'Inter', sans-serif; }
+        .font-heading { font-family: 'Montserrat', sans-serif; }
+        .material-symbols-rounded { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; line-height: 1; }
+        .icon-outline { font-variation-settings: 'FILL' 0; }
+        .glow-text { color: #FFD700; text-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2); }
+        .nav-active::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 100%; height: 2px; background-color: #FFD700; box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); }
+        .features-glow { box-shadow: 0 -10px 40px -15px rgba(255, 215, 0, 0.15); border-top: 1px solid rgba(255, 215, 0, 0.3); }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+        .lang-pill { animation: float 6s ease-in-out infinite; background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .delay-1 { animation-delay: 1s; } .delay-2 { animation-delay: 2s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4s; }
+        .icon-box { background: radial-gradient(circle at center, rgba(255,215,0,0.2) 0%, rgba(255,215,0,0) 70%); }
+    </style>
+</head>
+<body style="background-color: #0A0A0A; color: #ffffff;" class="font-sans antialiased relative selection:bg-[#FFD700] selection:text-black">
+
+    <header class="w-full relative z-40 px-4 md:px-8 py-6 max-w-[1400px] mx-auto flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2 z-50">
+            <div class="w-6 h-6 bg-[#FFD700] rounded-sm rotate-45 flex items-center justify-center mr-1 shadow-[0_0_10px_rgba(255,215,0,0.5)]"></div>
+            <span class="text-2xl font-bold font-heading tracking-wide">Vexio</span>
+            <span class="bg-[#FFD700] text-black px-3 py-0.5 rounded-full text-sm font-bold font-heading italic">Care</span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-8 text-sm text-gray-300 font-medium">
+            <a href="/help/" class="relative text-white nav-active">Главная</a>
+            <a href="/" class="hover:text-[#FFD700] transition-colors">Студия</a>
+            <a href="/news/" class="hover:text-[#FFD700] transition-colors">Новости</a>
+            <a href="/hr/" class="hover:text-[#FFD700] transition-colors">HR</a>
+        </nav>
+        <div class="hidden lg:flex items-center gap-4">
+            <div class="flex items-center gap-2 bg-[#1a1a1a] rounded-full px-4 py-2 border border-gray-800">
+                <div class="w-2.5 h-2.5 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+                <span class="text-sm text-gray-300">Мы онлайн</span>
+            </div>
+            <button onclick="openForm()" class="flex items-center gap-2 bg-[#FFD700] text-black px-6 py-2.5 rounded-full font-semibold hover:bg-[#e6c200] transition-all shadow-[0_0_15px_rgba(255,215,0,0.3)]">
+                <span class="material-symbols-rounded text-[18px]">send</span>
+                Написать в поддержку
+            </button>
+        </div>
+        <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden');document.getElementById('mobileMenu').classList.toggle('flex')" class="lg:hidden text-2xl z-50 text-white p-2">
+            <span class="material-symbols-rounded icon-outline text-[28px]">menu</span>
+        </button>
+    </header>
+
+    <div id="mobileMenu" class="fixed inset-0 bg-[#0A0A0A]/95 backdrop-blur-md z-40 hidden flex-col items-center justify-center gap-8 text-xl">
+        <a href="/help/" class="text-[#FFD700] font-medium">Главная</a>
+        <a href="/" class="text-white hover:text-[#FFD700]">Студия</a>
+        <a href="/news/" class="text-white hover:text-[#FFD700]">Новости</a>
+        <a href="/hr/" class="text-white hover:text-[#FFD700]">HR</a>
+        <button onclick="openForm()" class="flex items-center gap-2 bg-[#FFD700] text-black px-6 py-3 rounded-full font-semibold mt-4">
+            <span class="material-symbols-rounded text-[20px]">send</span>
+            Написать в поддержку
+        </button>
+    </div>
+
+    <main class="max-w-[1400px] mx-auto px-4 md:px-8 pb-20 pt-10">
+        
+        <section class="grid lg:grid-cols-2 gap-12 items-center relative min-h-[60vh]">
+            <div class="z-10 flex flex-col items-start pt-10 lg:pt-0">
+                <div class="flex items-center gap-2 bg-[#1a1a1a]/80 backdrop-blur-sm border border-[#FFD700]/20 rounded-full px-4 py-2 mb-6">
+                    <span class="material-symbols-rounded text-[#FFD700] text-[18px]">favorite</span>
+                    <span class="text-sm text-gray-300">Круглосуточная поддержка клиентов</span>
+                </div>
+                <div id="heroTextWrapper" class="transition-opacity duration-500 opacity-100 mb-6">
+                    <h1 class="text-5xl md:text-7xl lg:text-[80px] font-black font-heading leading-[1.1] uppercase">
+                        <span id="textPart1" class="italic text-white block">Мы вам</span>
+                        <span class="italic glow-text relative inline-block w-fit mt-1 lg:mt-2">
+                            <span id="textPart2" class="relative z-10">ПОМОЖЕМ</span>
+                            <svg class="absolute w-[110%] -left-[5%] h-[20px] md:h-[30px] lg:h-[40px] -bottom-2 md:-bottom-3 text-[#FFD700] pointer-events-none" viewBox="0 0 100 20" preserveAspectRatio="none">
+                                <path d="M 0 15 Q 50 5 100 12" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke" style="filter: drop-shadow(0 4px 6px rgba(255,215,0,0.6));"/>
+                            </svg>
+                        </span>
+                    </h1>
+                </div>
+                <p class="text-gray-300 text-lg md:text-xl max-w-lg mb-10 leading-relaxed">
+                    Техническая поддержка. Быстрые решения. Забота о вашем проекте 24/7.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+                    <button onclick="openForm()" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#FFD700] text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-[#e6c200] transition-all shadow-[0_0_20px_rgba(255,215,0,0.4)]">
+                        <span class="material-symbols-rounded text-[22px]">chat</span>
+                        Получить помощь
+                    </button>
+                    <a href="#" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-[#161616] border border-gray-800 text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-[#202020] transition-all">
+                        <div class="w-6 h-6 rounded-full bg-[#FFD700] flex items-center justify-center">
+                            <span class="material-symbols-rounded text-black text-[14px]">play_arrow</span>
+                        </div>
+                        Как это работает
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative h-[400px] lg:h-[600px] hidden md:block">
+                <img src="/static/back.png" class="absolute w-[120%] max-w-none right-[-20%] top-[-10%] object-contain pointer-events-none" alt="Vexio Care">
+                <div class="absolute top-10 left-10 lang-pill flex items-center gap-3 px-5 py-3 rounded-full"><span class="text-xl">🇬🇧</span><span class="font-medium">We will help you</span></div>
+                <div class="absolute top-32 right-10 lang-pill delay-1 flex items-center gap-3 px-5 py-3 rounded-full"><span class="text-xl">🇩🇪</span><span class="font-medium text-gray-300 italic">Wir helfen Ihnen</span></div>
+                <div class="absolute top-1/2 left-0 lang-pill delay-2 flex items-center gap-3 px-5 py-3 rounded-full"><span class="text-xl">🇫🇷</span><span class="font-medium text-gray-200">Nous vous aidons</span></div>
+                <div class="absolute bottom-32 left-20 lang-pill delay-3 flex items-center gap-3 px-5 py-3 rounded-full"><span class="text-xl">🇪🇸</span><span class="font-medium text-gray-300">Te ayudamos</span></div>
+                <div class="absolute bottom-10 right-20 lang-pill delay-4 flex items-center gap-3 px-5 py-3 rounded-full"><span class="text-xl">🇨🇳</span><span class="font-medium">我们会帮助你</span></div>
+            </div>
+        </section>
+
+        <section class="mt-20 z-20 relative">
+            <div class="bg-[#111] bg-opacity-80 backdrop-blur-xl rounded-[2.5rem] p-6 lg:p-10 features-glow border border-gray-800/50">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-800/60">
+                    <div class="flex items-start gap-4 pt-4 md:pt-0 md:px-4 first:pl-0"><div class="icon-box p-3 rounded-2xl shrink-0 border border-[#FFD700]/20"><span class="material-symbols-rounded text-[32px] text-[#FFD700]">bolt</span></div><div><h3 class="text-lg font-bold text-white mb-1">Быстрые ответы</h3><p class="text-gray-400 text-sm leading-relaxed">Решаем ваши вопросы в кратчайшие сроки</p></div></div>
+                    <div class="flex items-start gap-4 pt-4 md:pt-0 md:px-4"><div class="icon-box p-3 rounded-2xl shrink-0 border border-[#FFD700]/20"><span class="material-symbols-rounded text-[32px] text-[#FFD700]">settings</span></div><div><h3 class="text-lg font-bold text-white mb-1">Профессиональный подход</h3><p class="text-gray-400 text-sm leading-relaxed">Разбираемся в технологиях и бизнесе</p></div></div>
+                    <div class="flex items-start gap-4 pt-4 md:pt-0 md:px-4"><div class="icon-box p-3 rounded-2xl shrink-0 border border-[#FFD700]/20"><span class="material-symbols-rounded text-[32px] text-[#FFD700]">shield</span></div><div><h3 class="text-lg font-bold text-white mb-1">Надёжность</h3><p class="text-gray-400 text-sm leading-relaxed">Ваши задачи — наша ответственность</p></div></div>
+                    <div class="flex items-start gap-4 pt-4 md:pt-0 md:px-4 border-b-0"><div class="icon-box p-3 rounded-2xl shrink-0 border border-[#FFD700]/20"><span class="material-symbols-rounded text-[32px] text-[#FFD700]">favorite</span></div><div><h3 class="text-lg font-bold text-white mb-1">Индивидуальный подход</h3><p class="text-gray-400 text-sm leading-relaxed">Помогаем каждому клиенту</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-24 z-20 relative">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading relative inline-block">Мы поддерживаем<div class="absolute -bottom-2 left-0 w-16 h-1 bg-[#FFD700] rounded-full shadow-[0_0_10px_rgba(255,215,0,0.5)]"></div></h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-[#161616] hover:bg-[#1c1c1c] border border-gray-800/80 rounded-3xl p-6 transition-all duration-300 cursor-pointer group hover:border-[#FFD700]/30"><span class="material-symbols-rounded icon-outline text-[40px] text-[#FFD700] mb-6 group-hover:scale-110 transition-transform">monitor</span><h3 class="text-xl font-bold text-white mb-2">Разработка сайтов</h3><p class="text-gray-400 text-sm">Помощь по проектам<br>и доработкам</p></div>
+                <div class="bg-[#161616] hover:bg-[#1c1c1c] border border-gray-800/80 rounded-3xl p-6 transition-all duration-300 cursor-pointer group hover:border-[#FFD700]/30"><span class="material-symbols-rounded text-[40px] text-[#FFD700] mb-6 group-hover:scale-110 transition-transform">dns</span><h3 class="text-xl font-bold text-white mb-2">Хостинг и домены</h3><p class="text-gray-400 text-sm">Настройка и решение<br>проблем</p></div>
+                <div class="bg-[#161616] hover:bg-[#1c1c1c] border border-gray-800/80 rounded-3xl p-6 transition-all duration-300 cursor-pointer group hover:border-[#FFD700]/30"><span class="material-symbols-rounded text-[40px] text-[#FFD700] mb-6 group-hover:scale-110 transition-transform">settings</span><h3 class="text-xl font-bold text-white mb-2">Техническая поддержка</h3><p class="text-gray-400 text-sm">Диагностика и устранение<br>ошибок</p></div>
+                <div class="bg-[#161616] hover:bg-[#1c1c1c] border border-gray-800/80 rounded-3xl p-6 transition-all duration-300 cursor-pointer group hover:border-[#FFD700]/30"><span class="material-symbols-rounded text-[40px] text-[#FFD700] mb-6 group-hover:scale-110 transition-transform">groups</span><h3 class="text-xl font-bold text-white mb-2">Консультации</h3><p class="text-gray-400 text-sm">Помощь по любым<br>вопросам</p></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Form Modal -->
+    <div id="helpForm" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.8);align-items:center;justify-content:center">
+        <div style="background:#111;border:1px solid rgba(255,215,0,0.2);border-radius:24px;padding:32px;max-width:440px;width:90%;position:relative">
+            <button onclick="document.getElementById('helpForm').style.display='none'" style="position:absolute;top:12px;right:16px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:22px;cursor:pointer">&times;</button>
+            <h3 class="text-2xl font-bold font-heading mb-2">Нужна помощь?</h3>
+            <p class="text-gray-400 text-sm mb-6">Опишите проблему — ответим в течение часа.</p>
+            <form id="helpFormInner" onsubmit="submitHelp(event)" class="flex flex-col gap-4">
+                <input id="hf-name" placeholder="Ваше имя" required class="bg-[#1a1a1a] border border-gray-700 rounded-xl px-4 py-3 text-white text-sm outline-none focus:border-[#FFD700]">
+                <input id="hf-contact" placeholder="Telegram или телефон" required class="bg-[#1a1a1a] border border-gray-700 rounded-xl px-4 py-3 text-white text-sm outline-none focus:border-[#FFD700]">
+                <textarea id="hf-msg" placeholder="Опишите проблему..." required rows="4" class="bg-[#1a1a1a] border border-gray-700 rounded-xl px-4 py-3 text-white text-sm outline-none focus:border-[#FFD700] resize-none"></textarea>
+                <button type="submit" class="bg-[#FFD700] text-black py-3 rounded-xl font-bold hover:bg-[#e6c200] transition-colors">Отправить</button>
+            </form>
+            <div id="hf-success" style="display:none;text-align:center;padding:20px;color:#4ADE80;font-weight:600">Заявка отправлена! Ответим в ближайшее время.</div>
+        </div>
+    </div>
+
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <div id="chatPopup" class="bg-white text-black p-4 rounded-2xl rounded-br-none shadow-2xl mb-4 max-w-[220px] relative">
+            <button onclick="document.getElementById('chatPopup').style.display='none'" class="absolute -top-3 -right-3 bg-gray-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-gray-800"><span class="material-symbols-rounded text-[14px]">close</span></button>
+            <h4 class="font-bold text-sm mb-1">Нужна помощь?</h4>
+            <p class="text-xs text-gray-600 leading-tight">Мы уже здесь и готовы вам помочь!</p>
+        </div>
+        <button onclick="openForm()" class="w-16 h-16 bg-[#FFD700] rounded-full flex items-center justify-center text-3xl text-black shadow-[0_5px_20px_rgba(255,215,0,0.5)] hover:scale-105 transition-transform hover:bg-[#e6c200]">
+            <span class="material-symbols-rounded text-[32px]">forum</span>
+        </button>
+    </div>
+
+    <script>
+        function openForm(){document.getElementById('helpForm').style.display='flex';document.getElementById('chatPopup').style.display='none'}
+        document.getElementById('helpForm').addEventListener('click',function(e){if(e.target===this)this.style.display='none'});
+        async function submitHelp(e){
+            e.preventDefault();
+            var name=document.getElementById('hf-name').value.trim();
+            var contact=document.getElementById('hf-contact').value.trim();
+            var msg=document.getElementById('hf-msg').value.trim();
+            if(!name||!contact||!msg)return;
+            try{
+                await fetch('/api/help-apply',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,contact:contact,message:msg})});
+                document.getElementById('helpFormInner').style.display='none';
+                document.getElementById('hf-success').style.display='block';
+            }catch(e){}
+        }
+        var phrases=[{p1:"Мы вам",p2:"ПОМОЖЕМ"},{p1:"We will",p2:"HELP YOU"},{p1:"Wir helfen",p2:"IHNEN"},{p1:"Nous vous",p2:"AIDONS"},{p1:"Te",p2:"AYUDAMOS"},{p1:"我们会",p2:"帮助你"}];
+        var c=0,p1=document.getElementById('textPart1'),p2=document.getElementById('textPart2'),w=document.getElementById('heroTextWrapper');
+        setInterval(function(){w.classList.remove('opacity-100');w.classList.add('opacity-0');setTimeout(function(){c=(c+1)%phrases.length;p1.textContent=phrases[c].p1;p2.textContent=phrases[c].p2;w.classList.remove('opacity-0');w.classList.add('opacity-100')},500)},3500);
+    </script>
+</body>
+</html>
