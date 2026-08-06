@@ -561,7 +561,7 @@
             }
         }
     </style>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <div id="root"></div>
@@ -712,12 +712,12 @@
                 setTimeout(() => setActiveSheet('brief'), 300);
             };
 
-            const handleSubmit = () => {
+            const handleSubmit = () => { tsShow(); 
                 if (!formData.business || !formData.goal || !formData.contact) { alert('Заполните обязательные поля: бизнес, цель, контакт'); return; }
                 fetch('/api/brief-apply', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(Object.assign({},formData,{'cf-turnstile-response':(document.querySelector("[name=cf-turnstile-response]")||{}).value||""}))
+                    body: JSON.stringify(Object.assign({},formData,{'cf-turnstile-response':window._tsToken}))
                 });
                 setSubmitted(true);
             };
@@ -1031,15 +1031,7 @@
                         <div className="flex gap-4 items-center">
                             <button 
                                 onClick={handleSubmit}
-                                
-          
-                            <button 
-
-<script>
-window._tsToken = '';
-function tsCallback(token) { window._tsToken = token; }
-</script>
-                            <button className="flex-1 bg-ya-yellow hover:bg-[#F0D500] active:scale-[0.98] transition-all text-ya-dark font-black text-lg md:text-xl h-14 md:h-16 rounded-[20px] shadow-sm flex items-center justify-center gap-2"
+                                className="flex-1 bg-ya-yellow hover:bg-[#F0D500] active:scale-[0.98] transition-all text-ya-dark font-black text-lg md:text-xl h-14 md:h-16 rounded-[20px] shadow-sm flex items-center justify-center gap-2"
                             >
                                 {t.submitBtn} <Icon name="arrow-right" size={20} />
                             </button>
@@ -1096,7 +1088,11 @@ function tsCallback(token) { window._tsToken = token; }
     <script defer src="https://unpkg.com/lucide@latest"></script>
     <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script src="/static/ai-widget.js"></script>
-<div class="cf-turnstile" data-sitekey="0x4AAAAAAEIBlamy6FmDweCL" data-action="turnstile-spin-v2" data-callback="tsCallback" style="max-width:300px;margin:16px auto"></div>
-<script>window._tsToken="";function tsCallback(t){window._tsToken=t}</script>
+
+<div id="ts-box" style="display:none;max-width:320px;margin:12px auto">
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAAEIBlamy6FmDweCL" data-action="turnstile-spin-v2" data-callback="tsCallback"></div>
+</div>
+<script>window._tsToken="";function tsCallback(t){window._tsToken=t};function tsShow(){document.getElementById("ts-box").style.display="block";if(window.turnstile)window.turnstile.reset("#ts-box .cf-turnstile")}</script>
+
 </body>
 </html>
