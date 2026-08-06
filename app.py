@@ -297,8 +297,6 @@ def hr_apply():
     data = request.get_json()
     if not data:
         return jsonify({'error': 'No data'}), 400
-    if not verify_turnstile():
-        return jsonify({'error': 'Verification failed'}), 403
     data['project_id'] = 'HR-' + str(uuid.uuid4())[:6].upper()
     data['source'] = 'hr'
     data['created_at'] = datetime.utcnow().isoformat()
@@ -310,8 +308,6 @@ def brief_apply():
     data = request.get_json()
     if not data:
         return jsonify({'error': 'No data'}), 400
-    if not verify_turnstile():
-        return jsonify({'error': 'Verification failed'}), 403
     data['project_id'] = 'BF-' + str(uuid.uuid4())[:6].upper()
     data['source'] = 'brief'
     data['created_at'] = datetime.utcnow().isoformat()
@@ -372,8 +368,6 @@ def help_page():
 def business_apply():
     data = request.get_json()
     if not data: return jsonify({'error':'No data'}), 400
-    if not verify_turnstile():
-        return jsonify({'error': 'Verification failed'}), 403
     save_notification('business', data)
     return jsonify({'success': True})
 
@@ -382,8 +376,6 @@ def help_apply():
     data = request.get_json()
     if not data:
         return jsonify({'error': 'No data'}), 400
-    if not verify_turnstile():
-        return jsonify({'error': 'Verification failed'}), 403
     save_notification('help', {
         'name': data.get('name', ''),
         'contact': data.get('contact', ''),
@@ -400,25 +392,6 @@ def biz_redirect():
 @app.route('/business/<path:path>')
 def serve_biz(path='index.html'):
     return app.send_static_file(f'biz/{path or "index.html"}')
-
-import uuid
-TURNSTILE_SECRET = os.environ.get('TURNSTILE_SECRET', '')
-
-def verify_turnstile():
-    if not TURNSTILE_SECRET:
-        return True
-    token = request.headers.get('X-Turnstile-Response') or request.json.get('cf-turnstile-response', '')
-    if not token:
-        return False
-    try:
-        r = requests.post('https://challenges.cloudflare.com/turnstile/v0/siteverify', data={
-            'secret': TURNSTILE_SECRET,
-            'response': token,
-            'remoteip': request.remote_addr or ''
-        }, timeout=5)
-        return r.json().get('success', False)
-    except:
-        return False
 
 @app.route('/api/submit', methods=['POST'])
 def submit_project():

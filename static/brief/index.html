@@ -561,7 +561,6 @@
             }
         }
     </style>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <div id="root"></div>
@@ -712,12 +711,12 @@
                 setTimeout(() => setActiveSheet('brief'), 300);
             };
 
-            const handleSubmit = () => { tsShow(); 
+            const handleSubmit = () => {
                 if (!formData.business || !formData.goal || !formData.contact) { alert('Заполните обязательные поля: бизнес, цель, контакт'); return; }
                 fetch('/api/brief-apply', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(Object.assign({},formData,{'cf-turnstile-response':window._tsToken}))
+                    body: JSON.stringify(formData)
                 });
                 setSubmitted(true);
             };
@@ -1088,11 +1087,5 @@
     <script defer src="https://unpkg.com/lucide@latest"></script>
     <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script src="/static/ai-widget.js"></script>
-
-<div id="ts-box" style="display:none;max-width:320px;margin:12px auto">
-  <div class="cf-turnstile" data-sitekey="0x4AAAAAAEIBlamy6FmDweCL" data-action="turnstile-spin-v2" data-callback="tsCallback"></div>
-</div>
-<script>window._tsToken="";function tsCallback(t){window._tsToken=t};function tsShow(){document.getElementById("ts-box").style.display="block";if(window.turnstile)window.turnstile.reset("#ts-box .cf-turnstile")}</script>
-
 </body>
 </html>
