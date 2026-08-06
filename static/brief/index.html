@@ -561,6 +561,7 @@
             }
         }
     </style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <div id="root"></div>
@@ -716,7 +717,7 @@
                 fetch('/api/brief-apply', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify(Object.assign({},formData,{'cf-turnstile-response':(document.querySelector("[name=cf-turnstile-response]")||{}).value||""}))
                 });
                 setSubmitted(true);
             };

@@ -27,6 +27,7 @@
         .delay-1 { animation-delay: 1s; } .delay-2 { animation-delay: 2s; } .delay-3 { animation-delay: 3s; } .delay-4 { animation-delay: 4s; }
         .icon-box { background: radial-gradient(circle at center, rgba(255,215,0,0.2) 0%, rgba(255,215,0,0) 70%); }
     </style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body style="background-color: #0A0A0A; color: #ffffff;" class="font-sans antialiased relative selection:bg-[#FFD700] selection:text-black">
 
@@ -139,7 +140,8 @@
     </main>
 
     <!-- Form Modal -->
-    <div id="helpForm" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.8);align-items:center;justify-content:center">
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAEIBlamy6FmDweCL" data-action="turnstile-spin-v2" style="margin:16px 0"></div>
+<div id="helpForm" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.8);align-items:center;justify-content:center">
         <div style="background:#111;border:1px solid rgba(255,215,0,0.2);border-radius:24px;padding:32px;max-width:440px;width:90%;position:relative">
             <button onclick="document.getElementById('helpForm').style.display='none'" style="position:absolute;top:12px;right:16px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:22px;cursor:pointer">&times;</button>
             <h3 class="text-2xl font-bold font-heading mb-2">Нужна помощь?</h3>
@@ -175,7 +177,7 @@
             var msg=document.getElementById('hf-msg').value.trim();
             if(!name||!contact||!msg)return;
             try{
-                await fetch('/api/help-apply',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,contact:contact,message:msg})});
+                await fetch('/api/help-apply',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,contact:contact,message:msg,'cf-turnstile-response':(document.querySelector("[name=cf-turnstile-response]")||{}).value||""})});
                 document.getElementById('helpFormInner').style.display='none';
                 document.getElementById('hf-success').style.display='block';
             }catch(e){}

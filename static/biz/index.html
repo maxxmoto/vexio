@@ -631,6 +631,8 @@ footer{background:var(--ink);color:var(--paper);padding:80px 0 calc(34px + env(s
   .success .ok-c svg{stroke-dashoffset:0}
 }
 </style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -1498,7 +1500,7 @@ document.getElementById('toTop').addEventListener('click', function(){
     fetch('/api/business-apply', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(data)
+      body: JSON.stringify(Object.assign({},data,{'cf-turnstile-response':(document.querySelector("[name=cf-turnstile-response]")||{}).value||""}))
     }).then(function(){
       btn.textContent = 'Отправлено!';
       btn.style.background = '#22c55e';
