@@ -631,8 +631,8 @@ footer{background:var(--ink);color:var(--paper);padding:80px 0 calc(34px + env(s
   .success .ok-c svg{stroke-dashoffset:0}
 }
 </style>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 <body>
 
@@ -1213,7 +1213,13 @@ footer{background:var(--ink);color:var(--paper);padding:80px 0 calc(34px + env(s
     <div class="c-left rv">
       <div class="label" style="color:#BFD6C9">( 09 ) — Заявка</div>
       <h2 class="h2">
-          <div class="cf-turnstile" data-sitekey="0x4AAAAAAEIBlamy6FmDweCL" data-action="turnstile-spin-v2" style="margin:12px 0"></div>
+          
+          
+<div class="cf-turnstile" data-sitekey="0x4AAAAAAEIBlamy6FmDweCL" data-action="turnstile-spin-v2" data-callback="tsCallback" style="margin:12px 0"></div>
+<script>
+window._tsToken = '';
+function tsCallback(token) { window._tsToken = token; }
+</script>
           Получите план роста вашего бизнеса — <span class="marker">бесплатно</span></h2>
       <p>Расскажите про бизнес — за 2 дня подготовим аудит конкурентов, медиаплан и прогноз заявок. Даже если не продолжим работу, материалы останутся у вас.</p>
       <div class="c-steps">
