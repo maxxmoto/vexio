@@ -439,19 +439,8 @@ def submit_project():
     return jsonify({'success': True, 'project_id': pid}), 201
 
 @app.route('/admin')
-def admin_login():
-    if session.get('admin_logged_in'):
-        return redirect(url_for('admin_dashboard'))
-    error = None
-    if request.method == 'POST':
-        username = request.form.get('username', '')
-        password = request.form.get('password', '')
-        if username == ADMIN_USERNAME and check_password_hash(ADMIN_PASSWORD_HASH, password):
-            session['admin_logged_in'] = True
-            return redirect(url_for('admin_dashboard'))
-        else:
-            error = 'Invalid credentials'
-    return render_template('admin.html', error=error, login=True)
+def admin_panel():
+    return send_from_directory('templates', 'newadmin.html')
 
 @app.route('/admin/new')
 def admin_new():
