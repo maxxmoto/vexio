@@ -393,6 +393,18 @@ def biz_redirect():
 def serve_biz(path='index.html'):
     return app.send_static_file(f'biz/{path or "index.html"}')
 
+@app.route('/dev/')
+def dev_page():
+    return send_from_directory('templates', 'dev.html')
+
+@app.route('/api/dev-apply', methods=['POST'])
+def dev_apply():
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data'}), 400
+    save_notification('dev', data)
+    return jsonify({'success': True})
+
 @app.route('/api/submit', methods=['POST'])
 def submit_project():
     data = request.get_json()
