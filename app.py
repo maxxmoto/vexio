@@ -438,9 +438,22 @@ def submit_project():
     })
     return jsonify({'success': True, 'project_id': pid}), 201
 
-@app.route('/admin')
+@app.route('/admin', methods=['GET', 'POST'])
 def admin_panel():
-    return send_from_directory('templates', 'newadmin.html')
+    if session.get('admin_logged_in'):
+        return send_from_directory('templates', 'newadmin.html')
+    error = ''
+    if request.method == 'POST':
+        if request.form.get('password', '') == os.environ.get('ADMIN_PASSWORD', 'vexio2024'):
+            session['admin_logged_in'] = True
+            return redirect(url_for('admin_panel'))
+        error = 'Неверный пароль'
+    return render_template('admin_login.html', error=error)
+
+@app.route('/admin/logout')
+def admin_logout():
+    session.pop('admin_logged_in', None)
+    return redirect(url_for('admin_panel'))
 
 @app.route('/admin/new')
 def admin_new():
