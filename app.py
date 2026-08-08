@@ -566,11 +566,6 @@ def api_portfolio(category):
     items = [p for p in port if p['category'] == category]
     return jsonify(items)
 
-@app.route('/admin/logout')
-def admin_logout():
-    session.pop('admin_logged_in', None)
-    return redirect(url_for('admin_login'))
-
 @app.route('/admin/api/submissions')
 @login_required
 def api_submissions():
