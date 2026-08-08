@@ -438,17 +438,30 @@ def submit_project():
     })
     return jsonify({'success': True, 'project_id': pid}), 201
 
+import random
+
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_panel():
     if session.get('admin_logged_in'):
         return send_from_directory('templates', 'newadmin.html')
+    a = random.randint(1, 20)
+    b = random.randint(1, 20)
+    session['captcha_sum'] = a + b
     error = ''
     if request.method == 'POST':
-        if request.form.get('password', '') == os.environ.get('ADMIN_PASSWORD', 'vexio2024'):
+        user = request.form.get('username', '')
+        pwd = request.form.get('password', '')
+        cap = request.form.get('captcha', '')
+        if user != os.environ.get('ADMIN_USERNAME', 'admin'):
+            error = 'Неверный логин'
+        elif pwd != os.environ.get('ADMIN_PASSWORD', 'vexio2024'):
+            error = 'Неверный пароль'
+        elif not cap or int(cap) != session.get('captcha_sum', 0):
+            error = 'Неверный ответ на проверку'
+        else:
             session['admin_logged_in'] = True
             return redirect(url_for('admin_panel'))
-        error = 'Неверный пароль'
-    return render_template('admin_login.html', error=error)
+    return render_template('admin_login.html', error=error, a=a, b=b)
 
 @app.route('/admin/logout')
 def admin_logout():

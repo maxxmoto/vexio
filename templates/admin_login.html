@@ -20,6 +20,10 @@ p{font-size:14px;color:#68738a;margin-bottom:24px;line-height:1.5}
 input{width:100%;padding:14px 16px;border:1.5px solid #e6e8ee;border-radius:10px;font-size:15px;font-family:inherit;color:#182236;outline:none;transition:border-color .2s}
 input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
 input::placeholder{color:#98a1b3}
+.captcha-row{display:flex;gap:12px;align-items:center;margin:10px 0}
+.captcha-q{background:#f1f5f9;padding:10px 16px;border-radius:10px;font-weight:600;font-size:15px;color:#182236;white-space:nowrap;flex-shrink:0;user-select:none}
+.captcha-q span{color:#2563eb}
+.captcha-row input{flex:1}
 button{width:100%;padding:14px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:16px;transition:background .2s}
 button:hover{background:#1d4ed8}
 </style>
@@ -31,10 +35,15 @@ button:hover{background:#1d4ed8}
     <div class="brand-text">Vexio Admin</div>
   </div>
   <h1>Вход в админ-панель</h1>
-  <p>Введите пароль для доступа к заявкам и аналитике.</p>
+  <p>Введите логин и пароль для доступа.</p>
   {% if error %}<div class="error">{{ error }}</div>{% endif %}
   <form method="POST">
-    <input type="password" name="password" placeholder="Пароль" autofocus>
+    <input type="text" name="username" placeholder="Логин" autocomplete="username" style="margin-bottom:10px">
+    <input type="password" name="password" placeholder="Пароль" autocomplete="current-password">
+    <div class="captcha-row">
+      <div class="captcha-q">{{ a }} <span>+</span> {{ b }} <span>=</span></div>
+      <input type="number" name="captcha" placeholder="Ответ" required>
+    </div>
     <button type="submit">Войти</button>
   </form>
 </div>
