@@ -438,7 +438,7 @@ def submit_project():
     })
     return jsonify({'success': True, 'project_id': pid}), 201
 
-@app.route('/admin', methods=['GET', 'POST'])
+@app.route('/admin')
 def admin_login():
     if session.get('admin_logged_in'):
         return redirect(url_for('admin_dashboard'))
@@ -452,6 +452,30 @@ def admin_login():
         else:
             error = 'Invalid credentials'
     return render_template('admin.html', error=error, login=True)
+
+@app.route('/admin/new')
+def admin_new():
+    return send_from_directory('templates', 'newadmin.html')
+
+@app.route('/api/admin/data')
+def admin_data():
+    subs = load_all_submissions()
+    result = []
+    for s in subs:
+        cat = s.get('source', 'vx')
+        cat = {'site': 'vx', 'business': 'vx'}.get(cat, cat)
+        result.append({
+            'id': str(s.get('id', '')),
+            'cat': cat,
+            'title': (s.get('project_name') or s.get('project') or s.get('name') or s.get('position') or s.get('format') or '')[:60],
+            'author': s.get('name') or s.get('contact') or '',
+            'prio': 'medium',
+            'status': s.get('status', 'new'),
+            'date': (s.get('created_at') or '')[:16] if s.get('created_at') else '',
+            'desc': s.get('description') or s.get('goal') or s.get('message') or '',
+            'phone': s.get('phone') or s.get('contact') or '',
+        })
+    return jsonify(result)
 
 def load_all_submissions():
     subs = [s.to_dict() for s in Submission.query.order_by(Submission.created_at.desc()).all()]
