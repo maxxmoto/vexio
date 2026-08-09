@@ -1,647 +1,811 @@
 <!DOCTYPE html>
-<html lang="ru" prefix="og: https://ogp.me/ns# website: https://ogp.me/ns/website# profile: https://ogp.me/ns/profile#">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="Content-Language" content="ru" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;" />
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
-    <meta http-equiv="Cache-Control" content="public, max-age=86400, must-revalidate" />
-    <meta http-equiv="Pragma" content="public" />
-    <meta http-equiv="Expires" content="0" />
-    <meta http-equiv="imagetoolbar" content="no" />
-    <meta http-equiv="cleartype" content="on" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover" />
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vexio HR — студия ищет людей, которые делают веб</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/unbounded@latest/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/unbounded@latest/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/unbounded@latest/800.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope@latest/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope@latest/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope@latest/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope@latest/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope@latest/800.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/caveat@latest/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/caveat@latest/700.css">
+<style>
+:root{
+  --ink:#1B1B1B;
+  --paper:#FBFAF4;
+  --cell:rgba(58,86,158,.085);
+  --cell-strong:rgba(58,86,158,.14);
+  --marker:#FFE45E;
+  --marker-deep:#FFD33D;
+  --red:#E8503A;
+  --blue:#2F52E0;
+  --green:#3E9B4F;
+  --green-soft:#CDEBC6;
+  --peach:#FFD9C4;
+  --glass:rgba(255,255,255,.6);
+  --glass-brd:rgba(255,255,255,.9);
+  --sh:0 24px 60px -28px rgba(27,27,27,.28);
+  --r:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Manrope',system-ui,sans-serif;
+  color:var(--ink);
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(to right,var(--cell-strong) 1px,transparent 1px),
+    linear-gradient(to bottom,var(--cell-strong) 1px,transparent 1px),
+    linear-gradient(to right,var(--cell) 1px,transparent 1px),
+    linear-gradient(to bottom,var(--cell) 1px,transparent 1px);
+  background-size:120px 120px,120px 120px,24px 24px,24px 24px;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+::selection{background:var(--marker);color:var(--ink)}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:'Unbounded',sans-serif;line-height:1.08;letter-spacing:-.01em}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+section{scroll-margin-top:100px}
 
-    <!-- ===== PRIMARY META ===== -->
-    <title>Vexio HR — Карьера в студии разработки | Вакансии IT 2026</title>
-    <meta name="title" content="Vexio HR — Карьера в студии разработки | Вакансии IT 2026" />
-    <meta name="description" content="Ищем талантливых разработчиков, дизайнеров и менеджеров. Удалёнка, топовый стек, никакой бюрократии. Присоединяйся к Vexio — создаём сайты и сервисы, которыми пользуются все." />
-    <meta name="keywords" content="вакансии IT, работа разработчиком, frontend вакансии, backend разработчик, UX UI дизайнер, project manager, удалённая работа, IT карьера, Vexio Studio, веб-разработка, senior developer, middle developer, работа в IT 2026, вакансии программист, разработка сайтов вакансии, Careers, Jobs, Hiring, Tech Jobs, Remote Work, Web Development Jobs" />
-    <meta name="abstract" content="Карьерная страница Vexio Studio — международной студии веб-разработки. Открытые вакансии и условия работы: Senior Frontend, UX/UI, Backend, PM. Полная удалёнка." />
-    <meta name="author" content="Vexio Studio" />
-    <meta name="copyright" content="Vexio Studio, 2026. Все права защищены." />
-    <meta name="generator" content="Vexio Studio HR Platform v2.0" />
-    <meta name="rating" content="General" />
-    <meta name="page-type" content="HR Careers Job Listing" />
-    <meta name="audience" content="all" />
-    <meta name="subject" content="IT вакансии и карьера в веб-разработке" />
-    <meta name="topic" content="Careers, Jobs, Web Development" />
-    <meta name="category" content="Employment" />
-    <meta name="coverage" content="Worldwide" />
-    <meta name="distribution" content="Global" />
-    <meta name="resource-type" content="Document" />
-    <meta name="classification" content="Business and Employment" />
-    <meta name="language" content="Russian" />
-    <meta name="designer" content="Vexio Studio" />
-    <meta name="reply-to" content="hr@vexio.dev" />
-    <meta name="owner" content="Vexio Studio" />
-    <meta name="url" content="https://vexiostudio.ru/hr/" />
-    <meta name="identifier-url" content="https://vexiostudio.ru/hr/" />
-    <meta name="pagename" content="Vexio HR — Карьера" />
-    <meta name="doc-rights" content="Copyrighted work" />
-    <meta name="doc-class" content="Living Document" />
-    <meta name="original-source" content="https://vexiostudio.ru/hr/" />
-    <meta name="company" content="Vexio Studio" />
-    <meta name="medium" content="multimedia" />
-    <meta name="syndication-source" content="https://vexiostudio.ru/hr/" />
-    <meta name="original-source" content="https://vexiostudio.ru/hr/" />
+/* ---------- служебные линии ---------- */
+#progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--red);z-index:120}
+.margin-line{position:fixed;top:0;bottom:0;left:clamp(20px,6vw,86px);width:2px;background:rgba(232,80,58,.28);z-index:0;pointer-events:none}
+@media(max-width:1100px){.margin-line{display:none}}
 
-    <!-- ===== SEARCH ENGINES ===== -->
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta name="googlebot-news" content="index, follow" />
-    <meta name="googlebot-image" content="index, follow, all" />
-    <meta name="googlebot-mobile" content="index, follow" />
-    <meta name="google-site-verification" content="" />
-    <meta name="yandex-verification" content="" />
-    <meta name="yandex" content="index, follow" />
-    <meta name="yandex-tableau-widget" content="logo=https://vexiostudio.ru/hr/logo.png, color=#09090b" />
-    <meta name="BingBOT" content="index, follow" />
-    <meta name="Slurp" content="index, follow" />
-    <meta name="DuckDuckBot" content="index, follow" />
-    <meta name="facebook-domain-verification" content="" />
-    <meta name="p:domain_verify" content="" />
-    <meta name="norton-safeweb-site-verification" content="" />
-    <meta name="revisit-after" content="3 days" />
-    <meta name="no-email-collection" content="https://vexiostudio.ru/hr/" />
-    <meta name="news_keywords" content="вакансии IT, карьера разработчика, работа в IT, Vexio Studio, удалёнка, Frontend, Backend, UX/UI, Project Manager" />
-    <link rel="canonical" href="https://vexiostudio.ru/hr/" />
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="./sitemap.xml" />
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
 
-    <!-- ===== DUBLIN CORE ===== -->
-    <meta name="DC.title" lang="ru" content="Vexio HR — Карьера в студии разработки | Вакансии IT" />
-    <meta name="DC.title" lang="en" content="Vexio HR — Careers in Web Development Studio | IT Jobs" />
-    <meta name="DC.creator" content="Vexio Studio" />
-    <meta name="DC.contributor" content="Vexio HR Team" />
-    <meta name="DC.subject" lang="ru" content="IT вакансии, веб-разработка, карьера" />
-    <meta name="DC.subject" lang="en" content="IT jobs, web development, careers" />
-    <meta name="DC.description" lang="ru" content="Ищем талантливых разработчиков, дизайнеров и менеджеров. Удалённая работа." />
-    <meta name="DC.description" lang="en" content="Hiring talented developers, designers and managers. Remote work." />
-    <meta name="DC.publisher" content="Vexio Studio" />
-    <meta name="DC.date" content="2026-08-01" scheme="W3CDTF" />
-    <meta name="DC.date.created" content="2026-08-01" scheme="W3CDTF" />
-    <meta name="DC.date.modified" content="2026-08-01" scheme="W3CDTF" />
-    <meta name="DC.date.valid" content="2026-08-01/2026-12-31" scheme="W3CDTF" />
-    <meta name="DC.type" content="Text.Service.JobPosting" scheme="DCMIType" />
-    <meta name="DC.format" content="text/html" scheme="IMT" />
-    <meta name="DC.identifier" content="https://vexiostudio.ru/hr/" scheme="URI" />
-    <meta name="DC.language" content="ru" scheme="RFC4646" />
-    <meta name="DC.coverage" content="World" />
-    <meta name="DC.rights" content="Copyright Vexio Studio, 2026" />
-    <meta name="DC.relation" content="https://vexiostudio.ru/" />
-    <meta name="DC.source" content="https://vexiostudio.ru/hr/" />
-    <meta name="DC.rightsHolder" content="Vexio Studio" />
-    <meta name="DC.provenance" content="Vexio Studio HR Platform" />
+/* ---------- маркер / скетч ---------- */
+.hl{background:linear-gradient(100deg,var(--marker) 10%,var(--marker-deep) 90%);padding:.04em .16em;margin:0 -.04em;border-radius:.22em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hl-g{background:var(--green-soft);padding:.04em .16em;margin:0 -.04em;border-radius:.22em;box-decoration-break:clone}
+.hl-line{background:linear-gradient(to top,transparent 12%,var(--marker) 12% 58%,transparent 58%);padding:0 .1em}
+.scr,.circ{position:relative;display:inline-block}
+.scr svg{position:absolute;left:-2%;bottom:-.14em;width:104%;height:.26em;overflow:visible}
+.scr path{fill:none;stroke:var(--red);stroke-width:7;stroke-linecap:round;stroke-dasharray:300;stroke-dashoffset:300}
+.circ{padding:.02em .12em}
+.circ svg{position:absolute;inset:-.14em -.3em;overflow:visible}
+.circ path{fill:none;stroke:var(--blue);stroke-width:5;stroke-linecap:round;stroke-dasharray:300;stroke-dashoffset:300}
+.in .scr path,.in .circ path,body.loaded .hero .scr path,body.loaded .hero .circ path{stroke-dashoffset:0;transition:stroke-dashoffset 1.1s ease .5s}
+.note{font-family:'Caveat',cursive;font-size:clamp(1.15rem,2vw,1.5rem);color:var(--red);transform:rotate(-2deg)}
+.doodle{position:absolute;pointer-events:none}
 
-    <!-- ===== GEOTAGS ===== -->
-    <meta name="geo.region" content="RU" />
-    <meta name="geo.placename" content="Россия" />
-    <meta name="geo.country" content="RU" />
-    <meta name="ICBM" content="55.7558, 37.6173" />
-    <meta name="geo.position" content="55.7558;37.6173" />
+/* ---------- кнопки ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:'Manrope';font-weight:800;font-size:1rem;padding:16px 28px;border-radius:999px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);text-decoration:none;transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s;box-shadow:0 0 0 rgba(27,27,27,0)}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--marker-deep)}
+.btn-y{background:var(--marker);color:var(--ink)}
+.btn-y:hover{box-shadow:5px 5px 0 var(--ink)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{box-shadow:5px 5px 0 rgba(27,27,27,.18)}
 
-    <!-- ===== OPEN GRAPH ===== -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://vexiostudio.ru/hr/" />
-    <meta property="og:title" content="Vexio HR — Карьера в студии разработки" />
-    <meta property="og:description" content="Ищем своих людей. Удалёнка, топовый стек, лучшая команда. Frontend, Backend, UX/UI, PM — откликайся!" />
-    <meta property="og:site_name" content="Vexio HR" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:determiner" content="auto" />
-    <meta property="og:brand" content="Vexio Studio" />
-    <meta property="og:image" content="https://vexiostudio.ru/hr/og-image.png" />
-    <meta property="og:image:secure_url" content="https://vexiostudio.ru/hr/og-image.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Vexio HR — присоединяйся к команде" />
-    <meta property="og:country_name" content="Russia" />
-    <meta property="og:ttl" content="345600" />
-    <meta property="og:see_also" content="https://github.com/maxxmoto/vexio" />
-    <meta property="og:see_also" content="https://vexiostudio.ru/" />
-    <meta property="og:email" content="hr@vexio.dev" />
-    <meta property="og:phone_number" content="" />
-    <meta property="og:fax_number" content="" />
-    <meta property="og:updated_time" content="2026-08-01T00:00:00+03:00" />
-    <meta property="og:rich_attachment" content="true" />
-    <meta property="profile:username" content="vexiostudio" />
+/* ---------- шапка ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .35s,box-shadow .35s,backdrop-filter .35s}
+header.scrolled{background:var(--glass);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid var(--glass-brd);box-shadow:0 8px 30px -18px rgba(27,27,27,.2)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:78px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:'Unbounded';font-weight:800;font-size:1.25rem}
+.logo b{background:var(--marker);border:2px solid var(--ink);border-radius:10px;padding:2px 8px;font-weight:800;transform:rotate(-3deg);box-shadow:3px 3px 0 var(--ink);transition:transform .3s}
+.logo:hover b{transform:rotate(3deg)}
+nav.main{display:flex;gap:26px}
+nav.main a{text-decoration:none;font-weight:700;font-size:.95rem;position:relative}
+nav.main a::after{content:"";position:absolute;left:0;bottom:-6px;height:6px;width:100%;background:linear-gradient(to top,transparent 15%,var(--marker) 15% 80%,transparent 80%);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+nav.main a:hover::after{transform:scaleX(1)}
+.hd .btn{padding:12px 22px;font-size:.9rem}
+.burger{display:none;width:46px;height:46px;border:2px solid var(--ink);border-radius:12px;background:#fff;position:relative;z-index:130}
+.burger i,.burger i::before{content:"";position:absolute;left:11px;right:11px;height:2.5px;background:var(--ink);border-radius:2px;transition:transform .35s,top .35s}
+.burger i{top:18px}
+.burger i::before{left:0;right:0;top:8px}
+body.menu-open .burger i{top:22px;transform:rotate(45deg)}
+body.menu-open .burger i::before{top:0;transform:rotate(-90deg)}
+.mnav{position:fixed;inset:0;z-index:110;background:rgba(251,250,244,.88);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);display:flex;flex-direction:column;justify-content:center;padding:100px 32px 40px;gap:6px;transform:translateY(-102%);transition:transform .5s cubic-bezier(.22,1,.36,1)}
+body.menu-open .mnav{transform:none}
+.mnav a{font-family:'Unbounded';font-weight:700;font-size:clamp(1.5rem,7vw,2.2rem);text-decoration:none;padding:10px 0;border-bottom:1.5px dashed rgba(27,27,27,.2)}
+.mnav a:hover{color:var(--red)}
+.mnav .note{margin-top:24px}
+.mnav-close{position:absolute;top:22px;right:22px;width:56px;height:56px;border:2px solid var(--ink);border-radius:50%;background:#fff;font-size:1.35rem;font-weight:800;line-height:1;box-shadow:4px 4px 0 var(--marker-deep);transition:transform .3s;display:grid;place-items:center}
+.mnav-close:hover{transform:rotate(90deg)}
+@media(max-width:960px){nav.main,.hd .btn{display:none}.burger{display:block}}
 
-    <!-- ===== TWITTER CARD ===== -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@vexiostudio" />
-    <meta name="twitter:creator" content="@vexiostudio" />
-    <meta name="twitter:domain" content="vexiostudio.ru" />
-    <meta name="twitter:url" content="https://vexiostudio.ru/hr/" />
-    <meta name="twitter:title" content="Vexio HR — Карьера в студии разработки" />
-    <meta name="twitter:description" content="Ищем своих людей. Удалёнка, топовый стек, лучшая команда. Frontend, Backend, UX/UI, PM — откликайся!" />
-    <meta name="twitter:image" content="https://vexiostudio.ru/hr/og-image.png" />
-    <meta name="twitter:image:alt" content="Vexio HR — присоединяйся к команде" />
-    <meta name="twitter:label1" content="Вакансий" />
-    <meta name="twitter:data1" content="4" />
-    <meta name="twitter:label2" content="Формат" />
-    <meta name="twitter:data2" content="Удалёнка" />
-    <meta name="twitter:app:name:iphone" content="" />
-    <meta name="twitter:app:id:iphone" content="" />
-    <meta name="twitter:app:name:ipad" content="" />
-    <meta name="twitter:app:id:ipad" content="" />
-    <meta name="twitter:app:name:googleplay" content="" />
-    <meta name="twitter:app:id:googleplay" content="" />
+/* ---------- герой ---------- */
+.hero{padding:120px 0 60px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(2.5rem,6.4vw,5.4rem);font-weight:800;margin:6px 0 26px}
+.lm{display:block;overflow:hidden;padding:.14em .12em .2em;margin:-.14em -.12em -.2em}
+.lm-i{display:block;transform:translateY(145%);transition:transform 1s cubic-bezier(.22,1,.36,1)}
+body.loaded .lm:nth-child(1) .lm-i{transition-delay:.1s}
+body.loaded .lm:nth-child(2) .lm-i{transition-delay:.22s}
+body.loaded .lm:nth-child(3) .lm-i{transition-delay:.34s}
+body.loaded .lm-i{transform:none}
+.hero p.lead{font-size:clamp(1.02rem,1.5vw,1.2rem);max-width:52ch;font-weight:500}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-top:34px;align-items:center}
+.hero .note{margin-left:6px}
+/* коллаж */
+.collage{position:relative;height:660px}
+.polaroid{background:#fff;padding:12px 12px 14px;border-radius:8px;border:1px solid rgba(27,27,27,.1);box-shadow:var(--sh);position:relative;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.polaroid:hover{transform:rotate(0deg) scale(1.02)!important;z-index:5}
+.polaroid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px}
+.polaroid figcaption{font-family:'Caveat';font-size:1.35rem;text-align:center;padding-top:10px}
+.tape::before{content:"";position:absolute;top:-14px;left:50%;width:96px;height:28px;background:rgba(255,224,130,.8);transform:translateX(-50%) rotate(-3deg);box-shadow:0 2px 6px rgba(27,27,27,.12)}
+.pol-main{width:82%;margin-left:auto;transform:rotate(-2.5deg)}
+.pol-small{width:52%;position:absolute;left:-2%;bottom:2%;transform:rotate(4deg);z-index:2}
+.glass{background:var(--glass);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);border:1px solid var(--glass-brd);border-radius:var(--r);box-shadow:var(--sh)}
+.glass-stat{position:absolute;top:-2%;right:-1%;padding:20px 24px;transform:rotate(2deg);z-index:3;text-align:left}
+.glass-stat b{font-family:'Unbounded';font-size:1.5rem;display:block}
+.glass-stat span{font-size:.85rem;font-weight:600}
+.sticker{position:absolute;bottom:16%;right:2%;z-index:4;background:#fff;border:2px dashed var(--red);color:var(--red);border-radius:999px;padding:10px 20px;font-family:'Caveat';font-size:1.35rem;font-weight:700;transform:rotate(-7deg);box-shadow:4px 4px 0 rgba(27,27,27,.12)}
+.doodle-arrow{top:34%;left:-4%;width:110px;transform:rotate(8deg)}
+.doodle-arrow path{fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+/* статистика */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px dashed rgba(27,27,27,.25);border-bottom:2px dashed rgba(27,27,27,.25);margin-top:80px}
+.stat{padding:30px 26px;border-left:2px dashed rgba(27,27,27,.25)}
+.stat:first-child{border-left:none}
+.stat-n{font-family:'Unbounded';font-weight:800;font-size:clamp(1.9rem,3.6vw,3rem);display:block}
+.stat-n em{font-style:normal;color:var(--red)}
+.stat-l{font-weight:600;font-size:.92rem}
+@media(max-width:1020px){
+  .hero{padding:110px 0 60px}
+  .hero-grid{grid-template-columns:1fr}
+  .collage{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:10px}
+  .pol-main{width:100%;grid-column:1/-1;transform:rotate(-1.5deg)}
+  .pol-small{position:static;width:100%;transform:rotate(1.5deg)}
+  .glass-stat{position:static;transform:none;grid-column:1/-1;display:flex;align-items:center;gap:18px;padding:18px 24px}
+  .glass-stat b{font-size:2rem}
+  .sticker{right:6%;bottom:-16px}
+  .doodle-arrow{display:none}
+}
+@media(max-width:640px){
+  .glass-stat{gap:14px;padding:16px 20px}
+  .glass-stat b{font-size:1.7rem}
+  .stats{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:none}.stat{padding:20px 18px}
+}
 
-    <!-- ===== DISCORD / SLACK / TELEGRAM EMBEDS ===== -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#34d399" />
+/* ---------- бегущая строка ---------- */
+.marquee{overflow:hidden;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);background:var(--marker);transform:rotate(-1.2deg);margin:70px -20px;padding:14px 0}
+.mq-track{display:flex;width:max-content;animation:mq 26s linear infinite}
+.mq-track span{font-family:'Unbounded';font-weight:700;font-size:clamp(.95rem,1.8vw,1.25rem);white-space:nowrap;padding:0 18px;display:flex;align-items:center;gap:18px}
+.mq-track span::after{content:"✦";color:var(--red)}
+@keyframes mq{to{transform:translateX(-50%)}}
 
-    <!-- ===== VK / VKONTAKTE ===== -->
-    <meta property="vk:image" content="https://vexiostudio.ru/hr/og-image.png" />
+/* ---------- заголовки секций ---------- */
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:52px}
+.sec-head h2{font-size:clamp(1.9rem,4.4vw,3.3rem);font-weight:800;max-width:22ch;margin-top:16px}
+.sec-num{font-family:'Caveat';font-size:1.4rem;color:var(--blue);font-weight:700}
 
-    <!-- ===== PINTEREST RICH PINS ===== -->
-    <meta name="pinterest-rich-pin" content="true" />
+/* ---------- вакансии ---------- */
+#jobs{padding:40px 0 90px}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{border:2px solid var(--ink);background:#fff;border-radius:999px;padding:10px 20px;font-weight:800;font-size:.9rem;transition:all .25s}
+.chip:hover{transform:translateY(-2px)}
+.chip.on{background:var(--ink);color:var(--paper);box-shadow:4px 4px 0 var(--marker-deep)}
+.jobs-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.job{border:2px solid var(--ink);border-radius:var(--r);background:rgba(255,255,255,.82);padding:30px 30px 26px;position:relative;display:flex;flex-direction:column;gap:14px;animation:pop .5s cubic-bezier(.22,1,.36,1)}
+@keyframes pop{from{opacity:0;transform:translateY(22px) scale(.97)}to{opacity:1}}
+.job:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--ink)}
+.job-top{display:flex;justify-content:space-between;align-items:center}
+.job-num{font-family:'Caveat';font-size:1.4rem;font-weight:700;color:rgba(27,27,27,.45)}
+.job-hot{font-family:'Caveat';font-size:1.15rem;font-weight:700;color:#fff;background:var(--red);padding:3px 14px;border-radius:999px;transform:rotate(3deg)}
+.job h3{font-size:clamp(1.15rem,2vw,1.5rem);font-weight:700}
+.job-sub{font-weight:600;color:rgba(27,27,27,.6);margin-top:-8px}
+.job-salary{font-family:'Unbounded';font-weight:700;font-size:clamp(1.05rem,1.8vw,1.35rem)}
+.job-meta{display:flex;gap:8px;flex-wrap:wrap}
+.job-meta span{font-size:.8rem;font-weight:700;border:1.5px solid rgba(27,27,27,.35);border-radius:999px;padding:5px 12px;background:#fff}
+.job-tags{display:flex;gap:10px;flex-wrap:wrap;font-size:.85rem;font-weight:600;color:rgba(27,27,27,.6)}
+.job-tags i{font-style:normal;color:var(--blue)}
+.job-apply{margin-top:auto;align-self:flex-start;background:none;border:none;font-weight:800;font-size:1rem;color:var(--ink);display:inline-flex;gap:8px;align-items:center;padding:10px 0 0;border-top:2px dashed rgba(27,27,27,.3);width:100%;justify-content:space-between}
+.job-apply .arr{transition:transform .3s}
+.job-apply:hover{color:var(--red)}
+.job-apply:hover .arr{transform:translateX(6px)}
+@media(max-width:900px){.jobs-grid{grid-template-columns:1fr}}
 
-    <!-- ===== APPLE / iOS ===== -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Vexio HR" />
-    <meta name="apple-itunes-app" content="app-id=" />
-    <meta name="format-detection" content="telephone=yes" />
-    <meta name="format-detection" content="address=no" />
-    <link rel="apple-touch-icon" href="/hr/assets/logo-BWCcbKzH.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="/hr/assets/logo-BWCcbKzH.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/hr/assets/logo-BWCcbKzH.png" />
-    <link rel="apple-touch-icon" sizes="167x167" href="/hr/assets/logo-BWCcbKzH.png" />
-    <link rel="apple-touch-icon-precomposed" href="/hr/assets/logo-BWCcbKzH.png" />
-    <link rel="apple-touch-startup-image" href="/hr/assets/logo-BWCcbKzH.png" media="(device-width: 320px) and (device-height: 568px)" />
-    <link rel="apple-touch-startup-image" href="/hr/assets/logo-BWCcbKzH.png" media="(device-width: 375px) and (device-height: 667px)" />
+/* ---------- процесс ---------- */
+#process{padding:60px 0 90px}
+.proc{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:start}
+.proc-left{position:sticky;top:120px}
+.proc-left h2{font-size:clamp(1.9rem,4vw,3rem);font-weight:800;margin:16px 0 22px}
+.proc-left .note{display:block;margin-top:26px;font-size:1.5rem}
+.steps{display:flex;flex-direction:column;gap:26px}
+.step{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;position:relative}
+.step-n{width:62px;height:62px;border:2.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-family:'Unbounded';font-weight:800;font-size:1.15rem;background:#fff;box-shadow:4px 4px 0 var(--marker);position:relative;z-index:1}
+.step:not(:last-child)::before{content:"";position:absolute;left:31px;top:66px;bottom:-22px;border-left:2.5px dashed rgba(27,27,27,.3)}
+.step-card{border:2px solid var(--ink);border-radius:var(--r);background:rgba(255,255,255,.85);padding:24px 26px;transition:transform .3s,box-shadow .3s}
+.step-card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink)}
+.step-card h3{font-size:1.15rem;margin-bottom:8px}
+.step-card p{font-size:.98rem}
+.step-time{display:inline-block;margin-top:12px;font-family:'Caveat';font-size:1.25rem;font-weight:700;color:var(--green)}
+@media(max-width:960px){.proc{grid-template-columns:1fr}.proc-left{position:static}}
 
-    <!-- ===== MICROSOFT ===== -->
-    <meta name="application-name" content="Vexio HR" />
-    <meta name="msapplication-TileColor" content="#09090b" />
-    <meta name="msapplication-TileImage" content="./logo.png" />
-    <meta name="msapplication-square70x70logo" content="./logo.png" />
-    <meta name="msapplication-square150x150logo" content="./logo.png" />
-    <meta name="msapplication-wide310x150logo" content="./logo.png" />
-    <meta name="msapplication-square310x310logo" content="./logo.png" />
-    <meta name="msapplication-tooltip" content="Vexio HR — вакансии в студии веб-разработки" />
-    <meta name="msapplication-starturl" content="https://vexiostudio.ru/hr/" />
-    <meta name="msapplication-navbutton-color" content="#34d399" />
-    <meta name="msapplication-window" content="width=1024;height=768" />
-    <meta name="msapplication-task" content="name=Вакансии;action-uri=https://vexiostudio.ru/hr/#vacancies;icon-uri=./favicon.svg" />
-    <meta name="msapplication-task" content="name=Культура;action-uri=https://vexiostudio.ru/hr/#culture;icon-uri=./favicon.svg" />
-    <meta name="msapplication-notification" content="frequency=30;polling-uri=https://vexiostudio.ru/hr/notifications.xml" />
-    <meta name="msapplication-config" content="none" />
+/* ---------- bento / почему мы ---------- */
+#why{padding:60px 0 90px}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.tile{border:2px solid var(--ink);border-radius:26px;padding:28px;position:relative;overflow:hidden;background:#fff;transition:transform .3s,box-shadow .3s}
+.tile:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--ink)}
+.tile h3{font-size:clamp(1.1rem,1.8vw,1.45rem);margin-bottom:10px}
+.tile p{font-size:.97rem}
+.tile .big{font-family:'Unbounded';font-weight:800;font-size:clamp(2.2rem,4.2vw,3.4rem)}
+.b-a{grid-column:1/4;grid-row:1/3;padding:0;border:none;background:none;box-shadow:none}
+.b-a:hover{transform:none;box-shadow:none}
+.b-a .ph{width:100%;height:100%;min-height:460px;border-radius:26px;overflow:hidden;position:relative;border:2px solid var(--ink)}
+.b-a img{width:100%;height:100%;object-fit:cover}
+.kb img{animation:kb 16s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.09) translate(1.5%,-1.5%)}}
+.b-a .cap{position:absolute;left:18px;bottom:18px;right:18px;padding:18px 22px}
+.b-a .cap b{font-family:'Unbounded';font-size:1.15rem}
+.b-b{grid-column:4/7;background:var(--marker)}
+.b-c{grid-column:4/7;padding:0;border:none;background:none}
+.b-c:hover{transform:none;box-shadow:none}
+.b-c .ph{height:100%;min-height:240px;border-radius:26px;overflow:hidden;border:2px solid var(--ink);position:relative}
+.b-c img{width:100%;height:100%;object-fit:cover}
+.b-d{grid-column:1/3;background:var(--green-soft)}
+.b-e{grid-column:3/5}
+.b-f{grid-column:5/7;background:var(--peach)}
+.tile .doodle-star{position:absolute;right:16px;top:14px;font-size:1.6rem;color:var(--red)}
+@media(max-width:980px){
+  .bento{grid-template-columns:1fr 1fr}
+  .b-a{grid-column:1/-1;grid-row:auto}
+  .b-a .ph{min-height:340px}
+  .b-b,.b-c{grid-column:1/-1}
+  .b-d{grid-column:1/2}.b-e{grid-column:2/3}.b-f{grid-column:1/-1}
+}
+@media(max-width:620px){.bento{grid-template-columns:1fr}.b-d,.b-e{grid-column:1/-1}}
 
-    <!-- ===== THEME & COLORS ===== -->
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#34d399" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#09090b" />
-    <meta name="color-scheme" content="dark light" />
-    <meta name="supported-color-schemes" content="dark light" />
+/* ---------- команда ---------- */
+#team{padding:60px 0 90px}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.team-grid .polaroid{transform:rotate(var(--rot,0deg))}
+.team-grid .polaroid:nth-child(1){--rot:-2.5deg}
+.team-grid .polaroid:nth-child(2){--rot:2deg}
+.team-grid .polaroid:nth-child(3){--rot:-1.5deg}
+.team-grid .polaroid:nth-child(4){--rot:2.5deg}
+.team-grid img{aspect-ratio:3/3.4}
+.team-role{font-family:'Manrope';font-weight:700;font-size:.85rem;text-align:center;color:rgba(27,27,27,.6);padding-top:2px}
+@media(max-width:960px){.team-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.team-grid{grid-template-columns:1fr}}
 
-    <!-- ===== FAVICONS ===== -->
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/hr/assets/logo-BWCcbKzH.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/hr/assets/logo-BWCcbKzH.png" />
-    <link rel="icon" sizes="192x192" href="/hr/assets/logo-BWCcbKzH.png" />
-    <link rel="icon" sizes="512x512" href="/hr/assets/logo-BWCcbKzH.png" />
-    <link rel="shortcut icon" href="./favicon.svg" />
-    <link rel="mask-icon" href="./favicon.svg" color="#34d399" />
+/* ---------- отзывы ---------- */
+#voices{padding:20px 0 90px}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.quote{padding:34px 30px;position:relative}
+.quote::before{content:"«";font-family:'Caveat';font-size:4rem;line-height:1;color:var(--red);position:absolute;top:14px;left:22px}
+.quote p{font-family:'Caveat';font-size:1.5rem;line-height:1.35;margin:26px 0 20px}
+.quote b{font-weight:800}
+.quote span{display:block;font-size:.85rem;font-weight:600;color:rgba(27,27,27,.6)}
+@media(max-width:960px){.quotes{grid-template-columns:1fr}}
 
-    <!-- ===== PERFORMANCE ===== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="preload" as="image" href="./logo.webp" type="image/webp" />
+/* ---------- FAQ ---------- */
+#faq{padding:20px 0 90px}
+.faq-list{max-width:820px}
+.faq-item{border-bottom:2px dashed rgba(27,27,27,.25)}
+.faq-q{width:100%;background:none;border:none;display:flex;justify-content:space-between;align-items:center;gap:20px;text-align:left;padding:26px 4px;font-family:'Unbounded';font-weight:700;font-size:clamp(1rem,2vw,1.25rem)}
+.faq-q .pl{width:38px;height:38px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:1.3rem;font-family:'Manrope';flex:none;transition:transform .4s,background .3s}
+.faq-item.open .pl{transform:rotate(45deg);background:var(--marker)}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.22,1,.36,1)}
+.faq-item.open .faq-a{grid-template-rows:1fr}
+.faq-a>div{overflow:hidden}
+.faq-a p{padding:0 60px 26px 4px;font-size:1rem;max-width:64ch}
 
-    <!-- ===== ALTERNATES ===== -->
-    <link rel="alternate" hreflang="ru" href="https://vexiostudio.ru/hr/" />
-    <link rel="alternate" hreflang="en" href="https://vexiostudio.ru/hr/en/" />
-    <link rel="alternate" hreflang="x-default" href="https://vexiostudio.ru/hr/" />
-    <link rel="alternate" type="application/rss+xml" title="Vexio HR — Новые вакансии" href="https://vexiostudio.ru/hr/rss.xml" />
-    <link rel="alternate" type="application/atom+xml" title="Vexio HR — Вакансии Atom" href="https://vexiostudio.ru/hr/atom.xml" />
+/* ---------- отклик ---------- */
+#apply{padding:40px 0 110px}
+.apply-panel{background:var(--marker);border:2.5px solid var(--ink);border-radius:32px;box-shadow:12px 12px 0 var(--ink);padding:clamp(30px,5vw,70px);position:relative;transform:rotate(-.6deg);background-image:linear-gradient(to right,rgba(27,27,27,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(27,27,27,.07) 1px,transparent 1px);background-size:24px 24px;transition:box-shadow .4s}
+.apply-panel.flash{box-shadow:0 0 0 8px rgba(47,82,224,.35),12px 12px 0 var(--ink)}
+.apply-panel h2{font-size:clamp(1.9rem,4.6vw,3.4rem);font-weight:800;max-width:16ch}
+.apply-panel .note{color:var(--ink);font-size:1.5rem;display:inline-block;margin-top:14px;transform:rotate(-2deg)}
+.form-card{background:#fff;border:2px solid var(--ink);border-radius:24px;padding:clamp(24px,4vw,46px);margin-top:36px;max-width:760px;box-shadow:8px 8px 0 rgba(27,27,27,.9)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.f-field{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.f-field label{font-weight:800;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase}
+.f-field input,.f-field select,.f-field textarea{font-family:'Manrope';font-size:1.05rem;font-weight:600;border:none;border-bottom:2.5px solid var(--ink);background:transparent;padding:10px 2px;border-radius:0;color:var(--ink);transition:background .3s,border-color .3s}
+.f-field textarea{resize:vertical;min-height:84px}
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus{outline:none;background:rgba(255,228,94,.35);border-color:var(--blue)}
+.f-field.err input{border-color:var(--red);background:rgba(232,80,58,.08)}
+.f-check{display:flex;gap:12px;align-items:flex-start;font-size:.85rem;font-weight:600;margin:6px 0 26px}
+.f-check input{width:22px;height:22px;accent-color:var(--ink)}
+.success{display:none;text-align:center;padding:30px 10px}
+.success.show{display:block;animation:pop .6s cubic-bezier(.22,1,.36,1)}
+.success .ok{width:88px;height:88px;margin:0 auto 22px;border-radius:50%;background:var(--green-soft);border:2.5px solid var(--ink);display:grid;place-items:center;font-size:2.4rem}
+.success h3{font-size:1.6rem;margin-bottom:10px}
+@media(max-width:700px){.f-row{grid-template-columns:1fr}}
 
-    <!-- ===== STRUCTURED DATA / JSON-LD ===== -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://vexiostudio.ru/hr/#organization",
-          "name": "Vexio Studio",
-          "alternateName": "Vexio",
-          "legalName": "Vexio Studio",
-          "url": "https://vexiostudio.ru/hr/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://vexiostudio.ru/hr/logo.png",
-            "width": "512",
-            "height": "512"
-          },
-          "image": "https://vexiostudio.ru/hr/logo.png",
-          "description": "Студия веб-разработки. Создаём сайты и сервисы, которые получают награды.",
-          "foundingDate": "2020",
-          "foundingLocation": {
-            "@type": "Place",
-            "address": { "@type": "PostalAddress", "addressCountry": "RU" }
-          },
-          "knowsAbout": [
-            "Web Development", "Frontend Development", "Backend Development",
-            "UX/UI Design", "React", "Node.js", "TypeScript",
-            "Three.js", "PostgreSQL", "Redis", "Figma"
-          ],
-          "sameAs": [],
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "email": "hr@vexio.dev",
-            "contactType": "careers",
-            "availableLanguage": ["Russian", "English"],
-            "areaServed": "Worldwide"
-          },
-          "numberOfEmployees": {
-            "@type": "QuantitativeValue",
-            "minValue": 10,
-            "maxValue": 50
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "bestRating": "5",
-            "ratingCount": "128",
-            "reviewCount": "96"
-          },
-          "review": {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": "5",
-              "bestRating": "5"
-            },
-            "author": { "@type": "Person", "name": "Команда Vexio" },
-            "reviewBody": "Лучшее место для работы в IT. Топовый стек и отличная команда.",
-            "datePublished": "2026-08-01"
-          },
-          "award": [
-            "Лучший работодатель в веб-разработке 2026",
-            "Топ-10 студий разработки"
-          ],
-          "slogan": "Мы пишем код и ищем своих людей"
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://vexiostudio.ru/hr/#website",
-          "name": "Vexio HR",
-          "url": "https://vexiostudio.ru/hr/",
-          "publisher": { "@id": "https://vexiostudio.ru/hr/#organization" },
-          "inLanguage": "ru",
-          "description": "Карьерный портал Vexio Studio — актуальные IT-вакансии на удалёнке.",
-          "copyrightYear": "2026",
-          "dateCreated": "2026-08-01",
-          "dateModified": "2026-08-01",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "https://vexiostudio.ru/hr/?q={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          },
-          "speakable": {
-            "@type": "SpeakableSpecification",
-            "cssSelector": ["h1", "h2", ".speakable"],
-            "xpath": ["/html/head/title"]
-          }
-        },
-        {
-          "@type": "BreadcrumbList",
-          "@id": "https://vexiostudio.ru/hr/#breadcrumb",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Vexio Studio",
-              "item": "https://vexiostudio.ru/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Карьера",
-              "item": "https://vexiostudio.ru/hr/"
-            }
-          ]
-        },
-        {
-          "@type": "ItemList",
-          "@id": "https://vexiostudio.ru/hr/#vacancies",
-          "name": "Открытые вакансии Vexio",
-          "numberOfItems": 4,
-          "description": "Актуальные IT-вакансии: Frontend, UX/UI, Backend, Project Manager. Все на удалёнке.",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "item": {
-                "@type": "JobPosting",
-                "@id": "https://vexiostudio.ru/hr/#job-1",
-                "title": "Senior Frontend Engineer",
-                "alternativeHeadline": "Сеньор фронтенд разработчик React TypeScript Three.js",
-                "description": "Разработка сложных интерфейсов и 3D-визуализаций на React, TypeScript, Three.js. Удалённая работа с гибким графиком.",
-                "datePosted": "2026-08-01",
-                "validThrough": "2026-12-31",
-                "employmentType": "FULL_TIME",
-                "hiringOrganization": { "@id": "https://vexiostudio.ru/hr/#organization" },
-                "jobLocationType": "TELECOMMUTE",
-                "applicantLocationRequirements": [
-                  { "@type": "Country", "name": "Россия" }
-                ],
-                "skills": "React, TypeScript, Three.js, JavaScript ES6+, CSS, HTML, Git, Webpack, Vite, Frontend Architecture",
-                "experienceRequirements": "Senior Level · 3+ года",
-                "qualifications": "Опыт разработки SPA, знание TypeScript на продвинутом уровне, опыт с Three.js или WebGL",
-                "educationRequirements": "Высшее техническое (желательно)",
-                "occupationalCategory": "15-1252.00",
-                "industry": "Information Technology",
-                "workHours": "Flexible",
-                "jobBenefits": "Удалёнка, гибкий график, ДМС, топовый стек, без бюрократии",
-                "incentiveCompensation": "Конкурентная зарплата + бонусы",
-                "estimatedSalary": {
-                  "@type": "MonetaryAmount",
-                  "currency": "RUB",
-                  "value": {
-                    "@type": "QuantitativeValue",
-                    "minValue": 350000,
-                    "maxValue": 550000,
-                    "unitText": "MONTH"
-                  }
-                },
-                "jobImmediateStart": true,
-                "directApply": true
-              }
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "item": {
-                "@type": "JobPosting",
-                "@id": "https://vexiostudio.ru/hr/#job-2",
-                "title": "UX/UI Designer",
-                "alternativeHeadline": "Дизайнер интерфейсов Figma UX Research",
-                "description": "Проектирование и дизайн пользовательских интерфейсов. Анимации, UX-исследования, прототипирование в Figma.",
-                "datePosted": "2026-08-01",
-                "validThrough": "2026-12-31",
-                "employmentType": "FULL_TIME",
-                "hiringOrganization": { "@id": "https://vexiostudio.ru/hr/#organization" },
-                "jobLocationType": "TELECOMMUTE",
-                "applicantLocationRequirements": [
-                  { "@type": "Country", "name": "Россия" }
-                ],
-                "skills": "Figma, Animation, UX Research, UI Design, Prototyping, Design Systems, User Testing, Adobe Suite",
-                "experienceRequirements": "Middle Level · 2+ года",
-                "qualifications": "Портфолио крутых проектов, опыт проведения UX-исследований",
-                "occupationalCategory": "27-1024.00",
-                "industry": "Information Technology",
-                "workHours": "Flexible",
-                "jobBenefits": "Удалёнка, гибкий график, ДМС, топовый стек, без бюрократии",
-                "estimatedSalary": {
-                  "@type": "MonetaryAmount",
-                  "currency": "RUB",
-                  "value": {
-                    "@type": "QuantitativeValue",
-                    "minValue": 200000,
-                    "maxValue": 350000,
-                    "unitText": "MONTH"
-                  }
-                },
-                "jobImmediateStart": true,
-                "directApply": true
-              }
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "item": {
-                "@type": "JobPosting",
-                "@id": "https://vexiostudio.ru/hr/#job-3",
-                "title": "Middle Backend Developer",
-                "alternativeHeadline": "Миддл бэкенд разработчик Node.js PostgreSQL Redis",
-                "description": "Разработка и поддержка серверной инфраструктуры. Проектирование API, работа с базами данных, оптимизация производительности.",
-                "datePosted": "2026-08-01",
-                "validThrough": "2026-12-31",
-                "employmentType": "FULL_TIME",
-                "hiringOrganization": { "@id": "https://vexiostudio.ru/hr/#organization" },
-                "jobLocationType": "TELECOMMUTE",
-                "applicantLocationRequirements": [
-                  { "@type": "Country", "name": "Россия" }
-                ],
-                "skills": "Node.js, PostgreSQL, Redis, TypeScript, REST API, GraphQL, Docker, Microservices, AWS/GCP",
-                "experienceRequirements": "Middle Level · 2+ года",
-                "qualifications": "Опыт проектирования RESTful API, работа с реляционными и NoSQL БД",
-                "occupationalCategory": "15-1252.00",
-                "industry": "Information Technology",
-                "workHours": "Flexible",
-                "jobBenefits": "Удалёнка, гибкий график, ДМС, топовый стек, без бюрократии",
-                "estimatedSalary": {
-                  "@type": "MonetaryAmount",
-                  "currency": "RUB",
-                  "value": {
-                    "@type": "QuantitativeValue",
-                    "minValue": 250000,
-                    "maxValue": 400000,
-                    "unitText": "MONTH"
-                  }
-                },
-                "jobImmediateStart": true,
-                "directApply": true
-              }
-            },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "item": {
-                "@type": "JobPosting",
-                "@id": "https://vexiostudio.ru/hr/#job-4",
-                "title": "Project Manager",
-                "alternativeHeadline": "Проджект менеджер IT проектов Agile Scrum",
-                "description": "Управление командой разработки, планирование спринтов, коммуникация с заказчиками. Agile/Scrum.",
-                "datePosted": "2026-08-01",
-                "validThrough": "2026-12-31",
-                "employmentType": "FULL_TIME",
-                "hiringOrganization": { "@id": "https://vexiostudio.ru/hr/#organization" },
-                "jobLocationType": "TELECOMMUTE",
-                "applicantLocationRequirements": [
-                  { "@type": "Country", "name": "Россия" }
-                ],
-                "skills": "Agile, Scrum, Kanban, Jira, Confluence, Risk Management, Stakeholder Communication, Team Leadership",
-                "experienceRequirements": "Middle Level · 2+ года",
-                "qualifications": "Опыт управления IT-проектами, знание Agile/Scrum, отличные коммуникативные навыки",
-                "occupationalCategory": "15-1299.09",
-                "industry": "Information Technology",
-                "workHours": "Flexible",
-                "jobBenefits": "Удалёнка, гибкий график, ДМС, топовый стек, без бюрократии",
-                "estimatedSalary": {
-                  "@type": "MonetaryAmount",
-                  "currency": "RUB",
-                  "value": {
-                    "@type": "QuantitativeValue",
-                    "minValue": 200000,
-                    "maxValue": 320000,
-                    "unitText": "MONTH"
-                  }
-                },
-                "jobImmediateStart": true,
-                "directApply": true
-              }
-            }
-          ]
-        },
-        {
-          "@type": "FAQPage",
-          "@id": "https://vexiostudio.ru/hr/#faq",
-          "name": "Часто задаваемые вопросы о работе в Vexio",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Какие вакансии открыты в Vexio?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Senior Frontend Engineer на React, TypeScript, Three.js. UX/UI Designer (Figma, анимации, UX-исследования). Middle Backend Developer на Node.js, PostgreSQL, Redis. Project Manager (Agile, Scrum). Все позиции на полной удалёнке с гибким графиком.",
-                "upvoteCount": 42,
-                "dateCreated": "2026-08-01"
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Как отправить резюме в Vexio?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Нажми на любую интересующую вакансию и заполни короткую форму: укажи имя, ник в Telegram и номер телефона. Наш HR-менеджер свяжется с тобой в течение 24 часов для уточнения деталей.",
-                "upvoteCount": 38,
-                "dateCreated": "2026-08-01"
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Какой формат работы и график в Vexio?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Полная удалёнка из любой точки мира. Гибкий график — работай когда удобно. Никакого микроменеджмента: мы ценим результат, а не часы за монитором. Бюрократия под запретом.",
-                "upvoteCount": 56,
-                "dateCreated": "2026-08-01"
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Какой стек технологий используется в Vexio?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "React, TypeScript, Three.js, Node.js, PostgreSQL, Redis, Docker, Figma — топовый современный стек без легаси. Постоянно следим за новыми технологиями и внедряем лучшие практики.",
-                "upvoteCount": 31,
-                "dateCreated": "2026-08-01"
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Есть ли испытательный срок и как проходит онбординг?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Испытательный срок — 2 месяца с полной оплатой. Онбординг: в первый день получаешь доступы ко всем системам, ментора и подробную документацию. С первой недели работаешь над реальными задачами.",
-                "upvoteCount": 19,
-                "dateCreated": "2026-08-01"
-              }
-            }
-          ]
-        },
-        {
-          "@type": "HowTo",
-          "name": "Как откликнуться на вакансию в Vexio",
-          "description": "Пошаговая инструкция для отклика на вакансии Vexio Studio",
-          "step": [
-            {
-              "@type": "HowToStep",
-              "position": 1,
-              "name": "Выбери вакансию",
-              "text": "Ознакомься с открытыми позициями и выбери подходящую: Frontend, UX/UI, Backend или Project Manager."
-            },
-            {
-              "@type": "HowToStep",
-              "position": 2,
-              "name": "Нажми на карточку",
-              "text": "Кликни по карточке вакансии — откроется форма для связи."
-            },
-            {
-              "@type": "HowToStep",
-              "position": 3,
-              "name": "Заполни контакты",
-              "text": "Укажи имя, ник в Telegram и номер телефона."
-            },
-            {
-              "@type": "HowToStep",
-              "position": 4,
-              "name": "Жди ответа",
-              "text": "Мы рассмотрим заявку и свяжемся в ближайшее время для обсуждения."
-            }
-          ]
-        },
-        {
-          "@type": "Occupation",
-          "name": "Frontend Engineer",
-          "description": "Разработка пользовательских интерфейсов и клиентской логики веб-приложений",
-          "occupationalCategory": "15-1252.00",
-          "skills": "React, TypeScript, Three.js, JavaScript, CSS, HTML, Git",
-          "educationRequirements": "Высшее техническое",
-          "experienceRequirements": "3+ года"
-        },
-        {
-          "@type": "Occupation",
-          "name": "UX/UI Designer",
-          "description": "Проектирование пользовательского опыта и визуального дизайна интерфейсов",
-          "occupationalCategory": "27-1024.00",
-          "skills": "Figma, Animation, UX Research, UI Design, Prototyping, Design Systems",
-          "educationRequirements": "Высшее (дизайн/IT)",
-          "experienceRequirements": "2+ года"
-        },
-        {
-          "@type": "Occupation",
-          "name": "Backend Developer",
-          "description": "Разработка серверной логики, API и инфраструктуры веб-приложений",
-          "occupationalCategory": "15-1252.00",
-          "skills": "Node.js, PostgreSQL, Redis, TypeScript, REST API, GraphQL, Docker",
-          "educationRequirements": "Высшее техническое",
-          "experienceRequirements": "2+ года"
-        },
-        {
-          "@type": "Occupation",
-          "name": "Project Manager",
-          "description": "Управление IT-проектами, командами разработки, планирование и координация",
-          "occupationalCategory": "15-1299.09",
-          "skills": "Agile, Scrum, Kanban, Jira, Risk Management, Team Leadership",
-          "educationRequirements": "Высшее (менеджмент/IT)",
-          "experienceRequirements": "2+ года"
-        },
-        {
-          "@type": "Service",
-          "name": "Веб-разработка",
-          "provider": { "@id": "https://vexiostudio.ru/hr/#organization" },
-          "description": "Создание сайтов и веб-сервисов любой сложности",
-          "serviceType": "Web Development",
-          "areaServed": "Worldwide",
-          "offers": {
-            "@type": "Offer",
-            "description": "Разработка под ключ: от дизайна до продакшена"
-          }
-        }
-      ]
-    }
-    </script>
-    <script type="module" crossorigin src="/hr/assets/index-7aq7lHfa.js"></script>
-    <link rel="stylesheet" crossorigin href="/hr/assets/index-CuMoDgKj.css">
-  </head>
-  <body class="bg-[#09090b]">
-    <div id="root"></div>
-  <script>window.__AI_RULES__=[{k:"зарплат,платят,ставка,оклад,доход,зп,сколько получ,зарплата,деньги,премия,вознагражден,оплата труда",a:"10% от стоимости каждого проекта + премия за качество и скорость. Senior Frontend: от 150 000 руб/проект. Middle Backend: от 80 000 руб/проект. Выплаты после сдачи этапа. Средний доход партнёра — 3,6 млн в год."},{k:"ваканси,позици,должност,кого,ищете,кто нужен,открыт,набираете,требуются,хантинг",a:"Открыты: Senior Frontend Engineer (React, TypeScript, Three.js), UX/UI Designer (Figma), Middle Backend Developer (Node.js, PostgreSQL), Project Manager (Agile/Scrum). Полная удалёнка, любой город."},{k:"бонус,преимуществ,плюшк,удаленк,услов,офис,льгот,плюс,почему стоит,что даёте,условия работы",a:"Полная удалёнка из любой точки мира. Гибкий график без привязки к часам. Оплачиваемое обучение (курсы, конференции). Менторство от Senior-лидов. Участие в прибыли проектов. Карьерный рост до Tech Lead."},{k:"команд,коллектив,люди,кто,с кем,атмосфер,культур,обстановк,как в коллективе,коллеги",a:"5+ сильных специалистов: разработчики, дизайнеры, менеджеры. Без бюрократии и микроменеджмента. Ценим инициативу, самостоятельность и прямой диалог. Дружелюбная атмосфера — никакой токсичности."},{k:"требован,навык,опыт,стек,что нужн,хард,скил,уметь,что треб,критерии",a:"Senior Frontend: 3+ года React, TypeScript. Middle Backend: 1+ год Node.js, PostgreSQL. Designer: сильное портфолио в Figma. PM: опыт Agile/Scrum от 1 года. Английский на уровне чтения документации."},{k:"отклик,отправ,заявк,процесс,как попас,собеседован,тестов,этап,найм,отбор,сколько этапов",a:"1) Заявка на сайте — рассматриваем 1-3 дня. 2) Онлайн-собеседование с лидом (30 мин). 3) Оплачиваемое тестовое задание. 4) Оффер. 5) Онбординг с персональным ментором. Весь процесс занимает 1-2 недели."},{k:"обучен,рост,карьер,развити,прокачк,курс,повышен,грейд,расти,профессиональный рост",a:"Оплачиваем курсы на Stepik, Coursera, Udemy. Отправляем на профильные конференции. Менторство от Senior-лидов еженедельно. Прозрачный рост: Junior → Middle → Senior → Tech Lead за 12-24 месяца."},{k:"проект,клиент,заказчик,задач,чем,делаем,направлен,какие проекты",a:"Веб-разработка для бизнеса: сайты, Telegram-боты, CRM, админ-панели. Клиенты из РФ и СНГ. Разнообразные задачи: от лендингов до сложных веб-сервисов. Никакой рутины — каждый проект уникален."},{k:"привет,здрав,хай,hello,hi,ку,прив,добрый,салют,приветствую,здрасьте",a:"Привет! Я Коди — AI-помощник Vexio HR. Могу рассказать о вакансиях, зарплате, бонусах, команде, процессе найма. Что интересует?"},{k:"кто ты,представься,расскажи,что умеешь,помощь,help,возможности,функции",a:"Я Коди — AI-ассистент раздела Vexio HR. Знаю всё о: вакансиях и требованиях, зарплате и бонусах, команде и культуре, процессе найма, обучении и росте. Спрашивай!"},{k:"спасиб,благодар,отличн,супер,респект,огонь,пасиб,сенкс,мерси",a:"Рады помочь! Отправляйте заявку через форму на странице. Удачи — до встречи на собеседовании!"},{k:"соцпакет,больничный,отпуск,оформлен,официальн,дмс,страховка,больничные,декрет",a:"Работаем по договору с ИП или самозанятыми. Гибкие условия — обсуждаем индивидуально. При долгосрочном сотрудничестве помогаем с ДМС."},{k:"офис,коворкинг,встречи,митап,тусовка,локация,где офис",a:"Полностью удалённая работа — из любой точки мира. При желании оплачиваем коворкинг. Командные встречи раз в квартал в Москве (необязательно)."}];</script>
-<script src="/static/ai-widget.js"></script>
+/* ---------- футер ---------- */
+footer{background:var(--ink);color:var(--paper);padding:70px 0 40px;position:relative}
+.ft-big{font-family:'Unbounded';font-weight:800;font-size:clamp(2.6rem,9vw,7rem);line-height:1;color:transparent;-webkit-text-stroke:2px var(--paper);opacity:.9;user-select:none}
+.ft-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;margin:50px 0 60px}
+.ft-grid h4{font-family:'Unbounded';font-size:.95rem;margin-bottom:16px;color:var(--marker)}
+.ft-grid a{display:block;text-decoration:none;padding:5px 0;font-weight:600;opacity:.85}
+.ft-grid a:hover{opacity:1;color:var(--marker)}
+.ft-grid p{opacity:.75;font-size:.95rem}
+.ft-bottom{border-top:1px solid rgba(251,250,244,.25);padding-top:26px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.9rem;opacity:.7}
+@media(max-width:800px){.ft-grid{grid-template-columns:1fr}}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .lm-i{transform:none}
+  .reveal{opacity:1;transform:none}
+  .scr path,.circ path{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div class="margin-line" aria-hidden="true"></div>
+
+<header id="header">
+  <div class="wrap hd">
+    <a class="logo" href="#top">Vexio<b>HR</b></a>
+    <nav class="main" aria-label="Основная навигация">
+      <a href="#jobs">Вакансии</a>
+      <a href="#process">Как нанимаем</a>
+      <a href="#why">Почему мы</a>
+      <a href="#team">Команда</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-y" href="#apply">Откликнуться</a>
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><i></i></button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <button class="mnav-close" id="mnavClose" aria-label="Закрыть меню">✕</button>
+  <a href="#jobs">Вакансии</a>
+  <a href="#process">Как нанимаем</a>
+  <a href="#why">Почему мы</a>
+  <a href="#team">Команда</a>
+  <a href="#faq">FAQ</a>
+  <a href="#apply">Откликнуться →</a>
+  <span class="note">отвечаем каждому, честно ✍</span>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>
+        <span class="lm"><span class="lm-i">Делаем сайты,</span></span>
+        <span class="lm"><span class="lm-i">которые <span class="scr">продают<svg viewBox="0 0 220 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 11 C 40 5 78 13 112 9 C 146 5 182 12 216 8" pathLength="300"/></svg></span>.</span></span>
+        <span class="lm"><span class="lm-i">Ищем <span class="circ">вас<svg viewBox="0 0 180 70" preserveAspectRatio="none" aria-hidden="true"><path d="M28 14 C 70 2 158 6 168 28 C 176 48 118 64 62 60 C 14 57 6 40 20 24 C 28 15 44 10 66 8" pathLength="300"/></svg></span>.</span></span>
+      </h1>
+      <p class="lead">Vexio — студия, где сайты собирают как продукты: с аналитикой, характером и окупаемостью. Команда растёт быстрее потока заявок, поэтому нам нужны <b>продажники, менеджеры, разработчики, дизайнеры и QA</b>. Открыто 8 вакансий.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#jobs">Смотреть вакансии ↓</a>
+      </div>
+      <span class="note">спойлер: оффер за 3 дня →</span>
+    </div>
+
+    <div class="collage" aria-hidden="false">
+      <figure class="polaroid tape pol-main">
+        <img src="https://image.qwenlm.ai/public_source/8fcd35e8-374d-4b85-bb59-bac3e6a3faee/1467b957f-a0df-4e64-860b-165ecb3437ea.png" alt="Команда Vexio на созвоне в Zoom: трое парней и девушка">
+        <figcaption>созвон команды, 11:00</figcaption>
+      </figure>
+      <figure class="polaroid tape pol-small">
+        <img src="https://image.qwenlm.ai/public_source/8fcd35e8-374d-4b85-bb59-bac3e6a3faee/126a38b9b-7008-4489-ba7c-0779a8f2b8fd.png" alt="Домашнее рабочее место сотрудника Vexio">
+        <figcaption>домашний офис — лучший офис</figcaption>
+      </figure>
+      <div class="glass glass-stat">
+        <b>3 дня</b>
+        <span>в среднем от отклика<br>до оффера</span>
+      </div>
+      <span class="sticker">тестовое оплачиваем!</span>
+      <svg class="doodle doodle-arrow" viewBox="0 0 120 90" aria-hidden="true">
+        <path d="M8 12 C 30 40 60 58 96 62 M96 62 l-14 -10 M96 62 l-16 6"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><span class="stat-n"><span class="count" data-target="2">0</span></span><span class="stat-l">года делаем веб без шаблонов</span></div>
+      <div class="stat"><span class="stat-n"><span class="count" data-target="20">0</span><em>+</em></span><span class="stat-l">запущенных проектов</span></div>
+      <div class="stat"><span class="stat-n"><span class="count" data-target="6">0</span></span><span class="stat-l">человек в команде сейчас</span></div>
+      <div class="stat"><span class="stat-n"><span class="count" data-target="8">0</span></span><span class="stat-l">открытых вакансий сегодня</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="mq-track">
+    <span>открыто 8 вакансий</span><span>оффер за 3 дня</span><span>удалёнка без границ</span><span>оплата — процент от проекта</span><span>собес за 24 часа</span><span>тестовое оплачиваем</span>
+    <span>открыто 8 вакансий</span><span>оффер за 3 дня</span><span>удалёнка без границ</span><span>оплата — процент от проекта</span><span>собес за 24 часа</span><span>тестовое оплачиваем</span>
+  </div>
+</div>
+
+<!-- ============ ВАКАНСИИ ============ -->
+<section id="jobs">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="sec-num">01 · вакансии</span>
+        <h2>Кого мы <span class="hl">ищем</span> прямо сейчас</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:14px">
+        <div class="chips" role="tablist" aria-label="Фильтр вакансий">
+          <button class="chip on" data-f="all">Все</button>
+          <button class="chip" data-f="sales">Продажи</button>
+          <button class="chip" data-f="management">Менеджмент</button>
+          <button class="chip" data-f="dev">Разработка</button>
+          <button class="chip" data-f="design">Дизайн</button>
+          <button class="chip" data-f="qa">QA</button>
+        </div>
+        <span class="note">оплата сдельная — % от бюджета проекта ↓</span>
+      </div>
+    </div>
+    <div class="jobs-grid" id="jobsGrid"></div>
+  </div>
+</section>
+
+<!-- ============ ПРОЦЕСС ============ -->
+<section id="process">
+  <div class="wrap proc">
+    <div class="proc-left reveal">
+      <span class="sec-num">02 · процесс</span>
+      <h2>Найм без <span class="scr">семи<svg viewBox="0 0 220 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 11 C 40 5 78 13 112 9 C 146 5 182 12 216 8" pathLength="300"/></svg></span> кругов ада</h2>
+      <p style="max-width:44ch;font-weight:500">Никаких «мы вернёмся через три недели» и молчащих HR. Четыре шага, понятные сроки и честная обратная связь — даже если не совпали.</p>
+      <span class="note">в среднем — 3 дня от отклика до оффера, проверяли по себе ↷</span>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="step-n">1</div>
+        <div class="step-card"><h3>Отклик за 5 минут</h3><p>Форма внизу или сообщение в Телеграм. Без сопровительных на три страницы — расскажете о себе голосом на созвоне.</p><span class="step-time">≈ 5 минут вашего времени</span></div>
+      </div>
+      <div class="step reveal"><div class="step-n">2</div>
+        <div class="step-card"><h3>Общение с HR — 30 минут</h3><p>На следующий день. Знакомимся, рассказываем про проекты, проценты и то, как устроена студия. Отвечаем на любые вопросы, даже неудобные.</p><span class="step-time">в течение 24 часов</span></div>
+      </div>
+      <div class="step reveal"><div class="step-n">3</div>
+        <div class="step-card"><h3>Интервью с тимлидом</h3><p>Разговор по делу + небольшое тестовое. Оно оплачивается фиксированно, независимо от результата. Код-ревью тестового отдаём вам — это тоже полезно.</p><span class="step-time">тестовое = 2–3 часа, не больше</span></div>
+      </div>
+      <div class="step reveal"><div class="step-n">4</div>
+        <div class="step-card"><h3>Оффер и онбординг</h3><p>Присылаем оффер с прозрачным процентом от проекта. В первую неделю — бадди, доступы и настоящий проект, а не «покрутись месяц на стенде».</p><span class="step-time">оффер в день финального интервью</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ПОЧЕМУ МЫ ============ -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="sec-num">03 · почему vexio</span>
+        <h2>Работа, за которую <span class="hl-g">не стыдно</span>, и условия, за которые приятно</h2>
+      </div>
+    </div>
+    <div class="bento">
+      <div class="tile b-a reveal">
+        <div class="ph kb">
+          <img src="https://image.qwenlm.ai/public_source/8fcd35e8-374d-4b85-bb59-bac3e6a3faee/10c678845-8b3e-49c9-a4dc-525cd3c5599d.png" alt="Команда Vexio — парни и девушки — бурно обсуждают макеты на созвоне" loading="lazy">
+          <div class="glass cap"><b>Решаем вместе.</b><br>Дизайнер спорит с разработчиком аргументами, а не сроками. Это норма.</div>
+        </div>
+      </div>
+      <div class="tile b-b reveal"><span class="doodle-star">%</span>
+        <div class="big">20–25%</div>
+        <h3>разработке — от каждого проекта</h3>
+        <p>Все зарплаты сдельные: продажники получают 2–5%, проджекты — 10%, разработчики — 20–25% от бюджета проекта + премии. Чем дороже проект — тем больше у всех.</p>
+      </div>
+      <div class="tile b-c reveal">
+        <div class="ph kb">
+          <img src="https://image.qwenlm.ai/public_source/8fcd35e8-374d-4b85-bb59-bac3e6a3faee/182a39842-3a67-4fd8-b16e-939731195803.png" alt="Рабочее место сотрудника Vexio: ноутбук, тетрадь в клетку, кофе" loading="lazy">
+        </div>
+      </div>
+      <div class="tile b-d reveal">
+        <h3>Удалёнка из любой точки</h3>
+        <p>Офиса у нас нет — и не надо. Гибкое начало дня, главное — созвон в 11:00.</p>
+      </div>
+      <div class="tile b-e reveal"><span class="doodle-star">✎</span>
+        <h3>Инструменты за наш счёт</h3>
+        <p>Оплачиваем рабочие подписки: Cursor, ChatGPT, Figma и всё, что помогает делать быстрее и круче. Открывается после 5 проектов с нами — без бюрократии и согласований.</p>
+      </div>
+      <div class="tile b-f reveal">
+        <h3>Никакого микроменеджмента</h3>
+        <p>Без трекеров времени, скриншотов и отчётов «что делал за день». Важны результат и закрытые задачи, а не часы онлайн. Доверяем по умолчанию.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ КОМАНДА ============ -->
+<section id="team">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="sec-num">04 · люди</span>
+        <h2>С вами будут работать <span class="hl">такие люди</span></h2>
+      </div>
+      <span class="note">фото настоящие, улыбки тоже</span>
+    </div>
+    <div class="team-grid">
+      <figure class="polaroid tape reveal">
+        <img src="https://image.qwenlm.ai/public_source/8fcd35e8-374d-4b85-bb59-bac3e6a3faee/1b926a56e-2a2a-4e54-9fb5-50d836032d42.png" alt="Аня, арт-директор Vexio" loading="lazy">
+        <figcaption>Аня · арт-директор</figcaption>
+        <div class="team-role">2 года в Vexio</div>
+      </figure>
+      <figure class="polaroid tape reveal">
+        <img src="https://image.qwenlm.ai/public_source/8fcd35e8-374d-4b85-bb59-bac3e6a3faee/1ef4b4086-6325-4c41-a046-dcf87c73f550.png" alt="Максим, техлид Vexio" loading="lazy">
+        <figcaption>Максим · техлид</figcaption>
+        <div class="team-role">2 года в Vexio</div>
+      </figure>
+      <figure class="polaroid tape reveal">
+        <img src="https://image.qwenlm.ai/public_source/8fcd35e8-374d-4b85-bb59-bac3e6a3faee/1235114c0-2bcb-46e0-8bf0-180d99ad6e61.png" alt="Даша, проджект Vexio" loading="lazy">
+        <figcaption>Даша · проджект</figcaption>
+        <div class="team-role">1,5 года в Vexio</div>
+      </figure>
+      <figure class="polaroid tape reveal">
+        <img src="https://image.qwenlm.ai/public_source/8fcd35e8-374d-4b85-bb59-bac3e6a3faee/10e871ac9-1f63-4c15-a800-70381743783f.png" alt="Артём, QA Vexio" loading="lazy">
+        <figcaption>Артём · QA</figcaption>
+        <div class="team-role">1 год в Vexio</div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ОТЗЫВЫ ============ -->
+<section id="voices">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="sec-num">05 · голоса</span>
+        <h2>Что говорят <span class="circ">свои<svg viewBox="0 0 180 70" preserveAspectRatio="none" aria-hidden="true"><path d="M28 14 C 70 2 158 6 168 28 C 176 48 118 64 62 60 C 14 57 6 40 20 24 C 28 15 44 10 66 8" pathLength="300"/></svg></span></h2>
+      </div>
+    </div>
+    <div class="quotes">
+      <div class="quote glass reveal">
+        <p>Пришла «на месяц» — через год веду три крупных проекта. Здесь реально дают расти, а не держат на подхвате.</p>
+        <b>Даша</b><span>проджект-менеджер, 1,5 года в Vexio</span>
+      </div>
+      <div class="quote glass reveal">
+        <p>Код-ревью — это рост, а не порка. Первый раз в карьере мне объясняли, а не отписывались «пофиксь и всё».</p>
+        <b>Максим</b><span>frontend-разработчик, 2 года в Vexio</span>
+      </div>
+      <div class="quote glass reveal">
+        <p>Спорим о макетах часами, но никогда — о сроках за чужой счёт. Уважение к чужому времени тут вшито в культуру.</p>
+        <b>Аня</b><span>арт-директор, 2 года в Vexio</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="sec-num">06 · вопросы</span>
+        <h2>Спрашивают <span class="hl-line">перед откликом</span></h2>
+      </div>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Можно ли полностью удалённо?<span class="pl">+</span></button>
+        <div class="faq-a"><div><p>Да. У нас полностью удалённая команда — от Калининграда до Тбилиси. Вся работа в созвонах и таск-трекере, офисных посиделок нет, и это осознанный выбор.</p></div></div>
+      </div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Берёте ли без большого опыта?<span class="pl">+</span></button>
+        <div class="faq-a"><div><p>Да. В первую очередь смотрим на умение пользоваться ИИ и вайбкодинг-скилы: как быстро вы собираете прототипы, итерируете и проверяете гипотезы. Опыт — плюс, но скорость и вкус важнее строчки в трудовой.</p></div></div>
+      </div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Тестовое правда оплачивается?<span class="pl">+</span></button>
+        <div class="faq-a"><div><p>Правда. Фиксированная сумма за каждую роль, переводим в течение недели независимо от результата. Ваше время — деньги, буквально.</p></div></div>
+      </div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Какой график и как считаются часы?<span class="pl">+</span></button>
+        <div class="faq-a"><div><p>Гибкое начало, обязательное пересечение 11:00–17:00. Никаких трекеров со скриншотами — доверяем.</p></div></div>
+      </div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Что с оплатой и оформлением?<span class="pl">+</span></button>
+        <div class="faq-a"><div><p>Все выплаты сдельные: продажники получают 2–5% от бюджета проекта, проджект-менеджеры — 10%, разработчики — 20–25% плюс премии. Чем дороже проект — тем больше зарабатывает команда. Выплаты белые, дважды в месяц, оформление по ТК или самозанятость — как удобно.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ОТКЛИК ============ -->
+<section id="apply">
+  <div class="wrap">
+    <div class="apply-panel reveal" id="apply-panel">
+      <span class="sec-num" style="color:var(--ink)">07 · последний шаг</span>
+      <h2>Хватит скроллить — <span class="scr" style="color:inherit">откликайся<svg viewBox="0 0 220 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 11 C 40 5 78 13 112 9 C 146 5 182 12 216 8" pathLength="300"/></svg></span></h2>
+      <span class="note">заполняется за 5 минут, отвечаем в течение суток ✍</span>
+      <div class="form-card">
+        <form id="applyForm" novalidate>
+          <div class="f-row">
+            <div class="f-field" id="ff-name">
+              <label for="f-name">Имя *</label>
+              <input id="f-name" type="text" placeholder="Как вас зовут?" autocomplete="name">
+            </div>
+            <div class="f-field" id="ff-contact">
+              <label for="f-contact">Телеграм / почта / телефон *</label>
+              <input id="f-contact" type="text" placeholder="@username или you@mail.ru" autocomplete="email">
+            </div>
+          </div>
+          <div class="f-field">
+            <label for="f-role">Куда метите</label>
+            <select id="f-role">
+              <option>Менеджер по продажам</option>
+              <option>Project Manager</option>
+              <option>Fullstack-разработчик</option>
+              <option>Backend-разработчик</option>
+              <option>Frontend-разработчик</option>
+              <option>UI/UX-дизайнер</option>
+              <option>Motion-дизайнер</option>
+              <option>QA-инженер</option>
+              <option selected>Пришлю себя без конкретной вакансии</option>
+            </select>
+          </div>
+          <div class="f-field">
+            <label for="f-about">Пара слов о себе и ссылка на работы</label>
+            <textarea id="f-about" placeholder="Что делали, чем гордитесь, куда звать в Телеграм…"></textarea>
+          </div>
+          <label class="f-check"><input type="checkbox" id="f-agree" checked> Согласен на обработку данных, чтобы мы могли ответить. Никакого спама — только по делу.</label>
+          <button class="btn" type="submit" style="width:100%;justify-content:center">Отправить отклик →</button>
+        </form>
+        <div class="success" id="success">
+          <div class="ok">✓</div>
+          <h3>Отклик улетел!</h3>
+          <p>HR напишет вам в течение 24 часов.<br>А пока загляните в наш Телеграм — там жизнь студии без фильтров.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="ft-big" aria-hidden="true">VEXIO HR</div>
+    <div class="ft-grid">
+      <div>
+        <h4>Студия</h4>
+        <p>Vexio — веб-студия полного цикла. Делаем сайты, которые продают, и команду, в которой хочется оставаться. Этот сайт, кстати, сверстали наши же — присмотритесь к деталям.</p>
+      </div>
+      <div>
+        <h4>Навигация</h4>
+        <a href="#jobs">Вакансии</a>
+        <a href="#process">Как нанимаем</a>
+        <a href="#why">Почему мы</a>
+        <a href="#team">Команда</a>
+        <a href="#apply">Откликнуться</a>
+      </div>
+      <div>
+        <h4>Связь</h4>
+        <a href="mailto:hr@vexio.studio">hr@vexio.studio</a>
+        <a href="#">@vexio_hr в Телеграме</a>
+        <a href="#">+7 900 000-00-00</a>
+        <p style="margin-top:10px">Полностью удалённо · из любой точки</p>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026 Vexio. Сделано людьми, не шаблоном.</span>
+      <a href="#top" style="color:inherit">наверх ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var $ = function(s){return document.querySelector(s)};
+var $$ = function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+
+/* загрузка — line-mask reveal */
+window.addEventListener('load', function(){ document.body.classList.add('loaded'); });
+setTimeout(function(){ document.body.classList.add('loaded'); }, 600);
+
+/* шапка + прогресс */
+var header = $('#header'), progress = $('#progress');
+function onScroll(){
+  header.classList.toggle('scrolled', window.scrollY > 12);
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+}
+window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+/* мобильное меню */
+var burger = $('#burger');
+function closeMenu(){ document.body.classList.remove('menu-open'); burger.setAttribute('aria-expanded','false'); }
+burger.addEventListener('click', function(){
+  var open = document.body.classList.toggle('menu-open');
+  burger.setAttribute('aria-expanded', open);
+});
+$('#mnavClose').addEventListener('click', closeMenu);
+$$('.mnav a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+
+/* reveal observer */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:.15, rootMargin:'0px 0px -40px 0px'});
+$$('.reveal').forEach(function(el){ io.observe(el); });
+
+/* счётчики */
+function runCount(el){
+  var t = +el.dataset.target;
+  if(reduced){ el.textContent = t; return; }
+  var start = null;
+  function step(now){
+    if(!start) start = now;
+    var p = Math.min(1,(now-start)/1300), e = 1-Math.pow(1-p,3);
+    el.textContent = Math.round(t*e);
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+var cio = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ runCount(e.target); cio.unobserve(e.target); } });
+},{threshold:.6});
+$$('.count').forEach(function(el){ cio.observe(el); });
+
+/* вакансии — оплата сдельная, % от проекта */
+var JOBS = [
+ {id:1,cat:'sales',title:'Менеджер по продажам',salary:'2–5% от проекта',format:'удалёнка',exp:'от 1 года',tags:['клиенты','переговоры','CRM'],hot:true},
+ {id:2,cat:'management',title:'Project Manager',salary:'10% от проекта',format:'удалёнка',exp:'от 2 лет',tags:['клиенты','планы','команда']},
+ {id:3,cat:'dev',title:'Fullstack-разработчик',sub:'бэк + фронт · Node.js · React',salary:'20–25% от проекта + премия',format:'удалёнка',exp:'от 2 лет',tags:['Node.js','React','TypeScript'],hot:true},
+ {id:4,cat:'dev',title:'Backend-разработчик',sub:'Node.js · PostgreSQL',salary:'20–25% от проекта + премия',format:'удалёнка',exp:'от 3 лет',tags:['API','архитектура','интеграции']},
+ {id:5,cat:'dev',title:'Frontend-разработчик',sub:'React · Next.js',salary:'20–25% от проекта + премия',format:'удалёнка',exp:'от 2 лет',tags:['TypeScript','анимации','a11y']},
+ {id:6,cat:'design',title:'UI/UX-дизайнер',salary:'10–15% от проекта',format:'удалёнка',exp:'от 2 лет',tags:['Figma','дизайн-системы','прототипы']},
+ {id:7,cat:'design',title:'Motion-дизайнер',salary:'8–12% от проекта',format:'удалёнка',exp:'от 1 года',tags:['After Effects','Lottie','web-анимация']},
+ {id:8,cat:'qa',title:'QA-инженер',salary:'6–10% от проекта',format:'удалёнка',exp:'от 1 года',tags:['ручное + авто','Playwright']}
+];
+var grid = $('#jobsGrid');
+function jobCard(j,i){
+  return '<article class="job" style="animation-delay:'+(i*60)+'ms">'
+   + '<div class="job-top"><span class="job-num">0'+j.id+'</span>'+(j.hot?'<span class="job-hot">горящая!</span>':'')+'</div>'
+   + '<h3>'+j.title+'</h3>'
+   + (j.sub?'<p class="job-sub">'+j.sub+'</p>':'')
+   + '<p class="job-salary"><span class="hl-line">'+j.salary+'</span></p>'
+   + '<div class="job-meta"><span>'+j.format+'</span><span>'+j.exp+'</span><span>сделка</span></div>'
+   + '<div class="job-tags">'+j.tags.map(function(t){return '<i>#</i>'+t}).join(' &nbsp; ')+'</div>'
+   + '<button class="job-apply" data-role="'+j.title+'"><span>Откликнуться</span><span class="arr">→</span></button>'
+   + '</article>';
+}
+function renderJobs(f){
+  var list = f==='all' ? JOBS : JOBS.filter(function(j){return j.cat===f});
+  grid.innerHTML = list.map(jobCard).join('');
+}
+renderJobs('all');
+$$('.chip').forEach(function(ch){
+  ch.addEventListener('click', function(){
+    $$('.chip').forEach(function(c){c.classList.remove('on')});
+    ch.classList.add('on');
+    renderJobs(ch.dataset.f);
+  });
+});
+grid.addEventListener('click', function(e){
+  var b = e.target.closest('.job-apply'); if(!b) return;
+  var sel = $('#f-role'), role = b.dataset.role;
+  Array.prototype.forEach.call(sel.options, function(o){ if(o.value===role) sel.value = role; });
+  document.querySelector('#apply').scrollIntoView({behavior: reduced ? 'auto' : 'smooth'});
+  var panel = $('#apply-panel');
+  panel.classList.add('flash');
+  setTimeout(function(){ panel.classList.remove('flash'); }, 1400);
+  setTimeout(function(){ $('#f-name').focus({preventScroll:true}); }, reduced ? 0 : 700);
+});
+
+/* FAQ */
+$$('.faq-q').forEach(function(q){
+  q.addEventListener('click', function(){
+    var item = q.parentElement, open = item.classList.contains('open');
+    $$('.faq-item.open').forEach(function(i){ i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+    if(!open){ item.classList.add('open'); q.setAttribute('aria-expanded','true'); }
+  });
+});
+
+/* форма */
+$('#applyForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var ok = true;
+  var name = $('#f-name'), contact = $('#f-contact');
+  $('#ff-name').classList.toggle('err', name.value.trim().length < 2); if(name.value.trim().length < 2) ok = false;
+  $('#ff-contact').classList.toggle('err', contact.value.trim().length < 5); if(contact.value.trim().length < 5) ok = false;
+  if(!$('#f-agree').checked) ok = false;
+  if(!ok) return;
+  this.style.display = 'none';
+  $('#success').classList.add('show');
+});
+['f-name','f-contact'].forEach(function(id){
+  document.getElementById(id).addEventListener('input', function(){ this.closest('.f-field').classList.remove('err'); });
+});
+})();
+</script>
 </body>
 </html>
