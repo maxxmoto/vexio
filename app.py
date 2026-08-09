@@ -444,9 +444,6 @@ import random
 def admin_panel():
     if session.get('admin_logged_in'):
         return send_from_directory('templates', 'newadmin.html')
-    a = random.randint(1, 20)
-    b = random.randint(1, 20)
-    session['captcha_sum'] = a + b
     error = ''
     if request.method == 'POST':
         user = request.form.get('username', '')
@@ -456,11 +453,14 @@ def admin_panel():
             error = 'Неверный логин'
         elif pwd != os.environ.get('ADMIN_PASSWORD', 'vexio2024'):
             error = 'Неверный пароль'
-        elif not cap or int(cap) != session.get('captcha_sum', 0):
+        elif not cap or int(cap) != session.get('captcha_sum', -1):
             error = 'Неверный ответ на проверку'
         else:
             session['admin_logged_in'] = True
             return redirect(url_for('admin_panel'))
+    a = random.randint(1, 20)
+    b = random.randint(1, 20)
+    session['captcha_sum'] = a + b
     return render_template('admin_login.html', error=error, a=a, b=b)
 
 @app.route('/admin/logout')
