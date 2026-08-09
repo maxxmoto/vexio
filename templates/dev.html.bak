@@ -394,7 +394,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
     <div class="hero-visual reveal" style="--d:.12s">
       <span class="tape tape-a" aria-hidden="true"></span>
       <span class="tape tape-b" aria-hidden="true"></span>
-      <div class="frame tilt"><img src="/static/dev/img/hero.webp" alt="Рабочее место разработчика-партнёра Vexio" width="1024" height="1024"></div>
+      <div class="frame tilt"><img src="https://image.qwenlm.ai/public_source/0dc41e34-ea37-4530-9022-325733d9aeea/1b5c8effb-1bf7-45a6-969a-a2c2dc4c8f87.png" alt="Рабочее место разработчика-партнёра Vexio" width="1024" height="1024"></div>
       <span class="float-badge fb-a sticker">70% — тебе ✍</span>
       <span class="float-badge fb-b sticker sticker-blue">оплата в день сдачи</span>
     </div>
@@ -552,7 +552,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
       </div>
       <div class="cases-grid">
         <article class="case reveal">
-          <div class="case-img"><img loading="lazy" src="/static/dev/img/case-neobank.webp" alt="Финтех-дашборд NeoBank на ноутбуке"></div>
+          <div class="case-img"><img loading="lazy" src="https://image.qwenlm.ai/public_source/0dc41e34-ea37-4530-9022-325733d9aeea/1c1a2aa70-0b7f-4cc5-8b51-8ad0ea669739.png" alt="Финтех-дашборд NeoBank на ноутбуке"></div>
           <div class="case-body">
             <div class="case-tags"><span>Финтех</span><span>React</span><span>Node.js</span></div>
             <h3>Дашборд для NeoBank</h3>
@@ -564,7 +564,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
           </div>
         </article>
         <article class="case reveal" style="--d:.12s">
-          <div class="case-img"><img loading="lazy" src="/static/dev/img/case-moda.webp" alt="Интернет-магазин MODA на ноутбуке и телефоне"></div>
+          <div class="case-img"><img loading="lazy" src="https://image.qwenlm.ai/public_source/0dc41e34-ea37-4530-9022-325733d9aeea/18bd0b569-fe63-4a87-ba2f-1bbf04cfac9b.png" alt="Интернет-магазин MODA на ноутбуке и телефоне"></div>
           <div class="case-body">
             <div class="case-tags"><span>E-commerce</span><span>Next.js</span></div>
             <h3>MODA Store</h3>
@@ -576,7 +576,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
           </div>
         </article>
         <article class="case reveal" style="--d:.24s">
-          <div class="case-img"><img loading="lazy" src="/static/dev/img/case-skyline.webp" alt="SaaS-кабинет логистики Skyline на мониторе"></div>
+          <div class="case-img"><img loading="lazy" src="https://image.qwenlm.ai/public_source/0dc41e34-ea37-4530-9022-325733d9aeea/17a199969-7eff-406e-8a18-3ca346d8819f.png" alt="SaaS-кабинет логистики Skyline на мониторе"></div>
           <div class="case-body">
             <div class="case-tags"><span>SaaS</span><span>Vue</span><span>Карты</span></div>
             <h3>Skyline CRM</h3>
@@ -602,7 +602,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
         <article class="review glass reveal">
           <p>«За первые три месяца закрыл четыре проекта и заработал больше, чем за полгода соло-фриланса. Не тратить время на поиск клиентов — это бесценно.»</p>
           <div class="review-top">
-            <img class="avatar" loading="lazy" src="/static/dev/img/review-anton.webp" alt="Антон, фронтенд-разработчик">
+            <img class="avatar" loading="lazy" src="https://image.qwenlm.ai/public_source/0dc41e34-ea37-4530-9022-325733d9aeea/1ef5f1e95-4dcf-4a1f-aad4-c6631ee3ab62.png" alt="Антон, фронтенд-разработчик">
             <div><b>Антон К.</b><span>фронтенд-разработчик</span></div>
             <span class="review-since">с Vexio с 2024</span>
           </div>
@@ -610,7 +610,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
         <article class="review glass reveal" style="--d:.12s">
           <p>«Раньше я была и дизайнером, и менеджером, и бухгалтером. Теперь — только код. А 70% — не маркетинговый трюк, я сверяла выписки 🙂»</p>
           <div class="review-top">
-            <img class="avatar" loading="lazy" src="/static/dev/img/review-marina.webp" alt="Марина, fullstack-разработчица">
+            <img class="avatar" loading="lazy" src="https://image.qwenlm.ai/public_source/0dc41e34-ea37-4530-9022-325733d9aeea/1b13fe4e3-43f4-45b8-8f3a-fa7138dd1bd7.png" alt="Марина, fullstack-разработчица">
             <div><b>Марина С.</b><span>fullstack-разработчица</span></div>
             <span class="review-since">с Vexio с 2023</span>
           </div>
@@ -618,7 +618,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
         <article class="review glass reveal" style="--d:.24s">
           <p>«Начинал по вечерам, совмещая с основной работой. Через полгода ушёл в партнёрство полностью — и ни разу не пожалел.»</p>
           <div class="review-top">
-            <img class="avatar" loading="lazy" src="/static/dev/img/review-daniil.webp" alt="Даниил, бэкенд-разработчик">
+            <img class="avatar" loading="lazy" src="https://image.qwenlm.ai/public_source/0dc41e34-ea37-4530-9022-325733d9aeea/1b9e66c4d-ffc9-44ac-8472-8df757d1a310.png" alt="Даниил, бэкенд-разработчик">
             <div><b>Даниил Р.</b><span>бэкенд-разработчик</span></div>
             <span class="review-since">с Vexio с 2025</span>
           </div>
@@ -677,7 +677,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
             <li><i>✓</i>Договор на одну страницу, читается за 5 минут</li>
           </ul>
           <div class="apply-img">
-            <img loading="lazy" src="/static/dev/img/apply.webp" alt="Рукопожатие клиента и разработчика над договором">
+            <img loading="lazy" src="https://image.qwenlm.ai/public_source/0dc41e34-ea37-4530-9022-325733d9aeea/1eba54528-0e3c-4ee0-aef0-2eca7a70fe6d.png" alt="Рукопожатие клиента и разработчика над договором">
             <span class="sticker">договор — одна страница ✍</span>
           </div>
         </div>
