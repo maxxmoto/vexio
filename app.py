@@ -507,6 +507,8 @@ def load_all_submissions():
             notify = json.load(f)
         for n in notify:
             d = n['data']
+            if n.get('source') == 'site':
+                continue  # already in SQLite
             subs.append({
                 'id': d.get('project_id', ''),
                 'name': d.get('name', '') or d.get('contact', ''),
