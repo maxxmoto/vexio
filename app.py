@@ -472,6 +472,14 @@ def admin_logout():
 def admin_new():
     return send_from_directory('templates', 'newadmin.html')
 
+@app.route('/sitemap.xml')
+def sitemap():
+    return app.send_static_file('sitemap.xml')
+
+@app.route('/robots.txt')
+def robots():
+    return "User-agent: *\nAllow: /\nSitemap: https://vexiostudio.ru/sitemap.xml", 200, {'Content-Type': 'text/plain'}
+
 @app.route('/api/admin/data')
 def admin_data():
     subs = load_all_submissions()
