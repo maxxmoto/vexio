@@ -259,16 +259,7 @@
   }
 </style>
 </head>
-<body>
-<script>
-if(!sessionStorage.getItem('admin_auth')){
-  var pw = prompt('Введите пароль администратора:');
-  if(pw === 'vexio2024') sessionStorage.setItem('admin_auth','1');
-  else { document.body.innerHTML = '<div style="text-align:center;padding:100px;font-family:Inter,sans-serif"><h2>Доступ запрещён</h2></div>'; throw new Error('auth'); }
-}
-</script>
-
-<div class="app">
+<body><div class="app">
 
   <!-- ================= SIDEBAR ================= -->
   <aside class="sidebar">
