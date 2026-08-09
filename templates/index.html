@@ -1,1330 +1,1165 @@
 <!DOCTYPE html>
-<html lang="ru" prefix="og: https://ogp.me/ns#">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, shrink-to-fit=no" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta http-equiv="Content-Language" content="ru" />
-  <meta name="format-detection" content="telephone=no, address=no, email=no" />
-  <meta http-equiv="Cache-Control" content="public, max-age=86400, must-revalidate" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vexio — веб-студия. Сайты, которые не похожи на шаблон</title>
+<meta name="description" content="Vexio Studio — кастомные сайты, админ-панели и Telegram-интеграции для бизнеса, который отказывается выглядеть обычно. Ответим за 24 часа.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2l3.4 10.6L30 16l-10.6 3.4L16 30l-3.4-10.6L2 16l10.6-3.4z' fill='%231B1B1B'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/unbounded@5/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/unbounded@5/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/unbounded@5/900.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope@5/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope@5/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope@5/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope@5/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/manrope@5/800.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/caveat@5/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/caveat@5/700.css">
+<style>
+:root{
+  --ink:#1B1B1B;
+  --bg:#FFFFFF;
+  --paper:#F7F5F0;
+  --butter:#FFE38A;
+  --butter-soft:#FFF3C9;
+  --peach:#FFD9C4;
+  --peach-deep:#FF9E7A;
+  --mint:#CDEBDD;
+  --mint-deep:#7FC8A4;
+  --lav:#E4DCFF;
+  --sky:#D9E8FF;
+  --line:rgba(27,27,27,.14);
+  --disp:'Unbounded',sans-serif;
+  --body:'Manrope',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --hand:'Caveat',cursive;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{
+  font-family:var(--body);
+  color:var(--ink);
+  background:var(--bg);
+  font-size:17px;
+  line-height:1.6;
+  overflow-x:clip;
+  touch-action:manipulation;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 88% -5%, rgba(255,217,196,.5), transparent 42%),
+    radial-gradient(circle at -8% 78%, rgba(205,235,221,.45), transparent 40%),
+    radial-gradient(rgba(27,27,27,.07) 1px, transparent 1px);
+  background-size:auto,auto,26px 26px;
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection{background:var(--butter);color:var(--ink)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer}
+section{scroll-margin-top:96px;position:relative}
+.wrap{width:min(1220px,92%);margin:0 auto}
+.mono{font-family:var(--mono)}
 
-  <title>Vexio Studio — Разработка сайтов и Telegram-ботов под ключ. Веб-студия премиум-класса | Заказать сайт</title>
-  <meta name="description" content="Vexio Studio — веб-студия полного цикла. Создаём сайты, Telegram-ботов, CRM-системы и админ-панели с индивидуальным подходом. Создаём сайты, Telegram-ботов, CRM-системы и админ-панели. Полный цикл: дизайн → вёрстка → бэкенд → запуск → поддержка. Портфолио 9+ проектов. Бесплатная консультация — закажите сайт сегодня.: лендинги, интернет-магазины, корпоративные порталы, админ-панели. Разрабатываем Telegram-ботов с CRM-интеграцией, автоворонками и AI. Индивидуальный дизайн, чистый код, поддержка 24/7. Портфолио из 9+ проектов. Релиз 2026." />
-  <meta name="keywords" content="разработка сайтов под ключ, заказать сайт цена, веб-студия, веб-разработка, telegram боты разработка, telegram бот под ключ, лендинг пейдж, интернет магазин создание, админ-панель разработка, сайт визитка цена, корпоративный сайт разработка, vexio, vexio studio, веб студия москва, веб студия россия, создание сайта под ключ недорого, фриланс веб разработка, frontend разработка, backend разработка, fullstack разработчик, ui ux дизайн, создание ботов телеграм, чат-бот телеграм, crm система разработка, создание админ панели" />
-  <meta name="news_keywords" content="vexio studio, веб-разработка 2026, telegram боты, создание сайтов" />
-  <meta name="author" content="Vexio Studio" />
-  <meta name="copyright" content="Vexio Studio, 2026" />
-  <meta name="generator" content="Vexio Studio" />
-  <meta name="rating" content="general" />
-  <meta name="revisit-after" content="1 days" />
-  <meta name="subject" content="Веб-разработка, Telegram-боты, CRM-системы" />
-  <meta name="page-topic" content="Услуги веб-разработки" />
-  <meta name="audience" content="all" />
-  <meta name="page-type" content="Услуги бизнеса" />
+/* ---------- hand-written notes ---------- */
+.hand{font-family:var(--hand);font-weight:700;color:var(--ink);font-size:clamp(1.15rem,1.6vw,1.5rem);line-height:1.1;display:inline-block;transform:rotate(var(--hr,-3deg))}
+.hand svg{display:block;margin-top:2px}
+.hand-hero{position:absolute;top:-52px;right:-6px;--hr:6deg;z-index:2;font-size:clamp(1.05rem,1.4vw,1.35rem);text-align:right}
+.hand-srv{margin-top:26px;--hr:-2deg;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.head-note{display:inline-block;margin-top:14px;--hr:-2.5deg}
+.num-note{display:block;text-align:center;margin-top:20px;--hr:-1deg}
+.hand-price{display:block;text-align:left;margin:0 0 18px 2px;--hr:-2deg;font-size:1.5rem;color:var(--peach-deep)}
+.hand-cta{display:block;margin-top:16px;--hr:-2deg;font-size:1.25rem}
+.foot-hand{color:var(--butter);margin-top:16px;--hr:-2deg;font-size:1.3rem}
 
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1, nocache" />
-  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1, nocache" />
-  <meta name="googlebot-news" content="index, follow" />
-  <meta name="yandex" content="index, follow" />
-  <meta name="BingBOT" content="index, follow" />
-  <meta name="Mail.Ru" content="index, follow" />
-  <meta name="p:domain_verify" content="pinterest-verification-code" />
+/* ---------- progress ---------- */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--ink);z-index:960}
 
-  <meta name="geo.region" content="RU-MOW" />
-  <meta name="geo.placename" content="Москва" />
-  <meta name="geo.position" content="55.7558;37.6173" />
-  <meta name="geo.placename" content="Russia" />
-  <meta name="geo.position" content="55.7558;37.6173" />
-  <meta name="ICBM" content="55.7558, 37.6173" />
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:930;background:transparent;transition:background .35s,box-shadow .35s}
+header.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 1px 0 var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:10px}
+.logo{font-family:var(--disp);font-weight:900;font-size:1.45rem;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;flex:none}
+.logo .spark{width:20px;height:20px;flex:none;animation:spin 9s linear infinite}
+.nav-links{display:flex;gap:26px;font-weight:700;font-size:.92rem}
+.nav-links a{position:relative;padding:4px 0}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--butter);border-radius:3px;transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.burger{display:none;flex-direction:column;gap:5px;z-index:950;padding:8px 6px;flex:none}
+.burger span{width:26px;height:2.5px;background:var(--ink);border-radius:2px;transition:.35s}
+body.menu-open .burger span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+body.menu-open .burger span:nth-child(2){opacity:0}
+body.menu-open .burger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+.menu{position:fixed;inset:0;background:#fff;z-index:940;transform:translateY(-102%);transition:transform .55s cubic-bezier(.7,0,.2,1);display:flex;flex-direction:column;justify-content:center;padding:70px 8% 40px;gap:4px;overflow-y:auto}
+body.menu-open .menu{transform:translateY(0)}
+.menu a.m-link{font-family:var(--disp);font-weight:700;font-size:clamp(1.2rem,6vw,2.4rem);padding:10px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center}
+.menu a.m-link small{font-family:var(--mono);font-size:.75rem;color:rgba(27,27,27,.5)}
+.menu .m-foot{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-  <link rel="canonical" href="https://vexiostudio.ru/" />
-  <link rel="icon" href="static/pwalogo.svg" type="image/svg+xml" />
-  <link rel="icon" type="image/png" sizes="32x32" href="static/pwalogo.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="static/icon-192x192.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png" />
+/* ---------- buttons / stickers ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 28px;border-radius:999px;border:1.5px solid var(--ink);font-weight:800;font-size:.98rem;transition:transform .25s,box-shadow .25s,background .25s;will-change:transform}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-ink:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--butter)}
+.btn-ghost{background:transparent}
+.btn-ghost:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--mint)}
+.btn-sm{padding:11px 20px;font-size:.88rem}
+.sticker{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;border:1.5px solid var(--ink);border-radius:999px;padding:7px 13px;background:#fff;box-shadow:3px 3px 0 var(--ink)}
+.sticker.butter{background:var(--butter)}
+.sticker.mint{background:var(--mint)}
+.sticker.peach{background:var(--peach)}
+.sticker.lav{background:var(--lav)}
 
-  <link rel="alternate" hreflang="ru" href="https://vexiostudio.ru/" />
-  <link rel="alternate" hreflang="en" href="https://vexiostudio.ru/" />
-  <link rel="alternate" hreflang="x-default" href="https://vexiostudio.ru/" />
-  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+/* ---------- reveal / lines ---------- */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.6,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.hl .hl-line{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.hl .hl-line>span{display:block;transform:translateY(115%);transition:transform 1s cubic-bezier(.2,.65,.15,1)}
+.hl.in .hl-line>span{transform:translateY(0)}
+.hl.in .hl-line:nth-child(2)>span{transition-delay:.12s}
+.hl.in .hl-line:nth-child(3)>span{transition-delay:.24s}
+.mark{background:var(--butter);padding:.02em .14em;border-radius:.14em;box-decoration-break:clone;-webkit-box-decoration-break:clone;display:inline-block;transform:rotate(-1.2deg)}
+.mark.mint{background:var(--mint);transform:rotate(1deg)}
+.squig-wrap{position:relative;display:inline-block}
+.squig{position:absolute;left:0;bottom:-.28em;width:100%;height:.32em;color:var(--peach-deep)}
+.squig path{stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset 1.3s ease .6s}
+.in .squig path,.squig.in path{stroke-dashoffset:0}
 
-  <link rel="dns-prefetch" href="https://unpkg.com" />
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-  <link rel="preconnect" href="https://unpkg.com" crossorigin />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+/* ---------- hero ---------- */
+.hero{padding:clamp(36px,6vw,96px) 0 clamp(60px,7vw,100px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,70px);align-items:center}
+.hero h1{font-family:var(--disp);font-weight:900;font-size:clamp(2.15rem,5.6vw,4.6rem);line-height:1.04;letter-spacing:-.015em;margin-bottom:26px}
+.lead{font-size:clamp(1rem,1.4vw,1.18rem);max-width:34em;color:rgba(27,27,27,.78);margin-bottom:34px}
+.lead b{color:var(--ink)}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hero-visual{position:relative}
+.browser{border:1.5px solid var(--ink);border-radius:20px;background:#fff;overflow:hidden;box-shadow:12px 12px 0 var(--lav);transform:rotate(1.2deg)}
+.browser-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1.5px solid var(--ink);background:var(--paper)}
+.browser-bar i{width:11px;height:11px;border-radius:50%;flex:none}
+.browser-bar i:nth-child(1){background:#FF7A6B}.browser-bar i:nth-child(2){background:var(--butter)}.browser-bar i:nth-child(3){background:#7FC8A4}
+.browser-url{margin-left:6px;font-family:var(--mono);font-size:11.5px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 14px;color:rgba(27,27,27,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.browser-img{overflow:hidden;aspect-ratio:1/0.92}
+.browser-img img{width:100%;height:100%;object-fit:cover;animation:kb 16s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1) translate(0,0)}to{transform:scale(1.09) translate(-1.5%,1.5%)}}
+.float-card{position:absolute;background:rgba(255,255,255,.62);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);border:1px solid rgba(27,27,27,.1);border-radius:18px;box-shadow:0 14px 40px rgba(27,27,27,.12);padding:14px 18px;animation:floaty 6s ease-in-out infinite;max-width:calc(100% - 24px)}
+.fc-1{top:-26px;left:-30px;animation-delay:.4s}
+.fc-2{bottom:34px;right:-22px}
+.float-card .fc-val{font-family:var(--disp);font-weight:700;font-size:1.25rem;line-height:1.1;overflow-wrap:anywhere}
+.float-card .fc-lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(27,27,27,.6)}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
-  <meta property="og:title" content="Vexio Studio — Разработка сайтов и Telegram-ботов под ключ" />
-  <meta property="og:description" content="Создаём сайты любой сложности: от лендингов до интернет-магазинов. Telegram-боты с CRM и AI. Индивидуальный дизайн, быстрая разработка, поддержка 24/7. Закажите сайт мечты." />
-  <meta property="og:url" content="https://vexiostudio.ru/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Vexio Studio" />
-  <meta property="og:locale" content="ru_RU" />
-  <meta property="og:locale:alternate" content="en_US" />
-  <meta property="og:image" content="https://vexiostudio.ru/static/pwalogo.png" />
-  <meta property="og:image:secure_url" content="https://vexiostudio.ru/static/pwalogo.png" />
-  <meta property="og:image:width" content="343" />
-  <meta property="og:image:height" content="370" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:alt" content="Логотип Vexio Studio — премиальная веб-студия" />
-  <meta property="og:country-name" content="Russia" />
-  <meta property="og:see_also" content="https://t.me/vexiostudiocahnnel" />
-  <meta property="og:rich_attachment" content="true" />
-  <meta property="fb:app_id" content="vexio_studio" />
-  <meta property="article:publisher" content="https://t.me/vexiostudiocahnnel" />
+/* ---------- clients marquee ---------- */
+.clients{border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);background:#fff;padding:20px 0;overflow:hidden}
+.clients .mq-track{display:flex;width:max-content;animation:mq 34s linear infinite}
+.clients:hover .mq-track{animation-play-state:paused}
+.clients .mq-group{display:flex;align-items:center;gap:44px;padding-right:44px;white-space:nowrap}
+.clients .cl{font-family:var(--disp);font-weight:700;font-size:clamp(1.05rem,2.2vw,1.5rem)}
+.clients .cl.out{color:transparent;-webkit-text-stroke:1.3px var(--ink)}
+.clients .sep{color:var(--peach-deep);font-size:1.2rem}
+@keyframes mq{to{transform:translateX(-50%)}}
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@vexio_studio" />
-  <meta name="twitter:creator" content="@vexio_studio" />
-  <meta name="twitter:title" content="Vexio Studio — Разработка сайтов и Telegram-ботов" />
-  <meta name="twitter:description" content="Веб-студия премиум-класса. Индивидуальные сайты, CRM и чат-боты. Портфолио 9+ проектов. Бесплатная консультация." />
-  <meta name="twitter:image" content="https://vexiostudio.ru/static/pwalogo.png" />
-  <meta name="twitter:image:alt" content="Логотип Vexio Studio" />
-  <meta name="twitter:label1" content="Услуги" />
-  <meta name="twitter:data1" content="Сайты, Боты, CRM, Админ-панели" />
-  <meta name="twitter:label2" content="Портфолио" />
-  <meta name="twitter:data2" content="9+ проектов · С 2026 года"
+/* ---------- section heads ---------- */
+.sec-head{margin-bottom:clamp(36px,5vw,60px)}
+.sec-tag{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(27,27,27,.55);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.sec-tag::before{content:"";width:34px;height:1.5px;background:var(--ink)}
+h2.big{font-family:var(--disp);font-weight:800;font-size:clamp(1.7rem,4vw,3.1rem);line-height:1.1;letter-spacing:-.01em}
+.sec-sub{margin-top:16px;color:rgba(27,27,27,.7);max-width:36em}
 
-  <meta name="vk:image" content="https://vexiostudio.ru/static/pwalogo.png" />
-  <meta name="vk:title" content="Vexio Studio — Премиум веб-студия" />
-  <meta name="vk:description" content="Разработка сайтов и Telegram-ботов любой сложности" />
-  <link rel="image_src" href="https://vexiostudio.ru/static/pwalogo.png" />
-  <meta name="theme-color" content="#0A0A0A" />
-  <meta name="msapplication-TileColor" content="#7C3AED" />
-  <meta name="msapplication-TileImage" content="static/pwalogo.png" />
-  <meta name="msapplication-config" content="none" />
-  <meta name="application-name" content="Vexio Studio" />
-  <meta name="apple-mobile-web-app-title" content="Vexio" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+/* ---------- services ---------- */
+.services{padding:clamp(70px,9vw,130px) 0}
+.services-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(36px,5vw,72px);align-items:start}
+.services-left{position:sticky;top:120px}
+.acc{border:1.5px solid var(--ink);border-radius:20px;background:#fff;margin-bottom:14px;overflow:hidden;transition:box-shadow .3s,transform .3s}
+.acc:hover{transform:translate(-2px,-2px)}
+.acc.open{box-shadow:7px 7px 0 var(--butter)}
+.acc:nth-child(2).open{box-shadow:7px 7px 0 var(--mint)}
+.acc:nth-child(3).open{box-shadow:7px 7px 0 var(--peach)}
+.acc:nth-child(4).open{box-shadow:7px 7px 0 var(--lav)}
+.acc:nth-child(5).open{box-shadow:7px 7px 0 var(--sky)}
+.acc:nth-child(6).open{box-shadow:7px 7px 0 var(--butter)}
+.acc-head{width:100%;display:flex;align-items:center;gap:18px;padding:22px 24px;text-align:left}
+.acc-num{font-family:var(--mono);font-size:12px;color:rgba(27,27,27,.5);flex:none}
+.acc-title{font-family:var(--disp);font-weight:700;font-size:clamp(.98rem,1.6vw,1.2rem);flex:1}
+.acc-price{font-family:var(--mono);font-size:12px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.acc-icon{width:34px;height:34px;flex:none;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;transition:transform .4s,background .3s}
+.acc.open .acc-icon{transform:rotate(45deg);background:var(--butter)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.acc-inner{padding:0 24px 26px 24px}
+.acc-inner p{color:rgba(27,27,27,.75);margin-bottom:16px;max-width:38em}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.04em;border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:rgba(255,255,255,.75)}
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": "https://vexiostudio.ru/#organization",
-    "name": "Vexio Studio",
-    "alternateName": ["Vexio", "Vexio Dev"],
-    "url": "https://vexiostudio.ru/",
-    "logo": "https://vexiostudio.ru/static/pwalogo.png",
-    "image": "https://vexiostudio.ru/static/pwalogo.png",
-    "description": "Веб-студия полного цикла. Разработка сайтов, Telegram-ботов, CRM-систем и админ-панелей.",
-    "foundingDate": "2026-01-01",
-    "foundingLocation": { "@type": "Place", "name": "Москва, Россия" },
-    "areaServed": { "@type": "Country", "name": "Russia" },
-    "priceRange": "от 15 000 ₽",
-    "telephone": "+79877173511",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "RU",
-      "addressLocality": "Москва",
-      "addressRegion": "Москва",
-      "streetAddress": "Москва"
-    },
-    "contactPoint": [
-      {
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "telephone": "+79877173511",
-        "availableLanguage": ["Russian", "English"],
-        "contactOption": "TollFree"
-      },
-      {
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "availableLanguage": ["Russian"],
-        "url": "https://t.me/vexiostudiocahnnel"
-      }
-    ],
-    "sameAs": [
-      "https://t.me/vexiostudiocahnnel"
-    ],
-    "openingHoursSpecification": [
-      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "24:00" },
-      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "22:00" }
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Услуги разработки",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Разработка сайтов под ключ",
-            "description": "Лендинги, интернет-магазины, корпоративные сайты"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Разработка Telegram-ботов",
-            "description": "Чат-боты с CRM-интеграцией и AI-функциями"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Админ-панели и CRM-системы",
-            "description": "Системы управления и аналитики"
-          }
-        }
-      ]
-    }
-  }
-  </script>
+/* ---------- cases ---------- */
+.cases{padding:clamp(70px,9vw,130px) 0;background:var(--paper);border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.cases-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:26px}
+.case{border:1.5px solid var(--ink);border-radius:24px;background:#fff;overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s}
+.case:hover{transform:translate(-4px,-4px);box-shadow:10px 10px 0 var(--ink)}
+.case.c1{grid-column:span 7}.case.c2{grid-column:span 5}
+.case.c3{grid-column:span 5}.case.c4{grid-column:span 7}
+.case-img{position:relative;overflow:hidden;border-bottom:1.5px solid var(--ink);aspect-ratio:16/9.5;background:#eee}
+.case-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.6,.2,1)}
+.case:hover .case-img img{transform:scale(1.06)}
+.case-tag{position:absolute;top:16px;left:16px}
+.case-body{padding:24px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+.case-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.case h3{font-family:var(--disp);font-weight:700;font-size:clamp(1.1rem,2vw,1.45rem)}
+.case-arrow{width:46px;height:46px;flex:none;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;transition:transform .35s,background .3s}
+.case:hover .case-arrow{transform:rotate(45deg);background:var(--butter)}
+.case p{color:rgba(27,27,27,.72);font-size:.95rem}
+.case-res-row{margin-top:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.case-res{display:inline-flex;align-self:flex-start;font-family:var(--mono);font-size:12px;font-weight:700;background:var(--butter-soft);border:1.5px solid var(--ink);border-radius:999px;padding:7px 14px}
+.case-res.m{background:var(--mint)}.case-res.p{background:var(--peach)}.case-res.s{background:var(--sky)}
+.case-wow{transform:rotate(-4deg);font-size:10.5px;box-shadow:2px 2px 0 var(--ink)}
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "https://vexiostudio.ru/#website",
-    "url": "https://vexiostudio.ru/",
-    "name": "Vexio Studio",
-    "description": "Премиальная веб-студия. Разработка сайтов и Telegram-ботов.",
-    "inLanguage": ["ru", "en"],
-    "publisher": { "@id": "https://vexiostudio.ru/#organization" },
-    "copyrightYear": "2026",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://vexiostudio.ru/?q={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
+/* ---------- studio / call frame ---------- */
+.studio{padding:clamp(70px,9vw,130px) 0}
+.studio-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,80px);align-items:center}
+.callframe{background:#fff;border:1.5px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:12px 12px 0 var(--sky);transform:rotate(-1.5deg)}
+.cf-bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1.5px solid var(--ink);background:var(--paper)}
+.cf-bar i{width:11px;height:11px;border-radius:50%;flex:none}
+.cf-bar i:nth-child(1){background:#FF7A6B}.cf-bar i:nth-child(2){background:var(--butter)}.cf-bar i:nth-child(3){background:#7FC8A4}
+.cf-title{margin-left:6px;font-family:var(--mono);font-size:11px;color:rgba(27,27,27,.65);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cf-rec{margin-left:auto;font-family:var(--mono);font-size:10px;font-weight:700;color:#E5484D;flex:none;animation:blink 1.4s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+.callframe img{width:100%;aspect-ratio:1/0.94;object-fit:cover}
+.callframe figcaption{padding:12px 16px;border-top:1.5px solid var(--ink);font-family:var(--mono);font-size:12px;background:#fff}
+.check-list{list-style:none;margin-top:26px;display:grid;gap:14px}
+.check-list li{display:flex;gap:14px;align-items:flex-start;font-weight:600}
+.check-list .ck{width:26px;height:26px;flex:none;border:1.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;background:var(--mint)}
+.check-list li:nth-child(2) .ck{background:var(--butter)}
+.check-list li:nth-child(3) .ck{background:var(--peach)}
+.check-list li:nth-child(4) .ck{background:var(--lav)}
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Главная",
-        "item": "https://vexiostudio.ru/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Портфолио",
-        "item": "https://vexiostudio.ru/#showcase"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Услуги",
-        "item": "https://vexiostudio.ru/#builder"
-      }
-    ]
-  }
-  </script>
+/* ---------- numbers ---------- */
+.numbers{border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);background:#fff}
+.num-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.num-cell{padding:clamp(26px,4vw,54px) 24px;border-left:1.5px solid var(--ink);text-align:left}
+.num-cell:first-child{border-left:none}
+.num-val{font-family:var(--disp);font-weight:900;font-size:clamp(2rem,4.6vw,3.9rem);line-height:1;display:inline-block}
+.num-suf{font-family:var(--disp);font-weight:900;font-size:clamp(1.1rem,2.4vw,2rem)}
+.num-lbl{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(27,27,27,.6);margin-top:10px}
+.num-cell .hl-box{display:inline-block;padding:4px 10px;border-radius:10px;transform:rotate(-1.5deg)}
+.num-cell:nth-child(1) .hl-box{background:var(--butter)}
+.num-cell:nth-child(2) .hl-box{background:var(--mint)}
+.num-cell:nth-child(3) .hl-box{background:var(--peach)}
+.num-cell:nth-child(4) .hl-box{background:var(--lav)}
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Сколько стоит разработка сайта?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Стоимость зависит от сложности проекта. Лендинг — от 15 000 ₽, интернет-магазин — от 50 000 ₽, корпоративный сайт — от 80 000 ₽. Точную цену рассчитываем индивидуально после брифинга."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Сколько времени занимает создание сайта?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Средний срок разработки: лендинг — 5–10 дней, интернет-магазин — 14–30 дней, корпоративный сайт — от 21 дня. Сроки зависят от объёма работ и количества правок."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Какие технологии вы используете?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Мы работаем с современным стеком: React, Python (Flask/FastAPI), Node.js, PostgreSQL, Redis, Docker. Для Telegram-ботов — python-telegram-bot, aiogram. Всегда подбираем оптимальные инструменты под задачу."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Даёте ли гарантию на работу?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Да, мы предоставляем гарантию 30 дней на исправление багов после сдачи проекта. Также предлагаем техническую поддержку на постоянной основе."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Можно ли заказать Telegram-бота отдельно?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Конечно. Мы разрабатываем Telegram-ботов любой сложности: от простых информационных до комплексных решений с CRM-интеграцией, платёжными системами и искусственным интеллектом."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Делаете ли вы SEO-оптимизацию?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Обязательно. Все наши сайты проходят базовую SEO-оптимизацию: семантическая вёрстка, микроразметка Schema.org, Open Graph, оптимизация скорости загрузки (PageSpeed 90+), настройка sitemap.xml и robots.txt. Расширенное SEO — по запросу."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Как происходит процесс работы?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "1. Брифинг и анализ (1-2 дня). 2. Прототип и дизайн (3-7 дней). 3. Разработка и вёрстка. 4. Тестирование. 5. Запуск и передача. На каждом этапе вы видите результат и вносите правки. Оплата поэтапная — 30% / 30% / 40%."
-        }
-      }
-    ]
-  }
-  </script>
-    <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Портфолио Vexio Studio",
-    "itemListElement": [
-      {"@type":"ListItem","position":1,"item":{"@type":"CreativeWork","name":"MaxxMoto","description":"Мотоциклетная платформа с каталогом и CRM"}},
-      {"@type":"ListItem","position":2,"item":{"@type":"CreativeWork","name":"Sotnur Glamping","description":"Сайт глэмпинг-курорта с бронью"}},
-      {"@type":"ListItem","position":3,"item":{"@type":"CreativeWork","name":"Englify","description":"AI-платформа изучения английского"}},
-      {"@type":"ListItem","position":4,"item":{"@type":"CreativeWork","name":"Python Forge","description":"Образовательная платформа по Python"}},
-      {"@type":"ListItem","position":5,"item":{"@type":"CreativeWork","name":"СЦ Дружба","description":"Бронирование теннисных кортов"}},
-      {"@type":"ListItem","position":6,"item":{"@type":"CreativeWork","name":"Выживальщик Опенспейса","description":"Сатирический проект об офисной жизни"}}
-    ]
-  }
-  </script>
+/* ---------- process / stack (desktop) ---------- */
+.process{padding:clamp(70px,9vw,130px) 0}
+.stack{display:grid;gap:26px}
+.p-card{position:sticky;border:1.5px solid var(--ink);border-radius:26px;padding:clamp(24px,4vw,48px);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,44px);align-items:start;box-shadow:0 -8px 30px rgba(27,27,27,.06)}
+.p-card.s1{background:var(--butter-soft);top:100px}
+.p-card.s2{background:#EAF6F0;top:132px}
+.p-card.s3{background:#FFF0E8;top:164px}
+.p-card.s4{background:#EFEAFF;top:196px}
+.p-num{font-family:var(--disp);font-weight:900;font-size:clamp(2.2rem,5.5vw,4.6rem);line-height:1;color:transparent;-webkit-text-stroke:1.6px var(--ink)}
+.p-card h3{font-family:var(--disp);font-weight:700;font-size:clamp(1.1rem,2.3vw,1.7rem);margin-bottom:12px}
+.p-card p{color:rgba(27,27,27,.75);max-width:36em}
+.p-meta{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.p-polaroid{width:150px;border:1.5px solid var(--ink);background:#fff;padding:8px 8px 12px;transform:rotate(3deg);box-shadow:6px 6px 0 rgba(27,27,27,.15)}
+.p-polaroid img{aspect-ratio:1/.8;object-fit:cover}
+.p-polaroid figcaption{font-family:var(--mono);font-size:10px;margin-top:8px;text-align:center}
 
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap');
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0A0A0A;
-      --surface: rgba(255,255,255,0.035);
-      --surface-hover: rgba(255,255,255,0.065);
-      --border: rgba(255,255,255,0.08);
-      --border-glow: rgba(139,92,246,0.35);
-      --text: #F0EEF8;
-      --text-dim: rgba(240,238,248,0.45);
-      --text-muted: rgba(240,238,248,0.25);
-      --purple: #8B5CF6;
-      --purple-bright: #A78BFA;
-      --purple-dim: rgba(139,92,246,0.15);
-      --purple-glow: rgba(139,92,246,0.4);
-      --font-display: 'Syne', sans-serif;
-      --font-body: 'Outfit', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--text);
-      font-family: var(--font-body);
-      overflow-x: hidden; -webkit-font-smoothing: antialiased;
-    }
-    ::selection { background: rgba(139,92,246,0.35); color: #fff; }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--purple-dim); border-radius: 2px; }
+/* ---------- process / flip (mobile) ---------- */
+.flip-grid{display:none}
+.flip{perspective:1200px;height:250px;cursor:pointer;outline:none}
+.flip:focus-visible .flip-inner{box-shadow:0 0 0 3px var(--butter)}
+.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.4,0,.2,1);border-radius:24px}
+.flip.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1.5px solid var(--ink);border-radius:24px;padding:22px;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(27,27,27,.06)}
+.flip-front{justify-content:space-between}
+.flip-back{transform:rotateY(180deg);justify-content:flex-start;gap:12px}
+.f1{background:var(--butter-soft)}
+.f2{background:#EAF6F0}
+.f3{background:#FFF0E8}
+.f4{background:#EFEAFF}
+.flip-num{font-family:var(--disp);font-weight:900;font-size:2.4rem;line-height:1;color:transparent;-webkit-text-stroke:1.6px var(--ink)}
+.flip-front h3{font-family:var(--disp);font-weight:700;font-size:1.15rem;margin-top:12px}
+.flip-hint{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(27,27,27,.6)}
+.flip-hint .fh-ic{width:30px;height:30px;flex:none;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;background:#fff;transition:transform .4s,background .3s}
+.flip:active .fh-ic{transform:rotate(180deg);background:var(--butter)}
+.flip-back-tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1.5px solid var(--ink);border-radius:999px;padding:6px 12px;background:#fff;align-self:flex-start;flex:none}
+.flip-back p{font-size:.92rem;color:rgba(27,27,27,.8)}
+.flip-note{display:none;margin-top:22px;text-align:center;font-family:var(--mono);font-size:12px;color:rgba(27,27,27,.55)}
+.flip-only{display:none}
 
-    @keyframes float-a { 0%,100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-22px) rotate(3deg); } }
-    @keyframes float-b { 0%,100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(18px) rotate(-2deg); } }
-    @keyframes float-c { 0%,100% { transform: translateY(0px) rotate(0deg); } 33% { transform: translateY(-14px) rotate(2deg); } 66% { transform: translateY(10px) rotate(-1deg); } }
-    @keyframes pulse-glow { 0%,100% { box-shadow: 0 0 20px rgba(139,92,246,0.2), 0 0 60px rgba(139,92,246,0.05); } 50% { box-shadow: 0 0 35px rgba(139,92,246,0.4), 0 0 100px rgba(139,92,246,0.1); } }
-    @keyframes grid-scroll { 0% { transform: translateY(0); } 100% { transform: translateY(60px); } }
-    @keyframes cursor-blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
-    @keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-    @keyframes progress-fill { 0% { width: 0%; } 100% { width: 100%; } }
-    @keyframes orbit { from { transform: rotate(0deg) translateX(90px) rotate(0deg); } to { transform: rotate(360deg) translateX(90px) rotate(-360deg); } }
-    @keyframes ripple { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
-    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+/* ---------- pricing ---------- */
+.pricing{padding:clamp(70px,9vw,130px) 0;background:var(--paper);border-top:1.5px solid var(--ink)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:stretch}
+.price-card{border:1.5px solid var(--ink);border-radius:26px;background:#fff;padding:34px 30px;display:flex;flex-direction:column;position:relative;transition:transform .3s,box-shadow .3s}
+.price-card:hover{transform:translateY(-6px);box-shadow:8px 8px 0 rgba(27,27,27,.14)}
+.price-card.feat{background:#FFFBEA;border-width:2px;transform:translateY(-14px);box-shadow:12px 12px 0 var(--butter)}
+.price-card.feat:hover{transform:translateY(-20px)}
+.feat-sticker{position:absolute;top:-16px;right:24px;transform:rotate(5deg)}
+.price-name{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(27,27,27,.55);margin-bottom:14px}
+.price-val{font-family:var(--disp);font-weight:900;font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.1}
+.price-term{font-family:var(--mono);font-size:12px;color:rgba(27,27,27,.55);margin:8px 0 22px}
+.price-card ul{list-style:none;display:grid;gap:12px;margin-bottom:28px}
+.price-card li{display:flex;gap:12px;align-items:flex-start;font-size:.94rem;font-weight:600}
+.price-card li svg{flex:none;margin-top:3px}
+.price-card .btn{margin-top:auto}
+.price-note{margin-top:34px;text-align:center;font-family:var(--mono);font-size:12.5px;color:rgba(27,27,27,.6)}
+.price-note b{background:var(--butter);padding:2px 8px;border-radius:6px}
 
-    .glass { background: var(--surface); backdrop-filter: blur(24px) saturate(1.8); border: 1px solid var(--border); }
-    .glass-purple { background: rgba(139,92,246,0.08); backdrop-filter: blur(20px); border: 1px solid rgba(139,92,246,0.2); }
-    .glow-text { text-shadow: 0 0 40px rgba(139,92,246,0.6), 0 0 80px rgba(139,92,246,0.3); }
-    .shimmer-text { background: linear-gradient(90deg, #F0EEF8 0%, #A78BFA 40%, #F0EEF8 60%, #A78BFA 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmer 4s linear infinite; }
-    .btn-primary { position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; background: linear-gradient(135deg, #7C3AED, #6D28D9); border: 1px solid rgba(167,139,250,0.4); border-radius: 12px; color: #fff; font-family: var(--font-body); font-size: 15px; font-weight: 500; letter-spacing: 0.01em; cursor: pointer; transition: all 0.3s ease; overflow: hidden; }
-    .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent); opacity: 0; transition: opacity 0.3s; }
-    .btn-primary:hover::before { opacity: 1; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(139,92,246,0.5), 0 2px 8px rgba(0,0,0,0.4); }
-    .btn-primary:active { transform: translateY(0px); }
-    .section-label { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 100px; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple-bright); background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2); margin-bottom: 24px; }
-    .section-label::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--purple); box-shadow: 0 0 8px var(--purple); animation: pulse-glow 2s ease-in-out infinite; }
-    @media (max-width: 640px) {
-      .resp-pad { padding-left: 20px !important; padding-right: 20px !important; }
-      .resp-grid { grid-template-columns: 1fr !important; }
-      .resp-hide { display: none !important; }
-    }
-    @media (min-width: 641px) and (max-width: 1023px) {
-      .resp-pad { padding-left: 40px !important; padding-right: 40px !important; }
-    }
-  </style>
+/* ---------- reviews ---------- */
+.reviews{padding:clamp(70px,9vw,130px) 0;overflow:hidden}
+.rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px 40px}
+.postcard{border:1.5px solid var(--ink);border-radius:14px;padding:34px 30px 26px;position:relative;transform:rotate(var(--r,0deg));transition:transform .35s;box-shadow:8px 8px 0 rgba(27,27,27,.1)}
+.postcard:hover{transform:rotate(0deg) translateY(-6px)}
+.postcard::before{content:"";position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-3deg);width:96px;height:26px;background:rgba(255,227,138,.85);border:1px solid rgba(27,27,27,.12)}
+.postcard.pc1{background:#FFF6DC;--r:-2deg}
+.postcard.pc2{background:#EAF6F0;--r:1.6deg;margin-top:34px}
+.postcard.pc3{background:#FFF0E8;--r:1.8deg}
+.postcard.pc4{background:#EFEAFF;--r:-1.6deg;margin-top:34px}
+.pc-stars{color:var(--peach-deep);letter-spacing:3px;margin-bottom:14px;font-size:1rem}
+.pc-text{font-weight:600;font-size:1.02rem;line-height:1.55;margin-bottom:20px}
+.pc-who{display:flex;align-items:center;gap:14px}
+.pc-ava{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;font-family:var(--disp);font-weight:700;background:#fff;flex:none}
+.pc-name{font-weight:800;font-size:.95rem}
+.pc-role{font-family:var(--mono);font-size:11px;color:rgba(27,27,27,.55)}
+
+/* ---------- faq ---------- */
+.faq{padding:0 0 clamp(70px,9vw,130px)}
+.faq .acc{border-radius:0;border:none;border-top:1.5px solid var(--ink);background:transparent;box-shadow:none!important;margin:0}
+.faq .acc:last-child{border-bottom:1.5px solid var(--ink)}
+.faq .acc:hover{transform:none}
+.faq .acc-head{padding:24px 6px}
+.faq .acc-title{font-size:clamp(1rem,1.8vw,1.2rem)}
+.faq .acc-inner{padding:0 6px 26px}
+.faq .acc.open{box-shadow:none}
+.faq .acc.open .acc-icon{background:var(--mint)}
+
+/* ---------- cta ---------- */
+.cta{padding:0 0 clamp(80px,10vw,140px)}
+.cta-panel{border:1.5px solid var(--ink);border-radius:32px;background:rgba(255,255,255,.66);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25);box-shadow:0 24px 70px rgba(27,27,27,.1);display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden}
+.cta-left{padding:clamp(26px,4.5vw,60px)}
+.cta-left h2{font-family:var(--disp);font-weight:800;font-size:clamp(1.45rem,3.4vw,2.6rem);line-height:1.12;margin-bottom:14px}
+.cta-left .sec-sub{margin-bottom:30px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f-field{display:flex;flex-direction:column;gap:8px}
+.f-field.full{grid-column:1/-1}
+.f-field label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(27,27,27,.6)}
+.f-field input,.f-field select,.f-field textarea{font-family:var(--body);font-size:16px;font-weight:600;color:var(--ink);background:#fff;border:1.5px solid var(--ink);border-radius:14px;padding:14px 16px;outline:none;transition:box-shadow .25s,transform .25s;width:100%}
+.f-field textarea{resize:vertical;min-height:104px}
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus{box-shadow:5px 5px 0 var(--butter);transform:translate(-2px,-2px)}
+.f-field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%231B1B1B' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.form-foot{grid-column:1/-1;display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:6px}
+.form-foot small{font-family:var(--mono);font-size:11px;color:rgba(27,27,27,.5)}
+.cta-right{position:relative;border-left:1.5px solid var(--ink);min-height:420px}
+.cta-right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cta-right .float-card{left:22px;bottom:22px;right:auto;top:auto}
+.form-success{display:none;text-align:center;padding:40px 20px}
+.form-success .big-ok{width:86px;height:86px;margin:0 auto 22px;border:2px solid var(--ink);border-radius:50%;background:var(--mint);display:grid;place-items:center;box-shadow:6px 6px 0 var(--butter)}
+.form-success h3{font-family:var(--disp);font-weight:800;font-size:1.5rem;margin-bottom:10px}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:#fff;padding:clamp(56px,7vw,90px) 0 34px;position:relative;overflow:hidden}
+.foot-giant{font-family:var(--disp);font-weight:900;font-size:clamp(3.2rem,15vw,13rem);line-height:.95;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.3);user-select:none;text-align:center;letter-spacing:.02em;margin-bottom:clamp(36px,5vw,70px)}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:36px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.16)}
+.foot-grid h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:18px}
+.foot-grid a{display:block;padding:5px 0;font-weight:600;color:rgba(255,255,255,.85)}
+.foot-grid a:hover{color:var(--butter)}
+.foot-about p{color:rgba(255,255,255,.65);font-size:.94rem;max-width:26em;margin-top:14px}
+.foot-logo{font-family:var(--disp);font-weight:900;font-size:1.5rem}
+.foot-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:26px;font-family:var(--mono);font-size:11.5px;color:rgba(255,255,255,.5)}
+.foot-bottom .fb-star{color:var(--butter)}
+
+/* ---------- responsive ---------- */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:48px}
+  .hero-visual{max-width:560px;margin:0 auto;width:100%}
+  .services-grid{grid-template-columns:1fr}
+  .services-left{position:static}
+  .case.c1,.case.c2,.case.c3,.case.c4{grid-column:span 6}
+  .studio-grid{grid-template-columns:1fr;gap:44px}
+  .callframe{max-width:560px;margin:0 auto;width:100%}
+  .price-grid{grid-template-columns:1fr;max-width:560px;margin:0 auto}
+  .price-card.feat{transform:none}
+  .price-card.feat:hover{transform:translateY(-6px)}
+  .cta-panel{grid-template-columns:1fr}
+  .cta-right{border-left:none;border-top:1.5px solid var(--ink);min-height:360px}
+  .num-grid{grid-template-columns:1fr 1fr}
+  .num-cell{border-top:1.5px solid var(--ink)}
+  .num-cell:nth-child(-n+2){border-top:none}
+  .num-cell:nth-child(odd){border-left:none}
+  .p-card{grid-template-columns:auto 1fr}
+  .p-meta{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:flex-start;flex-wrap:wrap}
+  .p-polaroid{display:none}
+}
+@media(max-width:760px){
+  body{font-size:16px}
+  .nav-links{display:none}
+  .burger{display:flex}
+  .case.c1,.case.c2,.case.c3,.case.c4{grid-column:span 12}
+  .rev-grid{grid-template-columns:1fr;gap:26px}
+  .postcard.pc2,.postcard.pc4{margin-top:0}
+  .postcard{box-shadow:6px 6px 0 rgba(27,27,27,.1)}
+  .form-grid{grid-template-columns:1fr;gap:14px}
+  /* hero browser: fully adaptive, show whole image without crop */
+  .browser{transform:none;box-shadow:8px 8px 0 var(--lav)}
+  .browser-img{aspect-ratio:auto}
+  .browser-img img{height:auto;animation:none}
+  .hand-hero{top:-42px;right:0;font-size:1.05rem}
+  .fc-1{left:8px;top:-18px}
+  .fc-2{right:8px;bottom:-14px}
+  .float-card{padding:10px 14px;border-radius:14px}
+  .float-card .fc-val{font-size:1rem}
+  .float-card .fc-lbl{font-size:9.5px}
+  .acc-head{padding:18px 16px;gap:12px}
+  .acc-inner{padding:0 16px 22px}
+  .acc-icon{width:30px;height:30px}
+  .postcard{padding:28px 22px 22px}
+  .num-cell{padding:22px 16px}
+  .case-body{padding:20px}
+  .case-img{aspect-ratio:16/10}
+  .studio-grid{gap:30px}
+  .studio-text{order:-1}
+  .callframe{transform:none;box-shadow:8px 8px 0 var(--sky)}
+  .callframe img{aspect-ratio:4/3}
+  .callframe figcaption{font-size:11px;padding:10px 14px}
+  .check-list{margin-top:20px;gap:12px}
+  .check-list li{font-size:.95rem;gap:12px}
+  .check-list .ck{width:24px;height:24px}
+  .clients{padding:14px 0}
+  .clients .mq-group{gap:28px;padding-right:28px}
+  .clients .cl{font-size:1.05rem}
+  .stack{display:none}
+  .flip-grid{display:grid;grid-template-columns:1fr;gap:16px}
+  .flip-note{display:block}
+  .flip-only{display:inline}
+  .faq .acc-head{padding:20px 4px}
+  .cta-right{min-height:320px}
+  .cta-right .float-card{left:12px;right:12px;bottom:12px}
+  .cta-panel{border-radius:24px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .menu{padding:80px 6% 32px}
+  .hero-cta{gap:10px}
+}
+@media(max-width:560px){
+  .logo{font-size:1.2rem}
+  .btn-sm{padding:10px 16px;font-size:.8rem}
+  .hero h1{font-size:clamp(1.6rem,8.6vw,2.3rem)}
+  .lead{font-size:.98rem;margin-bottom:26px}
+  .hero-cta .btn{flex:1 1 auto;padding:14px 18px}
+  .sec-tag{font-size:11px}
+  .price-card{padding:28px 22px}
+  .num-val{font-size:clamp(1.7rem,8vw,2.2rem)}
+  .num-suf{font-size:1rem}
+  .num-lbl{font-size:10px}
+  .acc-title{font-size:.95rem}
+  .acc-price{display:none}
+  .foot-grid{grid-template-columns:1fr}
+  .foot-bottom{flex-direction:column;gap:8px}
+  .flip{height:240px}
+  .hand-srv svg{width:64px;height:auto}
+}
+@media(max-width:380px){
+  .logo{font-size:1.05rem}
+  .btn{padding:13px 16px;font-size:.9rem;gap:8px}
+  .btn-sm{padding:9px 12px;font-size:.72rem}
+  .float-card{padding:8px 10px}
+  .float-card .fc-val{font-size:.9rem}
+  .menu a.m-link{font-size:1.15rem}
+  .flip{height:230px}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .rv,.hl .hl-line>span{opacity:1!important;transform:none!important}
+  .squig path{stroke-dashoffset:0!important}
+}
+</style>
 </head>
-<body><div id="root"></div>
-<script type="text/babel">
-const { useState, useEffect, useRef, useCallback, useContext } = React;
+<body>
 
-const PROJECTS = [
-  { id: 1, name: "MaxxMoto", tag: "Motorcycles",
-    bg: "linear-gradient(135deg, #0f0514 0%, #1a0533 50%, #0a0a1f 100%)",
-    accent: "#9B5CF6", mockBg: "#0D0118",
-    image: "static/projects/1-maxxmoto/fon.webp",
-    desc: "Полноценная платформа для мотоциклетного бизнеса с каталогом, админ-панелью и интеграцией с Telegram-ботом.",
-    stack: ["React", "Node.js", "PostgreSQL", "Telegram Bot API"],
-    features: ["Каталог с фильтрацией", "Админ-панель CRM", "Telegram-бот для заказов", "Онлайн-оплата", "Личный кабинет дилера"],
-    result: "Рост онлайн-заказов на 60%, автоматизация обработки заявок." },
-  { id: 2, name: "Sotnur Glamping", tag: "Resort",
-    bg: "linear-gradient(135deg, #020b18 0%, #041830 50%, #010d1f 100%)",
-    accent: "#3B82F6", mockBg: "#050E1A",
-    image: "static/projects/2-morskoy-glaz/index.html",
-    desc: "Сайт для премиального глэмпинг-курорта с системой бронирования и визуальным погружением в атмосферу.",
-    stack: ["React", "Flask", "SQLite", "Stripe"],
-    features: ["Онлайн-бронирование", "3D-тур по номерам", "Сезонные тарифы", "Мультиязычность RU/EN", "Интеграция с CRM"],
-    result: "Загрузка номеров выросла на 45% в первый месяц." },
-  { id: 3, name: "Englify", tag: "Education",
-    bg: "linear-gradient(135deg, #0a0a0f 0%, #13131d 50%, #0a0a0f 100%)",
-    accent: "#7C5CFC", mockBg: "#0a0a0f",
-    image: "static/projects/3-engbot/index.html",
-    desc: "Интерактивная платформа для изучения английского языка с AI-тренажёром и геймификацией.",
-    stack: ["React", "Node.js", "MongoDB", "OpenAI API"],
-    features: ["AI-тренажёр произношения", "Геймификация и стрики", "Персональный словарь", "Адаптивная сложность", "Статистика прогресса"],
-    result: "Более 500 активных пользователей, средний рейт 4.8★." },
-  { id: 5, name: "Python Forge", tag: "Education",
-    bg: "linear-gradient(135deg, #0a0c0f 0%, #111418 50%, #0a0c0f 100%)",
-    accent: "#00e05e", mockBg: "#0a0c0f",
-    image: "static/projects/5-python-forge/index.html",
-    desc: "Образовательная платформа по Python с интерактивными заданиями, авто-проверкой кода и рейтинговой системой.",
-    stack: ["React", "FastAPI", "Docker", "Redis"],
-    features: ["Интерактивный редактор кода", "Авто-проверка решений", "Рейтинг и лидерборд", "Трек прогресса", "Сертификация"],
-    result: "80% студентов завершают курс, средний NPS — 92." },
-  { id: 6, name: 'СЦ "Дружба"', tag: "Booking",
-    bg: "linear-gradient(135deg, #030918 0%, #0d1a2e 50%, #030918 100%)",
-    accent: "#FACC15", mockBg: "#030918",
-    image: "static/projects/6-tennis-brutal/index.html",
-    desc: "Система бронирования теннисных кортов с расписанием, оплатой и уведомлениями в Telegram.",
-    stack: ["React", "Flask", "PostgreSQL", "Telegram Bot API"],
-    features: ["Расписание в реальном времени", "Оплата картой на сайте", "Telegram-уведомления", "Абонементы и скидки", "Админ-панель"],
-    result: "Отказы от броней сократились на 70%." },
-  { id: 7, name: "Выживальщик Опенспейса", tag: "Satire",
-    bg: "linear-gradient(135deg, #1a0a00 0%, #2d1400 50%, #1a0a00 100%)",
-    accent: "#FF6B35", mockBg: "#1a0a00",
-    image: "static/projects/7-survivalkit/index.html",
-    desc: "Сатирический проект о жизни в опенспейсе — генератор мемов, тестов и «полезных» советов для офисных работников.",
-    stack: ["React", "Vite", "Canvas API"],
-    features: ["Генератор мемов", "Офисный тест на выживаемость", "Голосовалка за худший опенспейс", "Анимации на Canvas"],
-    result: "Виральный охват — 10К+ просмотров за первую неделю." },
-];
+<div id="progress"></div>
 
-const LOCALES = {
-  en: {
-    hero: { studio: "Studio — Est. 2026", subtitle: "Websites that don't feel like templates.", desc: "Custom websites, admin panels and Telegram integrations for businesses that refuse to look ordinary.", viewProjects: "View Projects", startProject: "Start a Project", scroll: "scroll", stats: [["9", "Projects"], ["4.7★", "Rating"], ["24h", "Response"]] },
-    nav: { work: "Work", services: "Services", about: "About", contact: "Contact" },
-    carousel: { label: "Trusted By", title: "Brands that work with us" },
-    showcase: { label: "Work", title1: "Projects that", title2: "speak louder.", desc: "Click any project to explore it up close.", yours: "Your project" },
-    bots: { label: "Bots", title1: "Telegram bots", title2: "coming soon.", desc: "Automated solutions for your business.", placeholder: "Bot projects will appear here" },
-    builder: { label: "Request Builder", title1: "Build your project,", title2: "right here.", title: "vexio — project-builder", desc: "Choose or type your answers", complete: "All fields complete. Submit when ready.", submit: "Submit Project ✦", submitting: "Submitting...", projectPlaceholder: "Project name will appear here...", emptyHint: "Answer questions in the terminal to build your blueprint", catalog: "PRODUCT CATALOG", admin: "ADMIN DASHBOARD", telegram: "TELEGRAM INTEGRATION", telegramDesc: "Bot automation · Notifications · Commands" },
-    submission: { created: "PROJECT CREATED", yourProject: "Your Project", statusLabel: "Status", received: "Received", projectId: "Project ID", response: "Response", within24h: "Within 24 hours", preparing: "Preparing upload...", uploading: "Uploading...", delivered: "Delivered", review: "We'll review your project brief and reach out within 24 hours.", newProject: "Start a new project", catalog: "Catalog", adminPanel: "Admin Panel", telegram: "Telegram" },
-    footer: { copyright: "© 2026 Vexio Studio. Crafted with obsession.", twitter: "Twitter", behance: "Behance", telegram: "Telegram" },
-    channel: { title: "Subscribe to our Telegram", title2: "channel", desc: "Be the first to know all the news", button: "Subscribe" },
-    doneMsg: "Blueprint complete. Ready to submit.",
-    doneMsg: "Blueprint complete. Ready to submit.",
-  },
-  ru: {
-    hero: { studio: "Студия — Осн. 2026", subtitle: "Сайты, которые не похожи на шаблоны.", desc: "Индивидуальные сайты, админ-панели и Telegram-интеграции для бизнеса, который отказывается выглядеть обычно.", viewProjects: "Проекты", startProject: "Заказать проект", scroll: "листай", stats: [["9", "Проектов"], ["4.7★", "Рейтинг"], ["24ч", "Ответ"]] },
-    nav: { work: "Работы", services: "Услуги", about: "О нас", contact: "Связаться" },
-    carousel: { label: "Нам доверяют", title: "Бренды, которые с нами работают" },
-    showcase: { label: "Работы", title1: "Проекты, которые", title2: "говорят громче слов.", desc: "Нажмите на проект, чтобы рассмотреть вблизи.", yours: "Ваш проект" },
-    bots: { label: "Боты", title1: "Telegram боты", title2: "скоро появятся.", desc: "Автоматизированные решения для вашего бизнеса.", placeholder: "Здесь появятся боты" },
-    builder: { label: "Форма заявки", title1: "Создайте свой проект", title2: "прямо здесь.", title: "vexio — конструктор проектов", desc: "Выберите или введите ответы", complete: "Все поля заполнены. Отправляйте.", submit: "Отправить ✦", submitting: "Отправка...", projectPlaceholder: "Название проекта появится здесь...", emptyHint: "Ответьте на вопросы в терминале чтобы собрать проект", catalog: "КАТАЛОГ ТОВАРОВ", admin: "АДМИН-ПАНЕЛЬ", telegram: "ИНТЕГРАЦИЯ С TELEGRAM", telegramDesc: "Автоматизация ботов · Уведомления · Команды" },
-    submission: { created: "ПРОЕКТ СОЗДАН", yourProject: "Ваш проект", statusLabel: "Статус", received: "Получен", projectId: "ID проекта", response: "Ответ", within24h: "В течение 24 часов", preparing: "Подготовка к отправке...", uploading: "Отправка...", delivered: "Доставлено", review: "Мы проверим вашу заявку и свяжемся в течение 24 часов.", newProject: "Создать новый проект", catalog: "Каталог", adminPanel: "Админ-панель", telegram: "Telegram" },
-    footer: { copyright: "© 2026 Vexio Studio. Сделано с одержимостью.", twitter: "Twitter", behance: "Behance", telegram: "Telegram" },
-    channel: { title: "Подпишитесь на наш", title2: "телеграм-канал", desc: "Будьте первыми в курсе всех новостей", button: "Подписаться" },
-    doneMsg: "Бланк готов. Отправляйте.",
-    doneMsg: "Бланк готов. Отправляйте.",
-  },
-};
-const LocaleContext = React.createContext();
-function LocaleProvider({ children }) {
-  const [lang, setLang] = React.useState("en");
-  const t = (key) => { const v = key.split('.').reduce((o, k) => o?.[k], LOCALES[lang]); return v ?? key; };
-  return React.createElement(LocaleContext.Provider, { value: { lang, setLang, t } }, children);
-}
-
-function FloatingOrbs() {
-  const orbs = [
-    { size: 320, x: "8%", y: "12%", anim: "float-a 8s ease-in-out infinite", opacity: 0.22, delay: "0s" },
-    { size: 200, x: "75%", y: "8%", anim: "float-b 11s ease-in-out infinite", opacity: 0.16, delay: "2s" },
-    { size: 260, x: "85%", y: "55%", anim: "float-c 9s ease-in-out infinite", opacity: 0.19, delay: "1s" },
-    { size: 180, x: "20%", y: "68%", anim: "float-a 12s ease-in-out infinite", opacity: 0.14, delay: "3s" },
-    { size: 140, x: "50%", y: "80%", anim: "float-b 7s ease-in-out infinite", opacity: 0.12, delay: "0.5s" },
-    { size: 90, x: "62%", y: "30%", anim: "float-c 10s ease-in-out infinite", opacity: 0.18, delay: "1.5s" },
-  ];
-  return React.createElement("div", { style: { position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" } },
-    ...orbs.map((o, i) => React.createElement("div", { key: i, style: {
-      position: "absolute", left: o.x, top: o.y, width: o.size, height: o.size,
-      borderRadius: "50%",
-      background: `radial-gradient(circle at 30% 30%, rgba(139,92,246,${o.opacity + 0.05}), rgba(109,40,217,${o.opacity}), transparent 70%)`,
-      filter: "blur(1px)", animation: o.anim, animationDelay: o.delay,
-      border: `1px solid rgba(139,92,246,${o.opacity * 0.8})`,
-      backdropFilter: "blur(8px)",
-      boxShadow: `inset 0 0 60px rgba(139,92,246,${o.opacity * 0.5}), 0 0 40px rgba(139,92,246,${o.opacity * 0.3})`,
-    } })),
-    React.createElement("div", { style: {
-      position: "absolute", inset: 0,
-      backgroundImage: `linear-gradient(rgba(139,92,246,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.05) 1px, transparent 1px)`,
-      backgroundSize: "60px 60px",
-      animation: "grid-scroll 8s linear infinite",
-      maskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)",
-    } })
-  );
-}
-
-function Hero({ onViewProjects, onStartProject }) {
-  const { t } = useContext(LocaleContext);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => { setTimeout(() => setVisible(true), 100); }, []);
-  const stats = t("hero.stats");
-  return (
-    <section style={{
-      position: "relative", minHeight: "100vh",
-      display: "flex", flexDirection: "column",
-      alignItems: "center", justifyContent: "center",
-      textAlign: "center", padding: "80px 24px", overflow: "hidden",
-    }}>
-      <FloatingOrbs />
-      <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E")`,
-        backgroundRepeat: "repeat", backgroundSize: "200px 200px", opacity: 0.6,
-      }} />
-      <div style={{
-        position: "relative", zIndex: 2,
-        opacity: visible ? 1 : 0,
-        transform: visible ? "none" : "translateY(30px)",
-        transition: "all 1s cubic-bezier(0.22, 1, 0.36, 1)",
-      }}>
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: 40 }}>
-          <div className="section-label">{t("hero.studio")}</div>
-        </div>
-        <h1 className="glow-text" style={{
-          fontFamily: "var(--font-display)", fontSize: "clamp(72px, 16vw, 160px)",
-          fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.9, marginBottom: 32,
-          background: "linear-gradient(160deg, #FFFFFF 0%, #D4C5FF 40%, #8B5CF6 100%)",
-          WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-        }}>VEXIO</h1>
-        <h2 style={{
-          fontFamily: "var(--font-display)", fontSize: "clamp(22px, 4vw, 44px)",
-          fontWeight: 600, letterSpacing: "-0.02em", color: "var(--text)",
-          marginBottom: 20, maxWidth: 700, lineHeight: 1.15,
-        }}>{t("hero.subtitle")}</h2>
-        <p style={{
-          fontSize: "clamp(15px, 2vw, 18px)", color: "var(--text-dim)",
-          maxWidth: 520, lineHeight: 1.65, marginBottom: 48, fontWeight: 300,
-        }}>
-          {t("hero.desc")}
-        </p>
-        <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          <button className="btn-primary" onClick={onViewProjects}>
-            {t("hero.viewProjects")} <span style={{ fontSize: 18 }}>↗</span>
-          </button>
-          <button style={{
-            padding: "14px 28px", background: "transparent", border: "1px solid var(--border)",
-            borderRadius: 12, color: "var(--text-dim)", fontSize: 15,
-            fontFamily: "var(--font-body)", fontWeight: 400, cursor: "pointer",
-            transition: "all 0.3s", backdropFilter: "blur(8px)",
-          }}
-            onClick={onStartProject}
-            onMouseEnter={e => { e.target.style.borderColor = "rgba(139,92,246,0.4)"; e.target.style.color = "var(--text)"; }}
-            onMouseLeave={e => { e.target.style.borderColor = "var(--border)"; e.target.style.color = "var(--text-dim)"; }}
-          >{t("hero.startProject")}</button>
-        </div>
-        <div style={{ display: "flex", gap: 48, marginTop: 72, justifyContent: "center", flexWrap: "wrap" }}>
-          {stats.map(([val, label]) => (
-            <div key={label} style={{ textAlign: "center" }}>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 28, fontWeight: 700, color: "var(--purple-bright)" }}>{val}</div>
-              <div style={{ fontSize: 12, color: "var(--text-muted)", letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 4 }}>{label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div style={{
-        position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)",
-        display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
-        opacity: 0.4, animation: "float-b 3s ease-in-out infinite",
-      }}>
-        <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", letterSpacing: "0.15em", textTransform: "uppercase" }}>{t("hero.scroll")}</div>
-        <div style={{ width: 1, height: 40, background: "linear-gradient(to bottom, var(--border), transparent)" }} />
-      </div>
-    </section>
-  );
-}
-
-function ProjectCard({ project, onClick }) {
-  const [hovered, setHovered] = useState(false);
-  const [imgError, setImgError] = useState(false);
-  return (
-    <div onClick={() => onClick(project)}
-      onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
-      style={{
-        width: "100%", height: 220, borderRadius: 20, overflow: "hidden",
-        cursor: "pointer", position: "relative",
-        transform: hovered ? "scale(1.03) translateY(-4px)" : "scale(1)",
-        transition: "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
-        boxShadow: hovered ? `0 24px 60px rgba(0,0,0,0.6), 0 0 40px ${project.accent}30` : "0 8px 32px rgba(0,0,0,0.4)",
-        border: `1px solid ${hovered ? project.accent + "50" : "rgba(255,255,255,0.06)"}`,
-        background: project.bg,
-      }}
-    >
-      <div style={{ width: "100%", height: "100%", overflow: "hidden", position: "relative", background: project.mockBg }}>
-        {!imgError ? (
-          <img src={project.image} alt={project.name} onError={() => setImgError(true)}
-            style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6, transition: "opacity 0.4s" }} />
-        ) : (
-          <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", color: project.accent, fontSize: 48, opacity: 0.3 }}>
-            {project.name.charAt(0)}
-          </div>
-        )}
-      </div>
-      <div style={{
-        position: "absolute", inset: 0,
-        background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)",
-        display: "flex", flexDirection: "column", justifyContent: "flex-end",
-        padding: 18, opacity: hovered ? 1 : 0.7, transition: "opacity 0.3s",
-      }}>
-        <div style={{ fontSize: 10, color: project.accent, textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 4, fontFamily: "var(--font-mono)" }}>{project.tag}</div>
-        <div style={{ fontFamily: "var(--font-display)", fontSize: 18, fontWeight: 700 }}>{project.name}</div>
-        {hovered && <div style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", marginTop: 4, fontFamily: "var(--font-mono)", animation: "fade-up 0.3s ease" }}>Click to explore →</div>}
-      </div>
-    </div>
-  );
-}
-
-function ProjectModal({ project, onClose }) {
-  const [phase, setPhase] = useState("entering");
-  useEffect(() => {
-    setTimeout(() => setPhase("open"), 50);
-    const onKey = (e) => { if (e.key === "Escape") handleClose(); };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-  const handleClose = () => { setPhase("exiting"); setTimeout(onClose, 500); };
-  const scale = phase === "open" ? 1 : phase === "entering" ? 1.3 : 0.9;
-  const opacity = phase === "open" ? 1 : 0;
-  return (
-    <div onClick={handleClose} style={{
-      position: "fixed", inset: 0, zIndex: 1000,
-      background: `rgba(0,0,0,${phase === "open" ? 0.9 : 0})`,
-      transition: "background 0.5s ease",
-      display: "flex", alignItems: "center", justifyContent: "center",
-      backdropFilter: `blur(${phase === "open" ? 20 : 0}px)`,
-    }}>
-      <div onClick={e => e.stopPropagation()} style={{
-        width: "90vw", maxWidth: 800, maxHeight: "85vh", borderRadius: 24, overflow: "hidden auto",
-        transform: `scale(${scale})`, opacity,
-        transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease",
-        background: project.bg, border: `1px solid ${project.accent}40`,
-        boxShadow: `0 0 100px ${project.accent}30, 0 40px 80px rgba(0,0,0,0.8)`,
-        position: "relative",
-      }}>
-        <div style={{
-          position: "sticky", top: 0, left: 0, right: 0,
-          padding: "16px 20px", display: "flex", justifyContent: "space-between",
-          alignItems: "center", background: "rgba(0,0,0,0.5)", backdropFilter: "blur(12px)",
-          borderBottom: `1px solid ${project.accent}20`, zIndex: 2,
-        }}>
-          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <div style={{ fontSize: 10, color: project.accent, textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "var(--font-mono)" }}>{project.tag}</div>
-            <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 10 }}>·</div>
-            <div style={{ fontSize: 15, fontFamily: "var(--font-display)", fontWeight: 700 }}>{project.name}</div>
-          </div>
-          <button onClick={handleClose} style={{
-            width: 32, height: 32, borderRadius: "50%",
-            background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)",
-            color: "rgba(255,255,255,0.6)", fontSize: 16, cursor: "pointer",
-            display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s",
-          }}>×</button>
-        </div>
-        <div style={{ padding: "32px 28px" }}>
-          <p style={{ fontSize: 15, color: "var(--text-dim)", lineHeight: 1.7, marginBottom: 28 }}>
-            {project.desc}
-          </p>
-          <div style={{ marginBottom: 28 }}>
-            <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: project.accent, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12 }}>Стек технологий</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-              {project.stack.map(s => (
-                <span key={s} style={{ padding: "6px 14px", borderRadius: 8, background: `${project.accent}20`, border: `1px solid ${project.accent}30`, fontSize: 12, color: project.accent, fontFamily: "var(--font-mono)" }}>{s}</span>
-              ))}
-            </div>
-          </div>
-          <div style={{ marginBottom: 28 }}>
-            <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: project.accent, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12 }}>Что сделано</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              {project.features.map((f, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "var(--text-dim)" }}>
-                  <span style={{ color: project.accent, fontSize: 8 }}>●</span> {f}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div style={{ padding: "18px 20px", borderRadius: 14, background: `${project.accent}10`, border: `1px solid ${project.accent}20` }}>
-            <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: project.accent, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>Результат</div>
-            <div style={{ fontSize: 14, color: "var(--text)", lineHeight: 1.6 }}>{project.result}</div>
-          </div>
-        </div>
-        <div style={{ textAlign: "center", padding: "0 28px 32px", fontSize: 11, fontFamily: "var(--font-mono)", color: "rgba(255,255,255,0.25)" }}>
-          ESC чтобы закрыть
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function usePerPage() {
-  const [pp, setPp] = useState(() => {
-    const w = window.innerWidth;
-    return w < 640 ? 1 : w < 1024 ? 2 : 4;
-  });
-  useEffect(() => {
-    const fn = () => {
-      const w = window.innerWidth;
-      setPp(w < 640 ? 1 : w < 1024 ? 2 : 4);
-    };
-    window.addEventListener("resize", fn);
-    return () => window.removeEventListener("resize", fn);
-  }, []);
-  return pp;
-}
-
-function Showcase({ onNewProject }) {
-  const { t } = useContext(LocaleContext);
-  const [activeProject, setActiveProject] = useState(null);
-  const [page, setPage] = useState(0);
-  const perPage = usePerPage();
-
-  const allItems = [...PROJECTS, null];
-  const totalPages = Math.ceil(allItems.length / perPage);
-  const safePage = Math.min(page, totalPages - 1);
-  const from = safePage * perPage;
-  const visible = allItems.slice(from, from + perPage);
-
-  return (
-    <section style={{ padding: "120px 0", position: "relative" }} id="showcase">
-      <div className="resp-pad" style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div className="section-label">{t("showcase.label")}</div>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48, flexWrap: "wrap", gap: 16 }}>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 5vw, 56px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-            {t("showcase.title1")}<br /><span className="shimmer-text">{t("showcase.title2")}</span>
-          </h2>
-          <p className="resp-hide" style={{ fontSize: 14, color: "var(--text-dim)", maxWidth: 240, lineHeight: 1.6, textAlign: "right" }}>
-            {t("showcase.desc")}
-          </p>
-        </div>
-      </div>
-      <div className="resp-pad" style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ position: "relative" }}>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${perPage}, 1fr)`,
-            gap: 20, padding: "12px 0",
-          }}>
-            {visible.map((p, i) =>
-              p ? (
-                <ProjectCard key={p.id} project={p} onClick={setActiveProject} />
-              ) : (
-                <div key="plus" onClick={onNewProject} style={{
-                  width: "100%", height: 220, borderRadius: 20, cursor: "pointer",
-                  border: "1px dashed rgba(139,92,246,0.2)",
-                  display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-                  gap: 12, color: "var(--text-muted)", fontSize: 13,
-                  transition: "all 0.3s",
-                }}
-                  onMouseEnter={e => { e.target.style.borderColor = "rgba(139,92,246,0.5)"; e.target.style.color = "var(--purple-bright)"; }}
-                  onMouseLeave={e => { e.target.style.borderColor = "rgba(139,92,246,0.2)"; e.target.style.color = "var(--text-muted)"; }}
-                >
-                  <div style={{ fontSize: 32 }}>+</div>
-                  <div>{t("showcase.yours")}</div>
-                </div>
-              )
-            )}
-          </div>
-          {safePage > 0 && (
-            <button onClick={() => setPage(p => p - 1)} style={{
-              position: "absolute", left: -22, top: "50%", transform: "translateY(-50%)",
-              width: 44, height: 44, borderRadius: "50%",
-              background: "rgba(10,10,10,0.85)", backdropFilter: "blur(12px)",
-              border: "1px solid rgba(139,92,246,0.3)", color: "var(--text)", fontSize: 18,
-              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-              zIndex: 10, transition: "all 0.2s",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
-            }}
-              onMouseEnter={e => { e.target.style.borderColor = "rgba(139,92,246,0.6)"; e.target.style.color = "var(--purple-bright)"; }}
-              onMouseLeave={e => { e.target.style.borderColor = "rgba(139,92,246,0.3)"; e.target.style.color = "var(--text)"; }}
-            >‹</button>
-          )}
-          {safePage < totalPages - 1 && (
-            <button onClick={() => setPage(p => p + 1)} style={{
-              position: "absolute", right: -22, top: "50%", transform: "translateY(-50%)",
-              width: 44, height: 44, borderRadius: "50%",
-              background: "rgba(10,10,10,0.85)", backdropFilter: "blur(12px)",
-              border: "1px solid rgba(139,92,246,0.3)", color: "var(--text)", fontSize: 18,
-              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-              zIndex: 10, transition: "all 0.2s",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
-            }}
-              onMouseEnter={e => { e.target.style.borderColor = "rgba(139,92,246,0.6)"; e.target.style.color = "var(--purple-bright)"; }}
-              onMouseLeave={e => { e.target.style.borderColor = "rgba(139,92,246,0.3)"; e.target.style.color = "var(--text)"; }}
-            >›</button>
-          )}
-        </div>
-        <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 24 }}>
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <button key={i} onClick={() => setPage(i)} style={{
-              width: i === safePage ? 28 : 8, height: 8, borderRadius: 4,
-              border: "none", background: i === safePage ? "var(--purple)" : "rgba(139,92,246,0.25)",
-              cursor: "pointer", transition: "all 0.3s",
-              boxShadow: i === safePage ? "0 0 12px rgba(139,92,246,0.5)" : "none",
-            }} />
-          ))}
-        </div>
-      </div>
-      {activeProject && <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />}
-    </section>
-  );
-}
-
-function TelegramBots() {
-  const { t } = useContext(LocaleContext);
-  return (
-    <section style={{ padding: "120px 0", position: "relative" }}>
-      <div className="resp-pad" style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div className="section-label">{t("bots.label")}</div>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48 }}>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
-            {t("bots.title1")}<br /><span className="shimmer-text">{t("bots.title2")}</span>
-          </h2>
-          <p style={{ fontSize: 14, color: "var(--text-dim)", maxWidth: 240, lineHeight: 1.6, textAlign: "right" }}>
-            {t("bots.desc")}
-          </p>
-        </div>
-        <div style={{
-          minHeight: 220, borderRadius: 20,
-          border: "1px dashed rgba(139,92,246,0.2)",
-          display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-          gap: 16, color: "var(--text-muted)", fontSize: 14, padding: 40,
-        }}>
-          <div style={{ fontSize: 48, opacity: 0.5 }}>✈️</div>
-          <div>{t("bots.placeholder")}</div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function TelegramChannel() {
-  const { t } = useContext(LocaleContext);
-  return (
-    <section style={{
-      padding: "100px 24px",
-      background: "#ff4a2b",
-      backgroundImage: "radial-gradient(circle at 0% 0%, #ffaa00 0%, transparent 60%), radial-gradient(circle at 100% 0%, #ff1100 0%, transparent 55%), radial-gradient(circle at 0% 100%, #d80073 0%, transparent 65%), radial-gradient(circle at 100% 100%, #ff7700 0%, transparent 60%), radial-gradient(circle at 50% 50%, #ff4b2b 0%, transparent 65%)",
-      display: "flex", alignItems: "center", justifyContent: "center",
-    }}>
-      <div style={{ maxWidth: 700, textAlign: "center" }}>
-        <h2 style={{
-          color: "#fff", fontFamily: "var(--font-display)", fontWeight: 700,
-          fontSize: "clamp(28px, 5vw, 48px)", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: 20,
-        }}>
-          {t("channel.title")}<br /><span style={{ opacity: 0.9 }}>{t("channel.title2")}</span>
-        </h2>
-        <p style={{ color: "rgba(255,255,255,0.9)", fontSize: "clamp(15px, 2vw, 20px)", marginBottom: 32, fontWeight: 400 }}>
-          {t("channel.desc")}
-        </p>
-        <button onClick={() => window.open("https://t.me/vexiostudiocahnnel", "_blank")} style={{
-          display: "inline-flex", alignItems: "center", gap: 12, padding: "14px 32px",
-          background: "#fff", color: "#000", border: "none", borderRadius: 14,
-          fontFamily: "var(--font-body)", fontSize: "clamp(16px, 2vw, 18px)", fontWeight: 600,
-          cursor: "pointer", transition: "all 0.2s",
-        }}
-          onMouseEnter={e => { e.target.style.transform = "scale(1.02)"; e.target.style.boxShadow = "0 8px 24px rgba(0,0,0,0.15)"; }}
-          onMouseLeave={e => { e.target.style.transform = "scale(1)"; e.target.style.boxShadow = "none"; }}
-        >
-          {t("channel.button")}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.00002 11.9999L22 2.99994L18.46 20.9999L12.56 16.4299L10.5 18.5999L9.5 14.1999L17.5 7.49994L7.5 13.4999L2 11.9999Z"/>
-          </svg>
-        </button>
-      </div>
-    </section>
-  );
-}
-
-const CLIENTS = [
-  { name: "MaxxMoto", file: "maxxmoto.webp" },
-  { name: "Sotnur", file: "sotnur.webp" },
-  { name: "NextMoto", file: "nextmoto.webp" },
-  { name: "Codera", file: "codera.webp" },
-  { name: "TTX", file: "ttx.webp" },
-  { name: "Focus, bro!", file: "focus.webp" },
-  { name: "Englify", file: "englify.webp" },
-];
-
-function ClientCarousel() {
-  const { t } = useContext(LocaleContext);
-  const logos = CLIENTS.map(c => ({ ...c, path: `static/${c.file}` }));
-  const items = [...logos, ...logos];
-  return (
-    <section style={{ padding: "60px 0", position: "relative", pointerEvents: "none" }}>
-      <div className="resp-pad" style={{ maxWidth: 1200, margin: "0 auto", marginBottom: 40, pointerEvents: "auto" }}>
-        <div className="section-label" style={{ justifyContent: "center" }}>{t("carousel.label")}</div>
-        <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 600, letterSpacing: "-0.02em", textAlign: "center", color: "var(--text-dim)" }}>
-          {t("carousel.title")}
-        </h2>
-      </div>
-      <div style={{
-        width: "100%", overflow: "hidden", padding: "12px 0",
-        background: "rgba(139,92,246,0.03)", borderTop: "1px solid rgba(139,92,246,0.06)",
-        borderBottom: "1px solid rgba(139,92,246,0.06)",
-      }}>
-        <div style={{
-          display: "flex", gap: 80, alignItems: "center",
-          animation: "marquee 30s linear infinite",
-          width: "max-content",
-        }}>
-          {items.map((c, i) => (
-            <div key={i} style={{
-              display: "flex", alignItems: "center", gap: 12, flexShrink: 0,
-              opacity: 0.5,
-            }}>
-              <img src={c.path} alt={c.name}
-                style={{
-                  height: 36, width: "auto", objectFit: "contain",
-                  filter: "grayscale(0.5)",
-                  borderRadius: 4,
-                }}
-                onError={e => { e.target.style.display = "none"; }}
-              />
-              <span style={{
-                fontFamily: "var(--font-display)", fontSize: 13, fontWeight: 600,
-                color: "var(--text-dim)", whiteSpace: "nowrap",
-              }}>{c.name}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-const STEPS_LANG = [
-  { key: "lang", prompt: "Select language:", placeholder: "en / ru", type: "lang" },
-];
-
-const STEPS_EN = [
-  { key: "name", prompt: "What's your name?", placeholder: "e.g. John Doe", type: "text" },
-  { key: "phone", prompt: "Your phone number?", placeholder: "e.g. +7 999 123 45 67", type: "text" },
-  { key: "projectName", prompt: "What's your project name?", placeholder: "e.g. Lunar Shop", type: "text" },
-  { key: "type", prompt: "What type of website do you need?", placeholder: "e.g. E-commerce, Portfolio, SaaS", type: "text" },
-  { key: "description", prompt: "Tell us about your project.", placeholder: "Brief overview...", type: "text" },
-  { key: "catalog", prompt: "Do you need a product catalog? [yes/no]", placeholder: "yes", type: "yesno" },
-  { key: "admin", prompt: "Do you need an admin panel? [yes/no]", placeholder: "yes", type: "yesno" },
-  { key: "telegram", prompt: "Telegram bot integration? [yes/no]", placeholder: "no", type: "yesno" },
-];
-
-const STEPS_RU = [
-  { key: "name", prompt: "Ваше имя?", placeholder: "например: Иван Иванов", type: "text" },
-  { key: "phone", prompt: "Ваш номер телефона?", placeholder: "например: +7 999 123 45 67", type: "text" },
-  { key: "projectName", prompt: "Как назвать проект?", placeholder: "например: Lunar Shop", type: "text" },
-  { key: "type", prompt: "Какой тип сайта нужен?", placeholder: "например: Интернет-магазин, Портфолио, SaaS", type: "text" },
-  { key: "description", prompt: "Опишите ваш проект.", placeholder: "Краткое описание...", type: "text" },
-  { key: "catalog", prompt: "Нужен каталог товаров? [да/нет]", placeholder: "да", type: "yesno" },
-  { key: "admin", prompt: "Нужна админ-панель? [да/нет]", placeholder: "да", type: "yesno" },
-  { key: "telegram", prompt: "Интеграция с Telegram ботом? [да/нет]", placeholder: "нет", type: "yesno" },
-];
-
-function getSteps(lang) {
-  return lang && lang.toLowerCase().startsWith("r") ? STEPS_RU : STEPS_EN;
-}
-
-function BlueprintPaper({ answers }) {
-  const { t } = useContext(LocaleContext);
-  const hasCatalog = answers.catalog?.toLowerCase().startsWith("y");
-  const hasAdmin = answers.admin?.toLowerCase().startsWith("y");
-  const hasTelegram = answers.telegram?.toLowerCase().startsWith("y");
-  const b = t("builder");
-  return (
-    <div style={{
-      width: "100%", height: "100%", minHeight: 380,
-      background: "#FAFAF8", borderRadius: 16, padding: 28, position: "relative",
-      overflow: "hidden", boxShadow: "0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.5)",
-    }}>
-      {Array.from({ length: 20 }).map((_, i) => (
-        <div key={i} style={{ position: "absolute", left: 0, right: 0, top: 28 + i * 24, height: 1, background: "rgba(139,92,246,0.08)" }} />
-      ))}
-      <div style={{ position: "absolute", left: 52, top: 0, bottom: 0, width: 1, background: "rgba(255,100,100,0.2)" }} />
-      <div style={{ position: "relative", zIndex: 1 }}>
-        {answers.projectName ? (
-          <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 22, fontWeight: 800, color: "#1a1a2e", marginBottom: 6, animation: "fade-up 0.4s ease", paddingLeft: 28 }}>{answers.projectName}</div>
-        ) : (
-          <div style={{ paddingLeft: 28, fontSize: 13, color: "rgba(0,0,0,0.2)", fontFamily: "var(--font-mono)" }}>{b.projectPlaceholder}</div>
-        )}
-        {answers.type && <div style={{ paddingLeft: 28, fontSize: 11, fontFamily: "var(--font-mono)", color: "#8B5CF6", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 16, animation: "fade-up 0.4s ease" }}>{answers.type}</div>}
-        {answers.description && <div style={{ paddingLeft: 28, fontSize: 12, color: "#444", lineHeight: 1.6, marginBottom: 16, animation: "fade-up 0.4s ease" }}>{answers.description}</div>}
-        <div style={{ display: "flex", flexDirection: "column", gap: 10, paddingLeft: 28 }}>
-          {hasCatalog && <div style={{ padding: "10px 14px", borderRadius: 10, background: "rgba(139,92,246,0.08)", border: "1px solid rgba(139,92,246,0.2)", animation: "fade-up 0.4s ease" }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#6D28D9", marginBottom: 6 }}>🛍 {b.catalog}</div>
-            <div style={{ display: "flex", gap: 6 }}>{[1,2,3].map(i => <div key={i} style={{ flex: 1, height: 36, borderRadius: 6, background: "rgba(109,40,217,0.1)", border: "1px solid rgba(109,40,217,0.15)" }} />)}</div>
-          </div>}
-          {hasAdmin && <div style={{ padding: "10px 14px", borderRadius: 10, background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.2)", animation: "fade-up 0.4s ease" }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#1D4ED8", marginBottom: 6 }}>⚙️ {b.admin}</div>
-            <div style={{ display: "flex", gap: 4 }}><div style={{ width: 50, background: "rgba(59,130,246,0.15)", borderRadius: 4, height: 28 }} /><div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 4 }}>{[1,2].map(i => <div key={i} style={{ height: 10, borderRadius: 3, background: "rgba(59,130,246,0.1)" }} />)}</div></div>
-          </div>}
-          {hasTelegram && <div style={{ padding: "10px 14px", borderRadius: 10, background: "rgba(0,136,204,0.08)", border: "1px solid rgba(0,136,204,0.2)", animation: "fade-up 0.4s ease" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}><span style={{ fontSize: 18 }}>✈️</span><div><div style={{ fontSize: 11, fontWeight: 600, color: "#0088CC" }}>{b.telegram}</div><div style={{ fontSize: 10, color: "#666" }}>{b.telegramDesc}</div></div></div>
-          </div>}
-          {!answers.projectName && !hasCatalog && !hasAdmin && !hasTelegram && <div style={{ padding: "20px 0", textAlign: "center" }}>
-            <div style={{ fontSize: 28, marginBottom: 8 }}>✏️</div>
-            <div style={{ fontSize: 12, color: "rgba(0,0,0,0.3)", fontFamily: "var(--font-mono)" }}>{b.emptyHint}</div>
-          </div>}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Terminal({ onComplete }) {
-  const { t } = useContext(LocaleContext);
-  const [step, setStep] = useState(0);
-  const [history, setHistory] = useState([]);
-  const [input, setInput] = useState("");
-  const [isComplete, setIsComplete] = useState(false);
-  const [langSet, setLangSet] = useState(false);
-  const [activeSteps, setActiveSteps] = useState(STEPS_LANG);
-  const stepRef = useRef(0);
-  const answersRef = useRef({});
-  const doneRef = useRef(false);
-  const inputRef = useRef(null);
-  const scrollRef = useRef(null);
-  useEffect(() => { if (current && current.type !== "lang" && current.type !== "yesno") inputRef.current?.focus(); }, [step, current]);
-  useEffect(() => { if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight; }, [history]);
-  const handleSubmit = () => {
-    if (doneRef.current) return;
-    const s = stepRef.current;
-    if (!input.trim() && s < activeSteps.length) return;
-    const currentStep = activeSteps[s];
-    const val = input.trim();
-    const newAnswers = { ...answersRef.current, [currentStep.key]: val };
-    answersRef.current = newAnswers;
-    setHistory(h => [...h, { type: "prompt", text: currentStep.prompt }, { type: "answer", text: val || "—" }]);
-    setInput("");
-    if (!langSet && currentStep.key === "lang") {
-      const steps = getSteps(val);
-      activeSteps.length = 1;
-      activeSteps.push(...steps);
-      setActiveSteps([...activeSteps]);
-      setLangSet(true);
-    }
-    if (s < activeSteps.length - 1) {
-      const ns = s + 1;
-      stepRef.current = ns;
-      setStep(ns);
-    } else {
-      doneRef.current = true;
-      setHistory(h => [...h, { type: "system", text: t("doneMsg") }]);
-      setIsComplete(true);
-      setTimeout(() => { if (onComplete) onComplete(newAnswers); }, 100);
-    }
-  };
-  const handleSelect = (val) => {
-    if (doneRef.current) return;
-    const s = stepRef.current;
-    const currentStep = activeSteps[s];
-    const newAnswers = { ...answersRef.current, [currentStep.key]: val };
-    answersRef.current = newAnswers;
-    setHistory(h => [...h, { type: "prompt", text: currentStep.prompt }, { type: "answer", text: val }]);
-    if (!langSet && currentStep.key === "lang") {
-      const steps = getSteps(val);
-      activeSteps.length = 1;
-      activeSteps.push(...steps);
-      setActiveSteps([...activeSteps]);
-      setLangSet(true);
-    }
-    if (s < activeSteps.length - 1) {
-      const ns = s + 1;
-      stepRef.current = ns;
-      setStep(ns);
-    } else {
-      doneRef.current = true;
-      setHistory(h => [...h, { type: "system", text: t("doneMsg") }]);
-      setIsComplete(true);
-      setTimeout(() => { if (onComplete) onComplete(newAnswers); }, 100);
-    }
-  };
-  const handleKey = (e) => { if (e.key === "Enter") handleSubmit(); };
-  const current = isComplete ? null : activeSteps[step];
-  const isChoice = current && (current.type === "lang" || current.type === "yesno");
-  let choiceOptions = [];
-  if (current?.type === "lang") choiceOptions = ["en", "ru"];
-  else if (current?.type === "yesno") {
-    const isRu = answersRef.current.lang?.toLowerCase().startsWith("r");
-    choiceOptions = isRu ? ["да", "нет"] : ["yes", "no"];
-  }
-  return (
-    <div style={{
-      background: "#0D0D0D", borderRadius: 16, overflow: "hidden",
-      border: "1px solid rgba(255,255,255,0.08)",
-      boxShadow: "0 20px 60px rgba(0,0,0,0.8)",
-      height: "100%", minHeight: 380, display: "flex", flexDirection: "column",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 16px", background: "rgba(255,255,255,0.03)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-        {["#FF5F57", "#FEBC2E", "#28C840"].map((c, i) => <div key={i} style={{ width: 12, height: 12, borderRadius: "50%", background: c, boxShadow: `0 0 6px ${c}60` }} />)}
-        <div style={{ flex: 1, textAlign: "center", fontSize: 11, color: "rgba(255,255,255,0.3)", fontFamily: "var(--font-mono)" }}>{t("builder.title")}</div>
-      </div>
-      <div ref={scrollRef} style={{ flex: 1, padding: "20px 20px 0", fontFamily: "var(--font-mono)", fontSize: 13, lineHeight: 1.8, overflowY: "auto" }}>
-        <div style={{ color: "#8B5CF6", marginBottom: 4 }}><span style={{ color: "rgba(255,255,255,0.3)" }}>$ </span>vexio init project</div>
-        <div style={{ color: "rgba(255,255,255,0.3)", marginBottom: 16, fontSize: 11 }}>✦ {t("builder.desc")}</div>
-        {history.map((h, i) => <div key={i} style={{ marginBottom: 4, color: h.type === "prompt" ? "rgba(255,255,255,0.55)" : h.type === "answer" ? "#A78BFA" : "#4ADE80", fontSize: h.type === "system" ? 11 : 13 }}>
-          {h.type === "prompt" && <span style={{ color: "rgba(255,255,255,0.25)" }}>&gt; </span>}
-          {h.type === "answer" && <span style={{ color: "rgba(167,139,250,0.5)" }}>✓ </span>}
-          {h.text}
-        </div>)}
-        {!isComplete && <>
-          <div style={{ color: "rgba(255,255,255,0.55)", marginTop: 4 }}><span style={{ color: "rgba(255,255,255,0.25)" }}>&gt; </span>{current.prompt}</div>
-          {isChoice ? (
-            <div style={{ display: "flex", gap: 8, marginTop: 8, marginBottom: 4 }}>
-              {choiceOptions.map(opt => (
-                <button key={opt} onClick={() => handleSelect(opt)} style={{
-                  padding: "6px 20px", borderRadius: 8, cursor: "pointer",
-                  background: "rgba(139,92,246,0.12)", border: "1px solid rgba(139,92,246,0.3)",
-                  color: "var(--purple-bright)", fontFamily: "var(--font-mono)", fontSize: 13,
-                  transition: "all 0.2s",
-                }}
-                  onMouseEnter={e => { e.target.style.background = "rgba(139,92,246,0.25)"; e.target.style.borderColor = "rgba(139,92,246,0.5)"; }}
-                  onMouseLeave={e => { e.target.style.background = "rgba(139,92,246,0.12)"; e.target.style.borderColor = "rgba(139,92,246,0.3)"; }}
-                >{opt}</button>
-              ))}
-            </div>
-          ) : (
-            <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>
-              <span style={{ color: "var(--purple)" }}>$</span>
-              <input ref={inputRef} value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKey}
-                placeholder={current.placeholder}
-                style={{ flex: 1, background: "transparent", border: "none", outline: "none", color: "#fff", fontFamily: "var(--font-mono)", fontSize: 13, caretColor: "#8B5CF6" }} />
-              <div style={{ width: 8, height: 16, background: "#8B5CF6", animation: "cursor-blink 1s step-end infinite", borderRadius: 1 }} />
-            </div>
-          )}
-        </>}
-        {isComplete && <div style={{ marginTop: 8, padding: "8px 0" }}><span style={{ color: "#4ADE80" }}>✓ </span><span style={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}>{t("builder.complete")}</span></div>}
-      </div>
-      <div style={{ height: 20 }} />
-    </div>
-  );
-}
-
-function RequestBuilder({ onSubmit }) {
-  const { t } = useContext(LocaleContext);
-  const [answers, setAnswers] = useState({});
-  const [isTerminalComplete, setIsTerminalComplete] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmitToApi = () => {
-    setSubmitting(true);
-    setTimeout(function() { setSubmitted(true); setSubmitting(false); }, 1500);
-  };
-
-  if (submitted) {
-    return <SubmissionCard answers={answers} onReset={() => { setSubmitted(false); setIsTerminalComplete(false); setAnswers({}); }} />;
-  }
-
-  return (
-    <section style={{ padding: "80px 24px 120px", position: "relative" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <div className="section-label" style={{ justifyContent: "center" }}>{t("builder.label")}</div>
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-0.03em" }}>
-            {t("builder.title1")}<br /><span className="shimmer-text">{t("builder.title2")}</span>
-          </h2>
-        </div>
-        <div className="resp-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, alignItems: "start" }}>
-          <Terminal onComplete={(a) => { setAnswers(a); setIsTerminalComplete(true); }} />
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            <BlueprintPaper answers={answers} />
-            {isTerminalComplete && !submitting && (
-              <button onClick={handleSubmitToApi} className="btn-primary" style={{ width: "100%", justifyContent: "center", fontSize: 16, padding: "16px 32px" }}>
-                {t("builder.submit")}
-              </button>
-            )}
-            {submitting && <div className="btn-primary" style={{ width: "100%", justifyContent: "center", fontSize: 16, padding: "16px 32px", opacity: 0.7 }}>{t("builder.submitting")}</div>}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function SubmissionCard({ answers, onReset }) {
-  const { t } = useContext(LocaleContext);
-  const [phase, setPhase] = useState("card");
-  const [progress, setProgress] = useState(0);
-  const projectId = "VX-" + Math.floor(2000 + Math.random() * 999);
-  useEffect(() => {
-    const t1 = setTimeout(() => setPhase("uploading"), 800);
-    const t2 = setTimeout(() => {
-      let p = 0;
-      const interval = setInterval(() => { p += Math.random() * 12 + 3; if (p >= 100) { p = 100; clearInterval(interval); setPhase("done"); } setProgress(Math.min(p, 100)); }, 150);
-    }, 1200);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, []);
-  const sub = t("submission");
-  return (
-    <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "80px 24px", background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(139,92,246,0.08) 0%, transparent 70%)" }}>
-      <div style={{ maxWidth: 520, width: "100%", animation: "fade-up 0.6s ease" }}>
-        <div className="glass-purple" style={{ borderRadius: 24, padding: 40, boxShadow: "0 0 80px rgba(139,92,246,0.2), 0 24px 60px rgba(0,0,0,0.6)" }}>
-          <div style={{ marginBottom: 32 }}>
-            <div style={{ fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--purple)", letterSpacing: "0.15em", marginBottom: 12 }}>◉ {sub.created}</div>
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 800, marginBottom: 8 }}>{answers.projectName || answers.name || sub.yourProject}</h3>
-            <div style={{ fontSize: 14, color: "var(--text-dim)" }}>{answers.type}</div>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
-            {[[sub.statusLabel, sub.received, "#4ADE80"], [sub.projectId, projectId, "#A78BFA"], [sub.response, sub.within24h, "#60A5FA"]].map(([k, v, c]) => (
-              <div key={k} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderRadius: 12, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                <span style={{ fontSize: 13, color: "var(--text-dim)", fontFamily: "var(--font-mono)" }}>{k}</span>
-                <span style={{ fontSize: 13, color: c, fontWeight: 500 }}>{v}</span>
-              </div>
-            ))}
-          </div>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 32 }}>
-            {answers.catalog?.toLowerCase().startsWith("y") && <div style={{ padding: "5px 12px", borderRadius: 100, background: "rgba(139,92,246,0.15)", border: "1px solid rgba(139,92,246,0.25)", fontSize: 11, color: "var(--purple-bright)" }}>🛍 {sub.catalog}</div>}
-            {answers.admin?.toLowerCase().startsWith("y") && <div style={{ padding: "5px 12px", borderRadius: 100, background: "rgba(59,130,246,0.15)", border: "1px solid rgba(59,130,246,0.25)", fontSize: 11, color: "#93C5FD" }}>⚙️ {sub.adminPanel}</div>}
-            {answers.telegram?.toLowerCase().startsWith("y") && <div style={{ padding: "5px 12px", borderRadius: 100, background: "rgba(0,136,204,0.15)", border: "1px solid rgba(0,136,204,0.25)", fontSize: 11, color: "#7DD3FC" }}>✈️ {sub.telegram}</div>}
-          </div>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: 12 }}>
-            {phase === "card" && <div style={{ color: "var(--text-muted)" }}>{sub.preparing}</div>}
-            {phase === "uploading" && <div>
-              <div style={{ color: "var(--text-dim)", marginBottom: 8 }}>{sub.uploading} {Math.floor(progress)}%</div>
-              <div style={{ height: 6, borderRadius: 3, background: "rgba(255,255,255,0.08)", overflow: "hidden" }}>
-                <div style={{ height: "100%", borderRadius: 3, width: `${progress}%`, background: "linear-gradient(90deg, #6D28D9, #A78BFA)", transition: "width 0.2s ease", boxShadow: "0 0 12px rgba(139,92,246,0.6)" }} />
-              </div>
-              <div style={{ marginTop: 6, color: "rgba(255,255,255,0.2)" }}>
-                {"█".repeat(Math.floor(progress / 8))}{"░".repeat(12 - Math.floor(progress / 8))}
-              </div>
-            </div>}
-            {phase === "done" && <div style={{ animation: "fade-up 0.5s ease" }}>
-              <div style={{ color: "#4ADE80", fontSize: 16, fontWeight: 500, marginBottom: 8 }}>✓ {sub.delivered}</div>
-              <div style={{ height: 6, borderRadius: 3, background: "rgba(74,222,128,0.2)", overflow: "hidden" }}>
-                <div style={{ height: "100%", width: "100%", borderRadius: 3, background: "linear-gradient(90deg, #16A34A, #4ADE80)", boxShadow: "0 0 12px rgba(74,222,128,0.4)" }} />
-              </div>
-              <div style={{ marginTop: 8, color: "rgba(255,255,255,0.25)" }}>████████████ 100%</div>
-            </div>}
-          </div>
-        </div>
-        {phase === "done" && <div style={{ textAlign: "center", marginTop: 24, animation: "fade-up 0.6s ease 0.3s both" }}>
-          <p style={{ fontSize: 14, color: "var(--text-dim)", marginBottom: 20, lineHeight: 1.6 }}>{sub.review}</p>
-          <button onClick={onReset} style={{ padding: "12px 28px", borderRadius: 12, background: "transparent", border: "1px solid var(--border)", color: "var(--text-dim)", fontSize: 14, fontFamily: "var(--font-body)", cursor: "pointer", transition: "all 0.3s" }}
-            onMouseEnter={e => { e.target.style.borderColor = "rgba(139,92,246,0.4)"; e.target.style.color = "var(--text)"; }}
-            onMouseLeave={e => { e.target.style.borderColor = "var(--border)"; e.target.style.color = "var(--text-dim)"; }}
-          >{sub.newProject}</button>
-        </div>}
-      </div>
-    </section>
-  );
-}
-
-function Nav() {
-  const { t, lang, setLang } = useContext(LocaleContext);
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => { const fn = () => setScrolled(window.scrollY > 60); window.addEventListener("scroll", fn); return () => window.removeEventListener("scroll", fn); }, []);
-  return (
-    <nav style={{
-      position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      padding: "0 clamp(16px, 4vw, 40px)", height: 64,
-      background: scrolled ? "rgba(10,10,10,0.85)" : "transparent",
-      backdropFilter: scrolled ? "blur(20px)" : "none",
-      borderBottom: scrolled ? "1px solid rgba(255,255,255,0.05)" : "none",
-      transition: "all 0.4s ease",
-    }}>
-      <div style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 800, letterSpacing: "-0.03em" }}>VX<span style={{ color: "var(--purple)" }}>.</span></div>
-      <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
-        {["nav.work", "nav.services", "nav.about"].map(key => (
-          <a key={key} href="#" className="resp-hide" style={{ fontSize: 14, color: "var(--text-dim)", textDecoration: "none", transition: "color 0.2s", fontWeight: 400 }}
-            onMouseEnter={e => e.target.style.color = "var(--text)"}
-            onMouseLeave={e => e.target.style.color = "var(--text-dim)"}
-          >{t(key)}</a>
-        ))}
-        <button onClick={() => setLang(lang === "en" ? "ru" : "en")} style={{
-          padding: "6px 14px", borderRadius: 8, fontSize: 12, fontFamily: "var(--font-mono)",
-          background: lang === "en" ? "rgba(139,92,246,0.15)" : "transparent",
-          border: "1px solid rgba(139,92,246,0.3)", color: "var(--purple-bright)",
-          cursor: "pointer", fontWeight: 500, letterSpacing: "0.05em", transition: "all 0.2s",
-        }}
-          onMouseEnter={e => { e.target.style.background = "rgba(139,92,246,0.25)"; }}
-          onMouseLeave={e => { e.target.style.background = lang === "en" ? "rgba(139,92,246,0.15)" : "transparent"; }}
-        >{lang === "en" ? "RU" : "EN"}</button>
-        <button className="btn-primary" style={{ padding: "9px 20px", fontSize: 13 }}>{t("nav.contact")}</button>
-      </div>
+<!-- header -->
+<header id="header">
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Vexio — на главную">
+      <svg class="spark" viewBox="0 0 32 32" fill="none"><path d="M16 2l3.4 10.6L30 16l-10.6 3.4L16 30l-3.4-10.6L2 16l10.6-3.4z" fill="#1B1B1B"/></svg>
+      Vexio<span style="color:var(--peach-deep)">.</span>
+    </a>
+    <nav class="nav-links" aria-label="Основная навигация">
+      <a href="#services">Услуги</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#process">Процесс</a>
+      <a href="#pricing">Цены</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#faq">FAQ</a>
     </nav>
-  );
-}
+    <div style="display:flex;gap:10px;align-items:center">
+      <a class="btn btn-ink btn-sm magnet" href="#contact">Обсудить проект</a>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
 
-function VexioLanding() {
-  const { t } = useContext(LocaleContext);
-  const showcaseRef = useRef(null);
-  const requestRef = useRef(null);
-  const scrollToShowcase = () => { showcaseRef.current?.scrollIntoView({ behavior: "smooth" }); };
-  const scrollToBuilder = () => { requestRef.current?.scrollIntoView({ behavior: "smooth" }); };
-  const f = t("footer");
-  return (
-    <>
-      <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
-        <Nav />
-        <Hero onViewProjects={scrollToShowcase} onStartProject={scrollToBuilder} />
-        <ClientCarousel />
-        <div ref={showcaseRef}><Showcase onNewProject={scrollToBuilder} /></div>
-        <TelegramChannel />
-        <TelegramBots />
-        <div ref={requestRef}><RequestBuilder /></div>
-        <footer style={{ borderTop: "1px solid var(--border)", padding: "40px clamp(20px, 4vw, 60px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
-          <div style={{ fontFamily: "var(--font-display)", fontSize: 18, fontWeight: 800 }}>VX<span style={{ color: "var(--purple)" }}>.</span></div>
-          <div className="resp-hide" style={{ fontSize: 13, color: "var(--text-muted)" }}>{f.copyright}</div>
-          <div className="resp-hide" style={{ display: "flex", gap: 24 }}>
-            {["Twitter", "Behance", "Telegram"].map(s => (
-              <a key={s} href="#" style={{ fontSize: 13, color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={e => e.target.style.color = "var(--purple-bright)"}
-                onMouseLeave={e => e.target.style.color = "var(--text-muted)"}
-              >{s}</a>
-            ))}
-          </div>
-        </footer>
+<!-- mobile menu -->
+<div class="menu" id="menu">
+  <a class="m-link" href="#services">Услуги <small>01</small></a>
+  <a class="m-link" href="#cases">Кейсы <small>02</small></a>
+  <a class="m-link" href="#process">Процесс <small>03</small></a>
+  <a class="m-link" href="#pricing">Цены <small>04</small></a>
+  <a class="m-link" href="#reviews">Отзывы <small>05</small></a>
+  <a class="m-link" href="#contact">Контакт <small>06</small></a>
+  <div class="m-foot">
+    <a class="btn btn-ink" href="#contact">Обсудить проект</a>
+    <span class="sticker mint">tg: @vexiostudio</span>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 class="hl">
+          <span class="hl-line"><span>Сайты, которые</span></span>
+          <span class="hl-line"><span><em class="mark" style="font-style:normal">не похожи</em></span></span>
+          <span class="hl-line"><span>на <span class="squig-wrap">шаблон<svg class="squig" viewBox="0 0 220 20" preserveAspectRatio="none"><path d="M4 14 C 30 6, 52 16, 78 10 S 130 4, 156 12 S 200 8, 216 10" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></span>.</span></span>
+        </h1>
+        <p class="lead rv" style="--d:.35s">Проектируем, рисуем и запускаем <b>кастомные сайты, админ-панели и Telegram-интеграции</b> для бизнеса, который отказывается выглядеть обычно. Полный фарш: от смыслов до заявок в вашем телеграме.</p>
+        <div class="hero-cta rv" style="--d:.5s">
+          <a class="btn btn-ink magnet" href="#cases">Смотреть работы
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H4M12 2v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a>
+          <a class="btn btn-ghost magnet" href="#contact">Рассчитать проект</a>
+        </div>
       </div>
-    </>
-  );
-}
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(React.createElement(LocaleProvider, null, React.createElement(VexioLanding)));
+      <div class="hero-visual rv" style="--d:.25s">
+        <span class="hand hand-hero">это мог быть ваш сайт
+          <svg width="66" height="50" viewBox="0 0 66 50" fill="none" style="margin-left:auto"><path d="M54 4 C 44 18, 32 26, 14 42 M14 42 l14 -4 M14 42 l4 -14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div class="browser">
+          <div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">vexio.studio — ваш будущий сайт</span></div>
+          <div class="browser-img">
+            <img src="https://image.qwenlm.ai/public_source/8c02ce05-8b58-4560-b2d1-d7a05b96d3f4/1aa5645a4-cd54-43f2-9209-490aaeef186f.png" alt="3D-коллаж: ноутбук с макетом сайта и пастельные фигуры">
+          </div>
+        </div>
+        <div class="float-card fc-1"><div class="fc-val">4.7★</div><div class="fc-lbl">средняя оценка клиентов</div></div>
+        <div class="float-card fc-2"><div class="fc-val">20+ проектов</div><div class="fc-lbl">запущено и работают</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- clients -->
+  <div class="clients" aria-label="Бренды, с которыми мы работали">
+    <div class="mq-track">
+      <div class="mq-group">
+        <span class="cl">maxxmoto</span><span class="sep">✦</span>
+        <span class="cl out">Sotnur</span><span class="sep">✦</span>
+        <span class="cl">NextMoto</span><span class="sep">✦</span>
+        <span class="cl out">Codera</span><span class="sep">✦</span>
+        <span class="cl">TTX</span><span class="sep">✦</span>
+        <span class="cl out">Focus, bro!</span><span class="sep">✦</span>
+        <span class="cl">Englify</span><span class="sep">✦</span>
+        <span class="cl out">Python Forge</span><span class="sep">✦</span>
+      </div>
+      <div class="mq-group">
+        <span class="cl">maxxmoto</span><span class="sep">✦</span>
+        <span class="cl out">Sotnur</span><span class="sep">✦</span>
+        <span class="cl">NextMoto</span><span class="sep">✦</span>
+        <span class="cl out">Codera</span><span class="sep">✦</span>
+        <span class="cl">TTX</span><span class="sep">✦</span>
+        <span class="cl out">Focus, bro!</span><span class="sep">✦</span>
+        <span class="cl">Englify</span><span class="sep">✦</span>
+        <span class="cl out">Python Forge</span><span class="sep">✦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- services -->
+  <section class="services" id="services">
+    <div class="wrap services-grid">
+      <div class="services-left">
+        <div class="sec-tag">01 / услуги</div>
+        <h2 class="big hl">
+          <span class="hl-line"><span>Услуги, которые</span></span>
+          <span class="hl-line"><span><em class="mark" style="font-style:normal">окупаются</em></span></span>
+        </h2>
+        <p class="sec-sub rv">Не продаём «страницу в интернете». Собираем инструмент, который приводит клиентов: смыслы, дизайн, код, интеграции и аналитика — в одних руках.</p>
+        <div class="rv" style="--d:.15s;margin-top:28px"><a class="btn btn-ghost magnet" href="#contact">Собрать смету
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H4M12 2v8" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        <div class="hand hand-srv rv" style="--d:.25s">жмите на пункты — внутри всё интересное
+          <svg width="86" height="34" viewBox="0 0 86 34" fill="none"><path d="M4 18 C 26 6, 52 8, 76 18 M76 18 l-11 -7 M76 18 l-10 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <div>
+        <div class="acc rv">
+          <button class="acc-head" aria-expanded="false"><span class="acc-num">/01</span><span class="acc-title">Лендинги и промо</span><span class="acc-price">от 10 000 ₽</span><span class="acc-icon"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+          <div class="acc-body"><div class="acc-inner">
+            <p>Продающие страницы под рекламу и запуски. Прототип, уникальный дизайн, быстрый код и формы, которые доводят заявку до вашего Telegram.</p>
+            <div class="chips"><span class="chip">прототип</span><span class="chip">дизайн</span><span class="chip">копирайтинг</span><span class="chip">адаптив</span><span class="chip">7–10 дней</span></div>
+          </div></div>
+        </div>
+        <div class="acc rv" style="--d:.06s">
+          <button class="acc-head" aria-expanded="false"><span class="acc-num">/02</span><span class="acc-title">Корпоративные сайты</span><span class="acc-price">от 20 000 ₽</span><span class="acc-icon"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+          <div class="acc-body"><div class="acc-inner">
+            <p>Многостраничные сайты компаний: услуги, кейсы, команда, SEO-структура. Дизайн-система, а не «слепленные странички» — масштабировать легко.</p>
+            <div class="chips"><span class="chip">до 10 страниц</span><span class="chip">админ-панель</span><span class="chip">SEO-база</span><span class="chip">2–3 недели</span></div>
+          </div></div>
+        </div>
+        <div class="acc rv" style="--d:.12s">
+          <button class="acc-head" aria-expanded="false"><span class="acc-num">/03</span><span class="acc-title">Интернет-магазины и каталоги</span><span class="acc-price">от 35 000 ₽</span><span class="acc-icon"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+          <div class="acc-body"><div class="acc-inner">
+            <p>Каталоги с корзиной, оплатой и доставкой. Удобная витрина, карточки товара, которые хочется листать, и управление остатками без боли.</p>
+            <div class="chips"><span class="chip">оплата</span><span class="chip">доставка</span><span class="chip">склад</span><span class="chip">личный кабинет</span></div>
+          </div></div>
+        </div>
+        <div class="acc rv" style="--d:.18s">
+          <button class="acc-head" aria-expanded="false"><span class="acc-num">/04</span><span class="acc-title">Админ-панели и CRM</span><span class="acc-price">от 15 000 ₽</span><span class="acc-icon"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+          <div class="acc-body"><div class="acc-inner">
+            <p>Контент меняете сами за минуты: тексты, цены, заявки, клиенты. Никаких программистов на побегушках — всё в понятной админке.</p>
+            <div class="chips"><span class="chip">управление контентом</span><span class="chip">заявки</span><span class="chip">роли доступа</span><span class="chip">обучение команды</span></div>
+          </div></div>
+        </div>
+        <div class="acc rv" style="--d:.24s">
+          <button class="acc-head" aria-expanded="false"><span class="acc-num">/05</span><span class="acc-title">Telegram-боты и интеграции</span><span class="acc-price">от 8 000 ₽</span><span class="acc-icon"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+          <div class="acc-body"><div class="acc-inner">
+            <p>Боты принимают заявки, напоминают клиентам, выгружают отчёты. Сайт + CRM + Telegram работают как единый механизм, пока вы спите.</p>
+            <div class="chips"><span class="chip">боты заявок</span><span class="chip">автоворонки</span><span class="chip">CRM-синхронизация</span><span class="chip">скоро: новые слоты</span></div>
+          </div></div>
+        </div>
+        <div class="acc rv" style="--d:.3s">
+          <button class="acc-head" aria-expanded="false"><span class="acc-num">/06</span><span class="acc-title">Поддержка и развитие</span><span class="acc-price">от 5 000 ₽/мес</span><span class="acc-icon"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+          <div class="acc-body"><div class="acc-inner">
+            <p>После запуска не исчезаем: аналитика, A/B-тесты, новые секции, скорость и безопасность. Сайт растёт вместе с бизнесом.</p>
+            <div class="chips"><span class="chip">аналитика</span><span class="chip">обновления</span><span class="chip">бэкапы</span><span class="chip">приоритетная связь</span></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- cases -->
+  <section class="cases" id="cases">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">02 / кейсы</div>
+        <h2 class="big hl"><span class="hl-line"><span>Кейсы говорят</span></span><span class="hl-line"><span><em class="mark" style="font-style:normal">громче</em> нас</span></span></h2>
+        <p class="sec-sub rv">Каждый проект — кастомный, с нуля. Нажмите, чтобы рассмотреть поближе.</p>
+        <span class="hand head-note">каждый — с нуля, честное ✍</span>
+      </div>
+      <div class="cases-grid">
+        <article class="case c1 rv">
+          <div class="case-img"><img loading="lazy" src="https://image.qwenlm.ai/public_source/8c02ce05-8b58-4560-b2d1-d7a05b96d3f4/1695dcf45-ed85-42cd-bc9c-83d560a4637d.png" alt="Сайт мото-бренда maxxMoto"><span class="sticker butter case-tag">мотоциклы</span></div>
+          <div class="case-body">
+            <div class="case-top"><h3>maxxmoto</h3><span class="case-arrow"><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H4M12 2v8" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></div>
+            <p>Каталог мототехники с дерзким характером: витрина, фильтры, заявки прямо в Telegram дилера.</p>
+            <div class="case-res-row">
+              <span class="case-res">×102 заявки за квартал</span>
+              <span class="sticker peach case-wow">аномалия ✦</span>
+            </div>
+          </div>
+        </article>
+        <article class="case c2 rv" style="--d:.1s">
+          <div class="case-img"><img loading="lazy" src="https://image.qwenlm.ai/public_source/8c02ce05-8b58-4560-b2d1-d7a05b96d3f4/18b2748cd-15e5-4e77-943b-674fef5c8bb9.png" alt="Сайт глэмпинга Sotnur"><span class="sticker mint case-tag">курорт</span></div>
+          <div class="case-body">
+            <div class="case-top"><h3>Sotnur Glamping</h3><span class="case-arrow"><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H4M12 2v8" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></div>
+            <p>Атмосферный сайт бронирования домиков и шатров: календарь дат, оплата, письма гостям.</p>
+            <div class="case-res-row"><span class="case-res m">+38% бронирований</span></div>
+          </div>
+        </article>
+        <article class="case c3 rv">
+          <div class="case-img"><img loading="lazy" src="https://image.qwenlm.ai/public_source/8c02ce05-8b58-4560-b2d1-d7a05b96d3f4/16b20cc1b-4519-4c66-9914-f6ea0699df36.png" alt="Платформа школы английского Englify"><span class="sticker peach case-tag">образование</span></div>
+          <div class="case-body">
+            <div class="case-top"><h3>Englify</h3><span class="case-arrow"><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H4M12 2v8" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></div>
+            <p>Онлайн-школа английского: расписание, личные кабинеты, игровые прогресс-ринги для учеников.</p>
+            <div class="case-res-row"><span class="case-res p">11.8% конверсия в пробный урок</span></div>
+          </div>
+        </article>
+        <article class="case c4 rv" style="--d:.1s">
+          <div class="case-img"><img loading="lazy" src="https://image.qwenlm.ai/public_source/8c02ce05-8b58-4560-b2d1-d7a05b96d3f4/1162a9ce7-7a80-42b2-b827-6d817e9d385c.png" alt="Сайт школы программирования Python Forge"><span class="sticker lav case-tag">edtech</span></div>
+          <div class="case-body">
+            <div class="case-top"><h3>Python Forge</h3><span class="case-arrow"><svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H4M12 2v8" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></div>
+            <p>Школа программирования: воронка набора на поток, оплата курсов и бот-наставник для студентов.</p>
+            <div class="case-res-row"><span class="case-res s">340+ заявок на первый поток</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- studio -->
+  <section class="studio">
+    <div class="wrap studio-grid">
+      <figure class="callframe rv">
+        <div class="cf-bar"><i></i><i></i><i></i><span class="cf-title">vexio × клиент — созвон по макетам · 00:24:31</span><span class="cf-rec">● REC</span></div>
+        <img loading="lazy" src="https://image.qwenlm.ai/public_source/8c02ce05-8b58-4560-b2d1-d7a05b96d3f4/10bbe8832-f667-46dc-8d7b-b5fa6c615b20.png" alt="Скриншот созвона Vexio: молодые ребята презентуют прототип и графики">
+        <figcaption>презентуем прототип</figcaption>
+      </figure>
+      <div class="studio-text">
+        <div class="sec-tag">03 / студия</div>
+        <h2 class="big hl"><span class="hl-line"><span>Маленькая студия —</span></span><span class="hl-line"><span><em class="mark" style="font-style:normal">большие</em> результаты</span></span></h2>
+        <p class="sec-sub rv" style="margin-top:18px">Мы — компактная команда, поэтому с вами говорит не менеджер «передающий информацию», а люди, которые делают ваш сайт. Отсюда скорость и качество без бюрократии.</p>
+        <ul class="check-list">
+          <li class="rv"><span class="ck"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span>Договор, этапы и фикс-смета — цена не «плывёт» в процессе</li>
+          <li class="rv" style="--d:.08s"><span class="ck"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span>Связь напрямую в Telegram — без писем «в никуда»</li>
+          <li class="rv" style="--d:.16s"><span class="ck"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span>Все макеты и права — ваши после оплаты</li>
+          <li class="rv" style="--d:.24s"><span class="ck"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span>30 дней бесплатной поддержки после запуска</li>
+        </ul>
+        <span class="hand rv" style="--d:.3s;margin-top:20px;--hr:-2deg">а ещё мы на связи даже после запуска ↑</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- numbers -->
+  <div class="numbers">
+    <div class="wrap" style="padding:clamp(20px,3vw,36px) 0">
+      <div class="num-grid">
+        <div class="num-cell rv"><span class="hl-box"><span class="num-val" data-count="20" data-dec="0">0</span><span class="num-suf">+</span></span><div class="num-lbl">проектов запущено</div></div>
+        <div class="num-cell rv" style="--d:.08s"><span class="hl-box"><span class="num-val" data-count="4.7" data-dec="1">0</span><span class="num-suf">★</span></span><div class="num-lbl">средняя оценка</div></div>
+        <div class="num-cell rv" style="--d:.16s"><span class="hl-box"><span class="num-val" data-count="24" data-dec="0">0</span><span class="num-suf">ч</span></span><div class="num-lbl">среднее время ответа</div></div>
+        <div class="num-cell rv" style="--d:.24s"><span class="hl-box"><span class="num-val" data-count="100" data-dec="0">0</span><span class="num-suf">%</span></span><div class="num-lbl">кастом, без шаблонов</div></div>
+      </div>
+      <p class="hand num-note rv">все цифры настоящие — чест-честно ✦</p>
+    </div>
+  </div>
+
+  <!-- process -->
+  <section class="process" id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">04 / процесс</div>
+        <h2 class="big hl"><span class="hl-line"><span>Спокойный процесс.</span></span><span class="hl-line"><span>Никакого <em class="mark mint" style="font-style:normal">хаоса</em></span></span></h2>
+        <p class="sec-sub rv">Четыре понятных этапа. <span class="flip-only">Нажмите на карточку — внутри детали.</span></p>
+      </div>
+
+      <!-- desktop: stacked cards -->
+      <div class="stack">
+        <div class="p-card s1">
+          <div class="p-num">01</div>
+          <div><h3>Погружение и смыслы</h3><p>Бриф на 20 минут, анализ конкурентов, целевая аудитория и структура будущего сайта. Фиксируем цели и KPI — чтобы дизайн работал, а не просто нравился.</p>
+          <div class="chips" style="margin-top:16px"><span class="chip">бриф</span><span class="chip">анализ рынка</span><span class="chip">прототип</span></div></div>
+          <div class="p-meta"><span class="sticker butter">2–4 дня</span></div>
+        </div>
+        <div class="p-card s2">
+          <div class="p-num">02</div>
+          <div><h3>Дизайн, который продаёт</h3><p>Рисуем уникальный макет под ваш бренд: типографика, палитра, анимации. Показываем на живых примерах, правим до «вау» — без шаблонов и стоковых заглушек.</p>
+          <div class="chips" style="margin-top:16px"><span class="chip">UI-кит</span><span class="chip">макеты всех экранов</span><span class="chip">2 раунда правок</span></div></div>
+          <div class="p-meta">
+            <figure class="p-polaroid"><img loading="lazy" src="https://image.qwenlm.ai/public_source/8c02ce05-8b58-4560-b2d1-d7a05b96d3f4/174e24d5f-2a5e-483e-8c4c-23a2a8f908eb.png" alt="Скетчи и палитры на столе дизайнера"><figcaption>кухня дизайна</figcaption></figure>
+            <span class="sticker mint">5–10 дней</span>
+          </div>
+        </div>
+        <div class="p-card s3">
+          <div class="p-num">03</div>
+          <div><h3>Разработка и админка</h3><p>Верстаем быстро и аккуратно: адаптив под любые экраны, админ-панель, интеграции с CRM и Telegram. Тестируем на реальных устройствах перед сдачей.</p>
+          <div class="chips" style="margin-top:16px"><span class="chip">адаптив</span><span class="chip">админ-панель</span><span class="chip">интеграции</span><span class="chip">тесты</span></div></div>
+          <div class="p-meta"><span class="sticker peach">7–14 дней</span></div>
+        </div>
+        <div class="p-card s4">
+          <div class="p-num">04</div>
+          <div><h3>Запуск и рост</h3><p>Подключаем домен, аналитику и SEO-базу, обучаем команду админке. Первые 30 дней поддерживаем бесплатно и остаёмся на связи.</p>
+          <div class="chips" style="margin-top:16px"><span class="chip">SEO-база</span><span class="chip">аналитика</span><span class="chip">обучение</span><span class="chip">30 дней поддержки</span></div></div>
+          <div class="p-meta"><span class="sticker lav">2–3 дня</span></div>
+        </div>
+      </div>
+
+      <!-- mobile: flip cards -->
+      <div class="flip-grid">
+        <div class="flip rv" tabindex="0" role="button" aria-pressed="false" aria-label="Этап 01: Погружение. Нажмите, чтобы узнать подробнее">
+          <div class="flip-inner">
+            <div class="flip-face flip-front f1">
+              <div><span class="flip-num">01</span><h3>Погружение</h3></div>
+              <span class="flip-hint">нажмите <span class="fh-ic"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+            </div>
+            <div class="flip-face flip-back f1">
+              <span class="flip-back-tag">этап 01 · 2–4 дня</span>
+              <p>Бриф на 20 минут, анализ конкурентов, аудитория и структура сайта. Фиксируем цели и KPI до старта.</p>
+              <div class="chips"><span class="chip">бриф</span><span class="chip">анализ</span><span class="chip">прототип</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="flip rv" style="--d:.08s" tabindex="0" role="button" aria-pressed="false" aria-label="Этап 02: Дизайн. Нажмите, чтобы узнать подробнее">
+          <div class="flip-inner">
+            <div class="flip-face flip-front f2">
+              <div><span class="flip-num">02</span><h3>Дизайн</h3></div>
+              <span class="flip-hint">нажмите <span class="fh-ic"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+            </div>
+            <div class="flip-face flip-back f2">
+              <span class="flip-back-tag">этап 02 · 5–10 дней</span>
+              <p>Уникальный макет под ваш бренд: типографика, палитра, анимации. Правим до «вау», без шаблонов.</p>
+              <div class="chips"><span class="chip">UI-кит</span><span class="chip">макеты</span><span class="chip">правки</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="flip rv" style="--d:.16s" tabindex="0" role="button" aria-pressed="false" aria-label="Этап 03: Разработка. Нажмите, чтобы узнать подробнее">
+          <div class="flip-inner">
+            <div class="flip-face flip-front f3">
+              <div><span class="flip-num">03</span><h3>Разработка</h3></div>
+              <span class="flip-hint">нажмите <span class="fh-ic"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+            </div>
+            <div class="flip-face flip-back f3">
+              <span class="flip-back-tag">этап 03 · 7–14 дней</span>
+              <p>Быстрый код, адаптив, админка и интеграции с CRM и Telegram. Тестируем на реальных устройствах.</p>
+              <div class="chips"><span class="chip">адаптив</span><span class="chip">админка</span><span class="chip">тесты</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="flip rv" style="--d:.24s" tabindex="0" role="button" aria-pressed="false" aria-label="Этап 04: Запуск и рост. Нажмите, чтобы узнать подробнее">
+          <div class="flip-inner">
+            <div class="flip-face flip-front f4">
+              <div><span class="flip-num">04</span><h3>Запуск и рост</h3></div>
+              <span class="flip-hint">нажмите <span class="fh-ic"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+            </div>
+            <div class="flip-face flip-back f4">
+              <span class="flip-back-tag">этап 04 · 2–3 дня</span>
+              <p>Домен, SEO-база, аналитика и обучение команды. 30 дней поддержки после запуска — бесплатно.</p>
+              <div class="chips"><span class="chip">SEO</span><span class="chip">аналитика</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="flip-note">↺ нажмите ещё раз, чтобы вернуться</p>
+    </div>
+  </section>
+
+  <!-- pricing -->
+  <section class="pricing" id="pricing">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">05 / цены</div>
+        <h2 class="big hl"><span class="hl-line"><span>Цены <em class="mark" style="font-style:normal">без сюрпризов</em></span></span></h2>
+        <p class="sec-sub rv">Фиксируем смету в договоре до старта работ. Предоплата 50%, остальное — после сдачи.</p>
+      </div>
+      <span class="hand hand-price rv">этот берут чаще всего →</span>
+      <div class="price-grid">
+        <div class="price-card rv">
+          <div class="price-name">Старт / лендинг</div>
+          <div class="price-val">от 10 000 ₽</div>
+          <div class="price-term">срок: 7–10 дней</div>
+          <ul>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Прототип и продающая структура</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Уникальный дизайн, без шаблонов</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Адаптив под все экраны</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Форма заявок → ваш Telegram</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Базовое SEO и аналитика</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Выбрать Старт</a>
+        </div>
+        <div class="price-card feat rv" style="--d:.1s">
+          <span class="sticker butter feat-sticker">выбирают чаще ✦</span>
+          <div class="price-name">Бизнес / корпоративный</div>
+          <div class="price-val">от 20 000 ₽</div>
+          <div class="price-term">срок: 2–3 недели</div>
+          <ul>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Всё из тарифа «Старт»</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>До 10 уникальных страниц</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Админ-панель: контент меняете сами</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Интеграция с CRM</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Копирайтинг и SEO-структура</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>30 дней поддержки в подарок</li>
+          </ul>
+          <a class="btn btn-ink magnet" href="#contact">Выбрать Бизнес</a>
+        </div>
+        <div class="price-card rv" style="--d:.2s">
+          <div class="price-name">Под ключ / магазин</div>
+          <div class="price-val">от 35 000 ₽</div>
+          <div class="price-term">срок: от 4 недель</div>
+          <ul>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Интернет-магазин или сервис</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Оплата, доставка, личные кабинеты</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Telegram-боты и автоворонки</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>Обучение вашей команды</li>
+            <li><svg width="14" height="12" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg>60 дней поддержки</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Обсудить задачу</a>
+        </div>
+      </div>
+      <p class="price-note rv">точная смета — после 20-минутного созвона · <b>предоплата 50%</b> · работаем по договору</p>
+    </div>
+  </section>
+
+  <!-- reviews -->
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">06 / отзывы</div>
+        <h2 class="big hl"><span class="hl-line"><span>Клиенты пишут —</span></span><span class="hl-line"><span>мы <em class="mark mint" style="font-style:normal">краснеем</em></span></span></h2>
+        <span class="hand head-note">писали сами, мы не заставляли :)</span>
+      </div>
+      <div class="rev-grid">
+        <div class="postcard pc1 rv">
+          <div class="pc-stars">★★★★★</div>
+          <p class="pc-text">«Ребята сделали сайт за 12 дней, хотя другие студии называли три месяца. Заявки с рекламы пошли в первый же вечер после запуска. Это другой уровень.»</p>
+          <div class="pc-who"><span class="pc-ava">М</span><div><div class="pc-name">Максим А.</div><div class="pc-role">основатель, maxxMoto</div></div></div>
+        </div>
+        <div class="postcard pc2 rv" style="--d:.1s">
+          <div class="pc-stars">★★★★★</div>
+          <p class="pc-text">«Наконец-то студия, которая не мыслит шаблонами. Дизайн передаёт атмосферу базы отдыха так, что гости пишут „какой красивый сайт“ прямо в отзывах.»</p>
+          <div class="pc-who"><span class="pc-ava">И</span><div><div class="pc-name">Иван</div><div class="pc-role">сооснователь, база отдыха «Морской глаз»</div></div></div>
+        </div>
+        <div class="postcard pc3 rv">
+          <div class="pc-stars">★★★★★</div>
+          <p class="pc-text">«Админка — кайф. Меняю цены и расписание сама за минуты, без программиста. А бот в Telegram присылает заявки, пока мы ведём уроки.»</p>
+          <div class="pc-who"><span class="pc-ava">Д</span><div><div class="pc-name">Дарья</div><div class="pc-role">директор, Englify</div></div></div>
+        </div>
+        <div class="postcard pc4 rv" style="--d:.1s">
+          <div class="pc-stars">★★★★☆</div>
+          <p class="pc-text">«Собрали воронку набора на поток: сайт + оплата + бот-наставник. 340 заявок в первый же месяц. Минус звезда за то, что теперь не успеваем отвечать всем 😄»</p>
+          <div class="pc-who"><span class="pc-ava">К</span><div><div class="pc-name">Кирилл</div><div class="pc-role">продакт, Python Forge</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- faq -->
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">07 / faq</div>
+        <h2 class="big hl"><span class="hl-line"><span>Вопросы, которые</span></span><span class="hl-line"><span>задают <em class="mark" style="font-style:normal">все</em></span></span></h2>
+        <span class="hand head-note">не нашли свой вопрос — напишите нам в tg</span>
+      </div>
+      <div class="acc rv">
+        <button class="acc-head" aria-expanded="false"><span class="acc-title">Сколько стоит сайт и от чего зависит цена?</span><span class="acc-icon"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+        <div class="acc-body"><div class="acc-inner"><p>Лендинг — от 10 000 ₽, корпоративный сайт — от 20 000 ₽, магазин — от 35 000 ₽. Цена зависит от количества страниц, интеграций и сложности дизайна. Смета фиксируется в договоре и не меняется.</p></div></div>
+      </div>
+      <div class="acc rv">
+        <button class="acc-head" aria-expanded="false"><span class="acc-title">Какие сроки? Мне нужно «вчера».</span><span class="acc-icon"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+        <div class="acc-body"><div class="acc-inner"><p>Лендинг — 7–10 дней, корпоративный сайт — 2–3 недели, магазин — от 4 недель. Если горит — обсудим экспресс-режим, такое случается, и мы умеем быстро.</p></div></div>
+      </div>
+      <div class="acc rv">
+        <button class="acc-head" aria-expanded="false"><span class="acc-title">Что нужно от меня как от заказчика?</span><span class="acc-icon"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+        <div class="acc-body"><div class="acc-inner"><p>20 минут на бриф и вовремя отвечать на вопросы в Telegram. Всё остальное — смыслы, тексты, дизайн, технику — берём на себя. Логотипа нет? Придумаем.</p></div></div>
+      </div>
+      <div class="acc rv">
+        <button class="acc-head" aria-expanded="false"><span class="acc-title">Работаете по договору? Как проходит оплата?</span><span class="acc-icon"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+        <div class="acc-body"><div class="acc-inner"><p>Да, официальный договор с фиксированной сметой и сроками. Предоплата 50% — стартуем, остальные 50% — после сдачи проекта. Права на макеты и код — ваши.</p></div></div>
+      </div>
+      <div class="acc rv">
+        <button class="acc-head" aria-expanded="false"><span class="acc-title">Поможете с текстами и SEO?</span><span class="acc-icon"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+        <div class="acc-body"><div class="acc-inner"><p>Да. Пишем продающие тексты на основе анализа аудитории, закладываем SEO-структуру, мета-теги и скорость — сайт индексируется и приводит трафик с первого месяца.</p></div></div>
+      </div>
+      <div class="acc rv">
+        <button class="acc-head" aria-expanded="false"><span class="acc-title">А что с Telegram-ботами?</span><span class="acc-icon"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></span></button>
+        <div class="acc-body"><div class="acc-inner"><p>Это наша фишка: боты принимают заявки, напоминают клиентам и шлют отчёты. Направление сейчас активно развивается — слоты разбирают быстро, лучше бронировать заранее.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- cta -->
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <div class="cta-panel rv">
+        <div class="cta-left">
+          <div class="sec-tag">08 / старт</div>
+          <h2>Расскажите о задаче — вернёмся со сметой <em class="mark" style="font-style:normal">за 24 часа</em></h2>
+          <p class="sec-sub">Без спама и «менеджер вам перезвонит». Ответит человек, который будет делать ваш проект.</p>
+          <form id="leadForm" class="form-grid" novalidate>
+            <div class="f-field"><label for="fName">Ваше имя</label><input id="fName" name="name" type="text" placeholder="Как к вам обращаться?" required></div>
+            <div class="f-field"><label for="fContact">Телефон или Telegram</label><input id="fContact" name="contact" type="text" placeholder="@username или +7…" required></div>
+            <div class="f-field full"><label for="fType">Что нужно сделать?</label>
+              <select id="fType" name="type">
+                <option>Лендинг / промо</option>
+                <option>Корпоративный сайт</option>
+                <option>Интернет-магазин</option>
+                <option>Админ-панель / CRM</option>
+                <option>Telegram-бот</option>
+                <option>Пока не знаю, подскажите</option>
+              </select>
+            </div>
+            <div class="f-field full"><label for="fMsg">Пара слов о проекте</label><textarea id="fMsg" name="msg" placeholder="Например: нужен сайт для мото-салона, чтобы заявки падали в Telegram…"></textarea></div>
+            <div class="form-foot">
+              <button class="btn btn-ink magnet" type="submit">Отправить заявку
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <small>нажимая, вы соглашаетесь на обработку данных ✦</small>
+            </div>
+            <span class="hand hand-cta">займёт секунд 30, проверено ✦</span>
+          </form>
+          <div class="form-success" id="formSuccess">
+            <div class="big-ok"><svg width="34" height="28" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#1B1B1B" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>Заявка улетела!</h3>
+            <p style="color:rgba(27,27,27,.7)">Ответим в течение 24 часов. А пока можете полистать наши кейсы ещё раз — они того стоят ✦</p>
+          </div>
+        </div>
+        <div class="cta-right">
+          <img loading="lazy" src="https://image.qwenlm.ai/public_source/8c02ce05-8b58-4560-b2d1-d7a05b96d3f4/174e24d5f-2a5e-483e-8c4c-23a2a8f908eb.png" alt="Рабочее место дизайнера Vexio: скетчи, палитры, планшет">
+          <div class="float-card"><div class="fc-val">hello@vexiostudio.ru</div><div class="fc-lbl">или пишите в tg: @vexiostudio</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-giant" aria-hidden="true">VEXIO</div>
+    <div class="foot-grid">
+      <div class="foot-about">
+        <div class="foot-logo">Vexio<span style="color:var(--butter)">.</span></div>
+        <p>Веб-студия, est. 2026. Сайты, которые не похожи на шаблон: кастомный дизайн, админ-панели и Telegram-интеграции для бизнеса, который отказывается выглядеть обычно.</p>
+        <span class="hand foot-hand">сделано руками, а не конструктором ✦</span>
+      </div>
+      <div>
+        <h4>Навигация</h4>
+        <a href="#services">Услуги</a><a href="#cases">Кейсы</a><a href="#process">Процесс</a><a href="#pricing">Цены</a><a href="#reviews">Отзывы</a>
+      </div>
+      <div>
+        <h4>Услуги</h4>
+        <a href="#services">Лендинги</a><a href="#services">Корпоративные сайты</a><a href="#services">Магазины</a><a href="#services">Telegram-боты</a>
+      </div>
+      <div>
+        <h4>Связь</h4>
+        <a href="#contact">hello@vexiostudio.ru</a>
+        <a href="#contact">tg: @vexiostudio</a>
+        <a href="#contact">Telegram-канал студии</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Vexio Studio · сделано с любовью и без шаблонов</span>
+      <span><span class="fb-star">✦</span> 4.7★ · отвечаем за 24 часа</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* header + progress */
+  var header = document.getElementById("header");
+  var prog = document.getElementById("progress");
+  function onScroll(){
+    header.classList.toggle("scrolled", window.scrollY > 10);
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  /* burger */
+  var burger = document.getElementById("burger");
+  burger.addEventListener("click", function(){ document.body.classList.toggle("menu-open"); });
+  document.querySelectorAll(".menu a").forEach(function(a){
+    a.addEventListener("click", function(){ document.body.classList.remove("menu-open"); });
+  });
+
+  /* reveal observer */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add("in");
+        e.target.querySelectorAll(".num-val[data-count]").forEach(runCounter);
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:.18});
+  document.querySelectorAll(".rv, .hl, .squig").forEach(function(el){ io.observe(el); });
+
+  /* counters */
+  function runCounter(el){
+    if(el.dataset.done) return;
+    el.dataset.done = "1";
+    var target = parseFloat(el.dataset.count);
+    var dec = parseInt(el.dataset.dec || "0", 10);
+    if(reduced){ el.textContent = target.toFixed(dec).replace(".", ","); return; }
+    var t0 = performance.now(), dur = 1500;
+    function tick(t){
+      var p = Math.min((t - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * e).toFixed(dec).replace(".", ",");
+      if(p < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toFixed(dec).replace(".", ",");
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* flip cards */
+  document.querySelectorAll(".flip").forEach(function(card){
+    function toggle(){
+      card.classList.toggle("flipped");
+      card.setAttribute("aria-pressed", String(card.classList.contains("flipped")));
+    }
+    card.addEventListener("click", toggle);
+    card.addEventListener("keydown", function(ev){
+      if(ev.key === "Enter" || ev.key === " "){ ev.preventDefault(); toggle(); }
+    });
+  });
+
+  /* accordions */
+  document.querySelectorAll(".acc").forEach(function(acc){
+    var head = acc.querySelector(".acc-head");
+    var body = acc.querySelector(".acc-body");
+    head.addEventListener("click", function(){
+      var isOpen = acc.classList.contains("open");
+      document.querySelectorAll(".acc.open").forEach(function(o){
+        if(o !== acc && o.parentElement === acc.parentElement){
+          o.classList.remove("open");
+          o.querySelector(".acc-body").style.maxHeight = null;
+          o.querySelector(".acc-head").setAttribute("aria-expanded","false");
+        }
+      });
+      acc.classList.toggle("open", !isOpen);
+      head.setAttribute("aria-expanded", String(!isOpen));
+      body.style.maxHeight = !isOpen ? body.scrollHeight + "px" : null;
+    });
+  });
+  /* open first service item */
+  var firstAcc = document.querySelector(".services .acc");
+  if(firstAcc){
+    requestAnimationFrame(function(){
+      firstAcc.classList.add("open");
+      firstAcc.querySelector(".acc-head").setAttribute("aria-expanded","true");
+      var b = firstAcc.querySelector(".acc-body");
+      b.style.maxHeight = b.scrollHeight + "px";
+    });
+  }
+
+  /* magnetic buttons */
+  if(!reduced && window.matchMedia("(pointer:fine)").matches){
+    document.querySelectorAll(".magnet").forEach(function(btn){
+      btn.addEventListener("mousemove", function(ev){
+        var r = btn.getBoundingClientRect();
+        var x = ev.clientX - r.left - r.width/2;
+        var y = ev.clientY - r.top - r.height/2;
+        btn.style.transform = "translate(" + (x*0.12) + "px," + (y*0.2) + "px)";
+      });
+      btn.addEventListener("mouseleave", function(){ btn.style.transform = ""; });
+    });
+  }
+
+  /* form */
+  var form = document.getElementById("leadForm");
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var name = document.getElementById("fName");
+    var contact = document.getElementById("fContact");
+    var ok = true;
+    [name, contact].forEach(function(f){
+      if(!f.value.trim()){ f.style.boxShadow = "5px 5px 0 var(--peach-deep)"; ok = false;
+        setTimeout(function(){ f.style.boxShadow = ""; }, 1600);
+      }
+    });
+    if(!ok) return;
+    fetch('/api/submit', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        projectName: name.value,
+        phone: contact.value,
+        type: document.getElementById('fType')?.value||'',
+        description: document.getElementById('fDesc')?.value||''
+      })
+    });
+    form.style.display = "none";
+    document.getElementById("formSuccess").style.display = "block";
+  });
+})();
 </script>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=111247436','ym');
-ym(111247436,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/111247436" style="position:absolute;left:-9999px;" alt="" /></div></noscript>
-<script src="/static/ai-widget.js"></script>
 </body>
 </html>
