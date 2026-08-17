@@ -291,28 +291,30 @@ def ai_chat():
             pass
     return jsonify({'reply': None})
 
-@app.route('/news/')
-def news_page():
-    return send_from_directory('templates', 'news.html')
+# Временно отключено (раздел News не нужен)
+# @app.route('/news/')
+# def news_page():
+#     return send_from_directory('templates', 'news.html')
+#
+# @app.route('/api/news')
+# def api_news():
+#     NEWS_KEY = os.environ.get('NEWS_KEY', '')
+#     try:
+#         r = requests.get(
+#             'https://newsapi.org/v2/top-headlines',
+#             params={'category': 'technology', 'language': 'en', 'pageSize': 9, 'apiKey': NEWS_KEY},
+#             timeout=10
+#         )
+#         if r.status_code == 200:
+#             return jsonify(r.json())
+#     except Exception:
+#         pass
+#     return jsonify({'articles': []})
 
-@app.route('/api/news')
-def api_news():
-    NEWS_KEY = os.environ.get('NEWS_KEY', '')
-    try:
-        r = requests.get(
-            'https://newsapi.org/v2/top-headlines',
-            params={'category': 'technology', 'language': 'en', 'pageSize': 9, 'apiKey': NEWS_KEY},
-            timeout=10
-        )
-        if r.status_code == 200:
-            return jsonify(r.json())
-    except Exception:
-        pass
-    return jsonify({'articles': []})
-
-@app.route('/help/')
-def help_page():
-    return send_from_directory('templates', 'help.html')
+# Временно отключено (раздел Help не нужен)
+# @app.route('/help/')
+# def help_page():
+#     return send_from_directory('templates', 'help.html')
 
 
 @app.route('/api/business-apply', methods=['POST'])
@@ -322,18 +324,19 @@ def business_apply():
     save_notification('business', data)
     return jsonify({'success': True})
 
-@app.route('/api/help-apply', methods=['POST'])
-def help_apply():
-    data = request.get_json()
-    if not data:
-        return jsonify({'error': 'No data'}), 400
-    save_notification('help', {
-        'name': data.get('name', ''),
-        'contact': data.get('contact', ''),
-        'message': data.get('message', ''),
-        'project_id': 'HL-' + str(uuid.uuid4())[:6].upper(),
-    })
-    return jsonify({'success': True})
+# Временно отключено (раздел Help не нужен)
+# @app.route('/api/help-apply', methods=['POST'])
+# def help_apply():
+#     data = request.get_json()
+#     if not data:
+#         return jsonify({'error': 'No data'}), 400
+#     save_notification('help', {
+#         'name': data.get('name', ''),
+#         'contact': data.get('contact', ''),
+#         'message': data.get('message', ''),
+#         'project_id': 'HL-' + str(uuid.uuid4())[:6].upper(),
+#     })
+#     return jsonify({'success': True})
 
 @app.route('/business')
 def biz_redirect():
