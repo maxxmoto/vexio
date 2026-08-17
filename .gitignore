@@ -14,3 +14,10 @@ VexioLanding.jsx
 __pycache__/
 *.pyc
 node_modules/
+
+# Персональные данные (заявки, посетители, пользователи)
+data/visitors.json
+data/users.json
+data/notifications.json
+data/submissions.json
+data/submissions.xlsx

@@ -120,7 +120,6 @@
             <div class="nav-right">
                 <a href="{{ url_for('admin_dashboard') }}" class="btn-primary btn-outline" style="padding:8px 18px;font-size:12px;">Заявки</a>
                 <a href="{{ url_for('admin_portfolio') }}" class="btn-primary btn-outline" style="padding:8px 18px;font-size:12px;">Портфолио</a>
-                <a href="{{ url_for('admin_mailing') }}" class="btn-primary btn-outline" style="padding:8px 18px;font-size:12px;">Рассылка</a>
                 <a href="{{ url_for('index') }}" class="btn-primary" style="padding:8px 18px;font-size:12px;">← Сайт</a>
                 <a href="{{ url_for('admin_logout') }}" class="btn-primary btn-danger" style="padding:8px 18px;font-size:12px;">Выйти</a>
             </div>
@@ -192,28 +191,6 @@
                 <p>Портфолио пусто. Добавьте первый проект.</p>
             </div>
             {% endif %}
-            {% elif page == 'mailing' %}
-            <h2>Рассылка</h2>
-            <div class="desc">Отправить сообщение всем пользователям бота.</div>
-            <form method="POST" enctype="multipart/form-data" style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:32px;">
-                <div style="margin-bottom:16px;">
-                    <label style="display:block;font-size:12px;color:var(--text-dim);margin-bottom:6px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;">Текст сообщения (HTML)</label>
-                    <textarea name="text" rows="4" placeholder="Привет! У нас новый проект..." style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;resize:vertical;"></textarea>
-                </div>
-                <div style="margin-bottom:16px;">
-                    <label style="display:block;font-size:12px;color:var(--text-dim);margin-bottom:6px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.1em;">Прикрепить фото (необязательно)</label>
-                    <input type="file" name="photo" accept="image/*" style="color:var(--text-dim);font-size:13px;">
-                </div>
-                <button type="submit" class="btn-primary">✈️ Разослать</button>
-                <span style="font-size:12px;color:var(--text-dim);margin-left:12px;">{{ users|length }} получателей</span>
-                {% if result %}
-                <div style="margin-top:16px;padding:16px;border-radius:12px;background:rgba(22,163,74,0.1);border:1px solid rgba(22,163,74,0.2);">
-                    ✅ Отправлено: <strong>{{ result.sent }}</strong>
-                    {% if result.failed > 0 %} · ❌ Ошибок: <strong>{{ result.failed }}</strong>{% endif %}
-                    · Всего: {{ result.total }}
-                </div>
-                {% endif %}
-            </form>
             {% else %}
             <h2>Заявки</h2>
             <div class="desc">

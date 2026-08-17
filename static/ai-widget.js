@@ -16,9 +16,9 @@ tipShow();setInterval(tipShow,15000);
 pill.onclick=function(){open=!open;chat.className=open?'open':'';tip.classList.remove('show')};
 close.onclick=function(){open=false;chat.className=''};
 function add(t,c){var el=d.createElement('div');el.className='ai-msg '+c;el.textContent=t;msgs.appendChild(el);msgs.scrollTop=msgs.scrollHeight}
-function wait(s){if(s){var el=d.createElement('div');el.className='ai-typing';el.id='t1';el.textContent='...';msgs.appendChild(el)}else{var x=P('t1');if(x)x.remove()}}
+function wait(s){if(s){var el=d.createElement('div');el.className='ai-typing';el.textContent='...';msgs.appendChild(el)}else{var x=msgs.querySelectorAll('.ai-typing');for(var i=0;i<x.length;i++)x[i].remove()}}
 
-var rules=window.__AI_RULES__||[
+var DEFAULT_RULES=[
 {k:"цен,стои,сколько,прайс,бюджет,стоит,стоят,расценк,тариф,цена,ценник,недорого,дешево,дорого,прейскурант,калькулятор,расчет,расчёт",a:"Лендинг: от 15 000 руб (3-7 дней). Интернет-магазин: от 50 000 руб (14-30 дней). Корпоративный сайт: от 80 000 руб. Telegram-бот: от 20 000 руб. Точная цена после брифинга — зависит от сложности и объёма."},
 {k:"срок,долго,дней,быстр,скоро,дедлайн,время,тайминг,как быстро,когда будет готов,сколько ждать,скорость,как долго ждать,длительность,за какой срок",a:"Лендинг: 3-7 рабочих дней. Многостраничный сайт: 10-20 дней. Магазин: 14-30 дней. Сложный сервис: 30-60 дней. Буст-режим: сайт за 5 дней. Сроки фиксируем в договоре — ни дня просрочки."},
 {k:"сайт,веб,портал,сделать,разработать,сделаете,создать,создание,разработка,сайтик,создаёте,делаете сайты,веб-сайт,корпоративный",a:"Создаём сайты под ключ: лендинги, интернет-магазины, корпоративные порталы, CRM-системы, админ-панели. Полный цикл: дизайн в Figma, адаптивная вёрстка, бэкенд на Python/Node.js, запуск, поддержка. Все сайты с базовым SEO."},
@@ -39,10 +39,14 @@ var rules=window.__AI_RULES__||[
 {k:"бизнес,business,развитие,аналитика,реклама,продвижение бизнеса,рост,маркетинг,соцсети,smm",a:"Vexio Business — полное сопровождение: разработка сайта, настройка рекламы, ведение соцсетей, аналитика продаж. Всё в одном окне: https://vexiostudio.ru/business/"},
 {k:"разработчик,dev,партнёр,партнерство,70/30,семьдесят,процент разработчику,заказы для разработчиков,фриланс заказы,ищу заказы",a:"Партнёрство для разработчиков: 70% с каждого проекта — тебе. Клиенты, договоры, менеджмент — на нас. https://vexiostudio.ru/dev/"},
 ];
+var secRules=(Array.isArray(window.__AI_RULES__)&&window.__AI_RULES__)?window.__AI_RULES__:[];
+var rules=secRules.concat(DEFAULT_RULES);
 
-function match(q){var l=q.toLowerCase().replace(/[?!.,]/g,'');var found=[];for(var i=0;i<rules.length;i++){var r=rules[i];var ks=r.k.split(',');var bestLen=0;for(var j=0;j<ks.length;j++){if(l.indexOf(ks[j])>=0&&ks[j].length>bestLen)bestLen=ks[j].length}if(bestLen>0)found.push({a:r.a,score:bestLen})}if(!found.length)return null;found.sort(function(a,b){return b.score-a.score});return found.slice(0,2).map(function(f){return f.a}).join('\n\n')}
+function norm(s){return s.toLowerCase().replace(/[^0-9a-zа-яё\s\/-]/g,' ').replace(/\s+/g,' ').trim()}
+function match(q){var l=norm(q);if(!l)return null;var found=[];for(var i=0;i<rules.length;i++){var r=rules[i];var ks=r.k.split(',');var best=0,hits=0;for(var j=0;j<ks.length;j++){var k=ks[j];if(k&&l.indexOf(k)>=0){hits++;if(k.length>best)best=k.length}}if(best>0)found.push({a:r.a,score:best,hits:hits})}if(!found.length)return null;found.sort(function(a,b){return b.score-a.score||b.hits-a.hits});return found[0].a}
 
-async function ask(q){var r=match(q);if(r){add(r,'ai-bot');return}try{var res=await fetch('/api/ai-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q:q})});if(res.ok){var data=await res.json();if(data.reply){add(data.reply,'ai-bot');return}}}catch(e){}add('Спросите о ценах, сроках, услугах или кейсах Vexio. Что интересует?','ai-bot')}
+function fallback(){return 'Я лучше всего отвечаю про цены, сроки, сайты, ботов и услуги Vexio. Попробуй: «Сколько стоит сайт?», «Какие сроки?», «Вы делаете ботов?».'}
+async function ask(q){var r=match(q);if(r){add(r,'ai-bot');return}try{var ctrl=new AbortController();var t=setTimeout(function(){ctrl.abort()},6000);var res=await fetch('/api/ai-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q:q}),signal:ctrl.signal});clearTimeout(t);if(res.ok){var data=await res.json();if(data&&data.reply){add(data.reply,'ai-bot');return}}}catch(e){}add(fallback(),'ai-bot')}
 send.onclick=function(){var q=input.value.trim();if(!q)return;add(q,'ai-user');input.value='';wait(true);ask(q).finally(function(){wait(false)})};
 input.onkeydown=function(e){if(e.key==='Enter')send.click()};
 })();
